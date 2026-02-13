@@ -1,0 +1,95 @@
+[     335ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/:0
+[    9578ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/:0
+[   27772ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/:0
+[   29635ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/:0
+[   31878ms] TypeError: jsxDEV is not a function
+    at TextTypeAnimation (http://localhost:4329/src/components/animations/TextTypeAnimation.tsx:59:21)
+    at renderWithHooks (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:3521:25)
+    at updateFunctionComponent (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:5152:19)
+    at beginWork (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:5763:18)
+    at performUnitOfWork (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8568:18)
+    at workLoopSync (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8466:41)
+    at renderRootSync (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8450:11)
+    at performWorkOnRoot (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8125:44)
+    at performWorkOnRootViaSchedulerTask (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:9129:7)
+    at MessagePort.performWorkUntilDeadline (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:123:48)
+[ 1740038ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/projects/3-bridges-al-talah-road:0
+[ 2231689ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/projects/3-bridges-al-talah-road:0
+[ 2263904ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/projects/3-bridges-al-talah-road:0
+[ 2278033ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/projects/3-bridges-al-talah-road:0
+[ 2316993ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/projects/3-bridges-al-talah-road:0
+[ 2319464ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/projects/3-bridges-al-talah-road:0
+[ 2319846ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/projects/3-bridges-al-talah-road:0
+[ 2320207ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/projects/3-bridges-al-talah-road:0
+[ 2320354ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/projects/3-bridges-al-talah-road:0
+[ 2320576ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/projects/3-bridges-al-talah-road:0
+[ 2364735ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:4329/node_modules/.vite/deps/cobe.js?v=9f672c98:0
+[ 2364736ms] [ERROR] [astro-island] Error hydrating /src/components/animations/Globe.tsx TypeError: Failed to fetch dynamically imported module: http://localhost:4329/src/components/animations/Globe.tsx @ http://localhost:4329/contact:6234
+[ 2364736ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:4329/node_modules/.vite/deps/react-spring.js?v=5bec27e1:0
+[ 2367324ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:4329/node_modules/.vite/deps/cobe.js?v=9f672c98:0
+[ 2367325ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:4329/node_modules/.vite/deps/react-spring.js?v=5bec27e1:0
+[ 2367326ms] [ERROR] [astro-island] Error hydrating /src/components/animations/Globe.tsx TypeError: Failed to fetch dynamically imported module: http://localhost:4329/src/components/animations/Globe.tsx @ http://localhost:4329/contact:6234
+[ 2371551ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:4329/node_modules/.vite/deps/cobe.js?v=9f672c98:0
+[ 2371551ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:4329/node_modules/.vite/deps/react-spring.js?v=5bec27e1:0
+[ 2371552ms] [ERROR] [astro-island] Error hydrating /src/components/animations/Globe.tsx TypeError: Failed to fetch dynamically imported module: http://localhost:4329/src/components/animations/Globe.tsx @ http://localhost:4329/contact:6234
+[ 2376088ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:4329/node_modules/.vite/deps/cobe.js?v=9f672c98:0
+[ 2376088ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:4329/node_modules/.vite/deps/react-spring.js?v=5bec27e1:0
+[ 2376089ms] [ERROR] [astro-island] Error hydrating /src/components/animations/Globe.tsx TypeError: Failed to fetch dynamically imported module: http://localhost:4329/src/components/animations/Globe.tsx @ http://localhost:4329/contact:6234
+[ 2384972ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:4329/node_modules/.vite/deps/cobe.js?v=9f672c98:0
+[ 2384972ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:4329/node_modules/.vite/deps/react-spring.js?v=5bec27e1:0
+[ 2384973ms] [ERROR] [astro-island] Error hydrating /src/components/animations/Globe.tsx TypeError: Failed to fetch dynamically imported module: http://localhost:4329/src/components/animations/Globe.tsx @ http://localhost:4329/contact:6234
+[ 2645452ms] TypeError: jsxDEV is not a function
+    at TextTypeAnimation (http://localhost:4329/src/components/animations/TextTypeAnimation.tsx:59:21)
+    at renderWithHooks (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:3521:25)
+    at updateFunctionComponent (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:5152:19)
+    at beginWork (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:5763:18)
+    at performUnitOfWork (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8568:18)
+    at workLoopSync (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8466:41)
+    at renderRootSync (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8450:11)
+    at performWorkOnRoot (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8125:44)
+    at performWorkOnRootViaSchedulerTask (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:9129:7)
+    at MessagePort.performWorkUntilDeadline (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:123:48)
+[ 3045042ms] TypeError: jsxDEV is not a function
+    at TextTypeAnimation (http://localhost:4329/src/components/animations/TextTypeAnimation.tsx:59:21)
+    at renderWithHooks (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:3521:25)
+    at updateFunctionComponent (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:5152:19)
+    at beginWork (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:5763:18)
+    at performUnitOfWork (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8568:18)
+    at workLoopSync (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8466:41)
+    at renderRootSync (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8450:11)
+    at performWorkOnRoot (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8125:44)
+    at performWorkOnRootViaSchedulerTask (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:9129:7)
+    at MessagePort.performWorkUntilDeadline (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:123:48)
+[ 3256245ms] TypeError: jsxDEV is not a function
+    at TextTypeAnimation (http://localhost:4329/src/components/animations/TextTypeAnimation.tsx:59:21)
+    at renderWithHooks (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:3521:25)
+    at updateFunctionComponent (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:5152:19)
+    at beginWork (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:5763:18)
+    at performUnitOfWork (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8568:18)
+    at workLoopSync (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8466:41)
+    at renderRootSync (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8450:11)
+    at performWorkOnRoot (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8125:44)
+    at performWorkOnRootViaSchedulerTask (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:9129:7)
+    at MessagePort.performWorkUntilDeadline (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:123:48)
+[ 3309839ms] TypeError: jsxDEV is not a function
+    at TextTypeAnimation (http://localhost:4329/src/components/animations/TextTypeAnimation.tsx:59:21)
+    at renderWithHooks (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:3521:25)
+    at updateFunctionComponent (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:5152:19)
+    at beginWork (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:5763:18)
+    at performUnitOfWork (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8568:18)
+    at workLoopSync (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8466:41)
+    at renderRootSync (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8450:11)
+    at performWorkOnRoot (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8125:44)
+    at performWorkOnRootViaSchedulerTask (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:9129:7)
+    at MessagePort.performWorkUntilDeadline (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:123:48)
+[ 3461799ms] TypeError: jsxDEV is not a function
+    at TextTypeAnimation (http://localhost:4329/src/components/animations/TextTypeAnimation.tsx:59:21)
+    at renderWithHooks (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:3521:25)
+    at updateFunctionComponent (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:5152:19)
+    at beginWork (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:5763:18)
+    at performUnitOfWork (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8568:18)
+    at workLoopSync (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8466:41)
+    at renderRootSync (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8450:11)
+    at performWorkOnRoot (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:8125:44)
+    at performWorkOnRootViaSchedulerTask (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:9129:7)
+    at MessagePort.performWorkUntilDeadline (http://localhost:4329/node_modules/.vite/deps/@astrojs_react_client__js.js?v=e6771378:123:48)
