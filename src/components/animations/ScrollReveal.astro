@@ -1,0 +1,218 @@
+---
+/**
+ * ScrollReveal - Sophisticated scroll-triggered animation system
+ * Features:
+ * - Intersection Observer for performance
+ * - Staggered delays for grouped elements
+ * - Multiple reveal directions (up, down, left, right, fade)
+ * - Smooth cubic-bezier easing
+ * - Progress-based parallax effect
+ */
+
+interface Props {
+  stagger?: number; // Delay between elements in ms
+  threshold?: number; // Trigger threshold (0-1)
+  distance?: string; // Travel distance for animation
+  duration?: number; // Animation duration in ms
+  direction?: 'up' | 'down' | 'left' | 'right' | 'fade';
+  parallax?: boolean; // Enable parallax effect
+  parallaxSpeed?: number; // Parallax speed multiplier
+  once?: boolean; // Only animate once
+  delay?: number; // Initial delay
+}
+
+const {
+  stagger = 100,
+  threshold = 0.15,
+  distance = '60px',
+  duration = 800,
+  direction = 'up',
+  parallax = false,
+  parallaxSpeed = 0.3,
+  once = true,
+  delay = 0,
+} = Astro.props;
+
+// Generate unique ID for this instance
+const id = `reveal-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div
+  id={id}
+  data-reveal
+  data-direction={direction}
+  data-stagger={stagger}
+  data-distance={distance}
+  data-duration={duration}
+  data-parallax={parallax}
+  data-parallax-speed={parallaxSpeed}
+  data-once={once}
+  data-delay={delay}
+  class:reveal-item={true}
+>
+  <slot />
+</div>
+
+<style define:vars={{ id, duration, distance, direction }}>
+  .reveal-item {
+    opacity: 0;
+    transition: opacity calc(var(--duration) * 1ms) cubic-bezier(0.16, 1, 0.3, 1),
+                transform calc(var(--duration) * 1ms) cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  /* Initial states based on direction */
+  [data-reveal][data-direction="up"] .reveal-item {
+    transform: translateY(var(--distance));
+  }
+
+  [data-reveal][data-direction="down"] .reveal-item {
+    transform: translateY(calc(var(--distance) * -1));
+  }
+
+  [data-reveal][data-direction="left"] .reveal-item {
+    transform: translateX(var(--distance));
+  }
+
+  [data-reveal][data-direction="right"] .reveal-item {
+    transform: translateX(calc(var(--distance) * -1));
+  }
+
+  [data-reveal][data-direction="fade"] .reveal-item {
+    transform: none;
+  }
+
+  /* Revealed state */
+  [data-reveal].is-visible .reveal-item {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  /* Staggered children */
+  [data-reveal][data-stagger] > * {
+    opacity: 0;
+    transition: opacity calc(var(--duration) * 1ms) cubic-bezier(0.16, 1, 0.3, 1),
+                transform calc(var(--duration) * 1ms) cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  [data-reveal][data-stagger][data-direction="up"] > * {
+    transform: translateY(var(--distance));
+  }
+
+  [data-reveal][data-stagger][data-direction="down"] > * {
+    transform: translateY(calc(var(--distance) * -1));
+  }
+
+  [data-reveal][data-stagger][data-direction="left"] > * {
+    transform: translateX(var(--distance));
+  }
+
+  [data-reveal][data-stagger][data-direction="right"] > * {
+    transform: translateX(calc(var(--distance) * -1));
+  }
+
+  [data-reveal][data-stagger][data-direction="fade"] > * {
+    transform: none;
+  }
+
+  [data-reveal].is-visible > * {
+    opacity: 1 !important;
+    transform: translate(0, 0) !important;
+  }
+</style>
+
+<script define:vars={{ id }}>
+  // Advanced scroll reveal system with parallax support
+  class ScrollReveal {
+    constructor() {
+      this.elements = document.querySelectorAll('[data-reveal]');
+      this.observer = null;
+      this.init();
+    }
+
+    init() {
+      if (!this.elements.length) return;
+
+      // Create Intersection Observer
+      const options = {
+        root: null,
+        rootMargin: '0px 0px -100px 0px',
+        threshold: 0.15
+      };
+
+      this.observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.reveal(entry.target);
+            if (entry.target.dataset.once === 'true') {
+              this.observer.unobserve(entry.target);
+            }
+          } else if (entry.target.dataset.once === 'false') {
+            this.unreveal(entry.target);
+          }
+        });
+      }, options);
+
+      // Observe all elements
+      this.elements.forEach(el => this.observer.observe(el));
+
+      // Setup parallax if enabled
+      this.setupParallax();
+    }
+
+    reveal(element) {
+      const delay = parseInt(element.dataset.delay) || 0;
+      const stagger = parseInt(element.dataset.stagger) || 0;
+
+      setTimeout(() => {
+        element.classList.add('is-visible');
+
+        // Handle staggered children
+        if (stagger > 0) {
+          const children = element.querySelectorAll(':scope > *');
+          children.forEach((child, index) => {
+            child.style.transitionDelay = `${index * stagger}ms`;
+          });
+        }
+      }, delay);
+    }
+
+    unreveal(element) {
+      element.classList.remove('is-visible');
+    }
+
+    setupParallax() {
+      const parallaxElements = document.querySelectorAll('[data-parallax="true"]');
+
+      if (parallaxElements.length === 0) return;
+
+      let ticking = false;
+
+      const updateParallax = () => {
+        parallaxElements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          const speed = parseFloat(el.dataset.parallaxSpeed) || 0.3;
+          const yPos = (rect.top / window.innerHeight) * 100 * speed;
+
+          el.style.transform = `translateY(${yPos}px)`;
+        });
+        ticking = false;
+      };
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+  }
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new ScrollReveal());
+  } else {
+    new ScrollReveal();
+  }
+</script>

@@ -1,0 +1,69 @@
+---
+// Gallery.astro - ULTRACTION Gallery Section (Nova Construct Design Pattern)
+// Using real project images from analysis
+---
+
+<section class="border-b border-primary/20 dark:border-black/20">
+  <div class="p-8 lg:p-12">
+    <h2 class="text-xs font-bold uppercase tracking-widest mb-8 opacity-60">Featured Projects</h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3">
+    <!-- Gallery Item 1 - Infrastructure -->
+    <div class="relative group overflow-hidden h-[400px] border-b md:border-b-0 md:border-r border-primary/20 dark:border-black/20">
+      <div
+        class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+        style="background-image: url('/images/projects/p081_img01_xref4083.jpeg')"
+        role="img"
+        aria-label="Distribution Substations Sader - Abu Dhabi"
+      ></div>
+      <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300"></div>
+      <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div class="bg-primary/90 backdrop-blur-sm p-4 text-background dark:text-white">
+          <h3 class="text-sm font-bold uppercase font-heading">27 Distribution Substations</h3>
+          <p class="text-xs opacity-80">Abu Dhabi</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery Item 2 - Bridge -->
+    <div class="relative group overflow-hidden h-[400px] border-b md:border-b-0 md:border-r border-primary/20 dark:border-black/20">
+      <div
+        class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+        style="background-image: url('/images/projects/p156_img01_xref6973.jpeg')"
+        role="img"
+        aria-label="Bridge Construction Project"
+      ></div>
+      <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300"></div>
+      <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div class="bg-primary/90 backdrop-blur-sm p-4 text-background dark:text-white">
+          <h3 class="text-sm font-bold uppercase font-heading">Bridge Construction</h3>
+          <p class="text-xs opacity-80">Infrastructure Development</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery Item 3 - Villa -->
+    <div class="relative group overflow-hidden h-[400px]">
+      <div
+        class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+        style="background-image: url('/images/projects/p149_img01_xref6933.jpeg')"
+        role="img"
+        aria-label="Luxury Villa Project"
+      ></div>
+      <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300"></div>
+      <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div class="bg-primary/90 backdrop-blur-sm p-4 text-background dark:text-white">
+          <h3 class="text-sm font-bold uppercase font-heading">Luxury Villa</h3>
+          <p class="text-xs opacity-80">Residential Construction</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-8 text-center border-t border-primary/20 dark:border-black/20">
+    <a href="/projects" class="inline-block border border-primary dark:border-black/30 hover:bg-primary hover:text-background dark:hover:text-white px-8 py-3 text-sm font-medium uppercase tracking-wide transition-colors">
+      View All Projects
+    </a>
+  </div>
+</section>

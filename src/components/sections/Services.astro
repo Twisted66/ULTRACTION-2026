@@ -1,0 +1,171 @@
+---
+interface Service {
+  title: string;
+  description: string;
+  icon: string;
+  link: string;
+}
+
+interface Props {
+  services?: Service[];
+}
+
+// Default services data
+const defaultServices: Service[] = [
+  {
+    title: "General Contracting",
+    description: "Full-service construction management for residential, commercial, and industrial projects",
+    icon: "🏗️",
+    link: "/services/general-contracting"
+  },
+  {
+    title: "Renovation & Remodeling",
+    description: "Transform existing spaces with comprehensive renovation services",
+    icon: "🔧",
+    link: "/services/renovation"
+  },
+  {
+    title: "Commercial Projects",
+    description: "Office, retail, and industrial building construction and development",
+    icon: "🏢",
+    link: "/services/commercial"
+  },
+  {
+    title: "Project Consulting",
+    description: "Expert guidance and planning for successful construction projects",
+    icon: "📊",
+    link: "/services/consulting"
+  }
+];
+
+const services = Astro.props.services || defaultServices;
+---
+
+<section class="services-section">
+  <div class="services-container">
+    <div class="section-header">
+      <h2 class="section-title">Our Services</h2>
+      <div class="section-underline"></div>
+    </div>
+
+    <div class="services-grid">
+      {services.map((service, index) => (
+        <a href={service.link} class="service-card">
+          <div class="service-icon">{service.icon}</div>
+          <h3 class="service-title">{service.title}</h3>
+          <p class="service-description">{service.description}</p>
+          <span class="service-link">Learn More</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    padding: var(--space-12) var(--space-6);
+    background: hsl(var(--color-background));
+  }
+
+  .services-container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .section-title {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    color: hsl(var(--color-primary));
+    margin-bottom: var(--space-4);
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-underline {
+    width: 60px;
+    height: 3px;
+    background: hsl(var(--color-accent));
+    margin-top: var(--space-3);
+    border-radius: 2px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;                    /* 1 column on mobile */
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);        /* 2 columns on tablet */
+      gap: var(--space-8);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(4, 1fr);        /* 4 columns on desktop */
+    }
+  }
+
+  .service-card {
+    background: hsl(var(--color-card));
+    border: 1px solid hsl(var(--color-border));
+    border-radius: var(--radius);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: inherit;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(44, 24, 16, 0.1);
+    border-color: hsl(var(--color-accent));
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .service-icon {
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: var(--space-4);
+  }
+
+  .service-title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: hsl(var(--color-primary));
+    margin: 0;
+  }
+
+  .service-description {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: hsl(var(--color-text));
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .service-link {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: hsl(var(--color-accent));
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    transition: gap 0.3s ease;
+  }
+
+  .service-card:hover .service-link {
+    gap: var(--space-3);
+  }
+</style>

@@ -1,0 +1,182 @@
+---
+// Layout.astro - Base layout for all pages
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'ULTRACTION GENERAL CONTRACTING LLC',
+  description = 'Premium construction services in UAE - Transforming visions into reality with excellence in general contracting, construction management, and project delivery.',
+  image = '/logo/UGC-LOGO-HQ.png',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logo/UGC-LOGO-HQ.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/UGC-LOGO-HQ.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:site_name" content="ULTRACTION GENERAL CONTRACTING LLC" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.url)} />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "ULTRACTION GENERAL CONTRACTING LLC",
+        "description": "Premium construction services in UAE",
+        "url": "https://ultraction.ae",
+        "logo": "https://ultraction.ae/logo/UGC-LOGO-HQ.png",
+        "sameAs": [
+          "https://www.linkedin.com/company/ultraction",
+          "https://www.facebook.com/ultraction"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "UAE",
+          "addressLocality": "Abu Dhabi",
+          "streetAddress": "Office M05, Building C32, Shabiya 9, MBZ City"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "info@ultraction.ae",
+          "telephone": "+971-2-650-1694"
+        }
+      }
+    </script>
+
+    <!-- Preconnect to fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Material Symbols (Icons) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <title>{title}</title>
+  </head>
+
+  <body class="bg-background text-foreground antialiased">
+    <!-- Skip to main content (Accessibility) -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-background focus:rounded">
+      Skip to main content
+    </a>
+
+    <!-- App Container -->
+    <div class="app-container">
+      <!-- Header -->
+      <Header />
+
+      <!-- Main Content -->
+      <main id="main-content" class="main-content pt-[104px]">
+        <slot />
+      </main>
+
+      <!-- Footer -->
+      <Footer />
+    </div>
+
+    <!-- Dark Mode Toggle Script -->
+    <script is:inline>
+      // Dark mode initialization - runs immediately to prevent flash
+      (function() {
+        const theme = localStorage.getItem('theme') || 'light';
+        const html = document.documentElement;
+
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          html.classList.add('dark');
+        } else {
+          html.classList.remove('dark');
+        }
+      })();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  /* Accessibility: Screen reader only class */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus visible styles for keyboard navigation */
+  :focus-visible {
+    outline: 2px solid hsl(var(--color-primary));
+    outline-offset: 2px;
+  }
+
+  /* Custom scrollbar (Webkit browsers) */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--color-background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--color-accent));
+    border-radius: var(--radius);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--color-primary));
+  }
+</style>
+
+<style>
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .main-content {
+    flex: 1;
+  }
+</style>

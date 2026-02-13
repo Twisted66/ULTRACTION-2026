@@ -1,0 +1,214 @@
+---
+// Contact page - ULTRACTION General Contracting LLC
+// Refactored to match Nova Construct prototype design
+
+import Layout from '../layouts/Layout.astro';
+import Globe from '../components/animations/Globe';
+
+// SEO Metadata
+const title = "Contact Us - ULTRACTION GENERAL CONTRACTING LLC";
+const description = "Get in touch with ULTRACTION for your construction project. Contact us via phone, email, or visit our office in Dubai, UAE.";
+const allowedSubjects = new Set(['project', 'careers', 'other']);
+const querySubject = Astro.url.searchParams.get('subject')?.toLowerCase() ?? '';
+const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
+---
+
+<Layout
+  title={title}
+  description={description}
+  image="/logo/UGC-HEADER.png"
+>
+  <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-104px)] border-t border-black">
+      
+      <!-- Left: Form (Brand Beige) -->
+      <div class="bg-[#DDD4C5] text-[#232323] p-8 lg:p-20 flex flex-col justify-center order-2 lg:order-1 relative z-10 border-r border-black">
+        <div class="max-w-xl mx-auto w-full">
+          <span class="text-xs font-bold uppercase tracking-widest opacity-80 mb-4 block">Contact Us</span>
+          <h1 class="text-5xl lg:text-7xl font-bold uppercase leading-none mb-12 font-heading">
+            Building<br/><span class="text-accent italic">The Future</span>.
+          </h1>
+          <p class="text-lg mb-10 opacity-80 leading-relaxed">
+            Have a project in mind? Our team is ready to collaborate on your construction and contracting needs across the UAE and KSA.
+          </p>
+          
+          <form class="flex flex-col gap-8" method="POST" action="/api/contact" data-contact-form>
+            <div class="group">
+              <label class="block text-xs uppercase font-bold tracking-widest mb-2 opacity-80" for="name">Name</label>
+              <input class="w-full bg-transparent border-b border-[#232323]/20 py-4 text-xl focus:border-[#232323] focus:outline-none transition-colors placeholder-[#232323]/30" id="name" name="name" placeholder="Enter your name" type="text" required />
+            </div>
+            
+            <div class="group">
+              <label class="block text-xs uppercase font-bold tracking-widest mb-2 opacity-80" for="email">Email</label>
+              <input class="w-full bg-transparent border-b border-[#232323]/20 py-4 text-xl focus:border-[#232323] focus:outline-none transition-colors placeholder-[#232323]/30" id="email" name="email" placeholder="Enter your email" type="email" required />
+            </div>
+            
+            <div class="group">
+               <label class="block text-xs uppercase font-bold tracking-widest mb-2 opacity-80" for="subject">Subject</label>
+               <select class="w-full bg-transparent border-b border-[#232323]/20 py-4 text-xl focus:border-[#232323] focus:outline-none transition-colors cursor-pointer" id="subject" name="subject" required>
+                  <option value="" disabled={selectedSubject !== ''} selected={selectedSubject === ''}>Select a topic</option>
+                  <option value="project" selected={selectedSubject === 'project'}>New Project Inquiry</option>
+                  <option value="careers" selected={selectedSubject === 'careers'}>Careers</option>
+                  <option value="other" selected={selectedSubject === 'other'}>Other</option>
+               </select>
+            </div>
+            
+            <div class="group">
+               <label class="block text-xs uppercase font-bold tracking-widest mb-2 opacity-80" for="message">Message</label>
+               <textarea class="w-full bg-transparent border-b border-[#232323]/20 py-4 text-xl focus:border-[#232323] focus:outline-none transition-colors placeholder-[#232323]/30 resize-none h-32" id="message" name="message" placeholder="Tell us about your project..." required></textarea>
+            </div>
+
+            <div class="group">
+               <label class="block text-xs uppercase font-bold tracking-widest mb-2 opacity-80" for="attachment">Attachment <span class="font-normal opacity-60">(Optional)</span></label>
+               <div class="relative">
+                  <input class="w-full bg-transparent border-b border-[#232323]/20 py-4 text-base focus:border-[#232323] focus:outline-none transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-none file:border-0 file:bg-[#232323] file:text-white file:cursor-pointer" id="attachment" name="attachment" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip,.rar" />
+                  <p class="text-xs opacity-50 mt-2">PDF, DOC, DOCX, JPG, PNG, ZIP, RAR (Max 10MB)</p>
+               </div>
+               <div id="file-name" class="text-sm mt-2 opacity-80 hidden"></div>
+            </div>
+
+            <div class="sr-only" aria-hidden="true">
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div id="form-status" class="hidden border px-4 py-3 text-sm font-medium" role="status" aria-live="polite"></div>
+            
+            <button type="submit" data-submit-button class="mt-8 bg-[#232323] text-white font-bold uppercase tracking-widest py-6 px-10 hover:bg-black transition-colors flex justify-between items-center group disabled:cursor-not-allowed disabled:opacity-70">
+                <span data-submit-label>Send Message</span>
+                <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Right: Globe (Dark) -->
+      <div class="bg-[#151515] relative min-h-[50vh] lg:min-h-screen order-1 lg:order-2 overflow-hidden flex items-center justify-center">
+          <div class="absolute inset-0 z-0">
+               <Globe client:only="react" className="w-full h-full opacity-100" />
+          </div>
+          
+          <!-- Location Overlay -->
+          <div class="absolute bottom-12 left-12 z-20 text-white pointer-events-none p-8 bg-black/40 backdrop-blur-xl rounded-2xl border border-white/20 max-w-sm">
+              <h3 class="text-3xl font-bold uppercase mb-6 font-heading tracking-tight">Main Headquarters</h3>
+              <div class="space-y-8 text-sm">
+                  <div class="group">
+                      <h4 class="font-bold uppercase tracking-widest text-[11px] text-white mb-3">Abu Dhabi, UAE</h4>
+                      <p class="text-white leading-relaxed font-semibold text-base">
+                        Office No. M05, Building No. C32, Shabiya 9, Mohamed Bin Zayed City
+                      </p>
+                      <div class="mt-5 flex flex-col gap-2 text-[14px] text-white italic font-medium">
+                        <span class="flex items-center gap-2">T: <span class="not-italic font-bold">+971 2 650 1694</span></span>
+                        <span class="flex items-center gap-2">M: <span class="not-italic font-bold">+971 56 444 4045</span></span>
+                        <span class="mt-1 not-italic font-bold text-white">info@ultraction.ae</span>
+                      </div>
+                  </div>
+                  
+                  <div class="pt-6 border-t border-white/20">
+                    <h4 class="font-bold uppercase tracking-widest text-[11px] text-white mb-3">KSA Branch</h4>
+                    <p class="text-white leading-relaxed font-semibold text-base mb-1">AL Bawady International Contracting LLC</p>
+                    <div class="flex flex-col gap-2 text-[14px] text-white italic font-medium">
+                        <span class="flex items-center gap-2">T: <span class="not-italic font-bold">+966 50 000 2281</span></span>
+                        <span class="not-italic font-bold text-white">www.albawady.sa</span>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+    </div>
+</Layout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('[data-contact-form]');
+    if (!(form instanceof HTMLFormElement)) return;
+
+    const submitButton = form.querySelector('[data-submit-button]');
+    const submitLabel = form.querySelector('[data-submit-label]');
+    const statusBox = document.getElementById('form-status');
+    const subjectSelect = form.querySelector('#subject');
+    const fileInput = document.querySelector('#attachment');
+    const fileNameDisplay = document.getElementById('file-name');
+
+    // Display selected file name
+    if (fileInput instanceof HTMLInputElement && fileNameDisplay) {
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files && fileInput.files[0]) {
+          const file = fileInput.files[0];
+          const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+          fileNameDisplay.textContent = `${file.name} (${sizeInMB} MB)`;
+          fileNameDisplay.classList.remove('hidden');
+        } else {
+          fileNameDisplay.classList.add('hidden');
+        }
+      });
+    }
+
+    const setStatus = (type, message) => {
+      if (!(statusBox instanceof HTMLElement)) return;
+      statusBox.classList.remove('hidden', 'border-red-700', 'bg-red-50', 'text-red-800', 'border-green-700', 'bg-green-50', 'text-green-800');
+      if (type === 'success') {
+        statusBox.classList.add('border-green-700', 'bg-green-50', 'text-green-800');
+      } else {
+        statusBox.classList.add('border-red-700', 'bg-red-50', 'text-red-800');
+      }
+      statusBox.textContent = message;
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const formData = new FormData(form);
+      const selected = String(formData.get('subject') || '');
+
+      // Validate file size (max 10MB)
+      const file = formData.get('attachment') as File | null;
+      if (file && file.size > 10 * 1024 * 1024) {
+        setStatus('error', 'File size must be less than 10MB.');
+        return;
+      }
+
+      if (submitButton instanceof HTMLButtonElement) submitButton.disabled = true;
+      if (submitLabel instanceof HTMLElement) submitLabel.textContent = 'Sending...';
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: formData,
+        });
+
+        const result = await response.json().catch(() => ({ ok: false, message: 'Unexpected server response.' }));
+        if (!response.ok || !result.ok) {
+          throw new Error(result.message || 'Unable to send your message right now.');
+        }
+
+        setStatus('success', result.message || 'Your message has been sent.');
+        form.reset();
+        if (fileNameDisplay instanceof HTMLElement) fileNameDisplay.classList.add('hidden');
+        if (subjectSelect instanceof HTMLSelectElement && selected) {
+          subjectSelect.value = selected;
+        }
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unable to send your message right now.';
+        setStatus('error', errorMessage);
+      } finally {
+        if (submitButton instanceof HTMLButtonElement) submitButton.disabled = false;
+        if (submitLabel instanceof HTMLElement) submitLabel.textContent = 'Send Message';
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Animate pulse delay */
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+</style>

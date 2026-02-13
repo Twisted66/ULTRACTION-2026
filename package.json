@@ -1,0 +1,36 @@
+{
+  "name": "ultraction-website",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "start": "node ./dist/server/entry.mjs",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/node": "^9.5.3",
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/tailwind": "^6.0.2",
+    "@astrojs/vercel": "^9.0.4",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/public-sans": "^5.2.7",
+    "@remotion/player": "^4.0.421",
+    "@remotion/shapes": "^4.0.421",
+    "astro": "^5.17.1",
+    "cobe": "^0.6.5",
+    "framer-motion": "^12.34.0",
+    "lucide-react": "^0.563.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-spring": "^10.0.3",
+    "remotion": "^4.0.421"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.57.1"
+  }
+}

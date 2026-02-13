@@ -1,0 +1,96 @@
+---
+import { Image } from 'astro:assets';
+
+// Client logos with valid, metadata-readable files only
+import arabland from '../../assets/clients/arabland.jpg';
+import falaroad from '../../assets/clients/falaroad.jpg';
+import gcl from '../../assets/clients/gcl.jpg';
+import it from '../../assets/clients/it.png';
+import lindberg from '../../assets/clients/lindberg.png';
+import nbhh from '../../assets/clients/nbhh.jpg';
+import nmdcAe from '../../assets/clients/NMDC.AE.png';
+import npc from '../../assets/clients/npc.png';
+import petrofac from '../../assets/clients/petrofac.svg';
+import pivot from '../../assets/clients/pivot.jpg';
+import powerchina from '../../assets/clients/powerchina.jpeg';
+import powercon from '../../assets/clients/powercon.png';
+import sobha from '../../assets/clients/sobha.jpg';
+import trojan from '../../assets/clients/trojan.jpeg';
+import ue from '../../assets/clients/ue.jpg';
+
+// Client logos array with proper names for alt text
+const clientLogos = [
+  { src: arabland, name: 'Arab Land Contracting LLC' },
+  { src: falaroad, name: 'FARAROAD' },
+  { src: gcl, name: 'Gulf Contracting and Landscape GCL' },
+  { src: it, name: 'Larsen and Toubro LT' },
+  { src: lindberg, name: 'Lindberg Emirates' },
+  { src: nbhh, name: 'NBHH' },
+  { src: nmdcAe, name: 'NMDC National Marine Dredging Company' },
+  { src: npc, name: 'NPC' },
+  { src: petrofac, name: 'Petrofac' },
+  { src: pivot, name: 'Pivot Engineering and General Contracting' },
+  { src: powerchina, name: 'PowerChina' },
+  { src: powercon, name: 'Powercon' },
+  { src: sobha, name: 'SOBHA Limited' },
+  { src: trojan, name: 'Trojan' },
+  { src: ue, name: 'United Engineering UE' },
+];
+---
+
+<section class="py-20 border-b border-black dark:border-black overflow-hidden bg-background">
+  <div class="container mx-auto px-6 mb-12">
+    <h2 class="text-3xl font-bold uppercase tracking-wider text-center">Our Clients</h2>
+  </div>
+
+  <div class="logo-loop-container relative w-full overflow-hidden">
+    <div class="logo-track flex gap-12 md:gap-16 w-max animate-scroll">
+      {/* Original Set */}
+      {clientLogos.map((logo) => (
+        <div class="logo-item flex items-center justify-center w-32 md:w-40 h-20 md:h-24 hover:scale-110 transition-all duration-300 opacity-80 hover:opacity-100">
+          <Image
+            src={logo.src}
+            alt={logo.name}
+            class="max-w-full max-h-full object-contain"
+            width={160}
+            height={96}
+            loading="lazy"
+          />
+        </div>
+      ))}
+
+      {/* Duplicate Set for Seamless Loop */}
+      {clientLogos.map((logo) => (
+        <div class="logo-item flex items-center justify-center w-32 md:w-40 h-20 md:h-24 hover:scale-110 transition-all duration-300 opacity-80 hover:opacity-100">
+          <Image
+            src={logo.src}
+            alt={logo.name}
+            class="max-w-full max-h-full object-contain"
+            width={160}
+            height={96}
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .logo-track {
+    animation: scroll 40s linear infinite;
+  }
+
+  .logo-loop-container:hover .logo-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+</style>

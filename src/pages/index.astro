@@ -1,0 +1,427 @@
+---
+// Home page - ULTRACTION General Contracting LLC
+// Main landing page - Nova Construct Design Pattern
+
+import Layout from '../layouts/Layout.astro';
+import VideoPlayer from '../components/common/VideoPlayer.astro';
+import TextTypeAnimation from '../components/animations/TextTypeAnimation';
+import HomeStatsAnimation from '../components/animations/HomeStatsAnimation';
+import InfiniteScroll from '../components/common/InfiniteScroll.astro';
+import LogoLoop from '../components/common/LogoLoop.astro';
+
+const galleryImages = [
+  { src: "/images/projects/naseem-albar-bridge/photo_026.jpeg", alt: "Naseem Al Bar Bridge" },
+  { src: "/images/projects/inner-bypass-e45/photo_023.jpeg", alt: "Inner Bypass E45 Infrastructure" },
+  { src: "/images/projects/utility-structure/photo_005.jpeg", alt: "Utility Structure Design" },
+  { src: "/images/projects/e20-traffic-bridges/photo_015.jpeg", alt: "E20 Traffic Improvement" },
+  { src: "/images/projects/al-tallah-bridge/photo_016.jpeg", alt: "Al Tallah Road Bridge" },
+  { src: "/images/projects/inner-bypass-e45/photo_023.jpeg", alt: "Inner Bypass E45" },
+];
+
+// SEO Metadata
+const title = "ULTRACTION GENERAL CONTRACTING LLC | Premium Construction Services UAE";
+const description = "Leading construction company in Dubai offering general contracting, renovation, and commercial construction services. Transforming visions into reality with excellence.";
+
+// Page-specific structured data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": title,
+  "description": description,
+  "url": "https://ultraction.ae",
+  "about": {
+    "@type": "Organization",
+    "name": "ULTRACTION GENERAL CONTRACTING LLC",
+    "description": "Premium construction services in UAE"
+  }
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  image="/logo/UGC-HEADER.png"
+>
+  <!-- Hero Section - Full Screen Video -->
+  <section class="hero-fullscreen relative w-full h-screen min-h-[600px] overflow-hidden border-b border-black dark:border-black -mt-[104px]">
+    <!-- Cinematic Video Background -->
+    <div class="absolute inset-0 z-0">
+      <VideoPlayer src="/video/hero.mp4" />
+    </div>
+
+    <!-- Gradient Overlay for text readability -->
+    <div class="absolute inset-0 z-[1] bg-gradient-to-t from-black/80 via-black/40 to-black/20 pointer-events-none"></div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 h-full flex flex-col justify-center px-6 sm:px-8 lg:px-24 pt-16 sm:pt-20">
+      <div class="max-w-[1400px] mx-auto w-full">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[72px] xl:text-[90px] font-bold uppercase leading-[0.9] sm:leading-[0.85] tracking-tight mb-6 sm:mb-8 lg:mb-12 font-heading text-white">
+          Expert<br/>
+          Construction<br/>
+          Services For<br/>
+          <span class="text-white">
+            <TextTypeAnimation
+              client:load
+              words="Every Project,Your Vision,Dream Spaces,Modern Living"
+            />
+          </span>
+        </h1>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+          <a href="/contact" class="bg-white/10 backdrop-blur-sm hover:bg-accent border border-white/30 hover:border-accent text-white py-3 sm:py-4 px-6 sm:px-10 text-center font-medium transition-all duration-300 uppercase tracking-wide text-xs sm:text-sm inline-block min-h-[44px] flex items-center">
+            Contact Us
+          </a>
+          <a href="/about" class="text-white hover:text-accent text-xs sm:text-sm uppercase tracking-widest flex items-center gap-3 group transition-colors min-h-[44px]">
+            <span>Learn More</span>
+            <svg class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll Down Indicator -->
+      <div class="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60 animate-bounce">
+        <span class="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M19 14l-7 7m0 0l-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro Section - 4-column grid -->
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-b border-black dark:border-black">
+    <div class="p-8 lg:border-r border-b lg:border-b-0 border-black dark:border-black">
+      <h3 class="font-bold text-lg mb-4 uppercase">Delivering iconic projects<br/>in partnership with our<br/>clients around the world</h3>
+      <a class="inline-flex items-center gap-2 text-sm mt-8 group" href="/about">
+        <div class="w-6 h-6 rounded-full border border-primary dark:border-black flex items-center justify-center group-hover:bg-primary group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-primary transition-colors">
+          <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+        </div>
+        <span class="uppercase text-xs tracking-wider">Learn more</span>
+      </a>
+    </div>
+    <div class="p-8 lg:border-r border-b md:border-b-0 border-black dark:border-black text-sm leading-relaxed">
+      With offices across the United Arab Emirates, we have a proven track record of delivering iconic and world-class projects for public and private clients in major cities and regional areas alike.
+    </div>
+    <div class="p-8 lg:border-r border-b md:border-b-0 border-black dark:border-black text-sm leading-relaxed">
+      We seek collaborative, consultative relationships with clients and stakeholders to create common goals, moving standards forward in every phase of programme delivery.
+    </div>
+    <div class="p-8 text-sm leading-relaxed">
+      We do this through our quality systems, our market-leading health and safety approaches and the positive impacts we create through our projects — on society, local communities and the environment.
+    </div>
+  </section>
+
+  <!-- Stats Section - Grid with numbers and images -->
+  <section class="border-b border-black dark:border-black">
+    <div class="flex flex-col lg:flex-row">
+      <div class="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 border-r-0 lg:border-r border-black dark:border-black">
+        <div class="p-6 sm:p-8 border-b md:border-r border-black dark:border-black min-h-[280px] sm:h-80 flex flex-col justify-between">
+          <div>
+            <span class="block text-6xl font-bold mb-2">400</span>
+            <span class="text-xs uppercase tracking-widest font-bold">Professionals</span>
+          </div>
+          <p class="text-sm leading-relaxed mt-4">
+            Skilled professionals on our team. Our team brings together many professionals ready to take on any size challenge. We create a team that inspires trust.
+          </p>
+        </div>
+        <div class="border-b border-black dark:border-black min-h-[280px] sm:h-80 overflow-hidden relative group">
+          <img alt="Al Tallah Road Bridge" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="/images/projects/al-tallah-bridge/photo_003.jpeg" />
+        </div>
+        <div class="border-b border-black dark:border-black md:border-r min-h-[220px] sm:h-64 overflow-hidden">
+          <img alt="E20 Traffic Bridge" class="w-full h-full object-cover" src="/images/projects/e20-traffic-bridges/photo_010.jpeg" />
+        </div>
+        <div class="p-6 sm:p-8 border-b border-black dark:border-black min-h-[220px] sm:h-64 flex flex-col justify-between">
+          <div>
+            <span class="block text-6xl font-bold mb-2">18</span>
+            <span class="text-xs uppercase tracking-widest font-bold">Awards</span>
+          </div>
+          <p class="text-sm leading-relaxed mt-4">
+            Construction quality awards. Our commitment has been recognized with awards and certifications.
+          </p>
+        </div>
+        <div class="p-6 sm:p-8 border-b border-black dark:border-black md:border-r min-h-[220px] sm:h-64 flex flex-col justify-between">
+          <div>
+            <span class="block text-4xl sm:text-6xl font-bold mb-2">62</span>
+            <span class="text-[10px] sm:text-xs uppercase tracking-widest font-bold">Cities</span>
+          </div>
+          <p class="text-[13px] sm:text-sm leading-relaxed mt-4">
+            Cities where we have left our mark. Our construction achievements span more than 62 cities.
+          </p>
+        </div>
+        <div class="border-b border-black dark:border-black min-h-[220px] sm:h-64 overflow-hidden relative">
+          <img alt="Inner Bypass E45 Road" class="w-full h-full object-cover" src="/images/projects/inner-bypass-e45/photo_014.jpeg" />
+        </div>
+        <div class="p-6 sm:p-8 border-r border-black dark:border-black min-h-[220px] sm:h-64 flex flex-col justify-between">
+          <div>
+            <span class="block text-4xl sm:text-6xl font-bold mb-2">4</span>
+            <span class="text-[10px] sm:text-xs uppercase tracking-widest font-bold">Thousands</span>
+          </div>
+          <p class="text-[13px] sm:text-sm leading-relaxed mt-4">
+            Satisfied customers. We've built not just buildings, but long-term relationships.
+          </p>
+        </div>
+        <div class="p-6 sm:p-8 min-h-[220px] sm:h-64 flex flex-col justify-between">
+          <div>
+            <span class="block text-4xl sm:text-6xl font-bold mb-2">98</span>
+            <span class="text-[10px] sm:text-xs uppercase tracking-widest font-bold">Percent</span>
+          </div>
+          <p class="text-[13px] sm:text-sm leading-relaxed mt-4">
+            Satisfied customers. Our commitment to service excellence is reflected in our customer satisfaction levels.
+          </p>
+        </div>
+      </div>
+      <div class="w-full lg:w-1/2 flex flex-col bg-[#DDD4C5] dark:bg-[#2A2621]">
+        <div class="flex-1 p-0 flex items-stretch justify-stretch min-h-[250px] lg:min-h-0">
+          <div class="stats-motion-frame w-full h-full relative overflow-hidden shadow-2xl">
+            <img 
+              src="/images/bridge_hero_v2.png" 
+              alt="Bridge Construction Hero" 
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Overview - 4 Columns -->
+  <section id="services" class="border-t border-black dark:border-black bg-surface">
+    <div class="flex flex-col md:flex-row justify-between items-end px-8 lg:px-16 py-20 border-b border-black">
+      <div>
+        <span class="text-xs uppercase font-bold tracking-[0.2em] mb-4 block text-accent">Our Expertise</span>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold uppercase font-heading leading-tight">
+          Comprehensive<br/>Solutions
+        </h2>
+      </div>
+      <a href="/services" class="hidden md:flex items-center gap-2 group text-sm uppercase tracking-widest mt-8 md:mt-0">
+        <span>View All Services</span>
+        <div class="w-8 h-8 rounded-full border border-black dark:border-black flex items-center justify-center group-hover:bg-primary group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-primary transition-all">
+          <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        </div>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-b border-black">
+        <!-- Service 1: Infrastructure -->
+        <a href="/services#infrastructure" class="group block p-8 border-b md:border-b-0 md:border-r border-black hover:bg-black/5 transition-colors">
+          <div class="aspect-[3/4] overflow-hidden relative mb-6 border border-black/10">
+            <img src="/images/projects/naseem-albar-bridge/photo_038.jpeg" alt="Infrastructure Construction" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          </div>
+          <h3 class="text-xl font-bold uppercase mb-2 group-hover:text-accent transition-colors">Infrastructure</h3>
+          <p class="text-sm leading-relaxed">Bridges, roads, and utility networks that connect communities and drive progress.</p>
+        </a>
+
+        <!-- Service 2: Commercial -->
+        <a href="/services#commercial" class="group block p-8 border-b md:border-b-0 lg:border-r border-black hover:bg-black/5 transition-colors">
+          <div class="aspect-[3/4] overflow-hidden relative mb-6 border border-black/10">
+            <img src="/images/projects/commercial/p108_img01_xref6681.jpeg" alt="Commercial Construction" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          </div>
+          <h3 class="text-xl font-bold uppercase mb-2 group-hover:text-accent transition-colors">Commercial</h3>
+          <p class="text-sm leading-relaxed">High-rise towers, offices, and retail spaces designed for modern business needs.</p>
+        </a>
+
+        <!-- Service 3: Residential -->
+        <a href="/services#residential" class="group block p-8 border-b lg:border-b-0 lg:border-r border-black hover:bg-black/5 transition-colors">
+          <div class="aspect-[3/4] overflow-hidden relative mb-6 border border-black/10">
+            <img src="/images/projects/residential/p105_img01_xref6661.jpeg" alt="Residential Construction" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          </div>
+          <h3 class="text-xl font-bold uppercase mb-2 group-hover:text-accent transition-colors">Residential</h3>
+          <p class="text-sm leading-relaxed">Luxury villas and residential communities built with precision and care.</p>
+        </a>
+
+        <!-- Service 4: Industrial -->
+        <a href="/services#industrial" class="group block p-8 hover:bg-black/5 transition-colors">
+          <div class="aspect-[3/4] overflow-hidden relative mb-6 border border-black/10">
+            <img src="/images/projects/industrial/p087_img01_xref6534.jpeg" alt="Industrial Construction" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          </div>
+          <h3 class="text-xl font-bold uppercase mb-2 group-hover:text-accent transition-colors">Industrial</h3>
+          <p class="text-sm leading-relaxed">Warehouses, factories, and specialized facilities engineered for efficiency.</p>
+        </a>
+      </div>
+      
+      <div class="mt-12 md:hidden">
+        <a href="/services" class="flex items-center gap-2 text-sm uppercase tracking-widest justify-center border border-primary/20 py-4 hover:bg-primary hover:text-white transition-colors">
+          View All Services
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects - Carousel Snippet -->
+  <section class="border-t border-black dark:border-black overflow-hidden bg-surface text-foreground">
+    <div class="w-full p-12 lg:p-20 border-b border-black flex flex-col md:flex-row justify-between items-center">
+      <div>
+        <span class="text-xs uppercase font-bold tracking-[0.2em] mb-4 text-accent block">Featured Work</span>
+        <h2 class="text-4xl lg:text-5xl font-bold uppercase font-heading leading-tight">Building Landmarks</h2>
+      </div>
+      <div class="mt-8 md:mt-0 max-w-md md:text-right">
+        <p class="opacity-70 leading-relaxed mb-8 text-sm">
+          From complex infrastructure to iconic accolades, our portfolio showcases our capability to deliver challenging projects with excellence.
+        </p>
+        <a href="/projects" class="inline-flex items-center gap-4 text-sm uppercase tracking-widest hover:text-accent transition-colors group">
+          <span>Explore Portfolio</span>
+          <svg class="h-4 w-4 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        </a>
+      </div>
+    </div>
+    
+    <div class="w-full">
+        <!-- Manually selected featured projects for now to ensure quality images -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 h-full border-b border-black">
+          <a href="/projects/naseem-albar-bridge" class="relative group h-[300px] sm:h-[400px] lg:h-[500px] overflow-hidden border-b lg:border-b-0 border-black lg:border-r block">
+            <img src="/images/projects/naseem-albar-bridge/naseem.jpg" alt="Naseem Al Bar Bridge Construction Site" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute bottom-0 left-0 p-6 sm:p-8 w-full translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 text-white">
+              <span class="text-[10px] sm:text-xs uppercase tracking-widest text-white mb-2 block">Infrastructure</span>
+              <h3 class="text-xl sm:text-2xl font-bold uppercase">Naseem Al Bar Bridge</h3>
+            </div>
+            <div class="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            </div>
+          </a>
+
+          <a href="/projects/etihad-rail-2f2-adp" class="relative group h-[300px] sm:h-[400px] lg:h-[500px] overflow-hidden border-b lg:border-b-0 border-black lg:border-r block">
+            <img src="/images/projects/infrastructure/p082_img01_xref6357.jpeg" alt="Infrastructure Project" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute bottom-0 left-0 p-6 sm:p-8 w-full translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 text-white">
+              <span class="text-[10px] sm:text-xs uppercase tracking-widest text-white mb-2 block">Infrastructure</span>
+              <h3 class="text-xl sm:text-2xl font-bold uppercase">Etihad Rail Projects</h3>
+            </div>
+            <div class="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            </div>
+          </a>
+
+          <a href="/projects/utility-structure" class="relative group h-[300px] sm:h-[400px] lg:h-[500px] overflow-hidden block">
+            <img src="/images/projects/utility-structure/photo_005.jpeg" alt="Utility Structure" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute bottom-0 left-0 p-6 sm:p-8 w-full translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 text-white">
+              <span class="text-[10px] sm:text-xs uppercase tracking-widest text-white mb-2 block">Industrial</span>
+              <h3 class="text-xl sm:text-2xl font-bold uppercase">Utility Structures</h3>
+            </div>
+            <div class="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            </div>
+          </a>
+    </div>
+  </section>
+
+  <!-- Gallery Section - Infinite Scroll Moved Here -->
+  <InfiniteScroll images={galleryImages} />
+
+
+
+  <!-- Why Choose ULTRACTION Section -->
+  <section class="border-y border-black dark:border-black overflow-hidden bg-surface text-foreground">
+    <div class="w-full p-12 lg:p-20 border-b border-black flex flex-col md:flex-row justify-between items-center bg-background">
+      <div>
+        <span class="text-xs uppercase font-bold tracking-[0.2em] mb-4 text-accent block">Core Differentiators</span>
+        <h2 class="text-4xl lg:text-5xl font-bold uppercase font-heading leading-tight">Why Choose ULTRACTION</h2>
+      </div>
+      <div class="mt-8 md:mt-0 max-w-md md:text-right">
+        <p class="opacity-70 leading-relaxed mb-8 text-sm">
+          With a focus on quality, safety, and efficiency, we provide construction solutions that set new standards in the industry.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-0 px-0 max-w-full mx-auto border-b border-black">
+      <div class="p-8 lg:p-12 border-b md:border-b-0 md:border-r border-black bg-surface text-center group hover:bg-primary/5 transition-colors">
+        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-colors">
+          <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        </div>
+        <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Quality Assurance</h3>
+        <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">ISO-certified processes ensuring every project meets global standards of excellence and durability.</p>
+      </div>
+
+      <div class="p-8 lg:p-12 border-b md:border-b-0 md:border-r border-black bg-surface text-center group hover:bg-primary/5 transition-colors">
+        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-colors">
+          <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        </div>
+        <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">On-Time Delivery</h3>
+        <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">Rigorous project management methodologies to ensure we deliver on schedule, every time.</p>
+      </div>
+
+      <div class="p-8 lg:p-12 bg-surface text-center group hover:bg-primary/5 transition-colors">
+        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-colors">
+          <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        </div>
+        <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Safety First</h3>
+        <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">Uncompromising commitment to health, safety, and environment (HSE) on every construction site.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section - Numbered list -->
+  <section class="border-b border-black dark:border-black">
+    <div class="flex flex-col lg:flex-row">
+      <div class="w-full lg:w-1/4 border-r border-black dark:border-black min-h-[200px] lg:min-h-[400px] overflow-hidden relative">
+        <img alt="Naseem Al Bar Bridge Detail" class="w-full h-full object-cover" src="/images/projects/naseem-albar-bridge/photo_012.jpeg" />
+      </div>
+      <div class="w-full lg:w-3/4 p-6 lg:p-20">
+        <h2 class="text-2xl sm:text-4xl font-bold uppercase mb-12 lg:mb-20 max-w-2xl leading-[1.1]">
+          We are committed to creating buildings that are not only functional and aesthetically pleasing.
+        </h2>
+        <div class="flex flex-col border-t border-black dark:border-black">
+          <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-black dark:border-black gap-4 md:gap-16">
+            <span class="text-[10px] sm:text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">About Us</span>
+            <div class="flex gap-4 sm:gap-8 items-start flex-1">
+              <span class="text-xs sm:text-sm font-bold text-accent font-mono pt-1">[01]</span>
+              <p class="text-[13px] sm:text-sm uppercase tracking-widest leading-relaxed">ULTRACTION is a construction company that delivers exceptional projects across the UAE.</p>
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-black dark:border-black gap-4 md:gap-16">
+            <span class="text-[10px] sm:text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">Our Vision</span>
+            <div class="flex gap-4 sm:gap-8 items-start flex-1">
+              <span class="text-xs sm:text-sm font-bold text-accent font-mono pt-1">[02]</span>
+              <p class="text-[13px] sm:text-sm uppercase tracking-widest leading-relaxed">We believe that construction has the power to transform communities and lives.</p>
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-black dark:border-black gap-4 md:gap-16">
+            <span class="text-[10px] sm:text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">Our Approach</span>
+            <div class="flex gap-4 sm:gap-8 items-start flex-1">
+              <span class="text-xs sm:text-sm font-bold text-accent font-mono pt-1">[03]</span>
+              <p class="text-[13px] sm:text-sm uppercase tracking-widest leading-relaxed">We are committed to creating buildings that are not only functional and aesthetically pleasing.</p>
+            </div>
+          </div>
+          <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-black dark:border-black gap-4 md:gap-16">
+            <span class="text-[10px] sm:text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">Our Mission</span>
+            <div class="flex gap-4 sm:gap-8 items-start flex-1">
+              <span class="text-xs sm:text-sm font-bold text-accent font-mono pt-1">[04]</span>
+              <p class="text-[13px] sm:text-sm uppercase tracking-widest leading-relaxed">Our mission is to use our creativity and expertise to build spaces that make a positive impact on the world.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTO Section -->
+  <section class="border-b border-black dark:border-black bg-surface text-primary">
+    <div class="flex flex-col md:flex-row">
+       <div class="w-full md:w-1/2 min-h-[600px] relative order-2 md:order-1">
+          <img src="/images/projects/naseem-albar-bridge/photo_044.jpeg" alt="Technical leadership at ULTRACTION" class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+          <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+       </div>
+       <div class="w-full md:w-1/2 p-12 lg:p-24 flex flex-col justify-center order-1 md:order-2">
+          <div class="w-12 h-1 bg-accent mb-8"></div>
+          <span class="text-xs uppercase font-bold tracking-[0.2em] mb-6 text-primary/70 block">Technical Leadership</span>
+          <blockquote class="text-3xl lg:text-4xl font-light leading-tight mb-10">
+            "We don't just build structures; we engineer legacies. Every project is an opportunity to push the boundaries of what's possible."
+          </blockquote>
+          <cite class="not-italic">
+            <span class="block text-xl font-bold uppercase tracking-wider">Ahmed Hassan</span>
+            <span class="block text-sm text-primary/70 uppercase tracking-widest mt-2">Chief Technical Officer</span>
+          </cite>
+       </div>
+    </div>
+  </section>
+
+  <!-- Client Logos Section -->
+  <LogoLoop />
+</Layout>
+
+<!-- Page-specific structured data -->
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

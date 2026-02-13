@@ -1,0 +1,39 @@
+---
+// Hero.astro - ULTRACTION Hero Section (Nova Construct Design Pattern)
+// With video background integration
+import VideoPlayer from '../common/VideoPlayer.astro';
+---
+
+<section class="flex flex-col lg:flex-row border-b border-primary/20 dark:border-black/20">
+  <!-- Left: Text Content -->
+  <div class="w-full lg:w-1/2 flex flex-col border-r-0 lg:border-r border-primary/20 dark:border-black/20">
+    <div class="p-8 lg:p-16 flex-1 flex flex-col justify-center relative">
+      <h1 class="text-5xl lg:text-[80px] xl:text-[100px] font-bold uppercase leading-[0.85] tracking-tight mb-8 lg:mb-12 font-heading">
+        Expert<br/>
+        Construction<br/>
+        Services For<br/>
+        Every Project
+      </h1>
+    </div>
+    <div class="border-t border-primary/20 dark:border-black/20 p-8">
+      <a href="/contact" class="inline-block w-full max-w-md bg-primary hover:bg-accent text-background dark:text-white py-4 px-6 text-center font-medium transition-colors uppercase tracking-wide text-sm">
+        Contact Us
+      </a>
+    </div>
+  </div>
+
+  <!-- Right: Video Background -->
+  <div class="w-full lg:w-1/2 h-[500px] lg:h-auto relative overflow-hidden">
+    <!-- Hero Video - loads directly without poster -->
+    <VideoPlayer
+      src="/video/hero.mp4"
+      autoplay={true}
+      muted={true}
+      loop={true}
+      controls={false}
+      class="w-full h-full"
+    />
+    <!-- Overlay for better text readability if needed -->
+    <div class="absolute inset-0 bg-black/5 pointer-events-none"></div>
+  </div>
+</section>

@@ -1,0 +1,66 @@
+---
+interface Props {
+  images: {
+    src: string;
+    alt: string;
+  }[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="infinite-scroll-container w-full overflow-hidden h-[400px] bg-background relative border-b border-primary/20 dark:border-black/20">
+  <div class="scroll-track flex h-full">
+    {/* Original Set */}
+    {images.map((image, index) => (
+      <div class="scroll-item flex-shrink-0 w-[400px] h-full border-r border-primary/20 dark:border-black/20 relative group overflow-hidden">
+        <img 
+          src={image.src} 
+          alt={image.alt} 
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+        />
+        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
+        <div class="absolute bottom-8 left-8 z-10 transition-transform duration-500 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+           <span class="text-white text-xs font-bold tracking-[0.2em] uppercase block mb-2">Project {index + 1}</span>
+           <h3 class="text-white text-xl font-bold uppercase">{image.alt}</h3>
+        </div>
+      </div>
+    ))}
+    
+    {/* Duplicate Set for Seamless Loop */}
+    {images.map((image, index) => (
+      <div class="scroll-item flex-shrink-0 w-[400px] h-full border-r border-primary/20 dark:border-black/20 relative group overflow-hidden">
+        <img 
+          src={image.src} 
+          alt={image.alt} 
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+        />
+        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
+        <div class="absolute bottom-8 left-8 z-10 transition-transform duration-500 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+           <span class="text-white text-xs font-bold tracking-[0.2em] uppercase block mb-2">Project {index + 1}</span>
+           <h3 class="text-white text-xl font-bold uppercase">{image.alt}</h3>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .scroll-track {
+    width: max-content;
+    animation: infiniteScroll 40s linear infinite;
+  }
+  
+  .infinite-scroll-container:hover .scroll-track {
+    animation-play-state: paused;
+  }
+  
+  @keyframes infiniteScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>

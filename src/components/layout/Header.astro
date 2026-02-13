@@ -1,0 +1,123 @@
+---
+// Header.astro - ULTRACTION Website Header (Nova Construct Design Pattern)
+---
+
+<header class="w-full border-b border-black dark:border-black fixed top-0 left-0 right-0 z-50 bg-background">
+  <div class="flex flex-wrap md:flex-nowrap">
+    <!-- Logo - Left Side -->
+    <div class="w-full md:w-96 px-12 py-7 flex items-center justify-between">
+      <a href="/" class="font-bold text-lg tracking-wide uppercase flex items-center gap-3">
+        <img src="/logo/UGC-HEADER.png" alt="ULTRACTION" class="h-16 w-auto" />
+      </a>
+      <button
+        id="mobile-menu-toggle"
+        class="md:hidden text-[#232323]"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+      >
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Spacer to push nav to the right -->
+    <div class="hidden md:flex flex-1"></div>
+
+    <!-- Right Navigation - All links -->
+    <div class="hidden md:flex">
+      <a href="/" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group">
+        <span class="font-bold tracking-tight">HOME</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
+      </a>
+      <a href="/about" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group">
+        <span class="font-bold tracking-tight">ABOUT US</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
+      </a>
+      <a href="/services" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group">
+        <span class="font-bold tracking-tight">SERVICES</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
+      </a>
+      <a href="/projects" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group">
+        <span class="font-bold tracking-tight">PROJECTS</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
+      </a>
+      <a href="/contact" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group">
+        <span class="font-bold tracking-tight">CONTACTS</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <nav id="mobile-nav" class="hidden md:hidden fixed inset-0 z-40 bg-background border-t border-black dark:border-black top-[72px]">
+    <div class="flex flex-col h-full overflow-y-auto max-h-[calc(100vh-72px)]">
+      <a href="/" class="flex items-center justify-between px-6 py-4 text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
+        <span>HOME</span>
+        <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+      </a>
+      <a href="/about" class="flex items-center justify-between px-6 py-4 text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
+        <span>ABOUT US</span>
+        <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+      </a>
+      <a href="/services" class="flex items-center justify-between px-6 py-4 text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
+        <span>SERVICES</span>
+        <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+      </a>
+      <a href="/projects" class="flex items-center justify-between px-6 py-4 text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
+        <span>PROJECTS</span>
+        <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+      </a>
+      <a href="/contact" class="flex items-center justify-between px-6 py-4 text-[#232323] hover:bg-primary/10 transition-colors font-medium">
+        <span>CONTACT</span>
+        <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu toggle functionality
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  toggle?.addEventListener('click', () => {
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', !isExpanded);
+    mobileNav?.classList.toggle('hidden');
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = isExpanded ? 'auto' : 'hidden';
+  });
+
+  // Close mobile nav when clicking a link
+  const mobileLinks = mobileNav?.querySelectorAll('a');
+  mobileLinks?.forEach((link) => {
+    link.addEventListener('click', () => {
+      toggle?.setAttribute('aria-expanded', 'false');
+      mobileNav?.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    });
+  });
+
+  // Close mobile nav when clicking outside or pressing Escape
+  document.addEventListener('click', (e) => {
+    if (toggle && mobileNav && !toggle.contains(e.target) && !mobileNav.contains(e.target)) {
+      closeMobileMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMobileMenu();
+    }
+  });
+
+  function closeMobileMenu() {
+    const isExpanded = toggle?.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      toggle?.setAttribute('aria-expanded', 'false');
+      mobileNav?.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+  }
+</script>

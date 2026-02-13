@@ -1,0 +1,61 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = Astro.url.pathname } = Astro.props;
+---
+
+<nav class="hidden md:flex items-center space-x-8">
+  <ul class="flex items-center space-x-8">
+    {[
+      { path: '/', label: 'Home' },
+      { path: '/about', label: 'About' },
+      { path: '/services', label: 'Services' },
+      { path: '/projects', label: 'Projects' },
+      { path: '/blog', label: 'Blog' },
+      { path: '/careers', label: 'Careers' },
+      { path: '/contact', label: 'Contact' }
+    ].map((item) => (
+      <li key={item.path}>
+        <a
+          href={item.path}
+          class={`
+            relative font-heading font-medium tracking-widest
+            transition-colors duration-200 ease-in-out
+            ${currentPath === item.path || (item.path === '/blog' && currentPath.startsWith('/blog'))
+              ? 'text-accent'
+              : 'text-primary hover:text-accent'
+            }
+          `}
+        >
+          {item.label}
+          {currentPath === item.path && (
+            <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-accent transform scale-x-100"></span>
+          )}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  nav {
+    padding: var(--space-4);
+  }
+
+  a {
+    padding: var(--space-4);
+    display: block;
+    position: relative;
+  }
+
+  a:hover {
+    color: hsl(var(--color-accent));
+  }
+
+  a span {
+    transform-origin: left;
+    transition: transform 0.2s ease-in-out;
+  }
+</style>

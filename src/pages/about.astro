@@ -1,0 +1,224 @@
+﻿---
+import Layout from '../layouts/Layout.astro';
+import LogoLoop from '../components/common/LogoLoop.astro';
+import CoreValues from '../components/about/CoreValues.astro';
+
+const title = 'About Us | ULTRACTION';
+const description = 'ULTRACTION General Contracting LLC delivers civil construction, concrete structures, and infrastructure projects across the UAE with a focus on safety, quality, and sustainability.';
+
+const capabilityStages = [
+  {
+    label: 'Stage 01',
+    heading: 'Civil and Concrete Foundation',
+    body: 'Built on expertise in civil construction and concrete structure works, we execute every package with precision, reliability, and long-term performance in mind.',
+  },
+  {
+    label: 'Stage 02',
+    heading: 'Value-Engineered Delivery',
+    body: 'Our teams integrate value engineering across planning and execution to optimize constructability, cost-efficiency, and schedule performance.',
+  },
+  {
+    label: 'Stage 03',
+    heading: 'Safety and Sustainability by Design',
+    body: 'From method statements to handover, we prioritize jobsite safety, environmental responsibility, and resilient outcomes for communities.',
+  },
+  {
+    label: 'Stage 04',
+    heading: 'Trusted Regional Partnerships',
+    body: 'We continue to grow through repeat delivery, transparent collaboration, and strong partnerships with major contractors, developers, and consultants.',
+  },
+];
+
+const values = [
+  {
+    title: 'Integrity',
+    detail: 'Transparent communication and accountable execution at every stage.',
+  },
+  {
+    title: 'Team Spirit',
+    detail: 'Collaborative delivery across engineering, operations, and client teams.',
+  },
+  {
+    title: 'Commitment',
+    detail: 'Reliable follow-through from mobilization to final handover.',
+  },
+  {
+    title: 'Sustainability',
+    detail: 'Practical environmental responsibility integrated into project decisions.',
+  },
+  {
+    title: 'Performance',
+    detail: 'Measured quality, productivity, and outcomes that stand the test of time.',
+  },
+  {
+    title: 'Safety',
+    detail: 'A zero-compromise safety culture embedded in planning and site practice.',
+  },
+];
+---
+
+<Layout title={title} description={description}>
+  <section class="flex flex-col lg:grid lg:grid-cols-2 border-y border-black min-h-[75vh] lg:min-h-[85vh] bg-surface">
+    <div class="lg:col-span-1 flex flex-col justify-start px-6 py-16 md:px-12 lg:p-24 border-r border-black relative h-full">
+      <span class="text-xs uppercase tracking-[0.2em] text-black/60 mb-6 block">Company Profile</span>
+      <h1 class="text-5xl lg:text-7xl font-light font-heading leading-tight mb-8">
+        Building <br/> <span class="italic font-bold text-black">Infrastructure</span> <br/> With Purpose
+      </h1>
+      <div class="w-12 h-[1px] bg-black/20 mb-8"></div>
+      <p class="text-base font-light leading-loose opacity-80 max-w-md text-black">
+        ULTRACTION General Contracting LLC is a leader in civil construction and concrete structure works. We combine skilled engineering teams, hands-on execution, and value engineering to deliver safe, efficient, and high-performance outcomes across the UAE.
+      </p>
+    </div>
+
+    <div class="lg:col-span-1 relative overflow-hidden h-[320px] sm:h-[420px] lg:h-full bg-surface">
+      <img
+        src="/images/projects/naseem-albar-bridge/hero.png"
+        alt="ULTRACTION infrastructure project"
+        class="absolute inset-0 w-full h-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 pointer-events-none bg-gradient-to-r from-black/20 via-transparent to-transparent"></div>
+    </div>
+  </section>
+
+  <section class="border-b border-black bg-background text-primary py-24 px-8 lg:px-24">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="text-xs uppercase tracking-widest text-accent mb-8 block">General Manager Message</span>
+      <blockquote class="text-2xl md:text-3xl font-heading italic leading-relaxed mb-12">
+        "At ULTRACTION, construction is more than assembling structures. It is about creating spaces that serve communities, uphold safety, and stand as lasting proof of quality and innovation."
+      </blockquote>
+      <div class="flex flex-col items-center">
+        <div class="w-12 h-[1px] bg-black/20 mb-6"></div>
+        <span class="text-sm font-bold uppercase tracking-widest">Engr. Wael Mahmah</span>
+        <span class="text-xs uppercase tracking-widest text-black/60 mt-1">General Manager</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-32 border-b border-primary/20 bg-background">
+    <div class="px-8 lg:px-24">
+      <div class="flex justify-between items-end mb-24 border-b border-black/10 pb-8 gap-6">
+        <h2 class="text-4xl lg:text-5xl font-heading italic">How We <span class="not-italic font-light">Deliver</span></h2>
+        <span class="text-xs uppercase tracking-widest opacity-40">From Planning to Handover</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-black">
+        {capabilityStages.map((stage) => (
+          <div class="group border-r border-b border-black p-8">
+            <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent transition-colors duration-500 mb-6 block">{stage.label}</span>
+            <h3 class="text-lg font-bold uppercase tracking-tight mb-4">{stage.heading}</h3>
+            <p class="text-sm font-light leading-relaxed text-primary/70">
+              {stage.body}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-surface border-b border-black px-6 md:px-8 lg:px-24 pt-16 md:pt-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+        <h2 class="text-3xl md:text-4xl font-heading italic">Trusted <span class="not-italic font-light">By Industry Leaders</span></h2>
+        <span class="text-xs uppercase tracking-[0.2em] text-primary/50">Selected Partners From Our Profile</span>
+      </div>
+    </div>
+    <LogoLoop />
+  </section>
+
+  <section class="bg-surface text-primary py-20 md:py-24 lg:py-32 px-6 md:px-8 lg:px-24 border-b border-black">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+      <div>
+        <span class="text-xs uppercase tracking-widest text-accent mb-6 block">Mission and Vision</span>
+        <h2 class="text-5xl font-heading italic mb-10">Committed to <br/><span class="not-italic font-bold">Long-Term Value</span></h2>
+
+        <div class="space-y-8">
+          <div class="border-l-2 border-accent pl-5">
+            <h3 class="font-bold uppercase tracking-widest text-sm mb-2">Mission</h3>
+            <p class="text-sm font-light text-primary/80 leading-relaxed">
+              To be the builder of choice by delivering quality projects on time, maximizing value for investment, and building enduring relationships with every client.
+            </p>
+          </div>
+
+          <div class="border-l-2 border-accent pl-5">
+            <h3 class="font-bold uppercase tracking-widest text-sm mb-2">Vision</h3>
+            <p class="text-sm font-light text-primary/80 leading-relaxed">
+              To emerge as a premier civil contractor in the Middle East through unwavering dedication, superior design, timely completion, and consistent performance.
+            </p>
+          </div>
+
+          <div class="border-l-2 border-accent pl-5">
+            <h3 class="font-bold uppercase tracking-widest text-sm mb-2">Quality Commitment</h3>
+            <p class="text-sm font-light text-primary/80 leading-relaxed">
+              We maintain a steadfast commitment to quality and environmental awareness across all operations, ensuring every project meets today&apos;s standards and tomorrow&apos;s needs.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <div class="aspect-square relative overflow-hidden rounded-sm grayscale group hover:grayscale-0 transition-all duration-700">
+          <img src="/images/projects/naseem-albar-bridge/photo_038.jpeg" alt="ULTRACTION bridge construction - committed to long-term value" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+        </div>
+
+        <div class="foundation-panel border border-black bg-background">
+          <div class="foundation-header border-b border-black px-5 py-4 md:px-6 md:py-5">
+            <p class="text-[11px] uppercase tracking-[0.24em] text-black/60 mb-1">Our Foundation</p>
+            <h3 class="text-xl md:text-2xl font-heading italic leading-tight text-primary">
+              Principles That Guide Every Build
+            </h3>
+          </div>
+          <div class="foundation-grid grid grid-cols-1 sm:grid-cols-2">
+            {values.map((value, index) => (
+              <article class="foundation-item p-5 md:p-6 border-black">
+                <p class="text-[10px] uppercase tracking-[0.2em] text-accent mb-2">Pillar {String(index + 1).padStart(2, '0')}</p>
+                <h4 class="text-sm md:text-base font-bold uppercase tracking-wider mb-2">{value.title}</h4>
+                <p class="text-xs md:text-sm leading-relaxed text-primary/75">{value.detail}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced Core Values Section -->
+  <CoreValues />
+
+  <section class="border-y border-black bg-background">
+    <div class="flex flex-col items-center justify-center py-20 md:py-28 lg:py-32 px-6 text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-color-accent mb-6">Work With Us</span>
+      <h2 class="text-4xl md:text-5xl font-heading italic mb-10 max-w-3xl leading-snug text-primary">
+        Build your next project with a team focused on <br/><span class="not-italic font-light text-primary/80">safety, precision, and dependable delivery.</span>
+      </h2>
+      <a class="group relative inline-flex items-center justify-center px-12 py-4 overflow-hidden font-medium tracking-widest transition duration-300 ease-out border border-black/40 text-primary hover:border-color-accent hover:bg-color-accent hover:text-white" href="/contact">
+        <span class="text-xs uppercase tracking-widest">Connect Today</span>
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .foundation-item {
+    border-top: 1px solid rgb(0 0 0 / 0.12);
+  }
+
+  .foundation-item:nth-child(odd) {
+    border-right: 1px solid rgb(0 0 0 / 0.12);
+  }
+
+  .foundation-item:nth-child(-n + 2) {
+    border-top: none;
+  }
+
+  @media (max-width: 639px) {
+    .foundation-item:nth-child(odd) {
+      border-right: none;
+    }
+
+    .foundation-item:nth-child(2) {
+      border-top: 1px solid rgb(0 0 0 / 0.12);
+    }
+  }
+</style>
