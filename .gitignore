@@ -12,6 +12,13 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# local tooling artifacts
+.tmp/
+.playwright-mcp/
+test-results/
+.claude/
+ultraction-cpanel-dist.zip
+
 
 # environment variables
 .env

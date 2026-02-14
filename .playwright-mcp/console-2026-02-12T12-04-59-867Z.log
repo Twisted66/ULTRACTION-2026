@@ -1,4 +1,0 @@
-[     501ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/:0
-[   25420ms] [ERROR] Failed to load resource: the server responded with a status of 504 (Outdated Optimize Dep) @ http://localhost:4329/node_modules/.vite/deps/framer-motion.js?v=7398df1c:0
-[   25421ms] [ERROR] [astro-island] Error hydrating /src/components/animations/TextTypeAnimation.tsx TypeError: Failed to fetch dynamically imported module: http://localhost:4329/src/components/animations/TextTypeAnimation.tsx @ http://localhost:4329/:6201
-[   59329ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:4329/:0
