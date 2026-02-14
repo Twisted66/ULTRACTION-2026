@@ -11,8 +11,9 @@
       </a>
       <button
         id="mobile-menu-toggle"
-        class="md:hidden text-[#232323] p-3 min-h-[44px] min-w-[44px]"
-        aria-label="Toggle navigation menu"
+        class="md:hidden text-foreground p-3 min-h-[44px] min-w-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        aria-label="Open navigation menu"
+        aria-controls="mobile-nav"
         aria-expanded="false"
       >
         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -26,24 +27,24 @@
 
     <!-- Right Navigation - All links -->
     <div class="hidden md:flex">
-      <a href="/" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group">
+      <a href="/" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight">HOME</span>
         <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
       </a>
-      <a href="/about" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group">
+      <a href="/about" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight">ABOUT US</span>
         <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
       </a>
-      <a href="/services" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group">
+      <a href="/services" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight">SERVICES</span>
         <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
       </a>
-      <a href="/projects" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group">
+      <a href="/projects" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight">PROJECTS</span>
         <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
       </a>
-      <a href="/contact" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group">
-        <span class="font-bold tracking-tight">CONTACTS</span>
+      <a href="/contact" class="px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <span class="font-bold tracking-tight">CONTACT</span>
         <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
       </a>
     </div>
@@ -52,25 +53,25 @@
   <!-- Mobile Navigation Menu -->
   <nav id="mobile-nav" class="hidden md:hidden fixed inset-0 z-40 bg-background border-t border-black dark:border-black top-[72px]">
     <div class="flex flex-col h-full overflow-y-auto max-h-[calc(100vh-72px)]">
-      <a href="/" class="flex items-center justify-between px-6 min-h-[44px] text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
+      <a href="/" class="flex items-center justify-between px-6 min-h-[44px] text-foreground hover:bg-primary/10 transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span>HOME</span>
-        <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        <svg class="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/about" class="flex items-center justify-between px-6 min-h-[44px] text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
+      <a href="/about" class="flex items-center justify-between px-6 min-h-[44px] text-foreground hover:bg-primary/10 transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span>ABOUT US</span>
-        <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        <svg class="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/services" class="flex items-center justify-between px-6 min-h-[44px] text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
+      <a href="/services" class="flex items-center justify-between px-6 min-h-[44px] text-foreground hover:bg-primary/10 transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span>SERVICES</span>
-        <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        <svg class="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/projects" class="flex items-center justify-between px-6 min-h-[44px] text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
+      <a href="/projects" class="flex items-center justify-between px-6 min-h-[44px] text-foreground hover:bg-primary/10 transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span>PROJECTS</span>
-        <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        <svg class="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/contact" class="flex items-center justify-between px-6 min-h-[44px] text-[#232323] hover:bg-primary/10 transition-colors font-medium">
+      <a href="/contact" class="flex items-center justify-between px-6 min-h-[44px] text-foreground hover:bg-primary/10 transition-colors font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span>CONTACT</span>
-        <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        <svg class="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
     </div>
   </nav>
@@ -81,21 +82,25 @@
   const toggle = document.getElementById('mobile-menu-toggle');
   const mobileNav = document.getElementById('mobile-nav');
 
+  function setMobileMenuState(isOpen) {
+    if (!toggle || !mobileNav) return;
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    mobileNav.classList.toggle('hidden', !isOpen);
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+  }
+
   toggle?.addEventListener('click', () => {
     const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', !isExpanded);
-    mobileNav?.classList.toggle('hidden');
-    // Prevent body scroll when menu is open
-    document.body.style.overflow = isExpanded ? 'auto' : 'hidden';
+    setMobileMenuState(!isExpanded);
   });
 
   // Close mobile nav when clicking a link
   const mobileLinks = mobileNav?.querySelectorAll('a');
   mobileLinks?.forEach((link) => {
     link.addEventListener('click', () => {
-      toggle?.setAttribute('aria-expanded', 'false');
-      mobileNav?.classList.add('hidden');
-      document.body.style.overflow = 'auto';
+      setMobileMenuState(false);
     });
   });
 
@@ -113,11 +118,6 @@
   });
 
   function closeMobileMenu() {
-    const isExpanded = toggle?.getAttribute('aria-expanded') === 'true';
-    if (isExpanded) {
-      toggle?.setAttribute('aria-expanded', 'false');
-      mobileNav?.classList.add('hidden');
-      document.body.style.overflow = 'auto';
-    }
+    setMobileMenuState(false);
   }
 </script>

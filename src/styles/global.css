@@ -86,6 +86,14 @@
     /* Line heights */
     --leading-tight: 1.2;
     --leading-normal: 1.6;
+
+    /* Motion tokens */
+    --motion-duration-fast: 180ms;
+    --motion-duration-base: 300ms;
+    --motion-duration-medium: 500ms;
+    --motion-duration-slow: 700ms;
+    --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --motion-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .dark {
@@ -240,6 +248,34 @@
     text-wrap: balance;
   }
 
+  .motion-fast {
+    transition-duration: var(--motion-duration-fast);
+    transition-timing-function: var(--motion-ease-standard);
+  }
+
+  .motion-base {
+    transition-duration: var(--motion-duration-base);
+    transition-timing-function: var(--motion-ease-standard);
+  }
+
+  .motion-medium {
+    transition-duration: var(--motion-duration-medium);
+    transition-timing-function: var(--motion-ease-standard);
+  }
+
+  .motion-slow {
+    transition-duration: var(--motion-duration-slow);
+    transition-timing-function: var(--motion-ease-emphasized);
+  }
+
+  .media-motion {
+    transition-property: transform, opacity, filter;
+  }
+
+  .overlay-motion {
+    transition-property: opacity, background-color;
+  }
+
   /* Grid border utilities (PROMINENT) */
   .grid-border-r {
     border-right: 1px solid currentColor;
@@ -289,7 +325,9 @@
 /* Project card overlay effects */
 .project-overlay {
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  transition-property: opacity;
+  transition-duration: var(--motion-duration-base);
+  transition-timing-function: var(--motion-ease-standard);
 }
 
 .project-card:hover .project-overlay {
@@ -298,4 +336,34 @@
 
 .project-card:hover img {
   transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .motion-fast,
+  .motion-base,
+  .motion-medium,
+  .motion-slow {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .home-scroll-indicator {
+    animation: none !important;
+  }
+
+  .project-overlay,
+  .project-card img,
+  .media-motion,
+  .overlay-motion {
+    transition: none !important;
+  }
+
+  .project-card:hover img {
+    transform: none !important;
+  }
 }

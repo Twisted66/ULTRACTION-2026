@@ -47,20 +47,26 @@ const description = "Explore our portfolio of completed construction projects in
 
   <!-- Filters Section - Full Width -->
   <section class="border-b border-black">
-    <div class="grid grid-cols-4 md:grid-cols-8">
+    <div class="grid grid-cols-4 md:grid-cols-8" role="group" aria-label="Filter projects by category">
       <!-- ALL PROJECTS - Active -->
       <button
+        type="button"
         data-filter="all"
-        class="filter-btn active h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-primary text-white"
+        aria-pressed="true"
+        aria-controls="projects-grid"
+        class="filter-btn active h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-primary text-white"
       >
         <span class="material-symbols-outlined text-xl">apps</span>
         <span class="text-[10px] font-bold uppercase tracking-wider">ALL</span>
       </button>
 
-      <!-- INFRASTRUCTURE - Active -->
+      <!-- INFRASTRUCTURE - Inactive -->
       <button
+        type="button"
         data-filter="infrastructure"
-        class="filter-btn active h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-primary text-white"
+        aria-pressed="false"
+        aria-controls="projects-grid"
+        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5m-4 0h4"/>
@@ -70,8 +76,11 @@ const description = "Explore our portfolio of completed construction projects in
 
       <!-- MARINE - Inactive -->
       <button
+        type="button"
         data-filter="marine"
-        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#DDD4C5] dark:bg-[#2A2621] text-primary dark:text-white"
+        aria-pressed="false"
+        aria-controls="projects-grid"
+        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
       >
         <span class="material-symbols-outlined text-xl">sailing</span>
         <span class="text-[10px] font-bold uppercase tracking-wider">MARINE</span>
@@ -79,8 +88,11 @@ const description = "Explore our portfolio of completed construction projects in
 
       <!-- HERITAGE - Inactive -->
       <button
+        type="button"
         data-filter="heritage"
-        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#DDD4C5] dark:bg-[#2A2621] text-primary dark:text-white"
+        aria-pressed="false"
+        aria-controls="projects-grid"
+        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
       >
         <span class="material-symbols-outlined text-xl">account_balance</span>
         <span class="text-[10px] font-bold uppercase tracking-wider">HERITAGE</span>
@@ -88,8 +100,11 @@ const description = "Explore our portfolio of completed construction projects in
 
       <!-- OIL & GAS - Inactive -->
       <button
+        type="button"
         data-filter="oil-gas"
-        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#DDD4C5] dark:bg-[#2A2621] text-primary dark:text-white"
+        aria-pressed="false"
+        aria-controls="projects-grid"
+        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
       >
         <span class="material-symbols-outlined text-xl">oil_barrel</span>
         <span class="text-[10px] font-bold uppercase tracking-wider">OIL & GAS</span>
@@ -97,8 +112,11 @@ const description = "Explore our portfolio of completed construction projects in
 
       <!-- INDUSTRIAL - Inactive -->
       <button
+        type="button"
         data-filter="industrial"
-        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#DDD4C5] dark:bg-[#2A2621] text-primary dark:text-white"
+        aria-pressed="false"
+        aria-controls="projects-grid"
+        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
       >
         <span class="material-symbols-outlined text-xl">factory</span>
         <span class="text-[10px] font-bold uppercase tracking-wider">INDUSTRIAL</span>
@@ -106,8 +124,11 @@ const description = "Explore our portfolio of completed construction projects in
 
       <!-- RESIDENTIAL - Inactive -->
       <button
+        type="button"
         data-filter="residential"
-        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#DDD4C5] dark:bg-[#2A2621] text-primary dark:text-white"
+        aria-pressed="false"
+        aria-controls="projects-grid"
+        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
       >
         <span class="material-symbols-outlined text-xl">home_work</span>
         <span class="text-[10px] font-bold uppercase tracking-wider">RESIDENTIAL</span>
@@ -115,25 +136,29 @@ const description = "Explore our portfolio of completed construction projects in
 
       <!-- COMMERCIAL - Inactive -->
       <button
+        type="button"
         data-filter="commercial"
-        class="filter-btn h-24 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#DDD4C5] dark:bg-[#2A2621] text-primary dark:text-white"
+        aria-pressed="false"
+        aria-controls="projects-grid"
+        class="filter-btn h-24 flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
       >
         <span class="material-symbols-outlined text-xl">domain</span>
         <span class="text-[10px] font-bold uppercase tracking-wider">COMMERCIAL</span>
       </button>
     </div>
+    <p id="projects-filter-status" class="sr-only" aria-live="polite">Showing all projects.</p>
   </section>
 
   <!-- Projects Grid - 2:1:2 Masonry Layout -->
-  <section class="border-b border-black dark:border-black bg-background-light dark:bg-background-dark" aria-labelledby="projects-grid-heading">
+  <section class="border-b border-black dark:border-black bg-background" aria-labelledby="projects-grid-heading">
     <h2 id="projects-grid-heading" class="sr-only">Featured Projects</h2>
     <div class="grid grid-cols-1 md:grid-cols-12 auto-rows-min" id="projects-grid">
 
       <!-- Column 1 -->
       <div class="col-span-12 md:col-span-4 flex flex-col border-r border-black" data-category="infrastructure all">
         <div class="project-card relative group overflow-hidden h-[450px] border-b border-black">
-          <img alt="Al Tallah Road Bridge Construction, Ajman" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/al-tallah-bridge/photo_010.jpeg" />
-          <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-300"></div>
+          <img alt="Al Tallah Road Bridge Construction, Ajman" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/al-tallah-bridge/photo_010.jpeg" />
+          <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors motion-base"></div>
           <div class="absolute bottom-4 left-4 right-4 z-20">
             <div class="p-4">
               <span class="text-[10px] uppercase tracking-widest block mb-1 text-white drop-shadow-md">Bridge Construction</span>
@@ -154,8 +179,8 @@ const description = "Explore our portfolio of completed construction projects in
           </div>
         </div>
         <div class="project-card relative group overflow-hidden h-[350px]" data-category="infrastructure all">
-          <img alt="E20 Traffic Improvement and Bridge Construction" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/e20-traffic-bridges/photo_010.jpeg" />
-          <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-300"></div>
+          <img alt="E20 Traffic Improvement and Bridge Construction" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/e20-traffic-bridges/photo_010.jpeg" />
+          <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors motion-base"></div>
           <div class="absolute bottom-4 left-4 z-20 text-white">
             <h3 class="text-lg font-bold uppercase mb-1 drop-shadow-md">Traffic Improvement E20</h3>
             <p class="text-[10px] uppercase tracking-wide opacity-90 drop-shadow-md">2 Bridges Construction</p>
@@ -237,8 +262,8 @@ const description = "Explore our portfolio of completed construction projects in
       <!-- Column 3 -->
       <div class="col-span-12 md:col-span-4 flex flex-col" data-category="infrastructure all">
         <div class="project-card relative group overflow-hidden h-[350px] border-b border-black">
-          <img alt="Inner Bypass Parallel to E45 Madinat Zayed" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/inner-bypass-e45/photo_014.jpeg" />
-          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
+          <img alt="Inner Bypass Parallel to E45 Madinat Zayed" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/inner-bypass-e45/photo_014.jpeg" />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute top-4 right-4 z-20">
             <span class="material-symbols-outlined text-white opacity-80">arrow_outward</span>
           </div>
@@ -257,8 +282,8 @@ const description = "Explore our portfolio of completed construction projects in
           </div>
         </div>
         <div class="project-card relative group overflow-hidden h-[450px]" data-category="infrastructure all">
-          <img alt="Utility Structure Design & Build" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/utility-structure/photo_005.jpeg" />
-          <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-300"></div>
+          <img alt="Utility Structure Design & Build" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/utility-structure/photo_005.jpeg" />
+          <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors motion-base"></div>
           <div class="absolute top-6 left-6 z-20">
             <div class="flex flex-col items-start gap-1">
               <span class="text-3xl font-bold text-white uppercase leading-none">04</span>
@@ -285,8 +310,8 @@ const description = "Explore our portfolio of completed construction projects in
       <!-- Additional Projects Row -->
       <div class="col-span-12 md:col-span-4 flex flex-col border-r border-t border-black" data-category="infrastructure all">
         <div class="project-card relative group overflow-hidden h-[400px] border-b border-black">
-          <img alt="Infrastructure Road Works" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/inner-bypass-e45/photo_006.jpeg" />
-          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+          <img alt="Infrastructure Road Works" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/inner-bypass-e45/photo_006.jpeg" />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
             <span class="text-[10px] uppercase tracking-widest text-white">Public Infrastructure</span>
             <h3 class="text-xl font-bold uppercase mt-1">RAK Beach District</h3>
@@ -302,8 +327,8 @@ const description = "Explore our portfolio of completed construction projects in
           </div>
         </div>
         <div class="project-card relative group overflow-hidden h-[400px]" data-category="infrastructure all">
-          <img alt="E20 Bridge Construction" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/e20-traffic-bridges/photo_020.jpeg" />
-          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+          <img alt="E20 Bridge Construction" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/e20-traffic-bridges/photo_020.jpeg" />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
             <span class="text-[10px] uppercase tracking-widest text-white">Bridge Engineering</span>
             <h3 class="text-xl font-bold uppercase mt-1">E20 Bridges Construction</h3>
@@ -321,8 +346,8 @@ const description = "Explore our portfolio of completed construction projects in
 
       <div class="col-span-12 md:col-span-4 flex flex-col border-r border-t border-black" data-category="infrastructure all">
         <div class="project-card relative group overflow-hidden h-[400px] border-b border-black">
-          <img alt="Naseem Al Bar Bridge Foundation Work" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/naseem-albar-bridge/photo_038.jpeg" />
-          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+          <img alt="Naseem Al Bar Bridge Foundation Work" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/naseem-albar-bridge/photo_038.jpeg" />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
             <span class="text-[10px] uppercase tracking-widest text-white">Design & Build</span>
             <h3 class="text-xl font-bold uppercase mt-1">Naseem Al Bar Bridge</h3>
@@ -337,8 +362,8 @@ const description = "Explore our portfolio of completed construction projects in
           </div>
         </div>
         <div class="project-card relative group overflow-hidden h-[400px]" data-category="infrastructure all">
-          <img alt="Al Tallah Road Bridge Ajman" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/al-tallah-bridge/photo_016.jpeg" />
-          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+          <img alt="Al Tallah Road Bridge Ajman" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/al-tallah-bridge/photo_016.jpeg" />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
             <span class="text-[10px] uppercase tracking-widest text-white">Infrastructure</span>
             <h3 class="text-xl font-bold uppercase mt-1">Al Tallah Bridge Ajman</h3>
@@ -356,8 +381,8 @@ const description = "Explore our portfolio of completed construction projects in
 
       <div class="col-span-12 md:col-span-4 flex flex-col border-t border-black" data-category="infrastructure all">
         <div class="project-card relative group overflow-hidden h-[400px] border-b border-black">
-          <img alt="Inner Bypass E45 Madinat Zayed Road Work" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/inner-bypass-e45/photo_023.jpeg" />
-          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+          <img alt="Inner Bypass E45 Madinat Zayed Road Work" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/inner-bypass-e45/photo_023.jpeg" />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
             <span class="text-[10px] uppercase tracking-widest text-white">Road Upgrade</span>
             <h3 class="text-xl font-bold uppercase mt-1">Inner Bypass E45</h3>
@@ -372,8 +397,8 @@ const description = "Explore our portfolio of completed construction projects in
           </div>
         </div>
         <div class="project-card relative group overflow-hidden h-[400px]" data-category="infrastructure all">
-          <img alt="Utility Structure Construction" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/utility-structure/photo_010.jpeg" />
-          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+          <img alt="Utility Structure Construction" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/utility-structure/photo_010.jpeg" />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
             <span class="text-[10px] uppercase tracking-widest text-white">Utility Works</span>
             <h3 class="text-xl font-bold uppercase mt-1">Utility Structures</h3>
@@ -399,12 +424,12 @@ const description = "Explore our portfolio of completed construction projects in
       <div class="col-span-1 md:col-span-1 border-r border-black p-8 flex flex-col justify-center bg-background text-primary aspect-square">
         <span class="text-[10px] font-bold uppercase tracking-widest opacity-80 mb-4 block">Archive</span>
         <h3 class="text-xl font-bold uppercase leading-tight mb-6">Explore Past<br/>Endeavors</h3>
-        <a class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold hover:text-color-accent transition-colors" href="/contact">
+        <a class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold hover:text-color-accent transition-colors motion-base" href="/contact">
           View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
         </a>
       </div>
       <div class="col-span-1 md:col-span-1 border-r border-black dark:border-black relative group overflow-hidden aspect-square project-card">
-        <img alt="E20 Traffic Bridges" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale" src="/images/projects/e20-traffic-bridges/photo_015.jpeg" />
+        <img alt="E20 Traffic Bridges" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-110 grayscale" src="/images/projects/e20-traffic-bridges/photo_015.jpeg" />
         <div class="absolute bottom-4 left-4 z-10">
           <span class="text-[10px] font-bold uppercase bg-white/80 text-primary px-2 py-1">E20 Bridges</span>
         </div>
@@ -418,7 +443,7 @@ const description = "Explore our portfolio of completed construction projects in
         </div>
       </div>
       <div class="col-span-1 md:col-span-1 border-r border-black dark:border-black relative group overflow-hidden aspect-square project-card">
-        <img alt="Inner Bypass E45" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale" src="/images/projects/inner-bypass-e45/photo_025.jpeg" />
+        <img alt="Inner Bypass E45" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-110 grayscale" src="/images/projects/inner-bypass-e45/photo_025.jpeg" />
         <div class="absolute bottom-4 left-4 z-10">
           <span class="text-[10px] font-bold uppercase bg-white/80 text-primary px-2 py-1">Inner Bypass E45</span>
         </div>
@@ -431,7 +456,7 @@ const description = "Explore our portfolio of completed construction projects in
           </a>
         </div>
       </div>
-      <div class="col-span-1 md:col-span-1 relative group overflow-hidden aspect-square bg-background-light dark:bg-background-dark p-8 flex flex-col justify-between">
+      <div class="col-span-1 md:col-span-1 relative group overflow-hidden aspect-square bg-background p-8 flex flex-col justify-between">
         <div>
           <span class="material-symbols-outlined text-3xl mb-2 text-primary dark:text-white">folder_open</span>
           <p class="text-sm font-medium leading-relaxed opacity-90">Access our complete database of over 150 projects.</p>
@@ -445,49 +470,55 @@ const description = "Explore our portfolio of completed construction projects in
 <script>
   // Carousel/Filter functionality
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('.project-card');
+  const filterTargets = document.querySelectorAll('[data-category]');
+  const filterStatus = document.getElementById('projects-filter-status');
+
+  const formatFilterLabel = (filter) => {
+    if (!filter || filter === 'all') return 'all';
+    return filter.replace('-', ' ');
+  };
 
   filterBtns.forEach((btn) => {
     if (!(btn instanceof HTMLElement)) return;
     btn.addEventListener('click', () => {
       const filter = btn.dataset.filter;
+      if (!filter) return;
 
       // Update active states on buttons
       filterBtns.forEach((b) => {
         if (!(b instanceof HTMLElement)) return;
         b.classList.remove('active', 'bg-primary', 'text-white');
-        b.classList.add('bg-[#DDD4C5]', 'dark:bg-[#2A2621]', 'text-primary', 'dark:text-white');
+        b.classList.add('bg-background', 'dark:bg-card', 'text-primary', 'dark:text-white');
+        b.setAttribute('aria-pressed', 'false');
       });
 
       // Set clicked button as active
       btn.classList.add('active', 'bg-primary', 'text-white');
-      btn.classList.remove('bg-[#DDD4C5]', 'dark:bg-[#2A2621]', 'text-primary', 'dark:text-white');
+      btn.classList.remove('bg-background', 'dark:bg-card', 'text-primary', 'dark:text-white');
+      btn.setAttribute('aria-pressed', 'true');
 
-      // Filter project cards
-      projectCards.forEach((card) => {
-        if (!(card instanceof HTMLElement)) return;
-        const category = card.dataset.category;
-        if (filter === 'all' || category === filter) {
-          card.style.display = '';
-          card.style.opacity = '1';
+      let visibleCount = 0;
+
+      // Filter all categorized containers/cards
+      filterTargets.forEach((target) => {
+        if (!(target instanceof HTMLElement)) return;
+        const categories = (target.dataset.category ?? '').split(/\s+/).filter(Boolean);
+        const isMatch = filter === 'all' || categories.includes(filter);
+
+        if (isMatch) {
+          target.hidden = false;
+          target.removeAttribute('aria-hidden');
+          visibleCount += 1;
         } else {
-          card.style.display = 'none';
-          card.style.opacity = '0';
+          target.hidden = true;
+          target.setAttribute('aria-hidden', 'true');
         }
       });
+
+      if (filterStatus) {
+        filterStatus.textContent = `Showing ${formatFilterLabel(filter)} projects (${visibleCount} sections visible).`;
+      }
     });
   });
 </script>
 
-<style>
-  .project-overlay {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-  }
-  .project-card:hover .project-overlay {
-    opacity: 1;
-  }
-  .project-card:hover img {
-    transform: scale(1.05);
-  }
-</style>
