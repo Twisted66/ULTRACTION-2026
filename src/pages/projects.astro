@@ -125,7 +125,8 @@ const description = "Explore our portfolio of completed construction projects in
   </section>
 
   <!-- Projects Grid - 2:1:2 Masonry Layout -->
-  <section class="border-b border-black dark:border-black bg-background-light dark:bg-background-dark">
+  <section class="border-b border-black dark:border-black bg-background-light dark:bg-background-dark" aria-labelledby="projects-grid-heading">
+    <h2 id="projects-grid-heading" class="sr-only">Featured Projects</h2>
     <div class="grid grid-cols-1 md:grid-cols-12 auto-rows-min" id="projects-grid">
 
       <!-- Column 1 -->
@@ -392,10 +393,11 @@ const description = "Explore our portfolio of completed construction projects in
   </section>
 
   <!-- Archive Section -->
-  <section class="border-b border-black">
+  <section class="border-b border-black" aria-labelledby="archive-heading">
+    <h2 id="archive-heading" class="sr-only">Project Archive</h2>
     <div class="grid grid-cols-1 md:grid-cols-4">
       <div class="col-span-1 md:col-span-1 border-r border-black p-8 flex flex-col justify-center bg-background text-primary aspect-square">
-        <span class="text-[10px] font-bold uppercase tracking-widest opacity-60 mb-4 block">Archive</span>
+        <span class="text-[10px] font-bold uppercase tracking-widest opacity-80 mb-4 block">Archive</span>
         <h3 class="text-xl font-bold uppercase leading-tight mb-6">Explore Past<br/>Endeavors</h3>
         <a class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold hover:text-color-accent transition-colors" href="/contact">
           View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
@@ -442,15 +444,17 @@ const description = "Explore our portfolio of completed construction projects in
 
 <script>
   // Carousel/Filter functionality
-  const filterBtns = document.querySelectorAll('.filter-btn') as NodeListOf<HTMLElement>;
-  const projectCards = document.querySelectorAll('.project-card') as NodeListOf<HTMLElement>;
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
 
-  filterBtns.forEach((btn: HTMLElement) => {
+  filterBtns.forEach((btn) => {
+    if (!(btn instanceof HTMLElement)) return;
     btn.addEventListener('click', () => {
       const filter = btn.dataset.filter;
 
       // Update active states on buttons
-      filterBtns.forEach((b: HTMLElement) => {
+      filterBtns.forEach((b) => {
+        if (!(b instanceof HTMLElement)) return;
         b.classList.remove('active', 'bg-primary', 'text-white');
         b.classList.add('bg-[#DDD4C5]', 'dark:bg-[#2A2621]', 'text-primary', 'dark:text-white');
       });
@@ -460,14 +464,15 @@ const description = "Explore our portfolio of completed construction projects in
       btn.classList.remove('bg-[#DDD4C5]', 'dark:bg-[#2A2621]', 'text-primary', 'dark:text-white');
 
       // Filter project cards
-      projectCards.forEach((card: HTMLElement) => {
+      projectCards.forEach((card) => {
+        if (!(card instanceof HTMLElement)) return;
         const category = card.dataset.category;
         if (filter === 'all' || category === filter) {
-          (card as HTMLElement).style.display = '';
-          (card as HTMLElement).style.opacity = '1';
+          card.style.display = '';
+          card.style.opacity = '1';
         } else {
-          (card as HTMLElement).style.display = 'none';
-          (card as HTMLElement).style.opacity = '0';
+          card.style.display = 'none';
+          card.style.opacity = '0';
         }
       });
     });

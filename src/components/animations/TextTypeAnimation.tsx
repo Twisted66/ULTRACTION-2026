@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 
 interface Props {
   words?: string;
@@ -12,9 +11,9 @@ interface Props {
 export default function TextTypeAnimation({
   words = '',
   className = '',
-  typingSpeed = 100,
-  deletingSpeed = 50,
-  pauseDuration = 2000,
+  typingSpeed = 120,
+  deletingSpeed = 40,
+  pauseDuration = 1500,
 }: Props) {
   // Parse words from string (Astro passes as string attribute)
   const wordList = typeof words === 'string' ? words.split(',') : words;
@@ -58,14 +57,13 @@ export default function TextTypeAnimation({
   return (
     <span className={className}>
       {text}
-      <motion.span
-        animate={{ opacity: [1, 0, 1] }}
-        transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
+      <span
+        animate={{ opacity: isDeleting ? [1, 0] : [1, 1] }}
+        transition={{ duration: 0.6, repeat: Infinity, ease: 'linear' }}
         className="inline-block ml-1"
-        style={{ fontWeight: 'normal' }}
       >
         |
-      </motion.span>
+      </span>
     </span>
   );
 }

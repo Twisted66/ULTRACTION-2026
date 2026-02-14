@@ -4,6 +4,9 @@ import Layout from '../../layouts/Layout.astro';
 import LogoLoop from '../../components/common/LogoLoop.astro';
 import MagicBento, { type MagicBentoItem } from '../../components/projects/MagicBento';
 
+// Pre-render this page as static HTML at build time
+export const prerender = true;
+
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
   return projects.map(project => ({

@@ -29,32 +29,6 @@ const capabilityStages = [
   },
 ];
 
-const values = [
-  {
-    title: 'Integrity',
-    detail: 'Transparent communication and accountable execution at every stage.',
-  },
-  {
-    title: 'Team Spirit',
-    detail: 'Collaborative delivery across engineering, operations, and client teams.',
-  },
-  {
-    title: 'Commitment',
-    detail: 'Reliable follow-through from mobilization to final handover.',
-  },
-  {
-    title: 'Sustainability',
-    detail: 'Practical environmental responsibility integrated into project decisions.',
-  },
-  {
-    title: 'Performance',
-    detail: 'Measured quality, productivity, and outcomes that stand the test of time.',
-  },
-  {
-    title: 'Safety',
-    detail: 'A zero-compromise safety culture embedded in planning and site practice.',
-  },
-];
 ---
 
 <Layout title={title} description={description}>
@@ -99,7 +73,7 @@ const values = [
     <div class="px-8 lg:px-24">
       <div class="flex justify-between items-end mb-24 border-b border-black/10 pb-8 gap-6">
         <h2 class="text-4xl lg:text-5xl font-heading italic">How We <span class="not-italic font-light">Deliver</span></h2>
-        <span class="text-xs uppercase tracking-widest opacity-40">From Planning to Handover</span>
+        <span class="text-xs uppercase tracking-widest text-primary/70">From Planning to Handover</span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-black">
@@ -120,7 +94,7 @@ const values = [
     <div class="max-w-6xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
         <h2 class="text-3xl md:text-4xl font-heading italic">Trusted <span class="not-italic font-light">By Industry Leaders</span></h2>
-        <span class="text-xs uppercase tracking-[0.2em] text-primary/50">Selected Partners From Our Profile</span>
+        <span class="text-xs uppercase tracking-[0.2em] text-primary/80">Selected Partners From Our Profile</span>
       </div>
     </div>
     <LogoLoop />
@@ -161,24 +135,6 @@ const values = [
           <img src="/images/projects/naseem-albar-bridge/photo_038.jpeg" alt="ULTRACTION bridge construction - committed to long-term value" class="w-full h-full object-cover" />
           <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
         </div>
-
-        <div class="foundation-panel border border-black bg-background">
-          <div class="foundation-header border-b border-black px-5 py-4 md:px-6 md:py-5">
-            <p class="text-[11px] uppercase tracking-[0.24em] text-black/60 mb-1">Our Foundation</p>
-            <h3 class="text-xl md:text-2xl font-heading italic leading-tight text-primary">
-              Principles That Guide Every Build
-            </h3>
-          </div>
-          <div class="foundation-grid grid grid-cols-1 sm:grid-cols-2">
-            {values.map((value, index) => (
-              <article class="foundation-item p-5 md:p-6 border-black">
-                <p class="text-[10px] uppercase tracking-[0.2em] text-accent mb-2">Pillar {String(index + 1).padStart(2, '0')}</p>
-                <h4 class="text-sm md:text-base font-bold uppercase tracking-wider mb-2">{value.title}</h4>
-                <p class="text-xs md:text-sm leading-relaxed text-primary/75">{value.detail}</p>
-              </article>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -198,27 +154,3 @@ const values = [
     </div>
   </section>
 </Layout>
-
-<style>
-  .foundation-item {
-    border-top: 1px solid rgb(0 0 0 / 0.12);
-  }
-
-  .foundation-item:nth-child(odd) {
-    border-right: 1px solid rgb(0 0 0 / 0.12);
-  }
-
-  .foundation-item:nth-child(-n + 2) {
-    border-top: none;
-  }
-
-  @media (max-width: 639px) {
-    .foundation-item:nth-child(odd) {
-      border-right: none;
-    }
-
-    .foundation-item:nth-child(2) {
-      border-top: 1px solid rgb(0 0 0 / 0.12);
-    }
-  }
-</style>

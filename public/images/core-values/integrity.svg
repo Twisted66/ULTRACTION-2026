@@ -1,0 +1,19 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5EFE6"/>
+      <stop offset="1" stop-color="#E8DCC8"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="250" y1="220" x2="774" y2="804" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6E190D"/>
+      <stop offset="0.55" stop-color="#C89157"/>
+      <stop offset="1" stop-color="#6E190D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <circle cx="512" cy="512" r="350" stroke="url(#gold)" stroke-width="18" opacity="0.25"/>
+  <path d="M512 220L760 330V540C760 730 600 835 512 875C424 835 264 730 264 540V330L512 220Z" stroke="url(#gold)" stroke-width="22" fill="none" stroke-linejoin="round"/>
+  <path d="M512 392V676" stroke="url(#gold)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M408 348L512 300L616 348" stroke="url(#gold)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="512" y="955" text-anchor="middle" fill="#2C1810" font-size="72" font-family="Georgia, serif" letter-spacing="3">INTEGRITY</text>
+</svg>

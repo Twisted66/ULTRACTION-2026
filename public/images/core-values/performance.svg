@@ -1,0 +1,18 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5EFE6"/>
+      <stop offset="1" stop-color="#E8DCC8"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="250" y1="220" x2="774" y2="804" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6E190D"/>
+      <stop offset="0.55" stop-color="#C89157"/>
+      <stop offset="1" stop-color="#6E190D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <circle cx="512" cy="512" r="350" stroke="url(#gold)" stroke-width="18" opacity="0.25"/>
+  <path d="M560 250L365 560H545L500 770L660 518H482L560 250Z" stroke="url(#gold)" stroke-width="24" fill="none" stroke-linejoin="round"/>
+  <path d="M610 310L412 620H594L546 804L705 560H530L610 310Z" stroke="url(#gold)" stroke-width="14" opacity="0.35" fill="none" stroke-linejoin="round"/>
+  <text x="512" y="955" text-anchor="middle" fill="#2C1810" font-size="62" font-family="Georgia, serif" letter-spacing="2">PERFORMANCE</text>
+</svg>

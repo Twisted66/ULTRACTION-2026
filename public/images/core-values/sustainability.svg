@@ -1,0 +1,25 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5EFE6"/>
+      <stop offset="1" stop-color="#E8DCC8"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="250" y1="220" x2="774" y2="804" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6E190D"/>
+      <stop offset="0.55" stop-color="#C89157"/>
+      <stop offset="1" stop-color="#6E190D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <circle cx="512" cy="512" r="350" stroke="url(#gold)" stroke-width="18" opacity="0.25"/>
+  <circle cx="512" cy="512" r="145" stroke="url(#gold)" stroke-width="22"/>
+  <path d="M512 268V204" stroke="url(#gold)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M512 820V756" stroke="url(#gold)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M268 512H204" stroke="url(#gold)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M820 512H756" stroke="url(#gold)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M336 336L290 290" stroke="url(#gold)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M688 688L734 734" stroke="url(#gold)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M688 336L734 290" stroke="url(#gold)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M336 688L290 734" stroke="url(#gold)" stroke-width="18" stroke-linecap="round"/>
+  <text x="512" y="955" text-anchor="middle" fill="#2C1810" font-size="58" font-family="Georgia, serif" letter-spacing="2">SUSTAINABILITY</text>
+</svg>

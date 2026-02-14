@@ -11,7 +11,7 @@
       </a>
       <button
         id="mobile-menu-toggle"
-        class="md:hidden text-[#232323]"
+        class="md:hidden text-[#232323] p-3 min-h-[44px] min-w-[44px]"
         aria-label="Toggle navigation menu"
         aria-expanded="false"
       >
@@ -52,23 +52,23 @@
   <!-- Mobile Navigation Menu -->
   <nav id="mobile-nav" class="hidden md:hidden fixed inset-0 z-40 bg-background border-t border-black dark:border-black top-[72px]">
     <div class="flex flex-col h-full overflow-y-auto max-h-[calc(100vh-72px)]">
-      <a href="/" class="flex items-center justify-between px-6 py-4 text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
+      <a href="/" class="flex items-center justify-between px-6 min-h-[44px] text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
         <span>HOME</span>
         <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/about" class="flex items-center justify-between px-6 py-4 text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
+      <a href="/about" class="flex items-center justify-between px-6 min-h-[44px] text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
         <span>ABOUT US</span>
         <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/services" class="flex items-center justify-between px-6 py-4 text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
+      <a href="/services" class="flex items-center justify-between px-6 min-h-[44px] text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
         <span>SERVICES</span>
         <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/projects" class="flex items-center justify-between px-6 py-4 text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
+      <a href="/projects" class="flex items-center justify-between px-6 min-h-[44px] text-[#232323] hover:bg-primary/10 transition-colors font-medium border-b border-black/10">
         <span>PROJECTS</span>
         <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/contact" class="flex items-center justify-between px-6 py-4 text-[#232323] hover:bg-primary/10 transition-colors font-medium">
+      <a href="/contact" class="flex items-center justify-between px-6 min-h-[44px] text-[#232323] hover:bg-primary/10 transition-colors font-medium">
         <span>CONTACT</span>
         <svg class="w-4 h-4 text-[#232323]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
@@ -101,7 +101,7 @@
 
   // Close mobile nav when clicking outside or pressing Escape
   document.addEventListener('click', (e) => {
-    if (toggle && mobileNav && !toggle.contains(e.target) && !mobileNav.contains(e.target)) {
+    if (toggle && mobileNav && e.target instanceof HTMLElement && !toggle.contains(e.target) && !mobileNav.contains(e.target)) {
       closeMobileMenu();
     }
   });

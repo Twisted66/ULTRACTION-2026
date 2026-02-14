@@ -58,7 +58,7 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
             </div>
 
             <div class="group">
-               <label class="block text-xs uppercase font-bold tracking-widest mb-2 opacity-80" for="attachment">Attachment <span class="font-normal opacity-60">(Optional)</span></label>
+               <label class="block text-xs uppercase font-bold tracking-widest mb-2 opacity-80" for="attachment">Attachment <span class="font-normal text-primary/90">(Optional)</span></label>
                <div class="relative">
                   <input class="w-full bg-transparent border-b border-[#232323]/20 py-4 text-base focus:border-[#232323] focus:outline-none transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-none file:border-0 file:bg-[#232323] file:text-white file:cursor-pointer" id="attachment" name="attachment" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip,.rar" />
                   <p class="text-xs opacity-50 mt-2">PDF, DOC, DOCX, JPG, PNG, ZIP, RAR (Max 10MB)</p>
@@ -88,7 +88,8 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
           </div>
           
           <!-- Location Overlay -->
-          <div class="absolute bottom-12 left-12 z-20 text-white pointer-events-none p-8 bg-black/40 backdrop-blur-xl rounded-2xl border border-white/20 max-w-sm">
+          <div class="absolute bottom-12 left-12 z-20 text-white pointer-events-none p-8 bg-black/40 backdrop-blur-xl rounded-2xl border border-white/20 max-w-sm" aria-labelledby="contact-locations">
+              <h2 id="contact-locations" class="sr-only">Contact Locations</h2>
               <h3 class="text-3xl font-bold uppercase mb-6 font-heading tracking-tight">Main Headquarters</h3>
               <div class="space-y-8 text-sm">
                   <div class="group">
@@ -119,6 +120,11 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
 </Layout>
 
 <script is:inline>
+/** @type {HTMLFormElement} */
+/** @type {HTMLButtonElement} */
+/** @type {HTMLElement} */
+/** @type {HTMLSelectElement} */
+/** @type {HTMLInputElement} */
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('[data-contact-form]');
     if (!(form instanceof HTMLFormElement)) return;
@@ -163,7 +169,7 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
       const selected = String(formData.get('subject') || '');
 
       // Validate file size (max 10MB)
-      const file = formData.get('attachment') as File | null;
+      const file = /** @type {File|null} */ (formData.get('attachment'));
       if (file && file.size > 10 * 1024 * 1024) {
         setStatus('error', 'File size must be less than 10MB.');
         return;
