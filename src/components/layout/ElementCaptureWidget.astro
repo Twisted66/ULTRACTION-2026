@@ -1,0 +1,444 @@
+<div id="element-capture-widget" class="ecw" data-ecw-root>
+  <button class="ecw-brand" type="button" title="Element Capture">
+    <span>U</span>
+  </button>
+  <button id="ecw-toggle" class="ecw-btn" type="button" title="Toggle Capture">
+    <span class="material-symbols-outlined">arrow_selector_tool</span>
+  </button>
+  <button id="ecw-copy" class="ecw-btn" type="button" title="Copy Last Capture">
+    <span class="material-symbols-outlined">content_copy</span>
+  </button>
+  <button id="ecw-settings" class="ecw-btn" type="button" title="Settings">
+    <span class="material-symbols-outlined">settings</span>
+  </button>
+</div>
+
+<div id="ecw-panel" class="ecw-panel" hidden data-ecw-root>
+  <h3>Element Capture</h3>
+  <p class="ecw-hint">Click an element, review payload below, then copy into chat or send.</p>
+  <label>
+    Webhook URL (optional)
+    <input id="ecw-webhook" type="url" placeholder="http://localhost:3001/capture" />
+  </label>
+  <label>
+    Tracked CSS properties (comma-separated)
+    <input id="ecw-css-props" type="text" value="color,font-size,font-weight,display,position,z-index,margin,padding" />
+  </label>
+  <label>
+    Notes for review
+    <input id="ecw-notes" type="text" placeholder="What to ask Codex/Claude about this element" />
+  </label>
+  <label class="ecw-check">
+    <input id="ecw-compact-mode" type="checkbox" checked />
+    Use compact copy format for chat
+  </label>
+  <label>
+    Review payload
+    <textarea id="ecw-preview" rows="10" readonly></textarea>
+  </label>
+  <div class="ecw-actions">
+    <button id="ecw-copy-chat" type="button">Copy for Chat</button>
+    <button id="ecw-send" type="button">Send Reviewed</button>
+    <button id="ecw-download" type="button">Download JSON</button>
+  </div>
+  <p id="ecw-status">Idle.</p>
+</div>
+
+<div id="ecw-highlight" class="ecw-highlight" hidden aria-hidden="true"></div>
+
+<script is:inline>
+  (function () {
+    if (window.__ECW_INITIALIZED__) return;
+    window.__ECW_INITIALIZED__ = true;
+
+    const STORAGE_KEY = "ultraction.element.capture.config";
+    const DEFAULT_CONFIG = {
+      webhookUrl: "",
+      cssProps: "color,font-size,font-weight,display,position,z-index,margin,padding",
+      compactMode: true,
+    };
+
+    const root = document.getElementById("element-capture-widget");
+    const panel = document.getElementById("ecw-panel");
+    const highlight = document.getElementById("ecw-highlight");
+    const toggleBtn = document.getElementById("ecw-toggle");
+    const copyBtn = document.getElementById("ecw-copy");
+    const settingsBtn = document.getElementById("ecw-settings");
+    const webhookInput = document.getElementById("ecw-webhook");
+    const cssPropsInput = document.getElementById("ecw-css-props");
+    const notesInput = document.getElementById("ecw-notes");
+    const compactModeInput = document.getElementById("ecw-compact-mode");
+    const previewEl = document.getElementById("ecw-preview");
+    const copyChatBtn = document.getElementById("ecw-copy-chat");
+    const sendBtn = document.getElementById("ecw-send");
+    const downloadBtn = document.getElementById("ecw-download");
+    const statusEl = document.getElementById("ecw-status");
+
+    if (!root || !panel || !highlight || !toggleBtn || !copyBtn || !settingsBtn || !webhookInput || !cssPropsInput || !notesInput || !compactModeInput || !previewEl || !copyChatBtn || !sendBtn || !downloadBtn || !statusEl) {
+      return;
+    }
+
+    let active = false;
+    let lastPayload = null;
+
+    function setStatus(text, isError) {
+      statusEl.textContent = text;
+      statusEl.classList.toggle("error", Boolean(isError));
+    }
+
+    function loadConfig() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { ...DEFAULT_CONFIG };
+        return { ...DEFAULT_CONFIG, ...JSON.parse(raw) };
+      } catch {
+        return { ...DEFAULT_CONFIG };
+      }
+    }
+
+    function saveConfig(cfg) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg));
+    }
+
+    function getConfig() {
+      return {
+        webhookUrl: webhookInput.value.trim(),
+        cssProps: cssPropsInput.value.trim(),
+        compactMode: compactModeInput.checked,
+      };
+    }
+
+    function applyConfig(cfg) {
+      const defaultWebhook = window.location.origin + "/api/element-capture";
+      webhookInput.value = cfg.webhookUrl || defaultWebhook;
+      cssPropsInput.value = cfg.cssProps || DEFAULT_CONFIG.cssProps;
+      compactModeInput.checked = cfg.compactMode !== false;
+    }
+
+    function refreshPreview() {
+      if (!lastPayload) {
+        previewEl.value = "";
+        return;
+      }
+      previewEl.value = JSON.stringify(lastPayload, null, 2);
+    }
+
+    function toCompactPayload(payload) {
+      const keyStyles = payload.computedStyles || {};
+      return {
+        pageUrl: payload.pageUrl,
+        selector: payload.selector,
+        tagName: payload.tagName,
+        text: payload.textContent,
+        bounds: payload.boundingBox,
+        keyStyles,
+        notes: payload.notes || "",
+      };
+    }
+
+    function isWidgetElement(node) {
+      return node && node.closest && node.closest("[data-ecw-root]");
+    }
+
+    function cssPath(el) {
+      if (!(el instanceof Element)) return "";
+      const path = [];
+      let current = el;
+      while (current && current.nodeType === Node.ELEMENT_NODE && current !== document.body) {
+        let selector = current.nodeName.toLowerCase();
+        if (current.id) {
+          selector += "#" + CSS.escape(current.id);
+          path.unshift(selector);
+          break;
+        }
+        if (current.classList && current.classList.length > 0) {
+          selector += "." + Array.from(current.classList).map((c) => CSS.escape(c)).join(".");
+        }
+        const parent = current.parentElement;
+        if (parent) {
+          const siblings = Array.from(parent.children).filter((child) => child.nodeName === current.nodeName);
+          if (siblings.length > 1) {
+            selector += `:nth-of-type(${siblings.indexOf(current) + 1})`;
+          }
+        }
+        path.unshift(selector);
+        current = current.parentElement;
+      }
+      return path.join(" > ");
+    }
+
+    function captureElement(el) {
+      const rect = el.getBoundingClientRect();
+      const attrs = {};
+      for (const attr of el.attributes) attrs[attr.name] = attr.value;
+
+      const cfg = getConfig();
+      const tracked = cfg.cssProps.split(",").map((s) => s.trim()).filter(Boolean);
+      const style = getComputedStyle(el);
+      const computedStyles = {};
+      for (const key of tracked) computedStyles[key] = style.getPropertyValue(key).trim();
+
+      const payload = {
+        timestamp: new Date().toISOString(),
+        pageUrl: window.location.href,
+        title: document.title,
+        selector: cssPath(el),
+        tagName: el.tagName,
+        textContent: (el.textContent || "").trim().slice(0, 800),
+        boundingBox: {
+          x: Math.round(rect.x),
+          y: Math.round(rect.y),
+          width: Math.round(rect.width),
+          height: Math.round(rect.height),
+        },
+        attributes: attrs,
+        computedStyles,
+        notes: notesInput.value.trim(),
+      };
+
+      lastPayload = payload;
+      window.__ULTRA_CAPTURE_LAST__ = payload;
+      refreshPreview();
+      panel.hidden = false;
+      setStatus(`Captured ${payload.tagName} ${payload.selector || ""}`.trim());
+    }
+
+    async function sendPayload(payload, webhookUrl) {
+      if (!webhookUrl) {
+        setStatus("No webhook URL configured.", true);
+        return;
+      }
+      try {
+        const res = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        setStatus("Payload sent.");
+      } catch (err) {
+        setStatus(`Send failed: ${err instanceof Error ? err.message : "unknown error"}`, true);
+      }
+    }
+
+    function updateHighlight(el) {
+      const rect = el.getBoundingClientRect();
+      highlight.hidden = false;
+      highlight.style.left = `${rect.left + window.scrollX}px`;
+      highlight.style.top = `${rect.top + window.scrollY}px`;
+      highlight.style.width = `${rect.width}px`;
+      highlight.style.height = `${rect.height}px`;
+    }
+
+    function clearHighlight() {
+      highlight.hidden = true;
+    }
+
+    document.addEventListener(
+      "mousemove",
+      (event) => {
+        if (!active) return;
+        const el = event.target;
+        if (!(el instanceof Element) || isWidgetElement(el)) {
+          clearHighlight();
+          return;
+        }
+        updateHighlight(el);
+      },
+      true,
+    );
+
+    document.addEventListener(
+      "click",
+      (event) => {
+        if (!active) return;
+        const el = event.target;
+        if (!(el instanceof Element) || isWidgetElement(el)) return;
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        captureElement(el);
+      },
+      true,
+    );
+
+    toggleBtn.addEventListener("click", () => {
+      active = !active;
+      root.classList.toggle("active", active);
+      document.documentElement.classList.toggle("ecw-capture-mode", active);
+      if (!active) clearHighlight();
+      setStatus(active ? "Capture ON: click any element." : "Capture OFF.");
+    });
+
+    copyBtn.addEventListener("click", async () => {
+      if (!lastPayload) {
+        setStatus("No capture to copy yet.", true);
+        return;
+      }
+      await navigator.clipboard.writeText(JSON.stringify(lastPayload, null, 2));
+      setStatus("Copied payload to clipboard.");
+    });
+
+    copyChatBtn.addEventListener("click", async () => {
+      if (!lastPayload) {
+        setStatus("Capture an element first.", true);
+        return;
+      }
+      const cfg = getConfig();
+      const chatPayload = cfg.compactMode
+        ? {
+          instruction: "Review this compact element payload and help me with changes/debugging.",
+          payload: toCompactPayload(lastPayload),
+        }
+        : {
+          instruction: "Review this captured element payload and help me with changes/debugging.",
+          payload: lastPayload,
+        };
+      await navigator.clipboard.writeText(JSON.stringify(chatPayload, null, 2));
+      setStatus(cfg.compactMode ? "Copied compact payload for chat." : "Copied full payload for chat.");
+    });
+
+    settingsBtn.addEventListener("click", () => {
+      panel.hidden = !panel.hidden;
+      if (!panel.hidden) setStatus("Settings open.");
+    });
+
+    sendBtn.addEventListener("click", () => {
+      if (!lastPayload) {
+        setStatus("No capture to send yet.", true);
+        return;
+      }
+      const cfg = getConfig();
+      sendPayload(lastPayload, cfg.webhookUrl);
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      if (!lastPayload) {
+        setStatus("No capture to download yet.", true);
+        return;
+      }
+      const blob = new Blob([JSON.stringify(lastPayload, null, 2)], { type: "application/json" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `element-capture-${Date.now()}.json`;
+      link.click();
+      URL.revokeObjectURL(link.href);
+      setStatus("Downloaded JSON.");
+    });
+
+    notesInput.addEventListener("input", () => {
+      if (!lastPayload) return;
+      lastPayload.notes = notesInput.value.trim();
+      refreshPreview();
+    });
+
+    [webhookInput, cssPropsInput, compactModeInput].forEach((el) => {
+      el.addEventListener("change", () => saveConfig(getConfig()));
+    });
+
+    applyConfig(loadConfig());
+  })();
+</script>
+
+<style>
+  .ecw {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 2147483647;
+    display: flex;
+    align-items: center;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(8, 12, 26, 0.92);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+  }
+
+  .ecw button {
+    border: 0;
+    background: transparent;
+    color: #f4f6ff;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    transition: background-color 0.18s ease;
+  }
+
+  .ecw button:hover { background: rgba(255, 255, 255, 0.08); }
+  .ecw button:focus-visible { outline: 2px solid #49a8ff; outline-offset: -2px; }
+  .ecw-brand { border-left: 0; background: linear-gradient(135deg, #1c2445, #10172f); }
+  .ecw-brand span { font-weight: 700; font-size: 16px; letter-spacing: 0.08em; }
+  .ecw.active #ecw-toggle { background: rgba(73, 168, 255, 0.28); }
+
+  .ecw-panel {
+    position: fixed;
+    top: 64px;
+    right: 14px;
+    z-index: 2147483647;
+    width: min(92vw, 360px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 14px;
+    color: #f5f8ff;
+    background: rgba(6, 10, 22, 0.95);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    font-family: "Public Sans", "Segoe UI", sans-serif;
+  }
+
+  .ecw-panel h3 { margin: 0 0 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.07em; }
+  .ecw-panel label { display: block; font-size: 12px; color: rgba(230, 236, 255, 0.92); margin: 10px 0 0; }
+  .ecw-panel input[type="url"],
+  .ecw-panel input[type="text"],
+  .ecw-panel textarea {
+    width: 100%;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .ecw-panel textarea { resize: vertical; min-height: 140px; font-family: ui-monospace, Consolas, monospace; }
+  .ecw-hint { margin: 0 0 6px; font-size: 12px; color: rgba(219, 234, 255, 0.8); }
+
+  .ecw-check { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+  .ecw-actions { margin-top: 12px; display: flex; gap: 8px; }
+  .ecw-actions button {
+    flex: 1;
+    border: 0;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: #061027;
+    background: linear-gradient(135deg, #86d4ff, #7dc1ff);
+    cursor: pointer;
+  }
+
+  #ecw-status { margin: 10px 0 0; font-size: 12px; color: #b9f6c0; }
+  #ecw-status.error { color: #ff9ba7; }
+
+  .ecw-highlight {
+    position: absolute;
+    z-index: 2147483646;
+    border: 2px solid #44d0ff;
+    background: rgba(68, 208, 255, 0.12);
+    pointer-events: none;
+    border-radius: 4px;
+  }
+
+  html.ecw-capture-mode, html.ecw-capture-mode *:not([data-ecw-root]) {
+    cursor: crosshair !important;
+  }
+  @media (max-width: 768px) {
+    .ecw { top: 10px; right: 10px; }
+    .ecw button { width: 38px; height: 38px; }
+    .ecw-panel { top: 56px; right: 10px; }
+  }
+</style>

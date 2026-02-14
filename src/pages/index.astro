@@ -72,9 +72,11 @@ const structuredData = {
           </a>
           <a href="/about" class="text-white hover:text-accent text-xs sm:text-sm uppercase tracking-widest flex items-center gap-3 group transition-colors min-h-[44px]">
             <span>Learn More</span>
-            <svg class="h-4 w-4 group-hover:translate-x-1 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
-            </svg>
+            <div class="w-8 h-8 rounded-full border border-white/40 flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-all motion-base">
+              <svg class="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+              </svg>
+            </div>
           </a>
         </div>
       </div>
@@ -242,8 +244,13 @@ const structuredData = {
       </div>
       
       <div class="mt-12 md:hidden">
-        <a href="/services" class="flex items-center gap-2 text-sm uppercase tracking-widest justify-center border border-primary/20 py-4 hover:bg-primary hover:text-white transition-colors">
-          View All Services
+        <a href="/services" class="flex items-center justify-center gap-3 text-sm uppercase tracking-widest border border-primary/20 py-4 hover:bg-primary hover:text-white transition-colors group">
+          <span>View All Services</span>
+          <div class="w-7 h-7 rounded-full border border-current/40 flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-all motion-base">
+            <svg class="h-3 w-3 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+            </svg>
+          </div>
         </a>
       </div>
     </div>
@@ -260,9 +267,11 @@ const structuredData = {
         <p class="opacity-70 leading-relaxed mb-8 text-sm">
           From complex infrastructure to iconic accolades, our portfolio showcases our capability to deliver challenging projects with excellence.
         </p>
-        <a href="/projects" class="inline-flex items-center gap-4 text-sm uppercase tracking-widest hover:text-accent transition-colors group">
+        <a href="/projects" class="inline-flex items-center gap-3 text-sm uppercase tracking-widest hover:text-accent transition-colors group">
           <span>Explore Portfolio</span>
-          <svg class="h-4 w-4 group-hover:translate-x-2 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+          <div class="w-8 h-8 rounded-full border border-current/40 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all motion-base">
+            <svg class="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+          </div>
         </a>
       </div>
     </div>
@@ -329,25 +338,25 @@ const structuredData = {
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-0 px-0 max-w-full mx-auto border-b border-black">
       <div class="p-8 lg:p-12 border-b md:border-b-0 md:border-r border-black bg-surface text-center group hover:bg-primary/5 transition-colors">
-        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-colors">
-          <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-        </div>
+        <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-all motion-base">
+          <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        </a>
         <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Quality Assurance</h3>
         <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">ISO-certified processes ensuring every project meets global standards of excellence and durability.</p>
       </div>
 
       <div class="p-8 lg:p-12 border-b md:border-b-0 md:border-r border-black bg-surface text-center group hover:bg-primary/5 transition-colors">
-        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-colors">
-          <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-        </div>
+        <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-all motion-base">
+          <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        </a>
         <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">On-Time Delivery</h3>
         <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">Rigorous project management methodologies to ensure we deliver on schedule, every time.</p>
       </div>
 
       <div class="p-8 lg:p-12 bg-surface text-center group hover:bg-primary/5 transition-colors">
-        <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-colors">
-          <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-        </div>
+        <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-all motion-base">
+          <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        </a>
         <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Safety First</h3>
         <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">Uncompromising commitment to health, safety, and environment (HSE) on every construction site.</p>
       </div>

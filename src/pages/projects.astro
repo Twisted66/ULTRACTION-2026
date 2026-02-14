@@ -3,10 +3,24 @@
 // Following Nova Construct prototype exactly
 
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
 // SEO Metadata
 const title = "Projects - ULTRACTION GENERAL CONTRACTING LLC";
 const description = "Explore our portfolio of completed construction projects including residential, commercial, industrial, infrastructure, and renovation developments across the UAE.";
+
+const allProjects = await getCollection('projects');
+const projectEntries = allProjects
+  .map((project) => ({
+    slug: project.slug,
+    title: project.data.title
+  }))
+  .sort((a, b) => a.title.localeCompare(b.title));
+
+const projectChunkSize = Math.max(1, Math.ceil(projectEntries.length / 3));
+const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
+  projectEntries.slice(pageIndex * projectChunkSize, (pageIndex + 1) * projectChunkSize)
+).filter((page) => page.length > 0);
 ---
 
 <Layout
@@ -214,45 +228,45 @@ const description = "Explore our portfolio of completed construction projects in
           <!-- Projects List -->
           <div class="p-8 text-center">
             <h3 class="text-sm font-bold uppercase tracking-widest mb-6 border-b border-black/20 pb-3 text-primary text-center">Our Projects</h3>
-            <ul class="space-y-3">
-              <li>
-                <a href="/projects/al-tallah-bridge" class="flex items-center justify-between group hover:text-accent transition-colors py-1 text-primary text-center">
-                  <span class="text-xs uppercase tracking-wide text-center">Al Tallah Road Bridge</span>
-                  <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity text-primary">arrow_forward</span>
-                </a>
-              </li>
-              <li>
-                <a href="/projects/e20-traffic-improvement" class="flex items-center justify-between group hover:text-accent transition-colors py-1 text-primary">
-                  <span class="text-xs uppercase tracking-wide">E20 Traffic Improvement</span>
-                  <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity text-primary">arrow_forward</span>
-                </a>
-              </li>
-              <li>
-                <a href="/projects/naseem-al-bar-bridge" class="flex items-center justify-between group hover:text-accent transition-colors py-1 text-primary">
-                  <span class="text-xs uppercase tracking-wide">Naseem Al Bar Bridge</span>
-                  <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity text-primary">arrow_forward</span>
-                </a>
-              </li>
-              <li>
-                <a href="/projects/inner-bypass-e45" class="flex items-center justify-between group hover:text-accent transition-colors py-1 text-primary">
-                  <span class="text-xs uppercase tracking-wide">Inner Bypass E45</span>
-                  <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity text-primary">arrow_forward</span>
-                </a>
-              </li>
-              <li>
-                <a href="/projects/utility-structures" class="flex items-center justify-between group hover:text-accent transition-colors py-1 text-primary">
-                  <span class="text-xs uppercase tracking-wide">Utility Structures</span>
-                  <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity text-primary">arrow_forward</span>
-                </a>
-              </li>
-              <li>
-                <a href="/projects/rak-beach-district" class="flex items-center justify-between group hover:text-accent transition-colors py-1 text-primary">
-                  <span class="text-xs uppercase tracking-wide">RAK Beach District</span>
-                  <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity text-primary">arrow_forward</span>
-                </a>
-              </li>
-            </ul>
-            <a href="/projects/all" class="mt-6 inline-block text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-primary hover:text-white transition-colors text-primary">
+            <div id="projects-list-carousel" class="relative min-h-[292px]">
+              {projectCarouselPages.map((projectPage, pageIndex) => (
+                <ul
+                  id={`projects-list-page-${pageIndex}`}
+                  class="projects-list-page space-y-1"
+                  data-project-page={pageIndex}
+                  hidden={pageIndex !== 0}
+                >
+                  {projectPage.map((project) => (
+                    <li>
+                      <a href={`/projects/${project.slug}`} class="flex items-center justify-between gap-3 group hover:text-accent transition-colors py-1 text-primary">
+                        <span class="text-[11px] uppercase tracking-wide text-left">{project.title}</span>
+                        <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity text-primary">arrow_forward</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
+            <div class="mt-5 flex items-center justify-center gap-3" role="tablist" aria-label="Project list pages">
+              {projectCarouselPages.map((_, pageIndex) => (
+                <button
+                  type="button"
+                  role="tab"
+                  aria-controls={`projects-list-page-${pageIndex}`}
+                  aria-selected={pageIndex === 0 ? 'true' : 'false'}
+                  class={`projects-list-dot w-2.5 h-2.5 rounded-full border border-primary transition-all motion-base ${
+                    pageIndex === 0 ? 'bg-primary scale-110' : 'bg-transparent opacity-50 hover:opacity-100'
+                  }`}
+                  data-project-page-target={pageIndex}
+                >
+                  <span class="sr-only">Show projects page {pageIndex + 1}</span>
+                </button>
+              ))}
+            </div>
+            <p id="projects-list-status" class="sr-only" aria-live="polite">
+              Showing projects page 1 of {projectCarouselPages.length}.
+            </p>
+            <a href="/projects" class="mt-6 inline-block text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-primary hover:text-white transition-colors text-primary">
               View All Projects
             </a>
           </div>
@@ -518,6 +532,44 @@ const description = "Explore our portfolio of completed construction projects in
       if (filterStatus) {
         filterStatus.textContent = `Showing ${formatFilterLabel(filter)} projects (${visibleCount} sections visible).`;
       }
+    });
+  });
+
+  // Center list 3-dot carousel
+  const projectListPages = document.querySelectorAll('.projects-list-page');
+  const projectListDots = document.querySelectorAll('.projects-list-dot');
+  const projectListStatus = document.getElementById('projects-list-status');
+
+  const setProjectListPage = (targetIndex) => {
+    projectListPages.forEach((page, pageIndex) => {
+      if (!(page instanceof HTMLElement)) return;
+      const isActive = pageIndex === targetIndex;
+      page.hidden = !isActive;
+      page.setAttribute('aria-hidden', String(!isActive));
+    });
+
+    projectListDots.forEach((dot, dotIndex) => {
+      if (!(dot instanceof HTMLElement)) return;
+      const isActive = dotIndex === targetIndex;
+      dot.setAttribute('aria-selected', String(isActive));
+      dot.classList.toggle('bg-primary', isActive);
+      dot.classList.toggle('scale-110', isActive);
+      dot.classList.toggle('bg-transparent', !isActive);
+      dot.classList.toggle('opacity-50', !isActive);
+      dot.classList.toggle('hover:opacity-100', !isActive);
+    });
+
+    if (projectListStatus) {
+      projectListStatus.textContent = `Showing projects page ${targetIndex + 1} of ${projectListPages.length}.`;
+    }
+  };
+
+  projectListDots.forEach((dot) => {
+    if (!(dot instanceof HTMLElement)) return;
+    dot.addEventListener('click', () => {
+      const targetIndex = Number(dot.dataset.projectPageTarget ?? 0);
+      if (Number.isNaN(targetIndex)) return;
+      setProjectListPage(targetIndex);
     });
   });
 </script>

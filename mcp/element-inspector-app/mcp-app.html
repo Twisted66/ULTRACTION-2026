@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Element Inspector App</title>
+</head>
+<body>
+  <main class="main">
+    <header>
+      <h1>Element Inspector</h1>
+      <p id="status" class="notice">Connecting to host...</p>
+    </header>
+
+    <section class="card">
+      <h2>Summary</h2>
+      <p id="summary">No inspection loaded yet.</p>
+    </section>
+
+    <section class="card grid">
+      <div>
+        <h3>Selector</h3>
+        <pre id="selector"></pre>
+      </div>
+      <div>
+        <h3>Tag</h3>
+        <pre id="tag-name"></pre>
+      </div>
+      <div>
+        <h3>Page URL</h3>
+        <pre id="page-url"></pre>
+      </div>
+      <div>
+        <h3>Text Content</h3>
+        <pre id="text-content"></pre>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Bounding Box</h2>
+      <pre id="bounding-box"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Attributes</h2>
+      <pre id="attributes"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Computed Styles</h2>
+      <pre id="styles"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Notes</h2>
+      <pre id="notes"></pre>
+    </section>
+  </main>
+  <script type="module" src="/src/mcp-app.ts"></script>
+</body>
+</html>
