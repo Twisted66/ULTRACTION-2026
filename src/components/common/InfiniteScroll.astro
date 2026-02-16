@@ -9,11 +9,11 @@ interface Props {
 const { images } = Astro.props;
 ---
 
-<div class="infinite-scroll-container w-full overflow-hidden h-[400px] bg-background relative border-b border-primary/20 dark:border-black/20">
+<div class="infinite-scroll-container w-full overflow-hidden h-[300px] md:h-[400px] bg-background relative border-b border-primary/20 dark:border-black/20">
   <div class="scroll-track flex h-full">
     {/* Original Set */}
     {images.map((image, index) => (
-      <div class="scroll-item flex-shrink-0 w-[400px] h-full border-r border-primary/20 dark:border-black/20 relative group overflow-hidden">
+      <div class="scroll-item flex-shrink-0 w-[280px] md:w-[400px] h-full border-r border-primary/20 dark:border-black/20 relative group overflow-hidden">
         <img 
           src={image.src} 
           alt={image.alt} 
@@ -29,7 +29,7 @@ const { images } = Astro.props;
     
     {/* Duplicate Set for Seamless Loop */}
     {images.map((image, index) => (
-      <div class="scroll-item flex-shrink-0 w-[400px] h-full border-r border-primary/20 dark:border-black/20 relative group overflow-hidden">
+      <div class="scroll-item flex-shrink-0 w-[280px] md:w-[400px] h-full border-r border-primary/20 dark:border-black/20 relative group overflow-hidden">
         <img 
           src={image.src} 
           alt={image.alt} 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface Props {
   words?: string;
@@ -57,13 +58,13 @@ export default function TextTypeAnimation({
   return (
     <span className={className}>
       {text}
-      <span
-        animate={{ opacity: isDeleting ? [1, 0] : [1, 1] }}
-        transition={{ duration: 0.6, repeat: Infinity, ease: 'linear' }}
+      <motion.span
+        animate={{ opacity: [1, 0, 1] }}
+        transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
         className="inline-block ml-1"
       >
         |
-      </span>
+      </motion.span>
     </span>
   );
 }
