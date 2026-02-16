@@ -64,11 +64,34 @@ const coreValues: CoreValue[] = [
 ---
 
 <!-- ULTRACTION Core Values Section -->
-<section class="ultra-core-values">
-  <div class="ucv-header">
-    <h2 class="ucv-title">Core Values</h2>
-    <div class="ucv-underline"></div>
+<section class="ultra-core-values relative bg-surface text-primary overflow-hidden border-y border-primary/20">
+  {/* Background pattern */}
+  <div class="absolute inset-0 pointer-events-none">
+    {/* Grid pattern overlay */}
+    <div
+      class="absolute inset-0 opacity-[0.03]"
+      style={{
+        backgroundImage: `
+          linear-gradient(to right, currentColor 1px, transparent 1px),
+          linear-gradient(to bottom, currentColor 1px, transparent 1px)
+        `,
+        backgroundSize: '60px 60px'
+      }}
+    ></div>
+
+    {/* Animated gradient accent */}
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse-slow"></div>
+
+    {/* Secondary gradient orb */}
+    <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse-slower"></div>
   </div>
+
+  {/* Content wrapper with relative positioning for z-index */}
+  <div class="relative z-10">
+    <div class="ucv-header">
+      <h2 class="ucv-title">Core Values</h2>
+      <div class="ucv-underline"></div>
+    </div>
 
   <div class="ucv-grid">
     {coreValues.map((value, index) => (
@@ -129,6 +152,10 @@ const coreValues: CoreValue[] = [
       </div>
     ))}
   </div>
+
+  {/* Bottom decorative line */}
+  <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+  </div>
 </section>
 
 <style>
@@ -142,7 +169,6 @@ const coreValues: CoreValue[] = [
     --ucv-text-light: #5a4d3a; /* Darker for WCAG AA contrast */
 
     padding: 6rem 2rem;
-    background: var(--ucv-bg);
     position: relative;
     overflow: hidden;
   }

@@ -31,17 +31,6 @@ function spanClass(colSpan?: 1 | 2, rowSpan?: 1 | 2) {
   return classes.join(" ");
 }
 
-function emphasisAccent(emphasis: Emphasis = "muted") {
-  switch (emphasis) {
-    case "primary":
-      return "bg-primary text-primary-foreground";
-    case "secondary":
-      return "bg-accent text-accent-foreground";
-    default:
-      return "bg-border/40 text-foreground/70 dark:text-foreground/80";
-  }
-}
-
 const MagicBento: React.FC<MagicBentoProps> = ({ items, className = "" }) => {
   if (!items || items.length === 0) return null;
 
@@ -58,19 +47,16 @@ const MagicBento: React.FC<MagicBentoProps> = ({ items, className = "" }) => {
         {visibleItems.map((item, index) => {
           if (!item.value && !item.meta) return null;
 
-          const tileEmphasis: Emphasis =
-            item.emphasis ?? (index === 0 ? "primary" : index === 1 ? "secondary" : "muted");
-
           return (
             <article
               key={item.id}
               className={[
                 "group relative flex flex-col justify-between overflow-hidden rounded-none",
-                "bg-card/90 dark:bg-card/95 border border-border/60",
+                "bg-card/90 dark:bg-card/95 border border-primary/35",
                 "shadow-[0_0_0_1px_rgba(0,0,0,0.02)]",
                 "transition-all duration-300 ease-out",
-                "hover:-translate-y-1 hover:border-accent/80 hover:shadow-lg",
-                "focus-within:ring-2 focus-within:ring-accent/60 focus-within:ring-offset-2 focus-within:ring-offset-background",
+                "hover:-translate-y-1 hover:border-black hover:shadow-lg",
+                "focus-within:ring-2 focus-within:ring-black/60 focus-within:ring-offset-2 focus-within:ring-offset-background",
                 spanClass(item.colSpan, item.rowSpan),
               ]
                 .filter(Boolean)
@@ -80,8 +66,8 @@ const MagicBento: React.FC<MagicBentoProps> = ({ items, className = "" }) => {
               <div
                 className={[
                   "absolute inset-x-0 top-0 h-1.5 md:h-2 origin-left scale-x-75",
-                  "group-hover:scale-x-100 transition-transform duration-300",
-                  emphasisAccent(tileEmphasis),
+                  "group-hover:scale-x-100 group-hover:bg-black transition-all duration-300",
+                  "bg-primary",
                 ].join(" ")}
               />
 
@@ -89,8 +75,8 @@ const MagicBento: React.FC<MagicBentoProps> = ({ items, className = "" }) => {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between gap-2 text-[0.65rem] md:text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground">
                     <span>{item.label}</span>
-                    <span className="h-px w-10 bg-border/70 group-hover:bg-accent/70 transition-colors duration-300" />
-                  </div>
+                      <span className="h-px w-10 bg-primary/50 group-hover:bg-black/80 transition-colors duration-300" />
+                    </div>
 
                   {item.value && (
                     <p className="text-lg md:text-xl lg:text-2xl font-heading font-semibold text-foreground leading-tight">

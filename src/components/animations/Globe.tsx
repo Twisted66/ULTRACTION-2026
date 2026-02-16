@@ -44,17 +44,17 @@ export default function Globe({ className }: { className?: string }) {
                 height: width * 2,
                 phi: 0,
                 theta: 0.3,
-                dark: 1,
-                diffuse: 1.2,
+                dark: 0,
+                diffuse: 1.5,
                 mapSamples: 16000,
-                mapBrightness: 6,
-                baseColor: [0.3, 0.3, 0.3],
-                markerColor: [1, 1, 1], // Pure white for visibility on dark backgrounds
-                glowColor: [1, 1, 1],
+                mapBrightness: 4,
+                baseColor: [0.35, 0.35, 0.38], // Darker grey for visibility on light backgrounds
+                markerColor: [0.82, 0.35, 0.24], // Brand terracotta/accent color for high contrast
+                glowColor: [0.82, 0.35, 0.24], // Matching glow color
                 markers: [
-                    { location: [25.2048, 55.2708], size: 0.1 }, // Dubai
-                    { location: [24.4539, 54.3773], size: 0.1 }, // Abu Dhabi
-                    { location: [25.3463, 55.4209], size: 0.1 }, // Sharjah
+                    { location: [25.2048, 55.2708], size: 0.12 }, // Dubai
+                    { location: [24.4539, 54.3773], size: 0.12 }, // Abu Dhabi
+                    { location: [25.3463, 55.4209], size: 0.12 }, // Sharjah
                 ],
                 onRender: (state) => {
                     if (!pointerInteracting.current) {
