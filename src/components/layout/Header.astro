@@ -1,5 +1,11 @@
 ---
 // Header.astro - ULTRACTION Website Header (Nova Construct Design Pattern)
+const pathname = Astro.url.pathname.replace(/\/$/, "");
+const isActive = (href: string) => {
+  const normalizedHref = href.replace(/\/$/, "");
+  if (normalizedHref === "") return pathname === "";
+  return pathname === normalizedHref || pathname.startsWith(`${normalizedHref}/`);
+};
 ---
 
 <header class="w-full border-b border-black dark:border-black fixed top-0 left-0 right-0 z-50 bg-background">
@@ -29,23 +35,23 @@
     <div class="hidden md:flex">
       <a href="/" class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">HOME</span>
-        <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
+        <span class={`w-1.5 h-1.5 rounded-full bg-black group-hover:opacity-100 transition-opacity ${isActive('/') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
       <a href="/about" class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">ABOUT US</span>
-        <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
+        <span class={`w-1.5 h-1.5 rounded-full bg-black group-hover:opacity-100 transition-opacity ${isActive('/about') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
       <a href="/services" class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">SERVICES</span>
-        <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
+        <span class={`w-1.5 h-1.5 rounded-full bg-black group-hover:opacity-100 transition-opacity ${isActive('/services') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
       <a href="/projects" class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">PROJECTS</span>
-        <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
+        <span class={`w-1.5 h-1.5 rounded-full bg-black group-hover:opacity-100 transition-opacity ${isActive('/projects') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
       <a href="/contact" class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">CONTACT</span>
-        <span class="w-1.5 h-1.5 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
+        <span class={`w-1.5 h-1.5 rounded-full bg-black group-hover:opacity-100 transition-opacity ${isActive('/contact') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
     </div>
   </div>
@@ -53,25 +59,25 @@
   <!-- Mobile Navigation Menu -->
   <nav id="mobile-nav" class="hidden md:hidden fixed inset-0 z-40 bg-background border-t border-black dark:border-black top-[72px]">
     <div class="flex flex-col h-full overflow-y-auto max-h-[calc(100vh-72px)]">
-      <a href="/" class="flex items-center justify-between px-6 min-h-[44px] text-foreground hover:bg-primary/10 transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/" class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
         <span>HOME</span>
-        <svg class="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        <svg class={`w-4 h-4 ${isActive('/') ? 'text-accent' : 'text-foreground'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/about" class="flex items-center justify-between px-6 min-h-[44px] text-foreground hover:bg-primary/10 transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/about" class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/about') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
         <span>ABOUT US</span>
-        <svg class="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        <svg class={`w-4 h-4 ${isActive('/about') ? 'text-accent' : 'text-foreground'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/services" class="flex items-center justify-between px-6 min-h-[44px] text-foreground hover:bg-primary/10 transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/services" class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/services') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
         <span>SERVICES</span>
-        <svg class="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        <svg class={`w-4 h-4 ${isActive('/services') ? 'text-accent' : 'text-foreground'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/projects" class="flex items-center justify-between px-6 min-h-[44px] text-foreground hover:bg-primary/10 transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/projects" class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/projects') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
         <span>PROJECTS</span>
-        <svg class="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        <svg class={`w-4 h-4 ${isActive('/projects') ? 'text-accent' : 'text-foreground'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/contact" class="flex items-center justify-between px-6 min-h-[44px] text-foreground hover:bg-primary/10 transition-colors font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/contact" class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/contact') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
         <span>CONTACT</span>
-        <svg class="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+        <svg class={`w-4 h-4 ${isActive('/contact') ? 'text-accent' : 'text-foreground'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
     </div>
   </nav>
