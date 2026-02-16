@@ -12,7 +12,7 @@ const isActive = (href: string) => {
   <div class="flex flex-wrap md:flex-nowrap">
     <!-- Logo - Left Side -->
     <div class="w-full md:w-96 px-6 py-3 md:px-12 md:py-5 flex items-center justify-between">
-      <a href="/" class="font-bold text-lg tracking-wide uppercase flex items-center gap-3">
+      <a href="/" class="font-bold text-lg tracking-wide uppercase flex items-center gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <img src="/logo/UGC-HEADER.png" alt="ULTRACTION" class="h-12 md:h-16 w-auto" />
       </a>
       <button
@@ -22,8 +22,11 @@ const isActive = (href: string) => {
         aria-controls="mobile-nav"
         aria-expanded="false"
       >
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg id="hamburger-icon" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        <svg id="close-icon" class="h-6 w-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
         </svg>
       </button>
     </div>
@@ -33,23 +36,23 @@ const isActive = (href: string) => {
 
     <!-- Right Navigation - All links -->
     <div class="hidden md:flex">
-      <a href="/" class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/" aria-current={isActive('/') ? 'page' : undefined} class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">HOME</span>
         <span class={`w-1.5 h-1.5 rounded-full bg-black group-hover:opacity-100 transition-opacity ${isActive('/') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
-      <a href="/about" class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/about" aria-current={isActive('/about') ? 'page' : undefined} class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">ABOUT US</span>
         <span class={`w-1.5 h-1.5 rounded-full bg-black group-hover:opacity-100 transition-opacity ${isActive('/about') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
-      <a href="/services" class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/services" aria-current={isActive('/services') ? 'page' : undefined} class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">SERVICES</span>
         <span class={`w-1.5 h-1.5 rounded-full bg-black group-hover:opacity-100 transition-opacity ${isActive('/services') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
-      <a href="/projects" class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/projects" aria-current={isActive('/projects') ? 'page' : undefined} class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">PROJECTS</span>
         <span class={`w-1.5 h-1.5 rounded-full bg-black group-hover:opacity-100 transition-opacity ${isActive('/projects') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
-      <a href="/contact" class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/contact" aria-current={isActive('/contact') ? 'page' : undefined} class="px-8 lg:px-12 py-6 text-black hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">CONTACT</span>
         <span class={`w-1.5 h-1.5 rounded-full bg-black group-hover:opacity-100 transition-opacity ${isActive('/contact') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
@@ -59,23 +62,23 @@ const isActive = (href: string) => {
   <!-- Mobile Navigation Menu -->
   <nav id="mobile-nav" class="hidden md:hidden fixed inset-0 z-40 bg-background border-t border-black dark:border-black top-[72px]">
     <div class="flex flex-col h-full overflow-y-auto max-h-[calc(100vh-72px)]">
-      <a href="/" class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
+      <a href="/" aria-current={isActive('/') ? 'page' : undefined} class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
         <span>HOME</span>
         <svg class={`w-4 h-4 ${isActive('/') ? 'text-accent' : 'text-foreground'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/about" class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/about') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
+      <a href="/about" aria-current={isActive('/about') ? 'page' : undefined} class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/about') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
         <span>ABOUT US</span>
         <svg class={`w-4 h-4 ${isActive('/about') ? 'text-accent' : 'text-foreground'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/services" class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/services') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
+      <a href="/services" aria-current={isActive('/services') ? 'page' : undefined} class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/services') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
         <span>SERVICES</span>
         <svg class={`w-4 h-4 ${isActive('/services') ? 'text-accent' : 'text-foreground'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/projects" class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/projects') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
+      <a href="/projects" aria-current={isActive('/projects') ? 'page' : undefined} class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium border-b border-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/projects') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
         <span>PROJECTS</span>
         <svg class={`w-4 h-4 ${isActive('/projects') ? 'text-accent' : 'text-foreground'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
-      <a href="/contact" class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/contact') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
+      <a href="/contact" aria-current={isActive('/contact') ? 'page' : undefined} class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/contact') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
         <span>CONTACT</span>
         <svg class={`w-4 h-4 ${isActive('/contact') ? 'text-accent' : 'text-foreground'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
       </a>
@@ -90,9 +93,19 @@ const isActive = (href: string) => {
 
   function setMobileMenuState(isOpen: boolean) {
     if (!toggle || !mobileNav) return;
+
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
+
     toggle.setAttribute('aria-expanded', String(isOpen));
     toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
     mobileNav.classList.toggle('hidden', !isOpen);
+
+    if (hamburgerIcon && closeIcon) {
+      hamburgerIcon.classList.toggle('hidden', isOpen);
+      closeIcon.classList.toggle('hidden', !isOpen);
+    }
+
     // Prevent body scroll when menu is open
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
   }
