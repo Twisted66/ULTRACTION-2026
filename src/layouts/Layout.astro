@@ -83,9 +83,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Material Symbols (Icons) -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
     <title>{title}</title>
   </head>
 
@@ -110,6 +107,41 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </div>
 
     <ElementCaptureWidget />
+
+    <!-- Back to Top Button -->
+    <button
+      id="back-to-top"
+      class="fixed bottom-8 right-8 z-40 bg-primary text-primary-foreground w-12 h-12 flex items-center justify-center shadow-lg transition-all duration-300 translate-y-20 opacity-0 invisible hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      aria-label="Back to top"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m18 15-6-6-6 6"/>
+      </svg>
+    </button>
+
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        const backToTopBtn = document.getElementById('back-to-top');
+        if (backToTopBtn) {
+          window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+              backToTopBtn.classList.remove('translate-y-20', 'opacity-0', 'invisible');
+              backToTopBtn.classList.add('translate-y-0', 'opacity-100', 'visible');
+            } else {
+              backToTopBtn.classList.add('translate-y-20', 'opacity-0', 'invisible');
+              backToTopBtn.classList.remove('translate-y-0', 'opacity-100', 'visible');
+            }
+          });
+
+          backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          });
+        }
+      });
+    </script>
 
     <!-- Dark Mode Toggle Script -->
     <script is:inline>
