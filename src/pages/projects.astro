@@ -4,6 +4,7 @@
 
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import SectionBackground from '../components/common/SectionBackground';
 
 // SEO Metadata
 const title = "Projects - ULTRACTION GENERAL CONTRACTING LLC";
@@ -17,8 +18,8 @@ const projectEntries = allProjects
   }))
   .sort((a, b) => a.title.localeCompare(b.title));
 
-const projectChunkSize = Math.max(1, Math.ceil(projectEntries.length / 3));
-const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
+const projectChunkSize = Math.max(1, Math.ceil(projectEntries.length / 4));
+const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
   projectEntries.slice(pageIndex * projectChunkSize, (pageIndex + 1) * projectChunkSize)
 ).filter((page) => page.length > 0);
 ---
@@ -80,7 +81,7 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
         data-filter="infrastructure"
         aria-pressed="false"
         aria-controls="projects-grid"
-        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
+        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5m-4 0h4"/>
@@ -94,7 +95,7 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
         data-filter="marine"
         aria-pressed="false"
         aria-controls="projects-grid"
-        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
+        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
       >
         <span class="material-symbols-outlined text-xl">sailing</span>
         <span class="text-[10px] font-bold uppercase tracking-wider">MARINE</span>
@@ -106,7 +107,7 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
         data-filter="heritage"
         aria-pressed="false"
         aria-controls="projects-grid"
-        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
+        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
       >
         <span class="material-symbols-outlined text-xl">account_balance</span>
         <span class="text-[10px] font-bold uppercase tracking-wider">HERITAGE</span>
@@ -118,7 +119,7 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
         data-filter="oil-gas"
         aria-pressed="false"
         aria-controls="projects-grid"
-        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
+        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
       >
         <span class="material-symbols-outlined text-xl">oil_barrel</span>
         <span class="text-[10px] font-bold uppercase tracking-wider">OIL & GAS</span>
@@ -130,7 +131,7 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
         data-filter="industrial"
         aria-pressed="false"
         aria-controls="projects-grid"
-        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
+        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
       >
         <span class="material-symbols-outlined text-xl">factory</span>
         <span class="text-[10px] font-bold uppercase tracking-wider">INDUSTRIAL</span>
@@ -142,7 +143,7 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
         data-filter="residential"
         aria-pressed="false"
         aria-controls="projects-grid"
-        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
+        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
       >
         <span class="material-symbols-outlined text-xl">home_work</span>
         <span class="text-[10px] font-bold uppercase tracking-wider">RESIDENTIAL</span>
@@ -154,7 +155,7 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
         data-filter="commercial"
         aria-pressed="false"
         aria-controls="projects-grid"
-        class="filter-btn h-24 flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-primary dark:text-white"
+        class="filter-btn h-24 flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
       >
         <span class="material-symbols-outlined text-xl">domain</span>
         <span class="text-[10px] font-bold uppercase tracking-wider">COMMERCIAL</span>
@@ -217,7 +218,7 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
       <div class="col-span-12 md:col-span-4 flex flex-col border-r border-black" data-category="infrastructure all">
         <div class="relative h-[600px] md:h-[800px] border-b md:border-b-0 border-black flex flex-col">
           <!-- Logo Section -->
-          <div class="flex-1 flex items-center justify-center p-12 bg-background">
+          <div class="h-[280px] md:h-[300px] flex items-center justify-center p-8 md:p-10 bg-background">
             <img
               alt="ULTRACTION GENERAL CONTRACTING LLC Logo"
               src="/logo/UGC-LOGO-HQ.png"
@@ -226,28 +227,41 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
           </div>
 
           <!-- Projects List -->
-          <div class="p-8 text-center">
-            <h3 class="text-sm font-bold uppercase tracking-widest mb-6 border-b border-black/20 pb-3 text-primary text-center">Our Projects</h3>
-            <div id="projects-list-carousel" class="relative min-h-[292px]">
-              {projectCarouselPages.map((projectPage, pageIndex) => (
-                <ul
-                  id={`projects-list-page-${pageIndex}`}
-                  class="projects-list-page space-y-1"
-                  data-project-page={pageIndex}
-                  hidden={pageIndex !== 0}
-                >
-                  {projectPage.map((project) => (
-                    <li>
-                      <a href={`/projects/${project.slug}`} class="flex items-center justify-between gap-3 group hover:text-accent transition-colors py-1 text-primary">
-                        <span class="text-[11px] uppercase tracking-wide text-left">{project.title}</span>
-                        <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity text-primary">arrow_forward</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ))}
+          <div class="p-6 md:p-8 pt-4 md:pt-5 text-center flex-1">
+            <h3 class="text-sm font-bold uppercase tracking-widest mb-4 border-b border-black/20 pb-3 text-primary text-center">Our Projects</h3>
+            <div id="projects-list-carousel" class="projects-list-carousel relative overflow-hidden min-h-[250px]">
+              <div id="projects-list-track" class="projects-list-track flex">
+                {projectCarouselPages.map((projectPage, pageIndex) => (
+                  <div
+                    id={`projects-list-page-${pageIndex}`}
+                    class="projects-list-slide w-full shrink-0"
+                    data-project-page={pageIndex}
+                    aria-hidden={pageIndex === 0 ? 'false' : 'true'}
+                  >
+                    <ul class="space-y-0.5">
+                      {projectPage.map((project) => (
+                        <li>
+                          <a href={`/projects/${project.slug}`} class="projects-list-link flex items-center justify-between gap-3 group py-1.5 text-primary transition-colors motion-base">
+                            <span class="project-link-label text-[11px] uppercase tracking-wide text-left">{project.title}</span>
+                            <span class="material-symbols-outlined text-sm text-primary/70 group-hover:text-primary transition-all motion-base group-hover:translate-x-0.5">arrow_forward</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div class="mt-5 flex items-center justify-center gap-3" role="tablist" aria-label="Project list pages">
+            <div class="mt-5 flex items-center justify-center gap-3">
+              <button
+                type="button"
+                class="projects-list-nav inline-flex h-7 w-7 items-center justify-center rounded-full border border-primary/35 text-primary hover:bg-primary hover:text-white transition-colors motion-base"
+                data-projects-prev
+                aria-label="Show previous projects"
+              >
+                <span class="material-symbols-outlined text-base">chevron_left</span>
+              </button>
+              <div role="tablist" aria-label="Project list pages" class="flex items-center justify-center gap-3">
               {projectCarouselPages.map((_, pageIndex) => (
                 <button
                   type="button"
@@ -262,6 +276,15 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
                   <span class="sr-only">Show projects page {pageIndex + 1}</span>
                 </button>
               ))}
+              </div>
+              <button
+                type="button"
+                class="projects-list-nav inline-flex h-7 w-7 items-center justify-center rounded-full border border-primary/35 text-primary hover:bg-primary hover:text-white transition-colors motion-base"
+                data-projects-next
+                aria-label="Show next projects"
+              >
+                <span class="material-symbols-outlined text-base">chevron_right</span>
+              </button>
             </div>
             <p id="projects-list-status" class="sr-only" aria-live="polite">
               Showing projects page 1 of {projectCarouselPages.length}.
@@ -432,53 +455,55 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
   </section>
 
   <!-- Archive Section -->
-  <section class="border-b border-black" aria-labelledby="archive-heading">
-    <h2 id="archive-heading" class="sr-only">Project Archive</h2>
-    <div class="grid grid-cols-1 md:grid-cols-4">
-      <div class="col-span-1 md:col-span-1 border-r border-black p-8 flex flex-col justify-center bg-background text-primary aspect-square">
-        <span class="text-[10px] font-bold uppercase tracking-widest opacity-80 mb-4 block">Archive</span>
-        <h3 class="text-xl font-bold uppercase leading-tight mb-6">Explore Past<br/>Endeavors</h3>
-        <a class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold hover:text-color-accent transition-colors motion-base" href="/contact">
-          View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
-        </a>
-      </div>
-      <div class="col-span-1 md:col-span-1 border-r border-black dark:border-black relative group overflow-hidden aspect-square project-card">
-        <img alt="E20 Traffic Bridges" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-110 grayscale" src="/images/projects/e20-traffic-bridges/photo_015.jpeg" />
-        <div class="absolute bottom-4 left-4 z-10">
-          <span class="text-[10px] font-bold uppercase bg-white/80 text-primary px-2 py-1">E20 Bridges</span>
-        </div>
-        <div class="project-overlay absolute inset-0 bg-primary/90 flex flex-col justify-center items-center text-white p-6 text-center z-30">
-          <span class="text-[10px] uppercase tracking-widest text-white mb-2">Archive</span>
-          <h3 class="text-sm font-bold uppercase mb-3">E20 Bridges</h3>
-          <p class="text-xs opacity-90 mb-4 max-w-[220px]">Archived visual from the E20 bridge works portfolio.</p>
-          <a href="/projects/traffic-improvement-e20" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
-            Explore
+  <SectionBackground client:visible showBottomLine={false} showTopBorder={false} showBottomBorder={true} showGrid={true} showAccentBlob={true}>
+    <section aria-labelledby="archive-heading">
+      <h2 id="archive-heading" class="sr-only">Project Archive</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4">
+        <div class="col-span-1 md:col-span-1 border-r border-primary/20 p-8 flex flex-col justify-center aspect-square">
+          <span class="text-[10px] font-bold uppercase tracking-widest opacity-80 mb-4 block">Archive</span>
+          <h3 class="text-xl font-bold uppercase leading-tight mb-6">Explore Past<br/>Endeavors</h3>
+          <a class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold hover:text-color-accent transition-colors motion-base" href="/contact">
+            View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
           </a>
         </div>
-      </div>
-      <div class="col-span-1 md:col-span-1 border-r border-black dark:border-black relative group overflow-hidden aspect-square project-card">
-        <img alt="Inner Bypass E45" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-110 grayscale" src="/images/projects/inner-bypass-e45/photo_025.jpeg" />
-        <div class="absolute bottom-4 left-4 z-10">
-          <span class="text-[10px] font-bold uppercase bg-white/80 text-primary px-2 py-1">Inner Bypass E45</span>
+        <div class="col-span-1 md:col-span-1 border-r border-primary/20 relative group overflow-hidden aspect-square project-card">
+          <img alt="E20 Traffic Bridges" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-110 grayscale" src="/images/projects/e20-traffic-bridges/photo_015.jpeg" />
+          <div class="absolute bottom-4 left-4 z-10">
+            <span class="text-[10px] font-bold uppercase bg-white/80 text-primary px-2 py-1">E20 Bridges</span>
+          </div>
+          <div class="project-overlay absolute inset-0 bg-primary/90 flex flex-col justify-center items-center text-white p-6 text-center z-30">
+            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Archive</span>
+            <h3 class="text-sm font-bold uppercase mb-3">E20 Bridges</h3>
+            <p class="text-xs opacity-90 mb-4 max-w-[220px]">Archived visual from the E20 bridge works portfolio.</p>
+            <a href="/projects/traffic-improvement-e20" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+              Explore
+            </a>
+          </div>
         </div>
-        <div class="project-overlay absolute inset-0 bg-primary/90 flex flex-col justify-center items-center text-white p-6 text-center z-30">
-          <span class="text-[10px] uppercase tracking-widest text-white mb-2">Archive</span>
-          <h3 class="text-sm font-bold uppercase mb-3">Inner Bypass E45</h3>
-          <p class="text-xs opacity-90 mb-4 max-w-[220px]">Selected archival imagery from the Inner Bypass E45 project.</p>
-          <a href="/projects/upgrading-inner-bypass-e45" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
-            Explore
-          </a>
+        <div class="col-span-1 md:col-span-1 border-r border-primary/20 relative group overflow-hidden aspect-square project-card">
+          <img alt="Inner Bypass E45" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-110 grayscale" src="/images/projects/inner-bypass-e45/photo_025.jpeg" />
+          <div class="absolute bottom-4 left-4 z-10">
+            <span class="text-[10px] font-bold uppercase bg-white/80 text-primary px-2 py-1">Inner Bypass E45</span>
+          </div>
+          <div class="project-overlay absolute inset-0 bg-primary/90 flex flex-col justify-center items-center text-white p-6 text-center z-30">
+            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Archive</span>
+            <h3 class="text-sm font-bold uppercase mb-3">Inner Bypass E45</h3>
+            <p class="text-xs opacity-90 mb-4 max-w-[220px]">Selected archival imagery from the Inner Bypass E45 project.</p>
+            <a href="/projects/upgrading-inner-bypass-e45" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+              Explore
+            </a>
+          </div>
+        </div>
+        <div class="col-span-1 md:col-span-1 relative group overflow-hidden aspect-square p-8 flex flex-col justify-between">
+          <div>
+            <span class="material-symbols-outlined text-3xl mb-2">folder_open</span>
+            <p class="text-sm font-medium leading-relaxed opacity-90">Access our complete database of over 150 projects.</p>
+          </div>
+          <div class="text-[10px] uppercase tracking-widest font-bold opacity-70">Database Access</div>
         </div>
       </div>
-      <div class="col-span-1 md:col-span-1 relative group overflow-hidden aspect-square bg-background p-8 flex flex-col justify-between">
-        <div>
-          <span class="material-symbols-outlined text-3xl mb-2 text-primary dark:text-white">folder_open</span>
-          <p class="text-sm font-medium leading-relaxed opacity-90">Access our complete database of over 150 projects.</p>
-        </div>
-        <div class="text-[10px] uppercase tracking-widest font-bold opacity-70">Database Access</div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </SectionBackground>
 </Layout>
 
 <script>
@@ -502,13 +527,13 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
       filterBtns.forEach((b) => {
         if (!(b instanceof HTMLElement)) return;
         b.classList.remove('active', 'bg-primary', 'text-white');
-        b.classList.add('bg-background', 'dark:bg-card', 'text-primary', 'dark:text-white');
+        b.classList.add('bg-background', 'dark:bg-card', 'text-black');
         b.setAttribute('aria-pressed', 'false');
       });
 
       // Set clicked button as active
       btn.classList.add('active', 'bg-primary', 'text-white');
-      btn.classList.remove('bg-background', 'dark:bg-card', 'text-primary', 'dark:text-white');
+      btn.classList.remove('bg-background', 'dark:bg-card', 'text-black');
       btn.setAttribute('aria-pressed', 'true');
 
       let visibleCount = 0;
@@ -535,22 +560,34 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
     });
   });
 
-  // Center list 3-dot carousel
-  const projectListPages = document.querySelectorAll('.projects-list-page');
+  // Center list smooth carousel
+  const projectListCarousel = document.getElementById('projects-list-carousel');
+  const projectListTrack = document.getElementById('projects-list-track');
+  const projectListPages = document.querySelectorAll('.projects-list-slide');
   const projectListDots = document.querySelectorAll('.projects-list-dot');
+  const projectListPrev = document.querySelector('[data-projects-prev]');
+  const projectListNext = document.querySelector('[data-projects-next]');
   const projectListStatus = document.getElementById('projects-list-status');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let projectListActiveIndex = 0;
+  let projectListTimer = 0;
 
-  const setProjectListPage = (targetIndex) => {
+  const setProjectListPage = (targetIndex, announce = true) => {
+    if (!(projectListTrack instanceof HTMLElement) || projectListPages.length === 0) return;
+    const pageCount = projectListPages.length;
+    const nextIndex = ((targetIndex % pageCount) + pageCount) % pageCount;
+    projectListActiveIndex = nextIndex;
+    projectListTrack.style.transform = `translateX(-${nextIndex * 100}%)`;
+
     projectListPages.forEach((page, pageIndex) => {
       if (!(page instanceof HTMLElement)) return;
-      const isActive = pageIndex === targetIndex;
-      page.hidden = !isActive;
+      const isActive = pageIndex === nextIndex;
       page.setAttribute('aria-hidden', String(!isActive));
     });
 
     projectListDots.forEach((dot, dotIndex) => {
       if (!(dot instanceof HTMLElement)) return;
-      const isActive = dotIndex === targetIndex;
+      const isActive = dotIndex === nextIndex;
       dot.setAttribute('aria-selected', String(isActive));
       dot.classList.toggle('bg-primary', isActive);
       dot.classList.toggle('scale-110', isActive);
@@ -559,9 +596,24 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
       dot.classList.toggle('hover:opacity-100', !isActive);
     });
 
-    if (projectListStatus) {
-      projectListStatus.textContent = `Showing projects page ${targetIndex + 1} of ${projectListPages.length}.`;
+    if (projectListStatus && announce) {
+      projectListStatus.textContent = `Showing projects page ${nextIndex + 1} of ${projectListPages.length}.`;
     }
+  };
+
+  const stopProjectListAutoplay = () => {
+    if (projectListTimer) {
+      window.clearInterval(projectListTimer);
+      projectListTimer = 0;
+    }
+  };
+
+  const startProjectListAutoplay = () => {
+    if (prefersReducedMotion || projectListPages.length <= 1) return;
+    stopProjectListAutoplay();
+    projectListTimer = window.setInterval(() => {
+      setProjectListPage(projectListActiveIndex + 1, false);
+    }, 4500);
   };
 
   projectListDots.forEach((dot) => {
@@ -570,7 +622,65 @@ const projectCarouselPages = Array.from({ length: 3 }, (_, pageIndex) =>
       const targetIndex = Number(dot.dataset.projectPageTarget ?? 0);
       if (Number.isNaN(targetIndex)) return;
       setProjectListPage(targetIndex);
+      startProjectListAutoplay();
     });
   });
+
+  if (projectListPrev instanceof HTMLElement) {
+    projectListPrev.addEventListener('click', () => {
+      setProjectListPage(projectListActiveIndex - 1);
+      startProjectListAutoplay();
+    });
+  }
+
+  if (projectListNext instanceof HTMLElement) {
+    projectListNext.addEventListener('click', () => {
+      setProjectListPage(projectListActiveIndex + 1);
+      startProjectListAutoplay();
+    });
+  }
+
+  if (projectListCarousel instanceof HTMLElement) {
+    projectListCarousel.addEventListener('mouseenter', stopProjectListAutoplay);
+    projectListCarousel.addEventListener('mouseleave', startProjectListAutoplay);
+    projectListCarousel.addEventListener('focusin', stopProjectListAutoplay);
+    projectListCarousel.addEventListener('focusout', startProjectListAutoplay);
+  }
+
+  setProjectListPage(0, false);
+  startProjectListAutoplay();
 </script>
+
+<style>
+  .projects-list-track {
+    transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .projects-list-link {
+    color: rgb(20, 20, 20);
+  }
+
+  .projects-list-link .project-link-label {
+    position: relative;
+    display: inline-block;
+  }
+
+  .projects-list-link .project-link-label::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .projects-list-link:hover .project-link-label::after,
+  .projects-list-link:focus-visible .project-link-label::after {
+    transform: scaleX(1);
+  }
+</style>
 
