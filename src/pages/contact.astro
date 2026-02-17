@@ -44,36 +44,38 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
           <p class="text-lg mb-10 opacity-80 leading-relaxed">
             Have a project in mind? Our team is ready to collaborate on your construction and contracting needs across the UAE and KSA.
           </p>
+
+          <p class="text-xs italic opacity-60 mb-6">* Indicates required field</p>
           
           <form class="flex flex-col gap-8" method="POST" action="/api/contact" data-contact-form>
             <div class="group">
               <label class="block text-xs uppercase font-bold tracking-[0.2em] mb-3 opacity-70 text-accent" for="name">
                 <span class="flex items-center gap-2">
                   <span class="w-4 h-[2px] bg-accent"></span>
-                  Name
+                  Name <span class="text-accent">*</span>
                 </span>
               </label>
-              <input class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 focus-visible:border-accent focus-visible:outline-none" id="name" name="name" placeholder="Enter your name" type="text" required />
+              <input class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 focus-visible:border-accent focus-visible:outline-none" id="name" name="name" placeholder="Enter your name" type="text" required aria-required="true" />
             </div>
 
             <div class="group">
               <label class="block text-xs uppercase font-bold tracking-[0.2em] mb-3 opacity-70 text-accent" for="email">
                 <span class="flex items-center gap-2">
                   <span class="w-4 h-[2px] bg-accent"></span>
-                  Email
+                  Email <span class="text-accent">*</span>
                 </span>
               </label>
-              <input class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 focus-visible:border-accent focus-visible:outline-none" id="email" name="email" placeholder="Enter your email" type="email" required />
+              <input class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 focus-visible:border-accent focus-visible:outline-none" id="email" name="email" placeholder="Enter your email" type="email" required aria-required="true" />
             </div>
 
             <div class="group">
                <label class="block text-xs uppercase font-bold tracking-[0.2em] mb-3 opacity-70 text-accent" for="subject">
                  <span class="flex items-center gap-2">
                    <span class="w-4 h-[2px] bg-accent"></span>
-                   Subject
+                   Subject <span class="text-accent">*</span>
                  </span>
                </label>
-               <select class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 cursor-pointer focus-visible:border-accent focus-visible:outline-none appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEyIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUuOTk5OTkgMUwxMS4zIDZMNS45OTk5OSAxMUwwLjcgNkw1Ljk5OTkgMVoiIHN0cm9rZT0iIzI4MTE4MCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+')] bg-[length:16px_10px] bg-[right_8px_center] bg-no-repeat pr-10" id="subject" name="subject" required>
+               <select class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 cursor-pointer focus-visible:border-accent focus-visible:outline-none appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEyIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTUuOTk5OTkgMUwxMS4zIDZMNS45OTk5OSAxMUwwLjcgNkw1Ljk5OTkgMVoiIHN0cm9rZT0iIzI4MTE4MCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+')] bg-[length:16px_10px] bg-[right_8px_center] bg-no-repeat pr-10" id="subject" name="subject" required aria-required="true">
                   <option value="" disabled={selectedSubject !== ''} selected={selectedSubject === ''}>Select a topic</option>
                   <option value="project" selected={selectedSubject === 'project'}>New Project Inquiry</option>
                   <option value="careers" selected={selectedSubject === 'careers'}>Careers</option>
@@ -85,17 +87,17 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                <label class="block text-xs uppercase font-bold tracking-[0.2em] mb-3 opacity-70 text-accent" for="message">
                  <span class="flex items-center gap-2">
                    <span class="w-4 h-[2px] bg-accent"></span>
-                   Message
+                   Message <span class="text-accent">*</span>
                  </span>
                </label>
-               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder="Tell us about your project..." required></textarea>
+               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder="Tell us about your project..." required aria-required="true"></textarea>
             </div>
 
             <div class="group">
                <label class="block text-xs uppercase font-bold tracking-widest mb-2 opacity-80" for="attachment">Attachment <span class="font-normal text-primary/90">(Optional)</span></label>
                <div class="relative">
-                  <input class="w-full bg-transparent border-b border-primary/20 py-4 text-base transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-none file:border-0 file:bg-primary file:text-primary-foreground file:cursor-pointer focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface" id="attachment" name="attachment" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip,.rar" />
-                  <p class="text-xs opacity-50 mt-2">PDF, DOC, DOCX, JPG, PNG, ZIP, RAR (Max 10MB)</p>
+                  <input class="w-full bg-transparent border-b border-primary/20 py-4 text-base transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-none file:border-0 file:bg-primary file:text-primary-foreground file:cursor-pointer focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface" id="attachment" name="attachment" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip,.rar" aria-describedby="attachment-hint" />
+                  <p id="attachment-hint" class="text-xs opacity-50 mt-2">PDF, DOC, DOCX, JPG, PNG, ZIP, RAR (Max 10MB)</p>
                </div>
                <div id="file-name" class="text-sm mt-2 opacity-80 hidden"></div>
             </div>
@@ -115,8 +117,14 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                 class="w-full sm:w-auto"
                 data-submit-button
               >
+                <span data-submit-spinner class="hidden mr-3">
+                  <svg class="animate-spin h-5 w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                </span>
                 <span data-submit-label class="flex items-center gap-4">
-                  Send Message
+                  <span data-label-text>Send Message</span>
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </span>
               </MagneticButton>
@@ -313,7 +321,8 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
     if (!(form instanceof HTMLFormElement)) return;
 
     const submitButton = form.querySelector('[data-submit-button]');
-    const submitLabel = form.querySelector('[data-submit-label]');
+    const labelText = form.querySelector('[data-label-text]');
+    const submitSpinner = form.querySelector('[data-submit-spinner]');
     const statusBox = document.getElementById('form-status');
     const subjectSelect = form.querySelector('#subject');
     const fileInput = document.querySelector('#attachment');
@@ -358,8 +367,12 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
         return;
       }
 
-      if (submitButton instanceof HTMLButtonElement) submitButton.disabled = true;
-      if (submitLabel instanceof HTMLElement) submitLabel.textContent = 'Sending...';
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+        submitButton.setAttribute('aria-busy', 'true');
+      }
+      if (submitSpinner instanceof HTMLElement) submitSpinner.classList.remove('hidden');
+      if (labelText instanceof HTMLElement) labelText.textContent = 'Sending...';
 
       try {
         const response = await fetch('/api/contact', {
@@ -383,8 +396,12 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
         const errorMessage = error instanceof Error ? error.message : 'Unable to send your message right now.';
         setStatus('error', errorMessage);
       } finally {
-        if (submitButton instanceof HTMLButtonElement) submitButton.disabled = false;
-        if (submitLabel instanceof HTMLElement) submitLabel.textContent = 'Send Message';
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = false;
+          submitButton.setAttribute('aria-busy', 'false');
+        }
+        if (submitSpinner instanceof HTMLElement) submitSpinner.classList.add('hidden');
+        if (labelText instanceof HTMLElement) labelText.textContent = 'Send Message';
       }
     });
   });
