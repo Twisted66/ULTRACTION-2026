@@ -504,6 +504,67 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
       </div>
     </section>
   </SectionBackground>
+
+  <!-- Final CTA Section - Matching About Page Style -->
+  <section class="relative bg-surface text-primary overflow-hidden border-y border-primary/20">
+    <div class="absolute inset-0 pointer-events-none">
+      <div
+        class="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, currentColor 1px, transparent 1px),
+            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px'
+        }}
+      />
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse-slow" />
+    </div>
+
+    <div class="relative z-10 px-6 md:px-12 lg:px-24 py-20 md:py-28 lg:py-32">
+      <div class="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-[2px] bg-accent"></div>
+          <span class="text-xs font-bold uppercase tracking-[0.3em] text-accent">
+            Start Your Project
+          </span>
+          <div class="w-12 h-[2px] bg-accent"></div>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading leading-[0.95] tracking-tight mb-8 max-w-3xl">
+          Let's build infrastructure that
+          <br />
+          <span class="italic font-light text-primary/50 scale-y-75 inline-block">
+            stands the test of time.
+          </span>
+        </h2>
+
+        <a
+          class="group relative inline-flex items-center gap-3 px-10 py-5 bg-primary text-white overflow-hidden transition-all duration-300 hover:bg-accent hover:shadow-xl hover:shadow-accent/20"
+          href="/contact"
+        >
+          <span class="relative z-10 text-xs font-bold uppercase tracking-[0.2em]">
+            Discuss Your Project
+          </span>
+          <svg
+            class="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+  </section>
 </Layout>
 
 <script>
@@ -681,6 +742,16 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
   .projects-list-link:hover .project-link-label::after,
   .projects-list-link:focus-visible .project-link-label::after {
     transform: scaleX(1);
+  }
+
+  /* Animation for CTA section */
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.1); }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 8s ease-in-out infinite;
   }
 </style>
 

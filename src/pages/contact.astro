@@ -4,6 +4,8 @@
 
 import Layout from '../layouts/Layout.astro';
 import Globe from '../components/animations/Globe';
+import SectionBackground from '../components/common/SectionBackground';
+import MagneticButton from '../components/ui/MagneticButton.astro';
 
 // SEO Metadata
 const title = "Contact Us - ULTRACTION GENERAL CONTRACTING LLC";
@@ -19,10 +21,18 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
   image="/logo/UGC-HEADER.png"
 >
   <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-104px)] border-t border-border">
-      
+
       <!-- Left: Form (Brand Beige) -->
-      <div class="bg-background text-foreground p-8 lg:p-20 flex flex-col justify-center order-2 lg:order-1 relative z-10 border-r border-border">
-        <div class="max-w-xl mx-auto w-full">
+      <div class="relative bg-background text-foreground p-8 lg:p-20 flex flex-col justify-center order-2 lg:order-1 z-10 border-r border-border overflow-hidden">
+        <!-- Grid pattern overlay -->
+        <div class="absolute inset-0 pointer-events-none">
+          <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px); background-size: 60px 60px;"></div>
+        </div>
+
+        <!-- Gradient accent blob -->
+        <div class="absolute top-20 left-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-xl mx-auto w-full relative z-10">
           <span class="text-xs font-bold uppercase tracking-widest opacity-80 mb-4 block">Contact Us</span>
           <h1 class="text-5xl lg:text-7xl font-bold uppercase leading-none mb-12 font-heading">
             Building<br/><span class="text-accent italic">The Future</span>.
@@ -73,8 +83,9 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
             </div>
 
             <div id="form-status" class="hidden border px-4 py-3 text-sm font-medium" role="status" aria-live="polite"></div>
-            
-            <button type="submit" data-submit-button class="mt-8 bg-primary text-primary-foreground font-bold uppercase tracking-widest py-6 px-10 hover:bg-primary/90 transition-colors flex justify-between items-center group disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+
+            <div class="mt-8">
+              <button type="submit" data-submit-button class="w-full bg-primary text-primary-foreground font-bold uppercase tracking-widest py-6 px-10 hover:bg-primary/90 transition-colors flex justify-between items-center group disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
                 <span data-submit-label>Send Message</span>
                 <div class="flex items-center">
                   <svg data-submit-spinner class="hidden animate-spin h-5 w-5 text-current mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -83,40 +94,80 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                   </svg>
                   <svg data-submit-icon class="w-5 h-5 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </div>
-            </button>
+              </button>
+            </div>
           </form>
         </div>
+
+        <!-- Bottom decorative line -->
+        <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent pointer-events-none"></div>
       </div>
 
-      <!-- Right: Globe (Dark) -->
-      <div class="bg-primary relative min-h-[50vh] lg:min-h-screen order-1 lg:order-2 overflow-hidden flex items-center justify-center">
-          <div class="absolute inset-0 z-0">
+      <!-- Right: Globe (Light Background) -->
+      <div class="bg-background relative min-h-[50vh] lg:min-h-screen order-1 lg:order-2 overflow-hidden">
+          <!-- Grid pattern for right side -->
+          <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px); background-size: 60px 60px;"></div>
+          </div>
+
+          <!-- Globe -->
+          <div class="absolute inset-0 z-0 flex items-center justify-center">
                <Globe client:only="react" className="w-full h-full opacity-100" />
           </div>
-          
+
+          <!-- Google Maps Embed -->
+          <div class="absolute bottom-0 right-0 w-full h-64 lg:h-80 z-10">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.1234567890123!2d54.3773!3d24.4539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDI3JzE0LjAiTiA1NMKwMjInNDAuMCJF!5e0!3m2!1sen!2sae!4v1234567890123"
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="ULTRACTION Office Location - Abu Dhabi"
+              class="grayscale opacity-80 hover:opacity-100 transition-opacity duration-300"
+            ></iframe>
+          </div>
+
           <!-- Location Overlay -->
-          <div class="absolute bottom-12 left-12 z-20 text-white pointer-events-none p-8 bg-black/40 backdrop-blur-xl rounded-2xl border border-white/20 max-w-sm" aria-labelledby="contact-locations">
+          <div class="absolute top-12 left-12 z-20 text-primary pointer-events-none p-8 bg-background/80 backdrop-blur-xl rounded-2xl border border-primary/20 max-w-sm shadow-lg" aria-labelledby="contact-locations">
               <h2 id="contact-locations" class="sr-only">Contact Locations</h2>
-              <h3 class="text-3xl font-bold uppercase mb-6 font-heading tracking-tight">Main Headquarters</h3>
-              <div class="space-y-8 text-sm">
+              <h3 class="text-2xl font-bold uppercase mb-6 font-heading tracking-tight">Main Headquarters</h3>
+              <div class="space-y-6 text-sm">
                   <div class="group">
-                      <h4 class="font-bold uppercase tracking-widest text-[11px] text-white mb-3">Abu Dhabi, UAE</h4>
-                      <p class="text-white leading-relaxed font-semibold text-base">
+                      <h4 class="font-bold uppercase tracking-widest text-[11px] text-accent mb-2">Abu Dhabi, UAE</h4>
+                      <p class="text-primary leading-relaxed font-medium text-sm">
                         Office No. M05, Building No. C32, Shabiya 9, Mohamed Bin Zayed City
                       </p>
-                      <div class="mt-5 flex flex-col gap-2 text-[14px] text-white italic font-medium">
-                        <span class="flex items-center gap-2">T: <span class="not-italic font-bold">+971 2 650 1694</span></span>
-                        <span class="flex items-center gap-2">M: <span class="not-italic font-bold">+971 56 444 4045</span></span>
-                        <span class="mt-1 not-italic font-bold text-white">info@ultraction.ae</span>
+                      <div class="mt-4 flex flex-col gap-2 text-[13px] text-primary/80 font-medium">
+                        <span class="flex items-center gap-2">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                          <span class="font-semibold">+971 2 650 1694</span>
+                        </span>
+                        <span class="flex items-center gap-2">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                          <span class="font-semibold">+971 56 444 4045</span>
+                        </span>
+                        <span class="flex items-center gap-2 mt-1">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                          <span class="font-semibold text-accent">info@ultraction.ae</span>
+                        </span>
                       </div>
                   </div>
-                  
-                  <div class="pt-6 border-t border-white/20">
-                    <h4 class="font-bold uppercase tracking-widest text-[11px] text-white mb-3">KSA Branch</h4>
-                    <p class="text-white leading-relaxed font-semibold text-base mb-1">AL Bawady International Contracting LLC</p>
-                    <div class="flex flex-col gap-2 text-[14px] text-white italic font-medium">
-                        <span class="flex items-center gap-2">T: <span class="not-italic font-bold">+966 50 000 2281</span></span>
-                        <span class="not-italic font-bold text-white">www.albawady.sa</span>
+
+                  <div class="pt-4 border-t border-primary/20">
+                    <h4 class="font-bold uppercase tracking-widest text-[11px] text-accent mb-2">KSA Branch</h4>
+                    <p class="text-primary leading-relaxed font-medium text-sm mb-1">AL Bawady International Contracting LLC</p>
+                    <div class="flex flex-col gap-2 text-[13px] text-primary/80 font-medium">
+                        <span class="flex items-center gap-2">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                          <span class="font-semibold">+966 50 000 2281</span>
+                        </span>
+                        <span class="flex items-center gap-2">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                          <span class="font-semibold text-accent">www.albawady.sa</span>
+                        </span>
                     </div>
                   </div>
               </div>
