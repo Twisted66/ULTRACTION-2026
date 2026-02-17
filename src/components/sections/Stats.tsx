@@ -50,7 +50,6 @@ export default function Stats() {
     }, 50);
 
     // Clear interval after animation completes
-    const maxTarget = Math.max(...stats.map(s => parseInt(s.number) || 0));
     const timeout = setTimeout(() => {
       clearInterval(interval);
     }, 3000);

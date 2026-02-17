@@ -88,7 +88,7 @@ const isActive = (href: string) => {
   const toggle = document.getElementById('mobile-menu-toggle');
   const mobileNav = document.getElementById('mobile-nav');
 
-  function setMobileMenuState(isOpen) {
+  function setMobileMenuState(isOpen: boolean) {
     if (!toggle || !mobileNav) return;
     toggle.setAttribute('aria-expanded', String(isOpen));
     toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');

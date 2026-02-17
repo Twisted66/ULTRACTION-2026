@@ -4,59 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
+  <meta name="description" content="MCP Element Inspector App - View and analyze web element inspection results">
+  <meta name="theme-color" content="#ffffff">
   <title>Element Inspector App</title>
 </head>
 <body>
-  <main class="main">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <main id="main-content" class="main" role="main">
     <header>
       <h1>Element Inspector</h1>
-      <p id="status" class="notice">Connecting to host...</p>
+      <p id="status" class="notice" role="status" aria-live="polite" aria-atomic="true">Connecting to host...</p>
     </header>
 
-    <section class="card">
-      <h2>Summary</h2>
-      <p id="summary">No inspection loaded yet.</p>
+    <section class="card" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Summary</h2>
+      <p id="summary" aria-live="polite">No inspection loaded yet.</p>
     </section>
 
-    <section class="card grid">
-      <div>
-        <h3>Selector</h3>
-        <pre id="selector"></pre>
+    <section class="card grid" aria-labelledby="details-heading">
+      <h2 id="details-heading" class="visually-hidden">Element Details</h2>
+
+      <div class="detail-item">
+        <h3 id="selector-label">Selector</h3>
+        <pre id="selector" tabindex="0" aria-labelledby="selector-label" role="textbox" aria-readonly="true"></pre>
       </div>
-      <div>
-        <h3>Tag</h3>
-        <pre id="tag-name"></pre>
+
+      <div class="detail-item">
+        <h3 id="tag-name-label">Tag Name</h3>
+        <pre id="tag-name" tabindex="0" aria-labelledby="tag-name-label" role="textbox" aria-readonly="true"></pre>
       </div>
-      <div>
-        <h3>Page URL</h3>
-        <pre id="page-url"></pre>
+
+      <div class="detail-item">
+        <h3 id="page-url-label">Page URL</h3>
+        <pre id="page-url" tabindex="0" aria-labelledby="page-url-label" role="textbox" aria-readonly="true"></pre>
       </div>
-      <div>
-        <h3>Text Content</h3>
-        <pre id="text-content"></pre>
+
+      <div class="detail-item">
+        <h3 id="text-content-label">Text Content</h3>
+        <pre id="text-content" tabindex="0" aria-labelledby="text-content-label" role="textbox" aria-readonly="true"></pre>
       </div>
     </section>
 
-    <section class="card">
-      <h2>Bounding Box</h2>
-      <pre id="bounding-box"></pre>
+    <section class="card" aria-labelledby="bbox-heading">
+      <h2 id="bbox-heading">Bounding Box</h2>
+      <pre id="bounding-box" tabindex="0" aria-labelledby="bbox-heading" role="textbox" aria-readonly="true"></pre>
     </section>
 
-    <section class="card">
-      <h2>Attributes</h2>
-      <pre id="attributes"></pre>
+    <section class="card" aria-labelledby="attributes-heading">
+      <h2 id="attributes-heading">Attributes</h2>
+      <pre id="attributes" tabindex="0" aria-labelledby="attributes-heading" role="textbox" aria-readonly="true"></pre>
     </section>
 
-    <section class="card">
-      <h2>Computed Styles</h2>
-      <pre id="styles"></pre>
+    <section class="card" aria-labelledby="styles-heading">
+      <h2 id="styles-heading">Computed Styles</h2>
+      <pre id="styles" tabindex="0" aria-labelledby="styles-heading" role="textbox" aria-readonly="true"></pre>
     </section>
 
-    <section class="card">
-      <h2>Notes</h2>
-      <pre id="notes"></pre>
+    <section class="card" aria-labelledby="notes-heading">
+      <h2 id="notes-heading">Notes</h2>
+      <pre id="notes" tabindex="0" aria-labelledby="notes-heading" role="textbox" aria-readonly="true"></pre>
     </section>
   </main>
+
   <script type="module" src="/src/mcp-app.ts"></script>
 </body>
 </html>

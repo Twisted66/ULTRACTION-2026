@@ -31,7 +31,7 @@ const {
   class: additionalClass = '',
 } = Astro.props;
 
-const id = `magnetic-${Math.random().toString(36).substr(2, 9)}`;
+const id = `magnetic-${Math.random().toString(36).slice(2, 11)}`;
 
 // Size classes
 const sizeClasses = {
@@ -124,7 +124,7 @@ const variantClasses = {
   }
 </style>
 
-<script define:vars={{ id, strength }}>
+<script is:inline define:vars={{ id }}>
   // Magnetic Button Effect
   class MagneticButton {
     constructor(button) {

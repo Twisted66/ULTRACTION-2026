@@ -43,6 +43,24 @@ const attributesEl = document.getElementById("attributes") as HTMLElement;
 const stylesEl = document.getElementById("styles") as HTMLElement;
 const notesEl = document.getElementById("notes") as HTMLElement;
 
+/**
+ * Sets the empty state for pre elements with a visual indicator
+ */
+function setEmptyState(element: HTMLElement, message: string = "No data") {
+  element.textContent = "";
+  element.setAttribute("data-empty", "true");
+  element.setAttribute("data-empty-text", message);
+}
+
+/**
+ * Clears the empty state and sets content
+ */
+function setContent(element: HTMLElement, content: string) {
+  element.removeAttribute("data-empty");
+  element.removeAttribute("data-empty-text");
+  element.textContent = content;
+}
+
 function handleHostContextChanged(ctx: McpUiHostContext) {
   if (ctx.theme) {
     applyDocumentTheme(ctx.theme);
@@ -61,16 +79,30 @@ function handleHostContextChanged(ctx: McpUiHostContext) {
   }
 }
 
+/**
+ * Formats a bounding box object for display
+ */
+function formatBoundingBox(bbox: { x: number; y: number; width: number; height: number }): string {
+  return `Position: x=${bbox.x}, y=${bbox.y}
+Size: width=${bbox.width}px, height=${bbox.height}px`;
+}
+
+/**
+ * Renders a map/object as formatted key-value pairs
+ */
 function renderMap(target: HTMLElement, map: Record<string, string>) {
   const keys = Object.keys(map);
   if (keys.length === 0) {
-    target.textContent = "None";
+    setEmptyState(target, "None");
     return;
   }
   const lines = keys.sort().map((key) => `${key}: ${map[key]}`);
-  target.textContent = lines.join("\n");
+  setContent(target, lines.join("\n"));
 }
 
+/**
+ * Main render function for inspection results
+ */
 function renderInspection(result: CallToolResult) {
   const payload = extractInspection(result);
   if (!payload) {
@@ -78,16 +110,51 @@ function renderInspection(result: CallToolResult) {
     return;
   }
   const { inspection, summary } = payload;
-  statusEl.textContent = "Inspection loaded.";
-  summaryEl.textContent = summary;
-  selectorEl.textContent = inspection.selector;
-  pageUrlEl.textContent = inspection.pageUrl;
-  tagNameEl.textContent = inspection.tagName;
-  textContentEl.textContent = inspection.textContent?.trim() || "(empty)";
-  boundingBoxEl.textContent = JSON.stringify(inspection.boundingBox, null, 2);
+
+  // Update status with success message
+  statusEl.textContent = "Inspection loaded successfully.";
+  statusEl.style.background = "var(--color-background-info)";
+
+  // Populate all fields
+  setContent(summaryEl, summary);
+  setContent(selectorEl, inspection.selector);
+  setContent(pageUrlEl, inspection.pageUrl);
+  setContent(tagNameEl, inspection.tagName);
+
+  // Handle text content - may be empty
+  if (inspection.textContent?.trim()) {
+    setContent(textContentEl, inspection.textContent.trim());
+  } else {
+    setEmptyState(textContentEl, "(empty element)");
+  }
+
+  // Format bounding box for better readability
+  setContent(boundingBoxEl, formatBoundingBox(inspection.boundingBox));
+
+  // Render attributes and styles
   renderMap(attributesEl, inspection.attributes);
   renderMap(stylesEl, inspection.computedStyles);
-  notesEl.textContent = inspection.notes?.trim() || "(none)";
+
+  // Handle notes - may be empty
+  if (inspection.notes?.trim()) {
+    setContent(notesEl, inspection.notes.trim());
+  } else {
+    setEmptyState(notesEl, "(no notes)");
+  }
+}
+
+/**
+ * Initializes the app with empty states
+ */
+function initializeEmptyStates() {
+  setEmptyState(selectorEl, "No selector");
+  setEmptyState(pageUrlEl, "No URL");
+  setEmptyState(tagNameEl, "No tag");
+  setEmptyState(textContentEl, "No text content");
+  setEmptyState(boundingBoxEl, "No dimensions");
+  setEmptyState(attributesEl, "No attributes");
+  setEmptyState(stylesEl, "No styles");
+  setEmptyState(notesEl, "No notes");
 }
 
 const app = new App({ name: "Element Inspector App", version: "1.0.0" });
@@ -101,6 +168,7 @@ app.ontoolinput = (params) => {
     ? params.arguments.selector
     : "unknown selector";
   statusEl.textContent = `Receiving inspection input for ${selector}...`;
+  statusEl.style.background = "var(--color-background-info)";
 };
 
 app.ontoolresult = (result) => {
@@ -109,16 +177,34 @@ app.ontoolresult = (result) => {
 
 app.ontoolcancelled = (params) => {
   statusEl.textContent = `Tool call cancelled: ${params.reason ?? "unknown"}`;
+  statusEl.style.background = "var(--color-background-error)";
+  statusEl.style.color = "var(--color-text-error)";
 };
 
-app.onerror = console.error;
+app.onerror = (error) => {
+  console.error("Element Inspector App Error:", error);
+  statusEl.textContent = "An error occurred. Check console for details.";
+  statusEl.style.background = "var(--color-background-error)";
+  statusEl.style.color = "var(--color-text-error)";
+};
 
 app.onhostcontextchanged = handleHostContextChanged;
 
 app.connect().then(() => {
+  // Initialize with empty states
+  initializeEmptyStates();
+
   statusEl.textContent = "Connected. Run show-element-inspection to populate this view.";
+  statusEl.style.background = "var(--color-background-info)";
+  statusEl.style.color = "var(--color-text-info)";
+
   const ctx = app.getHostContext();
   if (ctx) {
     handleHostContextChanged(ctx);
   }
+}).catch((error) => {
+  console.error("Failed to connect to MCP host:", error);
+  statusEl.textContent = "Failed to connect to MCP host.";
+  statusEl.style.background = "var(--color-background-error)";
+  statusEl.style.color = "var(--color-text-error)";
 });

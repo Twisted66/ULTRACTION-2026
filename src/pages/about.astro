@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import LogoLoop from '../components/common/LogoLoop.astro';
 import CoreValues from '../components/about/CoreValues.astro';
@@ -31,14 +31,14 @@ const capabilityStages = [
     body: 'We continue to grow through repeat delivery, transparent collaboration, and strong partnerships with major contractors, developers, and consultants.',
   },
 ];
+
 ---
 
 <Layout title={title} description={description}>
-  <!-- Hero Section -->
   <section class="flex flex-col lg:grid lg:grid-cols-2 border-y border-black min-h-[75vh] lg:min-h-[85vh] bg-surface">
     <div class="lg:col-span-1 flex flex-col justify-start px-6 py-16 md:px-12 lg:p-24 border-r border-black relative h-full">
       <span class="text-xs uppercase tracking-[0.2em] text-black/60 mb-6 block">Company Profile</span>
-      <h1 class="text-4xl sm:text-5xl lg:text-7xl font-light font-heading leading-tight mb-8">
+      <h1 class="text-5xl lg:text-7xl font-light font-heading leading-tight mb-8">
         Building <br/> <span class="italic font-bold text-black">Infrastructure</span> <br/> With Purpose
       </h1>
       <div class="w-12 h-[1px] bg-black/20 mb-8"></div>
@@ -58,10 +58,276 @@ const capabilityStages = [
     </div>
   </section>
 
+  <!-- General Manager's Message Section - Enhanced with refined visual design -->
+  <section class="relative bg-surface text-primary overflow-hidden border-y border-primary/20">
+    {/* Background pattern */}
+    <div class="absolute inset-0 pointer-events-none">
+      {/* Grid pattern overlay */}
+      <div
+        class="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, currentColor 1px, transparent 1px),
+            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px'
+        }}
+      />
+      {/* Animated gradient accent */}
+      <div class="absolute top-1/4 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse-slow" />
+      {/* Secondary gradient orb */}
+      <div class="absolute bottom-1/4 left-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-pulse-slower" />
+      {/* Decorative corner accents */}
+      <div class="absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 border-accent/10" />
+      <div class="absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-accent/10" />
+    </div>
+
+    <div class="relative z-10 px-6 md:px-12 lg:px-24 py-20 md:py-28 lg:py-36">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center max-w-7xl mx-auto">
+
+        {/* Left Column - Quote and Message */}
+        <div class="lg:col-span-7 order-1 lg:order-1">
+          {/* Section label */}
+          <div class="flex items-center gap-4 mb-8 cto-animate-on-scroll">
+            <div class="w-16 h-[2px] bg-accent" />
+            <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">General Manager's Message</span>
+          </div>
+
+          {/* Main heading */}
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-light leading-tight mb-12 cto-animate-on-scroll cto-delay-100">
+            Building <span class="italic font-semibold text-accent">Legacy</span> Through
+            <br />
+            Excellence in Every
+            <br />
+            <span class="font-semibold">Structure We Create</span>
+          </h2>
+
+          {/* Quote block with enhanced styling */}
+          <blockquote class="relative mb-12 cto-animate-on-scroll cto-delay-200">
+            {/* Decorative quote mark */}
+            <span class="absolute -top-6 -left-2 text-7xl md:text-8xl text-accent/15 font-serif cto-quote-mark leading-none">"</span>
+
+            <div class="relative">
+              {/* Vertical accent line */}
+              <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-accent via-accent/50 to-transparent" />
+
+              <p class="text-lg md:text-xl lg:text-2xl font-heading italic leading-relaxed text-primary/95 pl-10 pr-4">
+                At ULTRACTION, construction is more than assembling structures. It is about creating spaces that serve communities, uphold safety, and stand as lasting proof of quality and innovation.
+              </p>
+            </div>
+          </blockquote>
+
+          {/* Signature section with enhanced styling */}
+          <div class="relative pl-10 cto-animate-on-scroll cto-delay-300">
+            {/* Decorative line */}
+            <div class="absolute left-0 top-1/2 w-16 h-[1px] bg-accent/30" />
+
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+              <div>
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-[2px] bg-accent" />
+                  <span class="text-xs font-bold uppercase tracking-[0.2em] text-primary/60">Message from</span>
+                </div>
+                <p class="text-lg md:text-xl font-heading font-semibold text-primary">Engr. Wael Mahmah</p>
+                <p class="text-sm uppercase tracking-[0.25em] text-primary/50 mt-2">General Manager</p>
+              </div>
+
+              {/* Decorative element */}
+              <div class="hidden sm:flex items-center gap-2">
+                <div class="w-2 h-2 rotate-45 bg-accent/30" />
+                <div class="w-2 h-2 rotate-45 bg-accent/50" />
+                <div class="w-2 h-2 rotate-45 bg-accent/70" />
+                <div class="w-2 h-2 rotate-45 bg-accent" />
+                <div class="w-2 h-2 rotate-45 bg-accent/70" />
+                <div class="w-2 h-2 rotate-45 bg-accent/50" />
+                <div class="w-2 h-2 rotate-45 bg-accent/30" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column - Visual Elements */}
+        <div class="lg:col-span-5 order-2 lg:order-2 cto-animate-left cto-delay-200">
+          <div class="relative">
+            {/* Quote marks decoration */}
+            <div class="absolute -top-6 -right-4 text-[120px] md:text-[160px] font-heading font-light text-accent/10 leading-none select-none cto-quote-mark">
+              "
+            </div>
+
+            {/* Image with decorative frame */}
+            <div class="relative aspect-[4/5] overflow-hidden border border-primary/10 shadow-2xl">
+              <img
+                src="/images/projects/naseem-albar-bridge/photo_038.jpeg"
+                alt="ULTRACTION construction excellence"
+                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105"
+                loading="lazy"
+              />
+              {/* Overlay gradient */}
+              <div class="absolute inset-0 bg-gradient-to-t from-primary/50 via-primary/10 to-transparent" />
+
+              {/* Floating stats card */}
+              <div class="cto-stats-card absolute bottom-6 left-6 right-6 bg-background/95 backdrop-blur-md p-6 border-l-2 border-accent shadow-lg">
+                <div class="flex items-center gap-4">
+                  <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-xs uppercase tracking-widest text-primary/60 mb-1">Projects Delivered</p>
+                    <p class="text-2xl font-heading font-bold text-primary">100+</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Corner accents on image */}
+              <div class="absolute top-3 left-3 w-8 h-8 border-l-2 border-t-2 border-accent/30" />
+              <div class="absolute bottom-3 right-3 w-8 h-8 border-r-2 border-b-2 border-accent/30" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom decorative line */}
+    <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent" />
+  </section>
+
+  <style>
+    /* CTO Section Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Apply animations on scroll (using Intersection Observer) */
+    .cto-animate-on-scroll {
+      opacity: 0;
+      animation: none;
+    }
+
+    .cto-animate-on-scroll.is-visible {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .cto-animate-left.is-visible {
+      animation: fadeInLeft 0.8s ease-out forwards;
+    }
+
+    /* Staggered animation delays */
+    .cto-delay-100 { animation-delay: 100ms; }
+    .cto-delay-200 { animation-delay: 200ms; }
+    .cto-delay-300 { animation-delay: 300ms; }
+    .cto-delay-400 { animation-delay: 400ms; }
+
+    /* Stats card hover effect */
+    .cto-stats-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cto-stats-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(44, 24, 16, 0.15);
+    }
+
+    /* Image container hover effect */
+    .cto-image-container {
+      transition: transform 0.7s ease, filter 0.7s ease;
+    }
+
+    .cto-image-container:hover {
+      transform: scale(1.02);
+    }
+
+    /* Quote mark animation */
+    .cto-quote-mark {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .cto-quote-mark:nth-child(2) {
+      animation-delay: 3s;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      .cto-animate-on-scroll.is-visible,
+      .cto-animate-left.is-visible,
+      .cto-stats-card {
+        animation: none;
+        transition: none;
+        opacity: 1;
+        transform: none;
+      }
+
+      .cto-quote-mark {
+        animation: none;
+      }
+    }
+  </style>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements when DOM is ready
+    document.addEventListener('astro:page-load', () => {
+      const animatedElements = document.querySelectorAll('.cto-animate-on-scroll, .cto-animate-left');
+      animatedElements.forEach(el => observer.observe(el));
+    });
+
+    // Also run on initial page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        const animatedElements = document.querySelectorAll('.cto-animate-on-scroll, .cto-animate-left');
+        animatedElements.forEach(el => observer.observe(el));
+      });
+    } else {
+      const animatedElements = document.querySelectorAll('.cto-animate-on-scroll, .cto-animate-left');
+      animatedElements.forEach(el => observer.observe(el));
+    }
+  </script>
+
   <!-- Enhanced "How We Deliver" Section -->
   <HowWeDeliver client:visible />
 
-  <!-- Client Partners -->
   <ClientPartners client:visible />
 
   <!-- Enhanced Mission & Vision Section -->
@@ -119,27 +385,16 @@ const capabilityStages = [
           >
             <path
               d="M14 5l7 7m0 0l-7 7m7-7H3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width={2}
             />
           </svg>
         </a>
       </div>
     </div>
 
+    {/* Bottom decorative line */}
     <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent"></div>
   </section>
 </Layout>
-
-<style>
-  /* Animation for CTA button */
-  @keyframes pulse-slow {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.1); }
-  }
-
-  .animate-pulse-slow {
-    animation: pulse-slow 8s ease-in-out infinite;
-  }
-</style>

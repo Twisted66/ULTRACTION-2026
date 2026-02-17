@@ -24,11 +24,6 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   const heightClass = heightClasses[height] || heightClasses.med;
 
-  // Placeholder gradient if no image provided
-  const backgroundStyle = image
-    ? { backgroundImage: `url(${image})` }
-    : {};
-
   const placeholderContent = image ? null : (
     <div className="w-full h-full bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center">
       <svg className="w-16 h-16 text-primary/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -17,7 +17,7 @@ const boundingBoxSchema = z.object({
 });
 
 const inspectionInputSchema = z.object({
-  pageUrl: z.string().url(),
+  pageUrl: z.url(),
   selector: z.string().min(1),
   tagName: z.string().min(1),
   textContent: z.string().optional(),

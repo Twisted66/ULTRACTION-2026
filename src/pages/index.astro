@@ -4,12 +4,11 @@
 
 import Layout from '../layouts/Layout.astro';
 import VideoPlayer from '../components/common/VideoPlayer.astro';
-import TextTypeAnimation from '../components/animations/TextTypeAnimation';
-import HomeStatsAnimation from '../components/animations/HomeStatsAnimation';
 import InfiniteScroll from '../components/common/InfiniteScroll.astro';
-import LogoLoop from '../components/common/LogoLoop.astro';
 import SectionBackground from '../components/common/SectionBackground';
 import ClientPartners from '../components/about/ClientPartners';
+import ServicesCarousel from '../components/sections/ServicesCarousel';
+import { services } from '../data/services';
 
 const galleryImages = [
   { src: "/images/projects/naseem-albar-bridge/photo_026.jpeg", alt: "Naseem Al Bar Bridge" },
@@ -61,12 +60,7 @@ const structuredData = {
           Expert<br/>
           Construction<br/>
           Services For<br/>
-          <span class="text-white">
-            <TextTypeAnimation
-              client:load
-              words="Every Project,Your Vision,Dream Spaces,Modern Living"
-            />
-          </span>
+          <span class="text-white">Every Project</span>
         </h1>
         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
           <a href="/contact" class="bg-white/10 backdrop-blur-sm hover:bg-accent border border-white/30 hover:border-accent text-white py-3 sm:py-4 px-6 sm:px-10 text-center font-medium transition-all motion-base uppercase tracking-wide text-xs sm:text-sm inline-block min-h-[44px] flex items-center">
@@ -113,7 +107,7 @@ const structuredData = {
       We seek collaborative, consultative relationships with clients and stakeholders to create common goals, moving standards forward in every phase of programme delivery.
     </div>
     <div class="p-8 text-sm leading-relaxed">
-      We do this through our quality systems, our market-leading health and safety approaches and the positive impacts we create through our projects — on society, local communities and the environment.
+      We do this through our quality systems, our market-leading health and safety approaches and the positive impacts we create through our projects &mdash; on society, local communities and the environment.
     </div>
   </section>
 
@@ -190,75 +184,9 @@ const structuredData = {
     </div>
   </section>
 
-  <!-- Services Overview - 4 Columns -->
+  <!-- Services Overview - Carousel -->
   <section id="services" class="border-t border-black dark:border-black bg-surface">
-    <div class="flex flex-col md:flex-row justify-between items-end px-8 lg:px-16 py-20 border-b border-black">
-      <div>
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-16 h-[2px] bg-accent"></div>
-          <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">Our Expertise</span>
-        </div>
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold uppercase font-heading leading-tight">
-          Comprehensive<br/>Solutions
-        </h2>
-      </div>
-      <a href="/services" class="hidden md:flex items-center gap-2 group text-sm uppercase tracking-widest mt-8 md:mt-0">
-        <span>View All Services</span>
-        <div class="w-8 h-8 rounded-full border border-black dark:border-black flex items-center justify-center group-hover:bg-primary group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-primary transition-all">
-          <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-        </div>
-      </a>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-b border-black">
-        <!-- Service 1: Infrastructure -->
-        <a href="/services#infrastructure" class="group block p-6 sm:p-8 border-b md:border-b-0 md:border-r border-black hover:bg-black/5 transition-colors">
-          <div class="aspect-[3/4] overflow-hidden relative mb-6 border border-black/10">
-            <img src="/images/projects/naseem-albar-bridge/photo_038.jpeg" alt="Infrastructure Construction" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" />
-          </div>
-          <h3 class="text-xl font-bold uppercase mb-2 group-hover:text-accent transition-colors">Infrastructure</h3>
-          <p class="text-sm leading-relaxed">Bridges, roads, and utility networks that connect communities and drive progress.</p>
-        </a>
-
-        <!-- Service 2: Commercial -->
-        <a href="/services#commercial" class="group block p-6 sm:p-8 border-b md:border-b-0 lg:border-r border-black hover:bg-black/5 transition-colors">
-          <div class="aspect-[3/4] overflow-hidden relative mb-6 border border-black/10">
-            <img src="/images/projects/commercial/p108_img01_xref6681.jpeg" alt="Commercial Construction" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" />
-          </div>
-          <h3 class="text-xl font-bold uppercase mb-2 group-hover:text-accent transition-colors">Commercial</h3>
-          <p class="text-sm leading-relaxed">High-rise towers, offices, and retail spaces designed for modern business needs.</p>
-        </a>
-
-        <!-- Service 3: Residential -->
-        <a href="/services#residential" class="group block p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-black hover:bg-black/5 transition-colors">
-          <div class="aspect-[3/4] overflow-hidden relative mb-6 border border-black/10">
-            <img src="/images/projects/residential/p105_img01_xref6661.jpeg" alt="Residential Construction" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" />
-          </div>
-          <h3 class="text-xl font-bold uppercase mb-2 group-hover:text-accent transition-colors">Residential</h3>
-          <p class="text-sm leading-relaxed">Luxury villas and residential communities built with precision and care.</p>
-        </a>
-
-        <!-- Service 4: Industrial -->
-        <a href="/services#industrial" class="group block p-6 sm:p-8 hover:bg-black/5 transition-colors">
-          <div class="aspect-[3/4] overflow-hidden relative mb-6 border border-black/10">
-            <img src="/images/projects/industrial/p087_img01_xref6534.jpeg" alt="Industrial Construction" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" />
-          </div>
-          <h3 class="text-xl font-bold uppercase mb-2 group-hover:text-accent transition-colors">Industrial</h3>
-          <p class="text-sm leading-relaxed">Warehouses, factories, and specialized facilities engineered for efficiency.</p>
-        </a>
-      </div>
-      
-      <div class="mt-12 md:hidden">
-        <a href="/services" class="flex items-center justify-center gap-3 text-sm uppercase tracking-widest border border-primary/20 py-4 hover:bg-primary hover:text-white transition-colors group">
-          <span>View All Services</span>
-          <div class="w-7 h-7 rounded-full border border-current/40 flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-all motion-base">
-            <svg class="h-3 w-3 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
-            </svg>
-          </div>
-        </a>
-      </div>
-    </div>
+    <ServicesCarousel client:visible services={services} />
   </section>
 
   <!-- Featured Projects - Carousel Snippet -->
@@ -310,7 +238,7 @@ const structuredData = {
             </div>
           </a>
 
-          <a href="/projects/utility-structure" class="relative group h-[250px] sm:h-[400px] lg:h-[500px] overflow-hidden block">
+          <a href="/projects/utility-bridge" class="relative group h-[250px] sm:h-[400px] lg:h-[500px] overflow-hidden block">
             <img src="/images/projects/utility-structure/photo_005.jpeg" alt="Utility Structure" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity motion-base"></div>
             <div class="absolute bottom-0 left-0 p-6 sm:p-8 w-full translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all motion-medium text-white">
@@ -322,8 +250,6 @@ const structuredData = {
             </div>
           </a>
     </div>
-  </SectionBackground>
-
   <!-- Gallery Section - Infinite Scroll Moved Here -->
   <InfiniteScroll images={galleryImages} />
 
@@ -440,9 +366,10 @@ const structuredData = {
   </SectionBackground>
 
   <!-- Client Partners Section -->
-  <ClientPartners client:visible />
+  <ClientPartners />
 </Layout>
 
 <!-- Page-specific structured data -->
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
+
 

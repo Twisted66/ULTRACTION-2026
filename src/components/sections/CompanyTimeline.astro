@@ -1,0 +1,426 @@
+---
+// ULTRACTION Company Timeline Section
+// Vertical timeline showcasing company milestones and history
+
+interface TimelineMilestone {
+  year: string;
+  title: string;
+  description: string;
+  icon?: string;
+  category: 'founding' | 'expansion' | 'project' | 'certification' | 'award';
+}
+
+const milestones: TimelineMilestone[] = [
+  {
+    year: '2009',
+    title: 'Company Founded',
+    description: 'ULTRACTION General Contracting LLC established in Abu Dhabi, UAE, with a vision to deliver exceptional civil construction and concrete structure works across the region.',
+    category: 'founding',
+  },
+  {
+    year: '2011',
+    title: 'First Major Infrastructure Project',
+    description: 'Successfully completed our first large-scale infrastructure contract, establishing our reputation for quality concrete works and timely delivery.',
+    category: 'project',
+  },
+  {
+    year: '2014',
+    title: 'ISO Certification Achieved',
+    description: 'Earned ISO 9001:2015 certification for quality management systems, demonstrating commitment to international standards and continuous improvement.',
+    category: 'certification',
+  },
+  {
+    year: '2016',
+    title: 'Regional Expansion',
+    description: 'Expanded operations across the UAE with new project divisions in Dubai and Northern Emirates, growing our team and capabilities.',
+    category: 'expansion',
+  },
+  {
+    year: '2018',
+    title: 'Marine Construction Division',
+    description: 'Launched specialized marine construction division to handle coastal infrastructure, waterfront developments, and marine concrete structures.',
+    category: 'expansion',
+  },
+  {
+    year: '2020',
+    title: 'Infrastructure Excellence Award',
+    description: 'Recognized for excellence in infrastructure delivery, highlighting our commitment to safety, quality, and sustainable construction practices.',
+    category: 'award',
+  },
+  {
+    year: '2022',
+    title: 'Heritage Restoration Projects',
+    description: 'Completed prestigious heritage restoration projects, combining modern construction techniques with respect for traditional architecture and cultural significance.',
+    category: 'project',
+  },
+  {
+    year: '2024',
+    title: '15+ Years of Excellence',
+    description: 'Celebrating over 15 years of successful project delivery across civil, marine, residential, commercial, and industrial construction sectors throughout the UAE.',
+    category: 'award',
+  },
+];
+---
+
+<section class="company-timeline relative bg-surface text-primary overflow-hidden border-y border-primary/20">
+  <!-- Background pattern -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div
+      class="absolute inset-0 opacity-[0.03]"
+      style={{
+        backgroundImage: `
+          linear-gradient(to right, currentColor 1px, transparent 1px),
+          linear-gradient(to bottom, currentColor 1px, transparent 1px)
+        `,
+        backgroundSize: '60px 60px'
+      }}
+    ></div>
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse-slow"></div>
+  </div>
+
+  <div class="relative z-10 px-6 md:px-12 lg:px-24 py-16 md:py-24">
+    <!-- Section Header -->
+    <div class="text-center mb-16 md:mb-20">
+      <span class="text-xs font-bold uppercase tracking-[0.3em] text-accent block mb-4">
+        Our Journey
+      </span>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-semibold text-primary mb-6">
+        Building <span class="italic font-light text-primary/70">Excellence</span> Since 2009
+      </h2>
+      <div class="flex items-center justify-center gap-4">
+        <div class="w-12 h-[2px] bg-accent"></div>
+        <div class="w-2 h-2 bg-accent rotate-45"></div>
+        <div class="w-12 h-[2px] bg-accent"></div>
+      </div>
+      <p class="mt-6 text-base text-primary/70 max-w-2xl mx-auto font-light leading-relaxed">
+        From our founding to becoming a trusted name in UAE construction, discover the milestones that define our commitment to quality.
+      </p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline-container max-w-5xl mx-auto">
+      <!-- Vertical Line -->
+      <div class="timeline-line" aria-hidden="true"></div>
+
+      <!-- Milestones -->
+      {milestones.map((milestone, index) => (
+        <div
+          class={`timeline-milestone ${index % 2 === 0 ? 'milestone-left' : 'milestone-right'}`}
+          style={`--delay: ${index * 150}ms`}
+        >
+          <!-- Year Marker -->
+          <div class="milestone-year" aria-hidden="true">
+            <span class="year-text">{milestone.year}</span>
+            <div class="year-dot"></div>
+          </div>
+
+          <!-- Content Card -->
+          <article class="milestone-card surface-card">
+            <!-- Category Badge -->
+            <div class="milestone-badge">
+              <span class="badge-dot"></span>
+              <span class="badge-text">{milestone.category}</span>
+            </div>
+
+            <!-- Content -->
+            <h3 class="milestone-title">{milestone.title}</h3>
+            <p class="milestone-description">{milestone.description}</p>
+
+            <!-- Decorative corner accents -->
+            <div class="card-corner corner-tl"></div>
+            <div class="card-corner corner-br"></div>
+          </article>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-16 md:mt-20">
+      <a
+        href="/projects"
+        class="group inline-flex items-center gap-3 px-8 py-4 bg-primary hover:bg-accent text-white transition-all duration-300 font-medium"
+      >
+        <span class="text-xs font-bold uppercase tracking-[0.2em]">
+          View Our Projects
+        </span>
+        <svg
+          class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M14 5l7 7m0 0l-7 7m7-7H3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width={2}
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Bottom decorative line -->
+  <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+</section>
+
+<style>
+  .company-timeline {
+    --timeline-primary: 0 0% 8%;
+    --timeline-accent: 2 64% 21%;
+    --timeline-bg: 33 55% 83%;
+    --timeline-surface: 33 52% 93%;
+    --timeline-border: 0 0% 15%;
+  }
+
+  /* Timeline Container */
+  .timeline-container {
+    position: relative;
+    padding: 2rem 0;
+  }
+
+  /* Vertical Line */
+  .timeline-line {
+    position: absolute;
+    left: 2rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--timeline-accent)) 0%,
+      hsl(var(--timeline-accent) / 0.3) 50%,
+      hsl(var(--timeline-accent)) 100%
+    );
+  }
+
+  @media (min-width: 768px) {
+    .timeline-line {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Milestone Wrapper */
+  .timeline-milestone {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: timelineFadeIn 0.6s ease-out forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+
+  @keyframes timelineFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .timeline-milestone {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 3rem;
+    }
+
+    .milestone-left {
+      flex-direction: row;
+    }
+
+    .milestone-left .milestone-year {
+      order: 1;
+      text-align: right;
+      align-items: flex-end;
+    }
+
+    .milestone-left .milestone-card {
+      order: 2;
+    }
+
+    .milestone-right {
+      flex-direction: row-reverse;
+    }
+
+    .milestone-right .milestone-year {
+      order: 2;
+      text-align: left;
+      align-items: flex-start;
+    }
+
+    .milestone-right .milestone-card {
+      order: 1;
+    }
+  }
+
+  /* Year Marker */
+  .milestone-year {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    width: 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .year-text {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: hsl(var(--timeline-accent));
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+
+  .year-dot {
+    width: 1rem;
+    height: 1rem;
+    background: hsl(var(--timeline-bg));
+    border: 3px solid hsl(var(--timeline-accent));
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .timeline-milestone:hover .year-dot {
+    background: hsl(var(--timeline-accent));
+    transform: scale(1.3);
+    box-shadow: 0 0 0 4px hsl(var(--timeline-accent) / 0.2);
+  }
+
+  /* Milestone Card */
+  .milestone-card {
+    position: relative;
+    flex: 1;
+    max-width: 28rem;
+    background: hsl(var(--timeline-surface));
+    border: 1px solid hsl(var(--timeline-border));
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  @media (min-width: 768px) {
+    .milestone-card {
+      padding: 2rem;
+    }
+  }
+
+  .timeline-milestone:hover .milestone-card {
+    border-color: hsl(var(--timeline-accent));
+    box-shadow: 0 8px 24px rgba(44, 24, 16, 0.12);
+    transform: translateY(-4px);
+  }
+
+  /* Category Badge */
+  .milestone-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.35rem 0.75rem;
+    background: hsl(var(--timeline-accent) / 0.1);
+    border: 1px solid hsl(var(--timeline-accent) / 0.3);
+    border-radius: var(--radius);
+  }
+
+  .badge-dot {
+    width: 0.375rem;
+    height: 0.375rem;
+    background: hsl(var(--timeline-accent));
+    border-radius: 50%;
+  }
+
+  .badge-text {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: hsl(var(--timeline-accent));
+  }
+
+  /* Card Content */
+  .milestone-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: hsl(var(--timeline-primary));
+    margin: 0 0 0.75rem 0;
+    letter-spacing: 0.02em;
+  }
+
+  .milestone-description {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: hsl(var(--timeline-primary) / 0.75);
+    margin: 0;
+  }
+
+  /* Corner Accents */
+  .card-corner {
+    position: absolute;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-color: hsl(var(--timeline-accent));
+    border-style: solid;
+    border-width: 0;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+  }
+
+  .timeline-milestone:hover .card-corner {
+    opacity: 0.6;
+  }
+
+  .corner-tl {
+    top: 0;
+    left: 0;
+    border-top-width: 2px;
+    border-left-width: 2px;
+  }
+
+  .corner-br {
+    bottom: 0;
+    right: 0;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .timeline-milestone {
+      animation: none;
+      opacity: 1;
+    }
+
+    .milestone-card,
+    .year-dot {
+      transition: none;
+    }
+
+    .timeline-milestone:hover .milestone-card {
+      transform: none;
+    }
+  }
+
+  /* Connect mobile cards to line */
+  @media (max-width: 767px) {
+    .timeline-milestone {
+      padding-left: 5rem;
+    }
+
+    .milestone-year {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+</style>
