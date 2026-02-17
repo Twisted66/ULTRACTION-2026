@@ -1,24 +1,114 @@
 <div id="element-capture-widget" class="ecw" data-ecw-root>
-  <button class="ecw-brand" type="button" title="Element Capture">
-    <span>U</span>
+  <button class="ecw-brand" type="button" title="Element Capture Tool" aria-label="Element Capture Tool">
+    <svg class="ecw-icon ecw-brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M9 5l1.6-2h2.8L15 5h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3zm3 11.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4zm0-1.8a2.4 2.4 0 1 1 0-4.8 2.4 2.4 0 0 1 0 4.8z" />
+    </svg>
   </button>
   <button id="ecw-toggle" class="ecw-btn" type="button" title="Toggle Capture">
-    <span class="material-symbols-outlined">arrow_selector_tool</span>
+    <svg class="ecw-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M5 3l6.8 16 2.1-5.2L19 11.7 5 3zm9.6 9.6 1.8 4.4 2-2-3.8-2.4z" />
+    </svg>
   </button>
   <button id="ecw-copy" class="ecw-btn" type="button" title="Copy Last Capture">
-    <span class="material-symbols-outlined">content_copy</span>
+    <svg class="ecw-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z" />
+    </svg>
   </button>
   <button id="ecw-settings" class="ecw-btn" type="button" title="Settings">
-    <span class="material-symbols-outlined">settings</span>
+    <svg class="ecw-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M19.4 13a7.8 7.8 0 0 0 .1-1 7.8 7.8 0 0 0-.1-1l2.1-1.6a.5.5 0 0 0 .1-.7l-2-3.5a.5.5 0 0 0-.6-.2l-2.5 1a8.2 8.2 0 0 0-1.7-1L14.4 2a.5.5 0 0 0-.5-.4h-4a.5.5 0 0 0-.5.4L9 5a8.2 8.2 0 0 0-1.7 1l-2.5-1a.5.5 0 0 0-.6.2l-2 3.5a.5.5 0 0 0 .1.7L4.4 11a7.8 7.8 0 0 0-.1 1 7.8 7.8 0 0 0 .1 1l-2.1 1.6a.5.5 0 0 0-.1.7l2 3.5a.5.5 0 0 0 .6.2l2.5-1a8.2 8.2 0 0 0 1.7 1l.4 3a.5.5 0 0 0 .5.4h4a.5.5 0 0 0 .5-.4l.4-3a8.2 8.2 0 0 0 1.7-1l2.5 1a.5.5 0 0 0 .6-.2l2-3.5a.5.5 0 0 0-.1-.7L19.4 13zM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5z" />
+    </svg>
   </button>
 </div>
 
 <div id="ecw-panel" class="ecw-panel" hidden data-ecw-root>
-  <h3>Element Capture</h3>
+  <div class="ecw-panel-top">
+    <h3>Element Capture</h3>
+    <div class="ecw-panel-controls">
+      <button id="ecw-panel-minimize" type="button" aria-expanded="true" title="Minimize panel">Minimize</button>
+    </div>
+  </div>
+  <div id="ecw-panel-body" class="ecw-panel-body">
   <p class="ecw-hint">Click an element, review payload below, then copy into chat or send.</p>
+  <label>
+    Captured element box (copy/edit allowed)
+    <textarea id="ecw-element-box" rows="5" placeholder="Captured element details will appear here."></textarea>
+  </label>
+  <div class="ecw-capture-tools">
+    <button id="ecw-copy-element-box" type="button">Copy Element Box</button>
+    <button id="ecw-capture-shot" type="button">Screenshot Element</button>
+    <a id="ecw-shot-download" href="#" download="element-capture.png" hidden>Download Screenshot</a>
+  </div>
+  <img id="ecw-shot-preview" alt="Captured element screenshot preview" hidden />
   <label>
     Webhook URL (optional)
     <input id="ecw-webhook" type="url" placeholder="http://localhost:3001/capture" />
+  </label>
+  <label>
+    Chat Target ID (route key)
+    <input id="ecw-target-id" type="text" placeholder="e.g. codex-chat-a" />
+  </label>
+  <label>
+    Agent Profile
+    <select id="ecw-agent-profile">
+      <option value="generic">Generic CLI Agent</option>
+      <option value="codex">Codex CLI</option>
+      <option value="claude">Claude Code</option>
+      <option value="gemini">Gemini CLI</option>
+      <option value="antigravity">Antigravity</option>
+    </select>
+  </label>
+  <label>
+    Shortcut Modifier
+    <select id="ecw-shortcut-modifier">
+      <option value="alt+shift">Alt+Shift</option>
+      <option value="ctrl+shift">Ctrl+Shift</option>
+      <option value="alt">Alt</option>
+      <option value="ctrl">Ctrl</option>
+      <option value="none">None</option>
+    </select>
+  </label>
+  <div class="ecw-shortcut-grid" aria-label="Shortcut customization">
+    <p class="ecw-shortcut-grid-title">Shortcut Customization</p>
+    <div class="ecw-shortcut-grid-head">
+      <span>Use Case</span>
+      <span>Current Command</span>
+      <span>New Customization</span>
+    </div>
+    <div class="ecw-shortcut-row">
+      <span>Toggle Capture</span>
+      <code id="ecw-current-toggle">Alt+Shift+C</code>
+      <input id="ecw-shortcut-toggle" type="text" value="c" maxlength="12" placeholder="c" />
+    </div>
+    <div class="ecw-shortcut-row">
+      <span>Copy Last Capture</span>
+      <code id="ecw-current-copy">Alt+Shift+Y</code>
+      <input id="ecw-shortcut-copy" type="text" value="y" maxlength="12" placeholder="y" />
+    </div>
+    <div class="ecw-shortcut-row">
+      <span>Open Settings</span>
+      <code id="ecw-current-settings">Alt+Shift+S</code>
+      <input id="ecw-shortcut-settings" type="text" value="s" maxlength="12" placeholder="s" />
+    </div>
+    <div class="ecw-shortcut-row">
+      <span>Copy for Chat</span>
+      <code id="ecw-current-chat">Alt+Shift+H</code>
+      <input id="ecw-shortcut-chat" type="text" value="h" maxlength="12" placeholder="h" />
+    </div>
+    <div class="ecw-shortcut-row">
+      <span>Copy Fetch Link</span>
+      <code id="ecw-current-fetch">Alt+Shift+F</code>
+      <input id="ecw-shortcut-fetch" type="text" value="f" maxlength="12" placeholder="f" />
+    </div>
+    <div class="ecw-shortcut-row">
+      <span>Send to Target</span>
+      <code id="ecw-current-send">Alt+Shift+Enter</code>
+      <input id="ecw-shortcut-send" type="text" value="enter" maxlength="12" placeholder="enter" />
+    </div>
+  </div>
+  <label class="ecw-check">
+    <input id="ecw-middle-toggle" type="checkbox" checked />
+    Use middle mouse button (scroll click) to toggle capture
   </label>
   <label>
     Tracked CSS properties (comma-separated)
@@ -37,9 +127,16 @@
     <textarea id="ecw-preview" rows="10" readonly></textarea>
   </label>
   <div class="ecw-actions">
-    <button id="ecw-copy-chat" type="button">Copy for Chat</button>
-    <button id="ecw-send" type="button">Send Reviewed</button>
+    <button id="ecw-copy-chat" type="button" title="Copy for Chat">Copy for Chat</button>
+    <button id="ecw-copy-fetch" type="button" title="Copy Fetch Link">Copy Fetch Link</button>
+    <button id="ecw-send" type="button" title="Send to Target">Send to Target</button>
     <button id="ecw-download" type="button">Download JSON</button>
+  </div>
+  <div class="ecw-shortcuts" aria-label="Keyboard shortcuts">
+    <p class="ecw-shortcuts-title">Shortcuts (customizable)</p>
+    <p>Set modifier + keys above: toggle, copy, settings, chat, fetch, send.</p>
+    <p>Middle click can also toggle capture when enabled.</p>
+  </div>
   </div>
   <p id="ecw-status">Idle.</p>
 </div>
@@ -54,36 +151,160 @@
     const STORAGE_KEY = "ultraction.element.capture.config";
     const DEFAULT_CONFIG = {
       webhookUrl: "",
+      targetId: "",
+      agentProfile: "generic",
+      shortcutModifier: "alt+shift",
+      shortcutMap: {
+        toggle: "c",
+        copy: "y",
+        settings: "s",
+        chat: "h",
+        fetch: "f",
+        send: "enter",
+      },
+      middleClickToggle: true,
+      panelMinimized: false,
+      panelPosition: null,
       cssProps: "color,font-size,font-weight,display,position,z-index,margin,padding",
       compactMode: true,
     };
 
     const root = document.getElementById("element-capture-widget");
     const panel = document.getElementById("ecw-panel");
+    const panelBody = document.getElementById("ecw-panel-body");
+    const panelMinimizeBtn = document.getElementById("ecw-panel-minimize");
+    const panelTop = panel.querySelector(".ecw-panel-top");
     const highlight = document.getElementById("ecw-highlight");
     const toggleBtn = document.getElementById("ecw-toggle");
     const copyBtn = document.getElementById("ecw-copy");
     const settingsBtn = document.getElementById("ecw-settings");
     const webhookInput = document.getElementById("ecw-webhook");
+    const targetIdInput = document.getElementById("ecw-target-id");
+    const agentProfileInput = document.getElementById("ecw-agent-profile");
+    const shortcutModifierInput = document.getElementById("ecw-shortcut-modifier");
+    const shortcutToggleInput = document.getElementById("ecw-shortcut-toggle");
+    const shortcutCopyInput = document.getElementById("ecw-shortcut-copy");
+    const shortcutSettingsInput = document.getElementById("ecw-shortcut-settings");
+    const shortcutChatInput = document.getElementById("ecw-shortcut-chat");
+    const shortcutFetchInput = document.getElementById("ecw-shortcut-fetch");
+    const shortcutSendInput = document.getElementById("ecw-shortcut-send");
+    const currentToggleEl = document.getElementById("ecw-current-toggle");
+    const currentCopyEl = document.getElementById("ecw-current-copy");
+    const currentSettingsEl = document.getElementById("ecw-current-settings");
+    const currentChatEl = document.getElementById("ecw-current-chat");
+    const currentFetchEl = document.getElementById("ecw-current-fetch");
+    const currentSendEl = document.getElementById("ecw-current-send");
+    const middleToggleInput = document.getElementById("ecw-middle-toggle");
     const cssPropsInput = document.getElementById("ecw-css-props");
     const notesInput = document.getElementById("ecw-notes");
     const compactModeInput = document.getElementById("ecw-compact-mode");
+    const elementBoxInput = document.getElementById("ecw-element-box");
+    const copyElementBoxBtn = document.getElementById("ecw-copy-element-box");
+    const captureShotBtn = document.getElementById("ecw-capture-shot");
+    const shotPreviewEl = document.getElementById("ecw-shot-preview");
+    const shotDownloadEl = document.getElementById("ecw-shot-download");
     const previewEl = document.getElementById("ecw-preview");
     const copyChatBtn = document.getElementById("ecw-copy-chat");
+    const copyFetchBtn = document.getElementById("ecw-copy-fetch");
     const sendBtn = document.getElementById("ecw-send");
     const downloadBtn = document.getElementById("ecw-download");
     const statusEl = document.getElementById("ecw-status");
 
-    if (!root || !panel || !highlight || !toggleBtn || !copyBtn || !settingsBtn || !webhookInput || !cssPropsInput || !notesInput || !compactModeInput || !previewEl || !copyChatBtn || !sendBtn || !downloadBtn || !statusEl) {
+    if (!root || !panel || !panelBody || !panelMinimizeBtn || !panelTop || !highlight || !toggleBtn || !copyBtn || !settingsBtn || !webhookInput || !targetIdInput || !agentProfileInput || !shortcutModifierInput || !shortcutToggleInput || !shortcutCopyInput || !shortcutSettingsInput || !shortcutChatInput || !shortcutFetchInput || !shortcutSendInput || !middleToggleInput || !cssPropsInput || !notesInput || !compactModeInput || !elementBoxInput || !copyElementBoxBtn || !captureShotBtn || !shotPreviewEl || !shotDownloadEl || !previewEl || !copyChatBtn || !copyFetchBtn || !sendBtn || !downloadBtn || !statusEl || !currentToggleEl || !currentCopyEl || !currentSettingsEl || !currentChatEl || !currentFetchEl || !currentSendEl) {
       return;
+    }
+
+    function applyPanelMinimized(minimized) {
+      panel.classList.toggle("is-minimized", Boolean(minimized));
+      panelBody.hidden = Boolean(minimized);
+      panelMinimizeBtn.textContent = minimized ? "Expand" : "Minimize";
+      panelMinimizeBtn.setAttribute("aria-expanded", String(!minimized));
+    }
+
+    function parseShortcutMap(rawMap, rawString) {
+      const fallback = {
+        toggle: "c",
+        copy: "y",
+        settings: "s",
+        chat: "h",
+        fetch: "f",
+        send: "enter",
+      };
+      if (rawMap && typeof rawMap === "object") {
+        return {
+          toggle: String(rawMap.toggle || fallback.toggle).trim().toLowerCase(),
+          copy: String(rawMap.copy || fallback.copy).trim().toLowerCase(),
+          settings: String(rawMap.settings || fallback.settings).trim().toLowerCase(),
+          chat: String(rawMap.chat || fallback.chat).trim().toLowerCase(),
+          fetch: String(rawMap.fetch || fallback.fetch).trim().toLowerCase(),
+          send: String(rawMap.send || fallback.send).trim().toLowerCase(),
+        };
+      }
+      if (typeof rawString === "string" && rawString.trim()) {
+        const parts = rawString.split(",").map((v) => v.trim().toLowerCase()).filter(Boolean);
+        return {
+          toggle: parts[0] || fallback.toggle,
+          copy: parts[1] || fallback.copy,
+          settings: parts[2] || fallback.settings,
+          chat: parts[3] || fallback.chat,
+          fetch: parts[4] || fallback.fetch,
+          send: parts[5] || fallback.send,
+        };
+      }
+      return fallback;
+    }
+
+    function modifierLabel(modifier) {
+      if (modifier === "alt+shift") return "Alt+Shift";
+      if (modifier === "ctrl+shift") return "Ctrl+Shift";
+      if (modifier === "alt") return "Alt";
+      if (modifier === "ctrl") return "Ctrl";
+      return "(none)";
+    }
+
+    function formatShortcutLabel(modifier, key) {
+      const cleanKey = String(key || "").trim().toLowerCase() || "?";
+      const displayKey = cleanKey === " " ? "Space" : (cleanKey === "escape" ? "Esc" : cleanKey.length === 1 ? cleanKey.toUpperCase() : cleanKey[0].toUpperCase() + cleanKey.slice(1));
+      const mod = modifierLabel(modifier);
+      return mod === "(none)" ? displayKey : `${mod}+${displayKey}`;
+    }
+
+    function updateCurrentShortcutPreview(cfg) {
+      const map = parseShortcutMap(cfg.shortcutMap, cfg.shortcutKeys);
+      currentToggleEl.textContent = formatShortcutLabel(cfg.shortcutModifier, map.toggle);
+      currentCopyEl.textContent = formatShortcutLabel(cfg.shortcutModifier, map.copy);
+      currentSettingsEl.textContent = formatShortcutLabel(cfg.shortcutModifier, map.settings);
+      currentChatEl.textContent = formatShortcutLabel(cfg.shortcutModifier, map.chat);
+      currentFetchEl.textContent = formatShortcutLabel(cfg.shortcutModifier, map.fetch);
+      currentSendEl.textContent = formatShortcutLabel(cfg.shortcutModifier, map.send);
     }
 
     let active = false;
     let lastPayload = null;
+    let lastCapturedElement = null;
+    let dragState = null;
 
     function setStatus(text, isError) {
       statusEl.textContent = text;
       statusEl.classList.toggle("error", Boolean(isError));
+    }
+
+    function applyPanelPosition(position) {
+      if (!position || typeof position !== "object") return;
+      const left = Number(position.left);
+      const top = Number(position.top);
+      if (!Number.isFinite(left) || !Number.isFinite(top)) return;
+      panel.style.left = `${Math.max(8, left)}px`;
+      panel.style.top = `${Math.max(8, top)}px`;
+      panel.style.right = "auto";
+    }
+
+    function capturePanelPosition() {
+      const rect = panel.getBoundingClientRect();
+      return {
+        left: Math.round(rect.left),
+        top: Math.round(rect.top),
+      };
     }
 
     function loadConfig() {
@@ -103,6 +324,20 @@
     function getConfig() {
       return {
         webhookUrl: webhookInput.value.trim(),
+        targetId: targetIdInput.value.trim(),
+        agentProfile: agentProfileInput.value || "generic",
+        shortcutModifier: shortcutModifierInput.value || "alt+shift",
+        shortcutMap: parseShortcutMap({
+          toggle: shortcutToggleInput.value,
+          copy: shortcutCopyInput.value,
+          settings: shortcutSettingsInput.value,
+          chat: shortcutChatInput.value,
+          fetch: shortcutFetchInput.value,
+          send: shortcutSendInput.value,
+        }, ""),
+        middleClickToggle: middleToggleInput.checked,
+        panelMinimized: panel.classList.contains("is-minimized"),
+        panelPosition: capturePanelPosition(),
         cssProps: cssPropsInput.value.trim(),
         compactMode: compactModeInput.checked,
       };
@@ -110,9 +345,48 @@
 
     function applyConfig(cfg) {
       const defaultWebhook = window.location.origin + "/api/element-capture";
+      const params = new URL(window.location.href).searchParams;
+      const urlTarget = params.get("ecwTarget") || params.get("chatId") || params.get("threadId") || params.get("target") || "";
+      const savedTarget = typeof cfg.targetId === "string" ? cfg.targetId.trim() : "";
+      const shortcutMap = parseShortcutMap(cfg.shortcutMap, cfg.shortcutKeys);
       webhookInput.value = cfg.webhookUrl || defaultWebhook;
+      targetIdInput.value = urlTarget.trim() || savedTarget;
+      agentProfileInput.value = typeof cfg.agentProfile === "string" && cfg.agentProfile ? cfg.agentProfile : "generic";
+      shortcutModifierInput.value = typeof cfg.shortcutModifier === "string" && cfg.shortcutModifier ? cfg.shortcutModifier : "alt+shift";
+      shortcutToggleInput.value = shortcutMap.toggle;
+      shortcutCopyInput.value = shortcutMap.copy;
+      shortcutSettingsInput.value = shortcutMap.settings;
+      shortcutChatInput.value = shortcutMap.chat;
+      shortcutFetchInput.value = shortcutMap.fetch;
+      shortcutSendInput.value = shortcutMap.send;
+      middleToggleInput.checked = cfg.middleClickToggle !== false;
       cssPropsInput.value = cfg.cssProps || DEFAULT_CONFIG.cssProps;
       compactModeInput.checked = cfg.compactMode !== false;
+      applyPanelMinimized(cfg.panelMinimized === true);
+      applyPanelPosition(cfg.panelPosition);
+      updateCurrentShortcutPreview({
+        ...cfg,
+        shortcutMap,
+      });
+    }
+
+    function hasRequiredModifiers(event, modifier) {
+      if (modifier === "alt+shift") return event.altKey && event.shiftKey && !event.ctrlKey && !event.metaKey;
+      if (modifier === "ctrl+shift") return event.ctrlKey && event.shiftKey && !event.altKey && !event.metaKey;
+      if (modifier === "alt") return event.altKey && !event.shiftKey && !event.ctrlKey && !event.metaKey;
+      if (modifier === "ctrl") return event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey;
+      return !event.altKey && !event.shiftKey && !event.ctrlKey && !event.metaKey;
+    }
+
+    function getFetchUrl(targetId, agentProfile) {
+      const fetchUrl = new URL("/api/element-capture", window.location.origin);
+      fetchUrl.searchParams.set("limit", "1");
+      if (targetId) {
+        fetchUrl.searchParams.set("target", targetId);
+      }
+      fetchUrl.searchParams.set("format", "agent");
+      fetchUrl.searchParams.set("agent", agentProfile || "generic");
+      return fetchUrl.toString();
     }
 
     function refreshPreview() {
@@ -123,10 +397,102 @@
       previewEl.value = JSON.stringify(lastPayload, null, 2);
     }
 
+    function buildElementSvgDataUrl(el) {
+      const rect = el.getBoundingClientRect();
+      const width = Math.max(1, Math.round(rect.width));
+      const height = Math.max(1, Math.round(rect.height));
+      const cloned = el.cloneNode(true);
+
+      function copyStyles(source, target) {
+        const computed = window.getComputedStyle(source);
+        for (let i = 0; i < computed.length; i += 1) {
+          const prop = computed[i];
+          target.style.setProperty(prop, computed.getPropertyValue(prop), computed.getPropertyPriority(prop));
+        }
+        const sourceChildren = source.children || [];
+        const targetChildren = target.children || [];
+        for (let i = 0; i < sourceChildren.length; i += 1) {
+          if (targetChildren[i]) {
+            copyStyles(sourceChildren[i], targetChildren[i]);
+          }
+        }
+      }
+
+      copyStyles(el, cloned);
+      const serialized = new XMLSerializer().serializeToString(cloned);
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
+<foreignObject x="0" y="0" width="100%" height="100%">
+<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">${serialized}</div>
+</foreignObject>
+</svg>`;
+      return {
+        width,
+        height,
+        svg,
+        dataUrl: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`,
+      };
+    }
+
+    async function createElementScreenshotDataUrl(el) {
+      const { width, height, svg } = buildElementSvgDataUrl(el);
+      const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      try {
+        const image = await new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = reject;
+          img.src = url;
+        });
+        const scale = window.devicePixelRatio || 1;
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.floor(width * scale));
+        canvas.height = Math.max(1, Math.floor(height * scale));
+        const ctx = canvas.getContext("2d");
+        if (!ctx) throw new Error("Canvas context unavailable");
+        ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        ctx.drawImage(image, 0, 0, width, height);
+        return canvas.toDataURL("image/png");
+      } finally {
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    async function captureAndRenderScreenshot() {
+      if (!(lastCapturedElement instanceof Element)) {
+        setStatus("No captured element available for screenshot.", true);
+        return;
+      }
+      try {
+        const dataUrl = await createElementScreenshotDataUrl(lastCapturedElement);
+        shotPreviewEl.hidden = false;
+        shotPreviewEl.src = dataUrl;
+        shotDownloadEl.hidden = false;
+        shotDownloadEl.href = dataUrl;
+        shotDownloadEl.download = `element-screenshot-${Date.now()}.png`;
+        setStatus("Element screenshot generated.");
+      } catch {
+        try {
+          const fallback = buildElementSvgDataUrl(lastCapturedElement);
+          shotPreviewEl.hidden = false;
+          shotPreviewEl.src = fallback.dataUrl;
+          shotDownloadEl.hidden = false;
+          shotDownloadEl.href = fallback.dataUrl;
+          shotDownloadEl.download = `element-screenshot-${Date.now()}.svg`;
+          setStatus("PNG render failed. Fallback SVG screenshot generated.");
+        } catch {
+          setStatus("Screenshot failed for this element. Try a simpler element.", true);
+        }
+      }
+    }
+
     function toCompactPayload(payload) {
       const keyStyles = payload.computedStyles || {};
       return {
+        targetId: payload.targetId || "",
         pageUrl: payload.pageUrl,
+        targetPagePath: payload.targetPagePath || "",
+        targetSourceFile: payload.targetSourceFile || "",
         selector: payload.selector,
         tagName: payload.tagName,
         text: payload.textContent,
@@ -167,6 +533,38 @@
       return path.join(" > ");
     }
 
+    function fallbackSelector(el) {
+      if (!(el instanceof Element)) return "";
+      const base = el.tagName ? el.tagName.toLowerCase() : "unknown";
+      const parent = el.parentElement;
+      if (!parent) return base;
+      const siblings = Array.from(parent.children).filter((child) => child.tagName === el.tagName);
+      if (siblings.length <= 1) return base;
+      return `${base}:nth-of-type(${siblings.indexOf(el) + 1})`;
+    }
+
+    function inferSourceFileHint(pathname, el) {
+      if (el instanceof Element) {
+        const explicit =
+          el.closest("[data-source-file]")?.getAttribute("data-source-file") ||
+          el.closest("[data-component-file]")?.getAttribute("data-component-file");
+        if (explicit) return explicit;
+      }
+
+      const cleanPath = String(pathname || "/").replace(/\/+$/, "") || "/";
+      if (cleanPath === "/") return "src/pages/index.astro";
+      if (cleanPath === "/about") return "src/pages/about.astro";
+      if (cleanPath === "/contact") return "src/pages/contact.astro";
+      if (cleanPath === "/services") return "src/pages/services.astro";
+      if (cleanPath === "/projects") return "src/pages/projects.astro";
+      if (cleanPath === "/blog") return "src/pages/blog/index.astro";
+      if (cleanPath === "/careers") return "src/pages/careers.astro";
+      if (cleanPath.startsWith("/projects/")) return "src/pages/projects/[slug].astro";
+      if (cleanPath.startsWith("/blog/")) return "src/pages/blog/[slug].astro";
+      if (cleanPath.startsWith("/api/")) return `src/pages${cleanPath}.ts`;
+      return `src/pages${cleanPath}.astro`;
+    }
+
     function captureElement(el) {
       const rect = el.getBoundingClientRect();
       const attrs = {};
@@ -178,12 +576,19 @@
       const computedStyles = {};
       for (const key of tracked) computedStyles[key] = style.getPropertyValue(key).trim();
 
+      const selector = cssPath(el) || fallbackSelector(el);
+      const targetPagePath = window.location.pathname || "/";
+      const targetSourceFile = inferSourceFileHint(targetPagePath, el);
       const payload = {
+        targetId: cfg.targetId || undefined,
         timestamp: new Date().toISOString(),
         pageUrl: window.location.href,
+        targetPagePath,
+        targetSourceFile,
         title: document.title,
-        selector: cssPath(el),
+        selector,
         tagName: el.tagName,
+        outerHTML: el.outerHTML.slice(0, 8000),
         textContent: (el.textContent || "").trim().slice(0, 800),
         boundingBox: {
           x: Math.round(rect.x),
@@ -197,25 +602,50 @@
       };
 
       lastPayload = payload;
+      lastCapturedElement = el;
       window.__ULTRA_CAPTURE_LAST__ = payload;
       refreshPreview();
+      elementBoxInput.value = payload.outerHTML || payload.selector || "";
       panel.hidden = false;
-      setStatus(`Captured ${payload.tagName} ${payload.selector || ""}`.trim());
+      const captureLabel = `Captured ${payload.tagName} ${payload.selector || ""}`.trim();
+      setStatus(cfg.targetId ? `${captureLabel} (target: ${cfg.targetId})` : captureLabel);
     }
 
-    async function sendPayload(payload, webhookUrl) {
+    async function sendPayload(payload, webhookUrl, targetId) {
       if (!webhookUrl) {
         setStatus("No webhook URL configured.", true);
         return;
       }
       try {
-        const res = await fetch(webhookUrl, {
+        const url = new URL(webhookUrl, window.location.origin);
+        if (targetId) {
+          url.searchParams.set("target", targetId);
+        }
+        const res = await fetch(url.toString(), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        setStatus("Payload sent.");
+        if (!res.ok) {
+          let detail = "";
+          try {
+            const contentType = res.headers.get("content-type") || "";
+            if (contentType.includes("application/json")) {
+              const data = await res.json();
+              if (data && typeof data.error === "string") {
+                detail = data.error;
+              } else {
+                detail = JSON.stringify(data);
+              }
+            } else {
+              detail = (await res.text()).trim();
+            }
+          } catch {
+            detail = "";
+          }
+          throw new Error(detail ? `HTTP ${res.status}: ${detail}` : `HTTP ${res.status}`);
+        }
+        setStatus(targetId ? `Payload sent to target "${targetId}".` : "Payload sent.");
       } catch (err) {
         setStatus(`Send failed: ${err instanceof Error ? err.message : "unknown error"}`, true);
       }
@@ -232,6 +662,26 @@
 
     function clearHighlight() {
       highlight.hidden = true;
+    }
+
+    function isTypingTarget(node) {
+      if (!(node instanceof Element)) return false;
+      const tag = node.tagName.toLowerCase();
+      return node.isContentEditable || tag === "input" || tag === "textarea" || tag === "select";
+    }
+
+    function triggerButton(button) {
+      if (button instanceof HTMLButtonElement && !button.disabled) {
+        button.click();
+      }
+    }
+
+    function toggleCaptureMode() {
+      active = !active;
+      root.classList.toggle("active", active);
+      document.documentElement.classList.toggle("ecw-capture-mode", active);
+      if (!active) clearHighlight();
+      setStatus(active ? "Capture ON: click any element." : "Capture OFF.");
     }
 
     document.addEventListener(
@@ -263,11 +713,7 @@
     );
 
     toggleBtn.addEventListener("click", () => {
-      active = !active;
-      root.classList.toggle("active", active);
-      document.documentElement.classList.toggle("ecw-capture-mode", active);
-      if (!active) clearHighlight();
-      setStatus(active ? "Capture ON: click any element." : "Capture OFF.");
+      toggleCaptureMode();
     });
 
     copyBtn.addEventListener("click", async () => {
@@ -287,15 +733,44 @@
       const cfg = getConfig();
       const chatPayload = cfg.compactMode
         ? {
-          instruction: "Review this compact element payload and help me with changes/debugging.",
+          instruction: `Review this compact element payload for ${cfg.agentProfile} and help me with changes/debugging.`,
+          fetch: getFetchUrl(cfg.targetId, cfg.agentProfile),
           payload: toCompactPayload(lastPayload),
         }
         : {
-          instruction: "Review this captured element payload and help me with changes/debugging.",
+          instruction: `Review this captured element payload for ${cfg.agentProfile} and help me with changes/debugging.`,
+          fetch: getFetchUrl(cfg.targetId, cfg.agentProfile),
           payload: lastPayload,
         };
       await navigator.clipboard.writeText(JSON.stringify(chatPayload, null, 2));
       setStatus(cfg.compactMode ? "Copied compact payload for chat." : "Copied full payload for chat.");
+    });
+
+    copyElementBoxBtn.addEventListener("click", async () => {
+      const value = elementBoxInput.value.trim();
+      if (!value) {
+        setStatus("Element box is empty.", true);
+        return;
+      }
+      await navigator.clipboard.writeText(value);
+      setStatus("Copied element box.");
+    });
+
+    captureShotBtn.addEventListener("click", () => {
+      captureAndRenderScreenshot();
+    });
+
+    copyFetchBtn.addEventListener("click", async () => {
+      const cfg = getConfig();
+      const targetLabel = cfg.targetId || "(no target)";
+      const fetchUrl = getFetchUrl(cfg.targetId, cfg.agentProfile);
+      const text = `Agent: ${cfg.agentProfile}
+Target: ${targetLabel}
+Fetch URL: ${fetchUrl}
+CLI:
+curl -s "${fetchUrl}"`;
+      await navigator.clipboard.writeText(text);
+      setStatus(`Copied fetch link for ${cfg.agentProfile}.`);
     });
 
     settingsBtn.addEventListener("click", () => {
@@ -303,13 +778,24 @@
       if (!panel.hidden) setStatus("Settings open.");
     });
 
+    panelMinimizeBtn.addEventListener("click", () => {
+      const minimized = !panel.classList.contains("is-minimized");
+      applyPanelMinimized(minimized);
+      saveConfig(getConfig());
+      setStatus(minimized ? "Panel minimized." : "Panel expanded.");
+    });
+
     sendBtn.addEventListener("click", () => {
       if (!lastPayload) {
         setStatus("No capture to send yet.", true);
         return;
       }
+      if (!lastPayload.selector || !lastPayload.tagName || !lastPayload.pageUrl) {
+        setStatus("Capture is missing required fields. Re-capture a visible element.", true);
+        return;
+      }
       const cfg = getConfig();
-      sendPayload(lastPayload, cfg.webhookUrl);
+      sendPayload(lastPayload, cfg.webhookUrl, cfg.targetId);
     });
 
     downloadBtn.addEventListener("click", () => {
@@ -332,8 +818,99 @@
       refreshPreview();
     });
 
-    [webhookInput, cssPropsInput, compactModeInput].forEach((el) => {
-      el.addEventListener("change", () => saveConfig(getConfig()));
+    [webhookInput, targetIdInput, agentProfileInput, shortcutModifierInput, shortcutToggleInput, shortcutCopyInput, shortcutSettingsInput, shortcutChatInput, shortcutFetchInput, shortcutSendInput, middleToggleInput, cssPropsInput, compactModeInput].forEach((el) => {
+      el.addEventListener("change", () => {
+        const cfg = getConfig();
+        saveConfig(cfg);
+        updateCurrentShortcutPreview(cfg);
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && active) {
+        event.preventDefault();
+        active = false;
+        root.classList.remove("active");
+        document.documentElement.classList.remove("ecw-capture-mode");
+        clearHighlight();
+        setStatus("Capture OFF (cancelled with Esc).");
+        return;
+      }
+      if (isTypingTarget(event.target)) return;
+      const cfg = getConfig();
+      if (!hasRequiredModifiers(event, cfg.shortcutModifier)) return;
+      const shortcuts = parseShortcutMap(cfg.shortcutMap, cfg.shortcutKeys);
+
+      const key = event.key.toLowerCase();
+      if (key === shortcuts.toggle) {
+        event.preventDefault();
+        triggerButton(toggleBtn);
+        return;
+      }
+      if (key === shortcuts.copy) {
+        event.preventDefault();
+        triggerButton(copyBtn);
+        return;
+      }
+      if (key === shortcuts.settings) {
+        event.preventDefault();
+        triggerButton(settingsBtn);
+        return;
+      }
+      if (key === shortcuts.chat) {
+        event.preventDefault();
+        triggerButton(copyChatBtn);
+        return;
+      }
+      if (key === shortcuts.fetch) {
+        event.preventDefault();
+        triggerButton(copyFetchBtn);
+        return;
+      }
+      if (key === shortcuts.send) {
+        event.preventDefault();
+        triggerButton(sendBtn);
+      }
+    });
+
+    document.addEventListener("mousedown", (event) => {
+      if (event.button !== 1) return;
+      const cfg = getConfig();
+      if (!cfg.middleClickToggle) return;
+      const target = event.target;
+      if (target instanceof Element && target.closest("[data-ecw-root]")) return;
+      event.preventDefault();
+      toggleCaptureMode();
+    }, true);
+
+    panelTop.addEventListener("mousedown", (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (target.closest("button")) return;
+      dragState = {
+        startX: event.clientX,
+        startY: event.clientY,
+        panelLeft: panel.getBoundingClientRect().left,
+        panelTop: panel.getBoundingClientRect().top,
+      };
+      event.preventDefault();
+    });
+
+    document.addEventListener("mousemove", (event) => {
+      if (!dragState) return;
+      const dx = event.clientX - dragState.startX;
+      const dy = event.clientY - dragState.startY;
+      const nextLeft = Math.max(8, dragState.panelLeft + dx);
+      const nextTop = Math.max(8, dragState.panelTop + dy);
+      panel.style.left = `${nextLeft}px`;
+      panel.style.top = `${nextTop}px`;
+      panel.style.right = "auto";
+    });
+
+    document.addEventListener("mouseup", () => {
+      if (!dragState) return;
+      dragState = null;
+      saveConfig(getConfig());
     });
 
     applyConfig(loadConfig());
@@ -348,6 +925,7 @@
     z-index: 2147483647;
     display: flex;
     align-items: center;
+    gap: 0;
     border-radius: 999px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.18);
@@ -360,27 +938,56 @@
     border: 0;
     background: transparent;
     color: #f4f6ff;
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
     display: grid;
     place-items: center;
-    border-left: 1px solid rgba(255, 255, 255, 0.12);
-    transition: background-color 0.18s ease;
+    border-left: 1px solid rgba(255, 255, 255, 0.24);
+    transition: background-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+    flex: 0 0 auto;
   }
 
-  .ecw button:hover { background: rgba(255, 255, 255, 0.08); }
-  .ecw button:focus-visible { outline: 2px solid #49a8ff; outline-offset: -2px; }
-  .ecw-brand { border-left: 0; background: linear-gradient(135deg, #1c2445, #10172f); }
-  .ecw-brand span { font-weight: 700; font-size: 16px; letter-spacing: 0.08em; }
-  .ecw.active #ecw-toggle { background: rgba(73, 168, 255, 0.28); }
+  .ecw button:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+  }
+  .ecw button:focus-visible {
+    outline: 0;
+    box-shadow: inset 0 0 0 2px #7fd2ff;
+    background: rgba(73, 168, 255, 0.2);
+    color: #ffffff;
+  }
+  .ecw-brand {
+    border-left: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.24);
+    width: 50px;
+    background: linear-gradient(135deg, #1c2445, #10172f);
+  }
+  .ecw-brand-icon { width: 20px; height: 20px; }
+  #ecw-toggle { border-left: 0; }
+  .ecw.active #ecw-toggle {
+    background: rgba(73, 168, 255, 0.34);
+    color: #e8f7ff;
+  }
+  .ecw-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    display: block;
+    flex: 0 0 auto;
+  }
 
   .ecw-panel {
     position: fixed;
     top: 64px;
     right: 14px;
     z-index: 2147483647;
-    width: min(92vw, 360px);
+    width: min(92vw, 420px);
+    min-width: 320px;
+    max-width: min(96vw, 700px);
+    min-height: 220px;
+    max-height: 86vh;
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.14);
     padding: 14px;
@@ -389,11 +996,79 @@
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(8px);
     font-family: "Public Sans", "Segoe UI", sans-serif;
+    resize: both;
+    overflow: auto;
   }
 
-  .ecw-panel h3 { margin: 0 0 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.07em; }
+  .ecw-panel-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+    cursor: move;
+    user-select: none;
+  }
+  .ecw-panel-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .ecw-panel-controls button {
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: rgba(255, 255, 255, 0.08);
+    color: #f5f8ff;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  .ecw-panel h3 { margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 0.07em; }
+  .ecw-panel-body {
+    max-height: calc(86vh - 92px);
+    overflow: auto;
+    padding-right: 4px;
+  }
+  .ecw-panel.is-minimized {
+    min-height: 0;
+    height: auto;
+    resize: horizontal;
+  }
+  .ecw-panel.is-minimized .ecw-panel-body {
+    max-height: 0;
+    overflow: hidden;
+    padding-right: 0;
+  }
   .ecw-panel label { display: block; font-size: 12px; color: rgba(230, 236, 255, 0.92); margin: 10px 0 0; }
+  .ecw-capture-tools {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .ecw-capture-tools button,
+  .ecw-capture-tools a {
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: rgba(255, 255, 255, 0.08);
+    color: #eef6ff;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 11px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  #ecw-shot-preview {
+    margin-top: 8px;
+    width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(0, 0, 0, 0.22);
+  }
   .ecw-panel input[type="url"],
+  .ecw-panel select,
   .ecw-panel input[type="text"],
   .ecw-panel textarea {
     width: 100%;
@@ -404,6 +1079,22 @@
     color: #fff;
     padding: 8px 10px;
     font-size: 12px;
+  }
+  .ecw-panel select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    color: #f8fbff;
+    background-color: rgba(12, 20, 44, 0.92);
+    border-color: rgba(167, 190, 255, 0.4);
+  }
+  .ecw-panel select:focus {
+    outline: 2px solid rgba(127, 210, 255, 0.9);
+    outline-offset: 1px;
+  }
+  .ecw-panel select option {
+    color: #101a36;
+    background: #f2f7ff;
   }
   .ecw-panel textarea { resize: vertical; min-height: 140px; font-family: ui-monospace, Consolas, monospace; }
   .ecw-hint { margin: 0 0 6px; font-size: 12px; color: rgba(219, 234, 255, 0.8); }
@@ -420,6 +1111,87 @@
     background: linear-gradient(135deg, #86d4ff, #7dc1ff);
     cursor: pointer;
   }
+  .ecw-shortcut-grid {
+    margin-top: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 10px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .ecw-shortcut-grid-title {
+    margin: 0 0 8px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(190, 210, 255, 0.9);
+  }
+  .ecw-shortcut-grid-head,
+  .ecw-shortcut-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 8px;
+    align-items: center;
+  }
+  .ecw-shortcut-grid-head {
+    margin-bottom: 6px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(189, 202, 236, 0.85);
+  }
+  .ecw-shortcut-row {
+    margin-top: 6px;
+    font-size: 11px;
+  }
+  .ecw-shortcut-row code {
+    display: inline-block;
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: #f0f6ff;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+  }
+  .ecw-shortcut-row input[type="text"] {
+    margin-top: 0;
+    height: 30px;
+    font-size: 11px;
+    text-transform: lowercase;
+  }
+  .ecw-shortcuts {
+    margin-top: 10px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.22);
+    padding-top: 8px;
+    font-size: 11px;
+    color: rgba(230, 236, 255, 0.86);
+    display: grid;
+    gap: 4px;
+  }
+  .ecw-shortcuts-title {
+    margin: 0;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(190, 210, 255, 0.9);
+  }
+  .ecw-shortcuts p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .ecw-shortcuts kbd {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    padding: 1px 4px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    line-height: 1.2;
+  }
 
   #ecw-status { margin: 10px 0 0; font-size: 12px; color: #b9f6c0; }
   #ecw-status.error { color: #ff9ba7; }
@@ -432,13 +1204,20 @@
     pointer-events: none;
     border-radius: 4px;
   }
-
   html.ecw-capture-mode, html.ecw-capture-mode *:not([data-ecw-root]) {
     cursor: crosshair !important;
   }
   @media (max-width: 768px) {
     .ecw { top: 10px; right: 10px; }
-    .ecw button { width: 38px; height: 38px; }
-    .ecw-panel { top: 56px; right: 10px; }
+    .ecw button { width: 36px; height: 36px; }
+    .ecw-brand { width: 44px; }
+    .ecw-icon { width: 16px; height: 16px; }
+    .ecw-panel {
+      top: 56px;
+      right: 10px;
+      width: min(95vw, 420px);
+      max-height: 82vh;
+    }
+    .ecw-panel-body { max-height: calc(82vh - 92px); }
   }
 </style>
