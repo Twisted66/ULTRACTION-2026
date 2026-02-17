@@ -8,6 +8,8 @@ import TextTypeAnimation from '../components/animations/TextTypeAnimation';
 import HomeStatsAnimation from '../components/animations/HomeStatsAnimation';
 import InfiniteScroll from '../components/common/InfiniteScroll.astro';
 import LogoLoop from '../components/common/LogoLoop.astro';
+import SectionBackground from '../components/common/SectionBackground';
+import ClientPartners from '../components/about/ClientPartners';
 
 const galleryImages = [
   { src: "/images/projects/naseem-albar-bridge/photo_026.jpeg", alt: "Naseem Al Bar Bridge" },
@@ -428,8 +430,8 @@ const structuredData = {
     </div>
   </section>
 
-  <!-- Client Logos Section -->
-  <LogoLoop />
+  <!-- Client Partners Section -->
+  <ClientPartners client:visible />
 </Layout>
 
 <!-- Page-specific structured data -->
