@@ -194,7 +194,10 @@ const structuredData = {
   <section id="services" class="border-t border-black dark:border-black bg-surface">
     <div class="flex flex-col md:flex-row justify-between items-end px-8 lg:px-16 py-20 border-b border-black">
       <div>
-        <span class="text-xs uppercase font-bold tracking-[0.2em] mb-4 block text-accent">Our Expertise</span>
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-16 h-[2px] bg-accent"></div>
+          <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">Our Expertise</span>
+        </div>
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold uppercase font-heading leading-tight">
           Comprehensive<br/>Solutions
         </h2>
@@ -259,12 +262,14 @@ const structuredData = {
   </section>
 
   <!-- Featured Projects - Carousel Snippet -->
-  <section class="border-t border-black dark:border-black overflow-hidden bg-surface text-foreground">
-    <div class="w-full p-12 lg:p-20 border-b border-black flex flex-col md:flex-row justify-between items-center">
-      <div>
-        <span class="text-xs uppercase font-bold tracking-[0.2em] mb-4 text-accent block">Featured Work</span>
-        <h2 class="text-4xl lg:text-5xl font-bold uppercase font-heading leading-tight">Building Landmarks</h2>
+  <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={false} contentWrapperClassName="w-full p-12 lg:p-20 border-b border-black flex flex-col md:flex-row justify-between items-center">
+    <div>
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-16 h-[2px] bg-accent"></div>
+        <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">Featured Work</span>
       </div>
+      <h2 class="text-4xl lg:text-5xl font-bold uppercase font-heading leading-tight">Building Landmarks</h2>
+    </div>
       <div class="mt-8 md:mt-0 max-w-md md:text-right">
         <p class="opacity-70 leading-relaxed mb-8 text-sm">
           From complex infrastructure to iconic accolades, our portfolio showcases our capability to deliver challenging projects with excellence.
@@ -276,9 +281,9 @@ const structuredData = {
           </div>
         </a>
       </div>
-    </div>
-    
-    <div class="w-full">
+  </SectionBackground>
+
+  <div class="w-full">
         <!-- Manually selected featured projects for now to ensure quality images -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 h-full border-b border-black">
           <a href="/projects/naseem-albar-bridge" class="relative group h-[250px] sm:h-[400px] lg:h-[500px] overflow-hidden border-b lg:border-b-0 border-black lg:border-r block">
@@ -317,7 +322,7 @@ const structuredData = {
             </div>
           </a>
     </div>
-  </section>
+  </SectionBackground>
 
   <!-- Gallery Section - Infinite Scroll Moved Here -->
   <InfiniteScroll images={galleryImages} />
@@ -325,56 +330,60 @@ const structuredData = {
 
 
   <!-- Why Choose ULTRACTION Section -->
-  <section class="border-y border-black dark:border-black overflow-hidden bg-surface text-foreground">
-    <div class="w-full p-12 lg:p-20 border-b border-black flex flex-col md:flex-row justify-between items-center bg-background">
-      <div>
-        <span class="text-xs uppercase font-bold tracking-[0.2em] mb-4 text-accent block">Core Differentiators</span>
-        <h2 class="text-4xl lg:text-5xl font-bold uppercase font-heading leading-tight">Why Choose ULTRACTION</h2>
+  <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={false} contentWrapperClassName="w-full p-12 lg:p-20 border-b border-black flex flex-col md:flex-row justify-between items-center">
+    <div>
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-16 h-[2px] bg-accent"></div>
+        <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">Core Differentiators</span>
       </div>
+      <h2 class="text-4xl lg:text-5xl font-bold uppercase font-heading leading-tight">Why Choose ULTRACTION</h2>
+    </div>
       <div class="mt-8 md:mt-0 max-w-md md:text-right">
         <p class="opacity-70 leading-relaxed mb-8 text-sm">
           With a focus on quality, safety, and efficiency, we provide construction solutions that set new standards in the industry.
         </p>
       </div>
+  </SectionBackground>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-0 px-0 max-w-full mx-auto border-b border-black">
+    <div class="p-6 sm:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-black bg-surface text-center group hover:bg-primary/5 transition-colors">
+      <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-all motion-base">
+        <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+      </a>
+      <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Quality Assurance</h3>
+      <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">ISO-certified processes ensuring every project meets global standards of excellence and durability.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-0 px-0 max-w-full mx-auto border-b border-black">
-      <div class="p-6 sm:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-black bg-surface text-center group hover:bg-primary/5 transition-colors">
-        <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-all motion-base">
-          <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-        </a>
-        <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Quality Assurance</h3>
-        <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">ISO-certified processes ensuring every project meets global standards of excellence and durability.</p>
-      </div>
-
-      <div class="p-6 sm:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-black bg-surface text-center group hover:bg-primary/5 transition-colors">
-        <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-all motion-base">
-          <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-        </a>
-        <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">On-Time Delivery</h3>
-        <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">Rigorous project management methodologies to ensure we deliver on schedule, every time.</p>
-      </div>
-
-      <div class="p-6 sm:p-8 lg:p-12 bg-surface text-center group hover:bg-primary/5 transition-colors">
-        <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-all motion-base">
-          <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-        </a>
-        <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Safety First</h3>
-        <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">Uncompromising commitment to health, safety, and environment (HSE) on every construction site.</p>
-      </div>
+    <div class="p-6 sm:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-black bg-surface text-center group hover:bg-primary/5 transition-colors">
+      <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-all motion-base">
+        <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+      </a>
+      <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">On-Time Delivery</h3>
+      <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">Rigorous project management methodologies to ensure we deliver on schedule, every time.</p>
     </div>
-  </section>
+
+    <div class="p-6 sm:p-8 lg:p-12 bg-surface text-center group hover:bg-primary/5 transition-colors">
+      <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-all motion-base">
+        <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+      </a>
+      <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Safety First</h3>
+      <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">Uncompromising commitment to health, safety, and environment (HSE) on every construction site.</p>
+    </div>
+  </div>
 
   <!-- About Section - Numbered list -->
-  <section class="border-b border-black dark:border-black">
-    <div class="flex flex-col lg:flex-row">
-      <div class="w-full lg:w-1/4 border-r border-black dark:border-black min-h-[200px] lg:min-h-[400px] overflow-hidden relative">
-        <img alt="Naseem Al Bar Bridge Detail" class="w-full h-full object-cover" src="/images/projects/naseem-albar-bridge/photo_012.jpeg" />
+  <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={true} showGrid={true} contentWrapperClassName="flex flex-col lg:flex-row">
+    <div class="w-full lg:w-1/4 border-r border-black dark:border-black min-h-[200px] lg:min-h-[400px] overflow-hidden relative">
+      <img alt="Naseem Al Bar Bridge Detail" class="w-full h-full object-cover" src="/images/projects/naseem-albar-bridge/photo_012.jpeg" />
+    </div>
+    <div class="w-full lg:w-3/4 p-6 lg:p-20">
+      <div class="flex items-center gap-3 mb-12">
+        <div class="w-16 h-[2px] bg-accent"></div>
+        <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">Our Commitment</span>
       </div>
-      <div class="w-full lg:w-3/4 p-6 lg:p-20">
-        <h2 class="text-2xl sm:text-4xl font-bold uppercase mb-12 lg:mb-20 max-w-2xl leading-[1.1]">
-          We are committed to creating buildings that are not only functional and aesthetically pleasing.
-        </h2>
+      <h2 class="text-2xl sm:text-4xl font-bold uppercase mb-12 lg:mb-20 max-w-2xl leading-[1.1]">
+        We are committed to creating buildings that are not only functional and aesthetically pleasing.
+      </h2>
         <div class="flex flex-col border-t border-black dark:border-black">
           <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-black dark:border-black gap-4 md:gap-16">
             <span class="text-[10px] sm:text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">About Us</span>
@@ -407,18 +416,19 @@ const structuredData = {
         </div>
       </div>
     </div>
-  </section>
+  </SectionBackground>
 
   <!-- CTO Section -->
-  <section class="border-b border-black dark:border-black bg-surface text-primary">
-    <div class="flex flex-col md:flex-row">
-       <div class="w-full md:w-1/2 min-h-[400px] md:min-h-[600px] relative order-2 md:order-1">
-          <img src="/images/projects/naseem-albar-bridge/photo_044.jpeg" alt="Technical leadership at ULTRACTION" class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all motion-slow media-motion" />
-          <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
-       </div>
-       <div class="w-full md:w-1/2 p-12 lg:p-24 flex flex-col justify-center order-1 md:order-2">
-          <div class="w-12 h-1 bg-accent mb-8"></div>
-          <span class="text-xs uppercase font-bold tracking-[0.2em] mb-6 text-primary/70 block">Technical Leadership</span>
+  <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={true} showGrid={false} showAccentBlob={false} showBottomLine={false} contentWrapperClassName="flex flex-col md:flex-row">
+     <div class="w-full md:w-1/2 min-h-[400px] md:min-h-[600px] relative order-2 md:order-1">
+        <img src="/images/projects/naseem-albar-bridge/photo_044.jpeg" alt="Technical leadership at ULTRACTION" class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all motion-slow media-motion" />
+        <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+     </div>
+     <div class="w-full md:w-1/2 p-12 lg:p-24 flex flex-col justify-center order-1 md:order-2">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-16 h-[2px] bg-accent"></div>
+          <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">Technical Leadership</span>
+        </div>
           <blockquote class="text-3xl lg:text-4xl font-light leading-tight mb-10">
             "We don't just build structures; we engineer legacies. Every project is an opportunity to push the boundaries of what's possible."
           </blockquote>
@@ -426,9 +436,8 @@ const structuredData = {
             <span class="block text-xl font-bold uppercase tracking-wider">Ahmed Hassan</span>
             <span class="block text-sm text-primary/70 uppercase tracking-widest mt-2">Chief Technical Officer</span>
           </cite>
-       </div>
-    </div>
-  </section>
+     </div>
+  </SectionBackground>
 
   <!-- Client Partners Section -->
   <ClientPartners client:visible />
