@@ -1,7 +1,10 @@
-﻿---
+---
 import Layout from '../layouts/Layout.astro';
 import LogoLoop from '../components/common/LogoLoop.astro';
 import CoreValues from '../components/about/CoreValues.astro';
+import HowWeDeliver from '../components/about/HowWeDeliver';
+import ClientPartners from '../components/about/ClientPartners';
+import MissionVision from '../components/about/MissionVision';
 
 const title = 'About Us | ULTRACTION';
 const description = 'ULTRACTION General Contracting LLC delivers civil construction, concrete structures, and infrastructure projects across the UAE with a focus on safety, quality, and sustainability.';
@@ -28,10 +31,10 @@ const capabilityStages = [
     body: 'We continue to grow through repeat delivery, transparent collaboration, and strong partnerships with major contractors, developers, and consultants.',
   },
 ];
-
 ---
 
 <Layout title={title} description={description}>
+  <!-- Hero Section -->
   <section class="flex flex-col lg:grid lg:grid-cols-2 border-y border-black min-h-[75vh] lg:min-h-[85vh] bg-surface">
     <div class="lg:col-span-1 flex flex-col justify-start px-6 py-16 md:px-12 lg:p-24 border-r border-black relative h-full">
       <span class="text-xs uppercase tracking-[0.2em] text-black/60 mb-6 block">Company Profile</span>
@@ -55,102 +58,88 @@ const capabilityStages = [
     </div>
   </section>
 
-  <section class="border-b border-black bg-background text-primary py-24 px-8 lg:px-24">
-    <div class="max-w-4xl mx-auto text-center">
-      <span class="text-xs uppercase tracking-widest text-accent mb-8 block">General Manager Message</span>
-      <blockquote class="text-2xl md:text-3xl font-heading italic leading-relaxed mb-12">
-        "At ULTRACTION, construction is more than assembling structures. It is about creating spaces that serve communities, uphold safety, and stand as lasting proof of quality and innovation."
-      </blockquote>
-      <div class="flex flex-col items-center">
-        <div class="w-12 h-[1px] bg-black/20 mb-6"></div>
-        <span class="text-sm font-bold uppercase tracking-widest">Engr. Wael Mahmah</span>
-        <span class="text-xs uppercase tracking-widest text-black/60 mt-1">General Manager</span>
-      </div>
-    </div>
-  </section>
+  <!-- Enhanced "How We Deliver" Section -->
+  <HowWeDeliver client:visible />
 
-  <section class="py-20 md:py-32 border-b border-primary/20 bg-background">
-    <div class="px-8 lg:px-24">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-24 border-b border-black/10 pb-8 gap-6">
-        <h2 class="text-4xl lg:text-5xl font-heading italic">How We <span class="not-italic font-light">Deliver</span></h2>
-        <span class="text-xs uppercase tracking-widest text-primary/70">From Planning to Handover</span>
-      </div>
+  <!-- Client Partners -->
+  <ClientPartners client:visible />
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-black">
-        {capabilityStages.map((stage) => (
-          <div class="group border-r border-b border-black p-8">
-            <span class="text-xs font-bold uppercase tracking-[0.2em] text-accent transition-colors duration-500 mb-6 block">{stage.label}</span>
-            <h3 class="text-lg font-bold uppercase tracking-tight mb-4">{stage.heading}</h3>
-            <p class="text-sm font-light leading-relaxed text-primary/70">
-              {stage.body}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-surface border-b border-black px-6 md:px-8 lg:px-24 pt-16 md:pt-20">
-    <div class="max-w-6xl mx-auto">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
-        <h2 class="text-3xl md:text-4xl font-heading italic">Trusted <span class="not-italic font-light">By Industry Leaders</span></h2>
-        <span class="text-xs uppercase tracking-[0.2em] text-primary/80">Selected Partners From Our Profile</span>
-      </div>
-    </div>
-    <LogoLoop />
-  </section>
-
-  <section class="bg-surface text-primary py-20 md:py-24 lg:py-32 px-6 md:px-8 lg:px-24 border-b border-black">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-      <div>
-        <span class="text-xs uppercase tracking-widest text-accent mb-6 block">Mission and Vision</span>
-        <h2 class="text-5xl font-heading italic mb-10">Committed to <br/><span class="not-italic font-bold">Long-Term Value</span></h2>
-
-        <div class="space-y-8">
-          <div class="border-l-2 border-accent pl-5">
-            <h3 class="font-bold uppercase tracking-widest text-sm mb-2">Mission</h3>
-            <p class="text-sm font-light text-primary/80 leading-relaxed">
-              To be the builder of choice by delivering quality projects on time, maximizing value for investment, and building enduring relationships with every client.
-            </p>
-          </div>
-
-          <div class="border-l-2 border-accent pl-5">
-            <h3 class="font-bold uppercase tracking-widest text-sm mb-2">Vision</h3>
-            <p class="text-sm font-light text-primary/80 leading-relaxed">
-              To emerge as a premier civil contractor in the Middle East through unwavering dedication, superior design, timely completion, and consistent performance.
-            </p>
-          </div>
-
-          <div class="border-l-2 border-accent pl-5">
-            <h3 class="font-bold uppercase tracking-widest text-sm mb-2">Quality Commitment</h3>
-            <p class="text-sm font-light text-primary/80 leading-relaxed">
-              We maintain a steadfast commitment to quality and environmental awareness across all operations, ensuring every project meets today&apos;s standards and tomorrow&apos;s needs.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="space-y-8">
-        <div class="aspect-square relative overflow-hidden rounded-sm grayscale group hover:grayscale-0 transition-all duration-700">
-          <img src="/images/projects/naseem-albar-bridge/photo_038.jpeg" alt="ULTRACTION bridge construction - committed to long-term value" class="w-full h-full object-cover" />
-          <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Enhanced Mission & Vision Section -->
+  <MissionVision client:visible />
 
   <!-- Enhanced Core Values Section -->
   <CoreValues />
 
-  <section class="border-y border-black bg-background">
-    <div class="flex flex-col items-center justify-center py-20 md:py-28 lg:py-32 px-6 text-center">
-      <span class="text-xs font-bold uppercase tracking-[0.2em] text-color-accent mb-6">Work With Us</span>
-      <h2 class="text-4xl md:text-5xl font-heading italic mb-10 max-w-3xl leading-snug text-primary">
-        Build your next project with a team focused on <br/><span class="not-italic font-light text-primary/80">safety, precision, and dependable delivery.</span>
-      </h2>
-      <a class="group relative inline-flex items-center justify-center px-12 py-4 overflow-hidden font-medium tracking-widest transition duration-300 ease-out border border-black/40 text-primary hover:border-color-accent hover:bg-color-accent hover:text-white" href="/contact">
-        <span class="text-xs uppercase tracking-widest">Connect Today</span>
-      </a>
+  <!-- Final CTA Section -->
+  <section class="relative bg-surface text-primary overflow-hidden border-y border-primary/20">
+    <div class="absolute inset-0 pointer-events-none">
+      <div
+        class="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, currentColor 1px, transparent 1px),
+            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px'
+        }}
+      />
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse-slow" />
     </div>
+
+    <div class="relative z-10 px-6 md:px-12 lg:px-24 py-20 md:py-28 lg:py-32">
+      <div class="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-[2px] bg-accent"></div>
+          <span class="text-xs font-bold uppercase tracking-[0.3em] text-accent">
+            Work With Us
+          </span>
+          <div class="w-12 h-[2px] bg-accent"></div>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading leading-[0.95] tracking-tight mb-8 max-w-3xl">
+          Build your next project with a team focused on
+          <br />
+          <span class="italic font-light text-primary/50 scale-y-75 inline-block">
+            safety, precision, and dependable delivery.
+          </span>
+        </h2>
+
+        <a
+          class="group relative inline-flex items-center gap-3 px-10 py-5 bg-primary text-white overflow-hidden transition-all duration-300 hover:bg-accent hover:shadow-xl hover:shadow-accent/20"
+          href="/contact"
+        >
+          <span class="relative z-10 text-xs font-bold uppercase tracking-[0.2em]">
+            Connect Today
+          </span>
+          <svg
+            class="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent"></div>
   </section>
 </Layout>
+
+<style>
+  /* Animation for CTA button */
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.1); }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 8s ease-in-out infinite;
+  }
+</style>
