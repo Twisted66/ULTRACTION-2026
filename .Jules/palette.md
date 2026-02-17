@@ -7,3 +7,7 @@
 ## 2026-02-14 - Enhancing Navigation Awareness and Page Utility
 **Learning:** Users often lose context of their location in single-page-looking multi-page sites without clear active navigation indicators. Additionally, long landing pages significantly benefit from a "Back to Top" utility to improve flow and reduce scroll fatigue.
 **Action:** Always implement active state indicators in the main navigation and include a scroll-to-top utility for pages exceeding two screen heights.
+
+## 2026-02-14 - Accessible Async Interactions
+**Learning:** For icon-only or secondary buttons that trigger async actions, purely visual feedback (like a color change) is insufficient for screen readers. Using `aria-busy` combined with a text label update (e.g., "Sending...") provides the necessary semantic update.
+**Action:** Pair `aria-busy` with a temporary text-content change inside action buttons to ensure both visual and cognitive feedback.
