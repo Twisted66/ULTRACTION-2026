@@ -1,12 +1,11 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import './MissionVision.css';
+import { Target, Eye, ShieldCheck, Clock, Handshake, HardHat, Leaf, Zap } from 'lucide-react';
 
 interface MissionVisionProps {
   className?: string;
 }
 
-// Enhanced content data for Mission & Vision
+// Data directly in component or imported - keeping it here for simplicity as per original
 const missionData = {
   label: 'Mission',
   title: 'Building Excellence',
@@ -14,35 +13,17 @@ const missionData = {
   description: 'To be the builder of choice by delivering quality projects on time, maximizing value for investment, and building enduring relationships with every client.',
   pillars: [
     {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 2L2 7l10 5 10-5-10-5z" />
-          <path d="M2 17l10 5 10-5" />
-          <path d="M2 12l10 5 10-5" />
-        </svg>
-      ),
+      icon: <ShieldCheck className="w-6 h-6" />,
       title: 'Quality First',
       text: 'Exceeding standards in every project'
     },
     {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <circle cx="12" cy="12" r="10" />
-          <polyline points="12 6 12 12 16 14" />
-        </svg>
-      ),
+      icon: <Clock className="w-6 h-6" />,
       title: 'On-Time Delivery',
       text: 'Respecting deadlines and commitments'
     },
     {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-        </svg>
-      ),
+      icon: <Handshake className="w-6 h-6" />,
       title: 'Lasting Partnerships',
       text: 'Building trust through collaboration'
     }
@@ -73,308 +54,144 @@ const visionData = {
 const qualityData = {
   label: 'Our Commitment',
   title: 'Quality & Sustainability',
-  description: 'We maintain a steadfast commitment to quality and environmental awareness across all operations, ensuring every project meets today\'s standards and tomorrow\'s needs.',
+  description: "We maintain a steadfast commitment to quality and environmental awareness across all operations, ensuring every project meets today's standards and tomorrow's needs.",
   principles: [
     {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-          <path d="M9 12l2 2 4-4" />
-        </svg>
-      ),
+      icon: <HardHat className="w-5 h-5" />,
       text: 'Safety First Culture'
     },
     {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 2v4" />
-          <path d="M12 18v4" />
-          <path d="M4.93 4.93l2.83 2.83" />
-          <path d="M16.24 16.24l2.83 2.83" />
-          <path d="M2 12h4" />
-          <path d="M18 12h4" />
-          <path d="M4.93 19.07l2.83-2.83" />
-          <path d="M16.24 7.76l2.83-2.83" />
-          <circle cx="12" cy="12" r="4" />
-        </svg>
-      ),
+      icon: <Leaf className="w-5 h-5" />,
       text: 'Environmental Responsibility'
     },
     {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-        </svg>
-      ),
+      icon: <Zap className="w-5 h-5" />,
       text: 'Continuous Innovation'
     }
   ]
 };
 
-// Animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.25, 0.4, 0.25, 1]
-    }
-  }
-};
-
-const scaleInVariants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: [0.25, 0.4, 0.25, 1]
-    }
-  }
-};
-
-// Pillar Card Component
-const PillarCard: React.FC<{ icon: React.ReactNode; title: string; text: string; index: number }> = ({ icon, title, text, index }) => (
-  <motion.div
-    variants={itemVariants}
-    className="pillar-card group"
-  >
-    <div className="pillar-icon-wrapper">
-      <div className="pillar-icon">{icon}</div>
-    </div>
-    <h4 className="pillar-title">{title}</h4>
-    <p className="pillar-text">{text}</p>
-  </motion.div>
-);
-
-// Stat Highlight Component
-const StatHighlight: React.FC<{ value: string; label: string; index: number }> = ({ value, label, index }) => (
-  <motion.div
-    variants={scaleInVariants}
-    className="stat-item"
-  >
-    <div className="stat-value">{value}</div>
-    <div className="stat-label">{label}</div>
-  </motion.div>
-);
-
-// Principle Badge Component
-const PrincipleBadge: React.FC<{ icon: React.ReactNode; text: string; index: number }> = ({ icon, text, index }) => (
-  <motion.div
-    variants={itemVariants}
-    className="principle-badge"
-  >
-    <span className="principle-icon">{icon}</span>
-    <span className="principle-text">{text}</span>
-  </motion.div>
-);
-
 const MissionVision: React.FC<MissionVisionProps> = ({ className = '' }) => {
   return (
-    <section className={`mission-vision-section ${className}`}>
-      {/* Background decorative elements */}
-      <div className="mv-background">
-        <div className="mv-grid-pattern"></div>
-        <motion.div
-          className="mv-accent-blob mv-blob-1"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.15, 0.25, 0.15],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="mv-accent-blob mv-blob-2"
-          animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.1, 0.2, 0.1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-        />
-      </div>
+    <section className={`relative bg-surface py-20 md:py-32 overflow-hidden ${className}`}>
+      {/* Grid Pattern Background - Industrial Look */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, currentColor 1px, transparent 1px),
+            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px'
+        }}
+      />
 
-      {/* Section Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-        className="mv-header"
-      >
-        <div className="mv-header-line left"></div>
-        <span className="mv-label">Our Purpose</span>
-        <div className="mv-header-line right"></div>
-      </motion.div>
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10">
 
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="mv-title"
-      >
-        Guided by Vision,
-        <br />
-        <span className="mv-title-accent">Driven by Mission</span>
-      </motion.h2>
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-24">
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <div className="h-[1px] w-12 bg-accent"></div>
+            <span className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Our Purpose</span>
+            <div className="h-[1px] w-12 bg-accent"></div>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold text-primary leading-tight">
+            Guided by Vision, <br className="hidden md:block" />
+            <span className="text-accent italic font-light">Driven by Mission</span>
+          </h2>
+        </div>
 
-      {/* Main Content Grid */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="mv-grid"
-      >
-        {/* Mission Column */}
-        <motion.div variants={itemVariants} className="mv-column mission-column">
-          <div className="mv-card mission-card">
-            <div className="mv-card-header">
-              <div className="mv-card-icon mission-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg>
+        {/* Main Grid Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-primary/10">
+
+          {/* Mission Column */}
+          <div className="group relative bg-background/50 hover:bg-background transition-colors duration-500 border-b lg:border-b-0 lg:border-r border-primary/10 p-8 md:p-12 lg:p-16">
+            <div className="absolute top-0 left-0 w-1 h-0 group-hover:h-full bg-accent transition-all duration-500 ease-out"></div>
+
+            <div className="flex items-center gap-4 mb-8">
+              <div className="p-3 bg-accent/10 text-accent rounded-none">
+                <Target className="w-8 h-8" />
               </div>
               <div>
-                <span className="mv-card-label">{missionData.label}</span>
-                <h3 className="mv-card-title">{missionData.title}</h3>
+                <span className="block text-xs font-bold uppercase tracking-widest text-accent mb-1">{missionData.label}</span>
+                <h3 className="text-2xl md:text-3xl font-heading font-bold text-primary">{missionData.title}</h3>
               </div>
             </div>
 
-            <p className="mv-card-subtitle">{missionData.subtitle}</p>
-            <p className="mv-card-description">{missionData.description}</p>
+            <p className="text-lg font-medium text-primary/80 mb-6">{missionData.subtitle}</p>
+            <p className="text-base text-primary/60 leading-relaxed mb-12 max-w-md">{missionData.description}</p>
 
-            <div className="mv-pillars">
+            <div className="grid grid-cols-1 gap-6">
               {missionData.pillars.map((pillar, idx) => (
-                <PillarCard key={idx} {...pillar} index={idx} />
+                <div key={idx} className="flex items-start gap-4 p-4 border border-primary/5 hover:border-accent/30 bg-surface hover:bg-white transition-all duration-300">
+                  <div className="text-accent mt-1">{pillar.icon}</div>
+                  <div>
+                    <h4 className="text-sm font-bold text-primary uppercase tracking-wide">{pillar.title}</h4>
+                    <p className="text-sm text-primary/60 mt-1">{pillar.text}</p>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Image collage for mission */}
-          <motion.div
-            variants={scaleInVariants}
-            className="mv-image-collage mission-collage"
-          >
-            <div className="collage-image main">
-              <img src="/images/projects/naseem-albar-bridge/hero.png" alt="ULTRACTION construction excellence" />
-            </div>
-            <div className="collage-image secondary">
-              <img src="/images/projects/naseem-albar-bridge/photo_038.jpeg" alt="Quality construction details" />
-            </div>
-          </motion.div>
-        </motion.div>
+          {/* Vision Column */}
+          <div className="group relative bg-background/50 hover:bg-background transition-colors duration-500 p-8 md:p-12 lg:p-16">
+            <div className="absolute bottom-0 right-0 w-1 h-0 group-hover:h-full bg-primary transition-all duration-500 ease-out"></div>
 
-        {/* Vision Column */}
-        <motion.div variants={itemVariants} className="mv-column vision-column">
-          <div className="mv-card vision-card">
-            <div className="mv-card-header">
-              <div className="mv-card-icon vision-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
+            <div className="flex items-center gap-4 mb-8">
+              <div className="p-3 bg-primary/10 text-primary rounded-none">
+                <Eye className="w-8 h-8" />
               </div>
               <div>
-                <span className="mv-card-label">{visionData.label}</span>
-                <h3 className="mv-card-title">{visionData.title}</h3>
+                <span className="block text-xs font-bold uppercase tracking-widest text-primary mb-1">{visionData.label}</span>
+                <h3 className="text-2xl md:text-3xl font-heading font-bold text-primary">{visionData.title}</h3>
               </div>
             </div>
 
-            <p className="mv-card-subtitle">{visionData.subtitle}</p>
-            <p className="mv-card-description">{visionData.description}</p>
+            <p className="text-lg font-medium text-primary/80 mb-6">{visionData.subtitle}</p>
+            <p className="text-base text-primary/60 leading-relaxed mb-12 max-w-md">{visionData.description}</p>
 
-            <div className="mv-stats">
+            <div className="grid grid-cols-3 gap-4 mb-12">
               {visionData.highlights.map((stat, idx) => (
-                <StatHighlight key={idx} {...stat} index={idx} />
+                <div key={idx} className="text-center p-4 bg-surface border border-primary/5 hover:-translate-y-1 transition-transform duration-300">
+                  <div className="text-3xl font-heading font-bold text-accent mb-2">{stat.value}</div>
+                  <div className="text-[10px] uppercase tracking-wider font-semibold text-primary/60">{stat.label}</div>
+                </div>
               ))}
             </div>
 
-            {/* Vision statement accent */}
-            <motion.div
-              className="vision-accent-quote"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor" className="quote-icon">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-              <p>
-                Leading the future of construction through innovation, integrity, and inspired performance.
-              </p>
-            </motion.div>
+            <div className="relative pl-6 border-l-2 border-accent/20 italic text-primary/70">
+              "Leading the future of construction through innovation, integrity, and inspired performance."
+            </div>
           </div>
-        </motion.div>
-      </motion.div>
 
-      {/* Quality Commitment Banner */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="quality-banner"
-      >
-        <div className="quality-banner-content">
-          <div className="quality-header">
-            <span className="quality-label">{qualityData.label}</span>
-            <h3 className="quality-title">{qualityData.title}</h3>
-          </div>
-          <p className="quality-description">{qualityData.description}</p>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="principles-list"
-          >
-            {qualityData.principles.map((principle, idx) => (
-              <PrincipleBadge key={idx} {...principle} index={idx} />
-            ))}
-          </motion.div>
         </div>
 
-        {/* Decorative element */}
-        <div className="quality-banner-decoration">
-          <svg viewBox="0 0 100 100" fill="none" className="decoration-svg">
-            <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="1" opacity="0.2" />
-            <circle cx="50" cy="50" r="30" stroke="currentColor" strokeWidth="1" opacity="0.15" />
-            <circle cx="50" cy="50" r="20" stroke="currentColor" strokeWidth="1" opacity="0.1" />
-          </svg>
-        </div>
-      </motion.div>
+        {/* Quality Banner - Industrial Footer */}
+        <div className="mt-16 bg-primary text-white p-8 md:p-12 relative overflow-hidden">
+          {/* Decorative grid on dark background */}
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
 
-      {/* Bottom decorative line */}
-      <div className="mv-bottom-line"></div>
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-5">
+              <span className="block text-xs font-bold uppercase tracking-[0.2em] text-accent-foreground/60 mb-2">{qualityData.label}</span>
+              <h3 className="text-3xl md:text-4xl font-heading font-semibold mb-4">{qualityData.title}</h3>
+              <p className="text-primary-foreground/70 leading-relaxed">{qualityData.description}</p>
+            </div>
+            <div className="lg:col-span-7 flex flex-wrap gap-4 lg:justify-end">
+              {qualityData.principles.map((principle, idx) => (
+                <div key={idx} className="inline-flex items-center gap-3 px-6 py-3 border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors">
+                  <span className="text-accent">{principle.icon}</span>
+                  <span className="text-sm font-medium tracking-wide">{principle.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+      </div>
     </section>
   );
 };
 
 export default MissionVision;
+

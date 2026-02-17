@@ -49,7 +49,7 @@ const services = Astro.props.services || defaultServices;
     </div>
 
     <div class="services-grid">
-      {services.map((service, index) => (
+      {services.map((service) => (
         <a href={service.link} class="service-card">
           <div class="service-icon">{service.icon}</div>
           <h3 class="service-title">{service.title}</h3>

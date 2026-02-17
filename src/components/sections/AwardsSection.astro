@@ -1,0 +1,213 @@
+---
+// ULTRACTION Awards & Certifications Section
+// Displaying certifications and awards
+
+interface AwardCert {
+  icon: string;
+  name: string;
+  year: string;
+  description: string;
+  category: 'certification' | 'award' | 'recognition';
+}
+
+const awards: AwardCert[] = [
+  {
+    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+    name: 'ISO 9001:2015',
+    year: '2014',
+    description: 'Quality Management System certification for consistent excellence in construction services.',
+    category: 'certification',
+  },
+  {
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    name: 'ISO 14001:2015',
+    year: '2016',
+    description: 'Environmental Management System certification for sustainable construction practices.',
+    category: 'certification',
+  },
+  {
+    icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+    name: 'OHSAS 18001',
+    year: '2017',
+    description: 'Occupational Health and Safety certification for workplace safety excellence.',
+    category: 'certification',
+  },
+  {
+    icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
+    name: 'Infrastructure Excellence',
+    year: '2020',
+    description: 'Awarded for excellence in infrastructure delivery by UAE Construction Association.',
+    category: 'award',
+  },
+  {
+    icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z',
+    name: 'Safety First Award',
+    year: '2021',
+    description: 'Recognition for exceptional safety record and zero-accident projects.',
+    category: 'award',
+  },
+  {
+    icon: 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z',
+    name: 'Project of the Year',
+    year: '2023',
+    description: 'Honored for outstanding marine construction project delivery.',
+    category: 'award',
+  },
+];
+
+const backgroundGridStyle = `
+  background-image:
+    linear-gradient(to right, currentColor 1px, transparent 1px),
+    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 60px 60px;
+`;
+---
+
+<section class="awards-section relative bg-surface text-primary overflow-hidden border-y border-primary/20">
+  <!-- Background pattern -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div
+      class="absolute inset-0 opacity-[0.03]"
+      style={backgroundGridStyle}
+    ></div>
+    <div class="absolute top-1/2 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse-slow"></div>
+  </div>
+
+  <div class="relative z-10 px-6 md:px-12 lg:px-24 py-16 md:py-24">
+    <!-- Section Header -->
+    <div class="text-center mb-16 md:mb-20">
+      <span class="text-xs font-bold uppercase tracking-[0.3em] text-accent block mb-4">
+        Recognition & Excellence
+      </span>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-semibold text-primary mb-6">
+        Awards & <span class="italic font-light text-primary/70">Certifications</span>
+      </h2>
+      <div class="flex items-center justify-center gap-4">
+        <div class="w-12 h-[2px] bg-accent"></div>
+        <div class="w-2 h-2 bg-accent rotate-45"></div>
+        <div class="w-12 h-[2px] bg-accent"></div>
+      </div>
+      <p class="mt-6 text-base text-primary/70 max-w-2xl mx-auto font-light leading-relaxed">
+        Recognized for excellence in safety, quality, and sustainable construction practices across the UAE.
+      </p>
+    </div>
+
+    <!-- Awards Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 max-w-7xl mx-auto">
+      {awards.map((award, index) => (
+        <article
+          class="award-card group relative bg-card border border-primary/10 p-6 transition-all duration-300"
+          style={`--delay: ${index * 75}ms`}
+        >
+          <!-- Icon -->
+          <div class="award-icon mb-4">
+            <svg
+              class="w-10 h-10 text-accent/80 group-hover:text-accent transition-colors"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d={award.icon} />
+            </svg>
+          </div>
+
+          <!-- Category Badge -->
+          <div class="inline-block px-2 py-1 mb-3 text-[10px] font-bold uppercase tracking-wider border border-primary/20">
+            {award.category}
+          </div>
+
+          <!-- Content -->
+          <h3 class="font-heading font-semibold text-base text-primary mb-1 group-hover:text-accent transition-colors leading-tight">
+            {award.name}
+          </h3>
+          <p class="text-xs font-bold text-accent mb-2">{award.year}</p>
+          <p class="text-xs text-primary/60 leading-relaxed line-clamp-3">
+            {award.description}
+          </p>
+
+          <!-- Decorative corner accents -->
+          <div class="card-corner corner-tl"></div>
+          <div class="card-corner corner-br"></div>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- Bottom decorative line -->
+  <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+</section>
+
+<style>
+  .award-card {
+    --radius: 0px;
+    border-radius: var(--radius);
+    min-height: 14rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .award-card:hover {
+    border-color: hsl(var(--color-accent));
+    box-shadow: 0 8px 24px rgba(44, 24, 16, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .award-card:hover .award-icon {
+    transform: scale(1.1);
+  }
+
+  .award-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .card-corner {
+    position: absolute;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-color: hsl(var(--color-accent));
+    border-style: solid;
+    border-width: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .award-card:hover .card-corner {
+    opacity: 0.5;
+  }
+
+  .corner-tl {
+    top: 0;
+    left: 0;
+    border-top-width: 2px;
+    border-left-width: 2px;
+  }
+
+  .corner-br {
+    bottom: 0;
+    right: 0;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .award-card {
+      transition: none;
+    }
+
+    .award-card:hover {
+      transform: none;
+    }
+
+    .award-icon {
+      transition: none;
+    }
+  }
+</style>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 
 interface GMMessageProps {
   className?: string;
@@ -7,7 +8,7 @@ interface GMMessageProps {
 
 const GMMessage: React.FC<GMMessageProps> = ({ className = '' }) => {
   // Animation variants
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -18,26 +19,26 @@ const GMMessage: React.FC<GMMessageProps> = ({ className = '' }) => {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.7,
-        ease: [0.16, 1, 0.3, 1]
+        ease: 'easeOut'
       }
     }
   };
 
-  const quoteMarkVariants = {
+  const quoteMarkVariants: Variants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
       opacity: 1,
       scale: 1,
       transition: {
         duration: 1,
-        ease: [0.16, 1, 0.3, 1]
+        ease: 'easeOut'
       }
     }
   };

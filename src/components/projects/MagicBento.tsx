@@ -44,7 +44,7 @@ const MagicBento: React.FC<MagicBentoProps> = ({ items, className = "" }) => {
       </div>
 
       <div className="relative grid grid-cols-1 md:grid-cols-4 auto-rows-[minmax(120px,1fr)] gap-4 md:gap-5">
-        {visibleItems.map((item, index) => {
+        {visibleItems.map((item) => {
           if (!item.value && !item.meta) return null;
 
           return (

@@ -1,6 +1,6 @@
 ---
 // ULTRACTION Core Values Section - Enhanced Design
-// Brand Colors: Primary #2c1810 (dark brown), Accent #985a3d (terracotta), Background #e8dcc8 (beige)
+// Uses design tokens from global.css
 
 interface CoreValue {
   id: string;
@@ -106,7 +106,7 @@ const coreValues: CoreValue[] = [
           <div class="ucv-card-flip">
             <div class="ucv-card-face ucv-card-front">
               <div class="ucv-front-visual" aria-hidden="true">
-                <img src={value.image} alt="" loading="lazy" />
+                <img src={value.image} alt={`${value.title} core value illustration`} loading="lazy" />
               </div>
 
               <div class="ucv-card-shell">
@@ -125,7 +125,7 @@ const coreValues: CoreValue[] = [
 
             <div class="ucv-card-face ucv-card-back">
               <div class="ucv-logo-watermark" aria-hidden="true">
-                <img src="/logo/UGC-LOGO-HQ.png" alt="" loading="lazy" />
+                <img src="/logo/UGC-LOGO-HQ.png" alt="ULTRACTION logo watermark" loading="lazy" />
               </div>
 
               <div class="ucv-card-shell">
@@ -161,12 +161,13 @@ const coreValues: CoreValue[] = [
 <style>
   /* ULTRACTION Core Values - Enhanced Design */
   .ultra-core-values {
-    --ucv-primary: #2c1810;
-    --ucv-accent: #985a3d;
-    --ucv-bg: #e8dcc8;
-    --ucv-card-bg: #f5efe6;
-    --ucv-text: #2c1810;
-    --ucv-text-light: #5a4d3a; /* Darker for WCAG AA contrast */
+    /* Use design tokens from global.css instead of hardcoded colors */
+    --ucv-primary: hsl(var(--color-primary));
+    --ucv-accent: hsl(var(--color-accent));
+    --ucv-bg: hsl(var(--color-bg));
+    --ucv-card-bg: hsl(var(--color-surface));
+    --ucv-text: hsl(var(--color-foreground));
+    --ucv-text-light: hsl(var(--color-foreground) / 0.7);
 
     padding: 6rem 2rem;
     position: relative;
@@ -286,7 +287,7 @@ const coreValues: CoreValue[] = [
     height: 100%;
     padding: 0;
     background: var(--ucv-card-bg);
-    border: 1px solid rgba(44, 24, 16, 0.1);
+    border: 1px solid hsl(var(--color-primary) / 0.1);
     transition: box-shadow 0.4s ease, background 0.4s ease;
   }
 
@@ -297,7 +298,7 @@ const coreValues: CoreValue[] = [
 
   .ucv-card-back {
     transform: rotateY(180deg);
-    background: color-mix(in srgb, var(--ucv-card-bg) 88%, var(--ucv-bg));
+    background: hsl(var(--color-surface) / 0.88);
   }
 
   .ucv-card-shell {
@@ -320,16 +321,16 @@ const coreValues: CoreValue[] = [
     font-size: 0.58rem;
     font-weight: 600; /* Increased weight for better contrast */
     color: var(--ucv-primary);
-    background: linear-gradient(90deg, color-mix(in srgb, var(--ucv-accent) 88%, white), var(--ucv-accent));
-    border-bottom: 1px solid color-mix(in srgb, var(--ucv-accent) 70%, black);
+    background: linear-gradient(90deg, hsl(var(--color-accent) / 0.88), hsl(var(--color-accent)));
+    border-bottom: 1px solid hsl(var(--color-accent) / 0.7);
   }
 
   .ucv-face-footer {
-    border-top: 1px solid color-mix(in srgb, var(--ucv-accent) 70%, black);
+    border-top: 1px solid hsl(var(--color-accent) / 0.7);
     border-bottom: 0;
     justify-content: flex-start;
     gap: 0.7rem;
-    background: linear-gradient(90deg, color-mix(in srgb, var(--ucv-accent) 92%, white), var(--ucv-accent));
+    background: linear-gradient(90deg, hsl(var(--color-accent) / 0.92), hsl(var(--color-accent)));
   }
 
   .ucv-face-content {
@@ -341,8 +342,8 @@ const coreValues: CoreValue[] = [
 
   .ucv-card:hover .ucv-card-front,
   .ucv-card.is-flipped .ucv-card-back {
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 20px 40px rgba(44, 24, 16, 0.15);
+    background: hsl(var(--color-surface) / 0.95);
+    box-shadow: 0 20px 40px hsl(var(--color-primary) / 0.15);
   }
 
   .ucv-front-visual {
@@ -493,7 +494,7 @@ const coreValues: CoreValue[] = [
     margin: 0;
     font-size: 0.74rem;
     line-height: 1.55;
-    color: color-mix(in srgb, var(--ucv-primary) 72%, white 28%);
+    color: hsl(var(--color-primary) / 0.72);
     max-width: 32ch;
   }
 

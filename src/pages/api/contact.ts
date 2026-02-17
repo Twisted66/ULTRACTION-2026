@@ -3,6 +3,7 @@ import { sendContactEmail } from '../../lib/graph-mail';
 
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
+const RATE_LIMIT_RETENTION_MS = RATE_LIMIT_WINDOW_MS * 2;
 const rateLimitMap = new Map<string, { count: number; windowStart: number }>();
 
 const SUBJECT_LABELS: Record<string, string> = {
@@ -141,6 +142,12 @@ function validateBody(body: ContactRequestBody): Record<string, string> {
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
+  for (const [entryIp, entry] of rateLimitMap.entries()) {
+    if (now - entry.windowStart > RATE_LIMIT_RETENTION_MS) {
+      rateLimitMap.delete(entryIp);
+    }
+  }
+
   const existing = rateLimitMap.get(ip);
 
   if (!existing || now - existing.windowStart > RATE_LIMIT_WINDOW_MS) {

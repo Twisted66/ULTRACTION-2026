@@ -307,9 +307,9 @@ const CoreValues: React.FC<CoreValuesProps> = ({ values = coreValues }) => {
                         `}
                         style={{ color: isHovered ? '#ffffff' : value.color }}
                       >
-                        <svg className="w-8 h-8 md:w-9 md:h-9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                          {React.Children.toArray(value.icon.props.children)}
-                        </svg>
+                        <div className="[&>svg]:w-8 [&>svg]:h-8 md:[&>svg]:w-9 md:[&>svg]:h-9">
+                          {value.icon}
+                        </div>
                       </div>
                     </motion.div>
 

@@ -18,6 +18,8 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const showElementCaptureWidget =
+  import.meta.env.DEV || import.meta.env.PUBLIC_ENABLE_ELEMENT_CAPTURE_WIDGET === 'true';
 ---
 
 <!doctype html>
@@ -52,7 +54,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:image" content={new URL(image, Astro.url)} />
 
     <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
+    <script is:inline type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
@@ -106,7 +108,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <Footer />
     </div>
 
-    <ElementCaptureWidget />
+    {showElementCaptureWidget && <ElementCaptureWidget />}
 
     <!-- Back to Top Button -->
     <button

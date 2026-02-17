@@ -1,4 +1,4 @@
----
+﻿---
 // Projects page - ULTRACTION General Contracting LLC
 // Following Nova Construct prototype exactly
 
@@ -71,7 +71,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
         aria-controls="projects-grid"
         class="filter-btn active h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-primary text-white"
       >
-        <span class="material-symbols-outlined text-xl">apps</span>
+        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 3h6m-3-3v6"/>
+        </svg>
         <span class="text-[10px] font-bold uppercase tracking-wider">ALL</span>
       </button>
 
@@ -97,7 +99,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
         aria-controls="projects-grid"
         class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
       >
-        <span class="material-symbols-outlined text-xl">sailing</span>
+        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 19h16M6 17l6-11 6 11M12 6V3m0 14v2"/>
+        </svg>
         <span class="text-[10px] font-bold uppercase tracking-wider">MARINE</span>
       </button>
 
@@ -109,7 +113,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
         aria-controls="projects-grid"
         class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
       >
-        <span class="material-symbols-outlined text-xl">account_balance</span>
+        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M3 20h18M4 9l8-5 8 5M6 9v8m4-8v8m4-8v8m4-8v8"/>
+        </svg>
         <span class="text-[10px] font-bold uppercase tracking-wider">HERITAGE</span>
       </button>
 
@@ -121,7 +127,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
         aria-controls="projects-grid"
         class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
       >
-        <span class="material-symbols-outlined text-xl">oil_barrel</span>
+        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M8 6h8m-8 0a2 2 0 0 0-2 2v9a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V8a2 2 0 0 0-2-2m-8 4h8"/>
+        </svg>
         <span class="text-[10px] font-bold uppercase tracking-wider">OIL & GAS</span>
       </button>
 
@@ -133,7 +141,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
         aria-controls="projects-grid"
         class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
       >
-        <span class="material-symbols-outlined text-xl">factory</span>
+        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M3 20h18M4 20V9l4 3V9l4 3V7l9 4v9M8 20v-3m4 3v-3m4 3v-3"/>
+        </svg>
         <span class="text-[10px] font-bold uppercase tracking-wider">INDUSTRIAL</span>
       </button>
 
@@ -145,7 +155,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
         aria-controls="projects-grid"
         class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
       >
-        <span class="material-symbols-outlined text-xl">home_work</span>
+        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M3 11l9-7 9 7M5 10v10h14V10M9 20v-5h6v5"/>
+        </svg>
         <span class="text-[10px] font-bold uppercase tracking-wider">RESIDENTIAL</span>
       </button>
 
@@ -157,7 +169,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
         aria-controls="projects-grid"
         class="filter-btn h-24 flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
       >
-        <span class="material-symbols-outlined text-xl">domain</span>
+        <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M3 20h18M5 20V7h14v13M9 11h2m2 0h2m-6 4h2m2 0h2"/>
+        </svg>
         <span class="text-[10px] font-bold uppercase tracking-wider">COMMERCIAL</span>
       </button>
     </div>
@@ -180,7 +194,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
               <h3 class="text-lg font-bold uppercase leading-tight text-white drop-shadow-md">Al Tallah Road Bridge 1, 2 &amp; 3</h3>
               <div class="mt-2 flex justify-between items-end pt-2">
                 <span class="text-[10px] opacity-70 text-white drop-shadow-sm">Ajman</span>
-                <span class="material-symbols-outlined text-sm text-white drop-shadow-sm">arrow_forward</span>
+                <svg class="inline-flex w-4 h-4 text-white drop-shadow-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 12h14m-6-6 6 6-6 6"/>
+                </svg>
               </div>
             </div>
           </div>
@@ -243,7 +259,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
                         <li>
                           <a href={`/projects/${project.slug}`} class="projects-list-link flex items-center justify-between gap-3 group py-1.5 text-primary transition-colors motion-base">
                             <span class="project-link-label text-[11px] uppercase tracking-wide text-left">{project.title}</span>
-                            <span class="material-symbols-outlined text-sm text-primary/70 group-hover:text-primary transition-all motion-base group-hover:translate-x-0.5">arrow_forward</span>
+                            <svg class="inline-flex w-4 h-4 text-primary/70 group-hover:text-primary transition-all motion-base group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 12h14m-6-6 6 6-6 6"/>
+                            </svg>
                           </a>
                         </li>
                       ))}
@@ -259,7 +277,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
                 data-projects-prev
                 aria-label="Show previous projects"
               >
-                <span class="material-symbols-outlined text-base">chevron_left</span>
+                <svg class="inline-flex w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m15 18-6-6 6-6"/>
+                </svg>
               </button>
               <div role="tablist" aria-label="Project list pages" class="flex items-center justify-center gap-3">
               {projectCarouselPages.map((_, pageIndex) => (
@@ -283,7 +303,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
                 data-projects-next
                 aria-label="Show next projects"
               >
-                <span class="material-symbols-outlined text-base">chevron_right</span>
+                <svg class="inline-flex w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m9 18 6-6-6-6"/>
+                </svg>
               </button>
             </div>
             <p id="projects-list-status" class="sr-only" aria-live="polite">
@@ -302,7 +324,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
           <img alt="Inner Bypass Parallel to E45 Madinat Zayed" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/inner-bypass-e45/photo_014.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute top-4 right-4 z-20">
-            <span class="material-symbols-outlined text-white opacity-80">arrow_outward</span>
+            <svg class="inline-flex w-5 h-5 text-white opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 17 17 7M9 7h8v8"/>
+            </svg>
           </div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
             <h3 class="text-xl font-bold uppercase mb-1">Inner Bypass E45</h3>
@@ -329,7 +353,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
           </div>
           <div class="absolute bottom-6 right-6 z-20 text-right">
             <h3 class="text-2xl font-bold text-white uppercase mb-1 leading-tight text-shadow-sm">Utility Structure<br/>Design & Build</h3>
-            <p class="text-[10px] text-white uppercase tracking-widest font-medium">Stations 6+623 – 7+897</p>
+            <p class="text-[10px] text-white uppercase tracking-widest font-medium">Stations 6+623 &ndash; 7+897</p>
           </div>
           <div class="project-overlay absolute inset-0 bg-primary/90 flex flex-col justify-center items-center text-white p-8 text-center z-30">
             <svg class="w-12 h-12 mb-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -352,7 +376,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
             <span class="text-[10px] uppercase tracking-widest text-white">Public Infrastructure</span>
             <h3 class="text-xl font-bold uppercase mt-1">RAK Beach District</h3>
-            <p class="text-[10px] uppercase tracking-wide opacity-90 mt-1">Phase 1 – Road Infrastructure</p>
+            <p class="text-[10px] uppercase tracking-wide opacity-90 mt-1">Phase 1 &ndash; Road Infrastructure</p>
           </div>
           <div class="project-overlay absolute inset-0 bg-primary/95 flex flex-col justify-center items-center text-white p-6 text-center z-30">
             <span class="text-[10px] uppercase tracking-widest text-white mb-2">Public Infrastructure</span>
@@ -463,7 +487,10 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
           <span class="text-[10px] font-bold uppercase tracking-widest opacity-80 mb-4 block">Archive</span>
           <h3 class="text-xl font-bold uppercase leading-tight mb-6">Explore Past<br/>Endeavors</h3>
           <a class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold hover:text-color-accent transition-colors motion-base" href="/contact">
-            View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            View All
+            <svg class="inline-flex w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 12h14m-6-6 6 6-6 6"/>
+            </svg>
           </a>
         </div>
         <div class="col-span-1 md:col-span-1 border-r border-primary/20 relative group overflow-hidden aspect-square project-card">
@@ -496,7 +523,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
         </div>
         <div class="col-span-1 md:col-span-1 relative group overflow-hidden aspect-square p-8 flex flex-col justify-between">
           <div>
-            <span class="material-symbols-outlined text-3xl mb-2">folder_open</span>
+            <svg class="w-8 h-8 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v1H3V7Zm0 4h18l-2 8a2 2 0 0 1-2 1H5a2 2 0 0 1-2-2v-7Z"/>
+            </svg>
             <p class="text-sm font-medium leading-relaxed opacity-90">Access our complete database of over 150 projects.</p>
           </div>
           <div class="text-[10px] uppercase tracking-widest font-bold opacity-70">Database Access</div>
@@ -522,7 +551,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
     </div>
 
     <div class="relative z-10 px-6 md:px-12 lg:px-24 py-20 md:py-28 lg:py-32">
-      <div class="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
+      <div class="projects-cta-shell flex flex-col items-center justify-center text-center max-w-5xl mx-auto">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-12 h-[2px] bg-accent"></div>
           <span class="text-xs font-bold uppercase tracking-[0.3em] text-accent">
@@ -531,7 +560,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
           <div class="w-12 h-[2px] bg-accent"></div>
         </div>
 
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading leading-[0.95] tracking-tight mb-8 max-w-3xl">
+        <h2 class="projects-cta-title text-4xl md:text-5xl lg:text-6xl font-bold font-heading leading-[0.95] tracking-tight mb-8 max-w-3xl">
           Let's build infrastructure that
           <br />
           <span class="italic font-light text-primary/50 scale-y-75 inline-block">
@@ -539,8 +568,14 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
           </span>
         </h2>
 
+        <div class="projects-cta-pills mb-10">
+          <span>Design-Build Expertise</span>
+          <span>UAE Delivery Teams</span>
+          <span>Complex Civil Infrastructure</span>
+        </div>
+
         <a
-          class="group relative inline-flex items-center gap-3 px-10 py-5 bg-primary text-white overflow-hidden transition-all duration-300 hover:bg-accent hover:shadow-xl hover:shadow-accent/20"
+          class="projects-cta-btn group relative inline-flex items-center gap-3 px-10 py-5 bg-primary text-white overflow-hidden transition-all duration-300 hover:bg-accent hover:shadow-xl hover:shadow-accent/20"
           href="/contact"
         >
           <span class="relative z-10 text-xs font-bold uppercase tracking-[0.2em]">
@@ -554,9 +589,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
           >
             <path
               d="M14 5l7 7m0 0l-7 7m7-7H3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width={2}
             />
           </svg>
         </a>
@@ -573,7 +608,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
   const filterTargets = document.querySelectorAll('[data-category]');
   const filterStatus = document.getElementById('projects-filter-status');
 
-  const formatFilterLabel = (filter) => {
+  const formatFilterLabel = (filter: string): string => {
     if (!filter || filter === 'all') return 'all';
     return filter.replace('-', ' ');
   };
@@ -633,7 +668,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
   let projectListActiveIndex = 0;
   let projectListTimer = 0;
 
-  const setProjectListPage = (targetIndex, announce = true) => {
+  const setProjectListPage = (targetIndex: number, announce = true): void => {
     if (!(projectListTrack instanceof HTMLElement) || projectListPages.length === 0) return;
     const pageCount = projectListPages.length;
     const nextIndex = ((targetIndex % pageCount) + pageCount) % pageCount;
@@ -713,6 +748,12 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
 </script>
 
 <style>
+  .filter-icon {
+    width: 1.35rem;
+    height: 1.35rem;
+    stroke-width: 1.7;
+  }
+
   .projects-list-track {
     transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -753,5 +794,87 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
   .animate-pulse-slow {
     animation: pulse-slow 8s ease-in-out infinite;
   }
+
+  .projects-cta-shell {
+    position: relative;
+    border: 1px solid hsl(var(--primary) / 0.16);
+    padding: clamp(1.8rem, 1.1rem + 2vw, 3.25rem);
+    background:
+      radial-gradient(120% 120% at 0% 0%, hsl(var(--accent) / 0.08), transparent 55%),
+      linear-gradient(165deg, hsl(var(--background) / 0.96), hsl(var(--card) / 0.9));
+    box-shadow:
+      0 35px 80px -55px hsl(var(--primary) / 0.65),
+      0 0 0 1px hsl(var(--accent) / 0.08) inset;
+    overflow: hidden;
+  }
+
+  .projects-cta-shell::before {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    border: 1px solid hsl(var(--accent) / 0.14);
+    pointer-events: none;
+  }
+
+  .projects-cta-shell::after {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -60px;
+    width: 180px;
+    height: 180px;
+    border-radius: 999px;
+    background: radial-gradient(circle, hsl(var(--accent) / 0.26), transparent 65%);
+    pointer-events: none;
+  }
+
+  .projects-cta-title {
+    text-wrap: balance;
+    text-shadow: 0 14px 28px hsl(var(--primary) / 0.12);
+  }
+
+  .projects-cta-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.65rem;
+  }
+
+  .projects-cta-pills span {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 700;
+    border: 1px solid hsl(var(--primary) / 0.2);
+    padding: 0.55rem 0.85rem;
+    background: hsl(var(--background) / 0.72);
+    backdrop-filter: blur(4px);
+  }
+
+  .projects-cta-btn {
+    box-shadow:
+      0 18px 30px -20px hsl(var(--primary) / 0.7),
+      0 0 0 1px hsl(0 0% 100% / 0.08) inset;
+  }
+
+  .projects-cta-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent, hsl(0 0% 100% / 0.24), transparent);
+    transform: translateX(-115%);
+    transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .projects-cta-btn:hover::before {
+    transform: translateX(120%);
+  }
+
+  @media (max-width: 768px) {
+    .projects-cta-shell::before {
+      inset: 8px;
+    }
+  }
 </style>
+
 

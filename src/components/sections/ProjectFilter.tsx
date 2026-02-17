@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import type { CategoryType } from '../../lib/project-types';
+import React, { useState } from 'react';
+import { CATEGORIES, ProjectCategory, type CategoryType } from '../../lib/project-types';
 
 interface ProjectFilterProps {
-  categories?: CategoryType[];
+  categories?: readonly CategoryType[];
   initialCategory?: CategoryType;
   onCategoryChange?: (category: CategoryType) => void;
 }
 
-const icons: Record<string, string> = {
-  'all': 'apps',
-  'infrastructure': 'bridge',
-  'residential': 'home_work',
-  'commercial': 'domain',
-  'industrial': 'factory',
-  'marine': 'sailing'
+const icons: Record<CategoryType, string> = {
+  [ProjectCategory.ALL]: 'apps',
+  [ProjectCategory.INFRASTRUCTURE]: 'bridge',
+  [ProjectCategory.RESIDENTIAL]: 'home_work',
+  [ProjectCategory.COMMERCIAL]: 'domain',
+  [ProjectCategory.INDUSTRIAL]: 'factory',
+  [ProjectCategory.MARINE]: 'sailing'
 };
 
-const iconPaths: Record<string, JSX.Element> = {
+const iconPaths: Record<string, React.ReactElement> = {
   'apps': (
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
   ),
@@ -37,18 +37,18 @@ const iconPaths: Record<string, JSX.Element> = {
   )
 };
 
-const categoryLabels: Record<string, string> = {
-  'all': 'ALL',
-  'infrastructure': 'INFRASTRUCTURE',
-  'residential': 'RESIDENTIAL',
-  'commercial': 'COMMERCIAL',
-  'industrial': 'INDUSTRIAL',
-  'marine': 'MARINE'
+const categoryLabels: Record<CategoryType, string> = {
+  [ProjectCategory.ALL]: 'ALL',
+  [ProjectCategory.INFRASTRUCTURE]: 'INFRASTRUCTURE',
+  [ProjectCategory.RESIDENTIAL]: 'RESIDENTIAL',
+  [ProjectCategory.COMMERCIAL]: 'COMMERCIAL',
+  [ProjectCategory.INDUSTRIAL]: 'INDUSTRIAL',
+  [ProjectCategory.MARINE]: 'MARINE'
 };
 
 export default function ProjectFilter({
-  categories = ['all', 'infrastructure', 'residential', 'commercial', 'industrial', 'marine'],
-  initialCategory = 'all',
+  categories = CATEGORIES,
+  initialCategory = ProjectCategory.ALL,
   onCategoryChange
 }: ProjectFilterProps) {
   const [activeCategory, setActiveCategory] = useState<CategoryType>(initialCategory);
