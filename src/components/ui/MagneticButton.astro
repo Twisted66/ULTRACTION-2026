@@ -18,6 +18,7 @@ interface Props {
   href?: string; // If provided, renders as link
   type?: 'button' | 'submit' | 'reset';
   class?: string; // Additional classes
+  [key: string]: any; // Allow for data attributes and others
 }
 
 const {
@@ -29,6 +30,7 @@ const {
   href,
   type = 'button',
   class: additionalClass = '',
+  ...rest
 } = Astro.props;
 
 const id = `magnetic-${Math.random().toString(36).slice(2, 11)}`;
@@ -58,6 +60,7 @@ const variantClasses = {
       data-strength={strength}
       data-ripple={ripple}
       class={`magnetic-btn inline-flex items-center justify-center font-medium uppercase tracking-widest transition-all duration-300 ${variantClasses[variant]} ${sizeClasses[size]} ${additionalClass}`}
+      {...rest}
     >
       <slot />
     </a>
@@ -69,6 +72,7 @@ const variantClasses = {
       data-strength={strength}
       data-ripple={ripple}
       class={`magnetic-btn inline-flex items-center justify-center font-medium uppercase tracking-widest transition-all duration-300 ${variantClasses[variant]} ${sizeClasses[size]} ${additionalClass}`}
+      {...rest}
     >
       <slot />
     </button>
