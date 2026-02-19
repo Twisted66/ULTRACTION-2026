@@ -9,7 +9,9 @@
  * - Works with any button content
  */
 
-interface Props {
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'button'>, HTMLAttributes<'a'> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   magnetic?: boolean; // Enable magnetic effect
@@ -29,6 +31,7 @@ const {
   href,
   type = 'button',
   class: additionalClass = '',
+  ...rest
 } = Astro.props;
 
 const id = `magnetic-${Math.random().toString(36).slice(2, 11)}`;
@@ -58,6 +61,7 @@ const variantClasses = {
       data-strength={strength}
       data-ripple={ripple}
       class={`magnetic-btn inline-flex items-center justify-center font-medium uppercase tracking-widest transition-all duration-300 ${variantClasses[variant]} ${sizeClasses[size]} ${additionalClass}`}
+      {...rest}
     >
       <slot />
     </a>
@@ -69,6 +73,7 @@ const variantClasses = {
       data-strength={strength}
       data-ripple={ripple}
       class={`magnetic-btn inline-flex items-center justify-center font-medium uppercase tracking-widest transition-all duration-300 ${variantClasses[variant]} ${sizeClasses[size]} ${additionalClass}`}
+      {...rest}
     >
       <slot />
     </button>
