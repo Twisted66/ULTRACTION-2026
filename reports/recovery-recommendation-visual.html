@@ -1,0 +1,207 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recommended Recovery Plan (Visual-First)</title>
+  <style>
+    :root {
+      --bg1: #eef6ff;
+      --bg2: #fff8ef;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #d9e4f0;
+      --hi: #0ea5a4;
+      --warn: #f59e0b;
+      --ok: #2563eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 28px;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(140deg, var(--bg1), #f7fbff 45%, var(--bg2));
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    .sub { color: var(--muted); margin: 0 0 18px; }
+    .note {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--ok);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .legend .item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .k { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+    .v { font-size: 22px; margin-top: 5px; font-weight: 700; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e8eef5;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+    th {
+      font-size: 12px;
+      color: #4b5563;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      background: #f8fbff;
+    }
+    tr:last-child td { border-bottom: none; }
+    .rank {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #0ea5a4, #2563eb);
+    }
+    .score {
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .pill {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #e6f7f7;
+      color: #0f766e;
+    }
+    .phase {
+      margin-top: 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    ul { margin: 8px 0 0 20px; }
+    li { margin: 5px 0; }
+    code { background: #f3f4f6; padding: 1px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Recommended Recovery Plan (Visual-First)</h1>
+    <p class="sub">Goal: recover the parts from stash commit <code>972c2b5</code> that make the site look more advanced, while keeping current branch structure stable.</p>
+
+    <div class="note">
+      <strong>Decision rule used:</strong> prioritize pages where stash is visibly more rich and detailed, then recover medium-impact polish areas. Keep current versions where stash does not provide a clear visual improvement.
+    </div>
+
+    <div class="legend">
+      <div class="item">
+        <div class="k">Top Recovery Candidate</div>
+        <div class="v">Project Detail Page</div>
+      </div>
+      <div class="item">
+        <div class="k">Recovery Type</div>
+        <div class="v">Visual + Messaging</div>
+      </div>
+      <div class="item">
+        <div class="k">Approach</div>
+        <div class="v">Selective File Restore</div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Priority</th>
+          <th>File</th>
+          <th>Visual Advancement Score</th>
+          <th>Why Recover</th>
+          <th>Risk</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rank">1</span></td>
+          <td><code>src/pages/projects/[slug].astro</code></td>
+          <td><span class="score">10/10</span> <span class="pill">Highest Impact</span></td>
+          <td>Biggest visual and content depth gap. This is where the stash looks most premium and complete.</td>
+          <td>Medium: large file, so review spacing/components after restore.</td>
+        </tr>
+        <tr>
+          <td><span class="rank">2</span></td>
+          <td><code>src/pages/about.astro</code></td>
+          <td><span class="score">8/10</span></td>
+          <td>Stronger brand story and section richness in stash version.</td>
+          <td>Low-Medium: ensure current reusable about components still fit.</td>
+        </tr>
+        <tr>
+          <td><span class="rank">3</span></td>
+          <td><code>src/pages/contact.astro</code></td>
+          <td><span class="score">7/10</span></td>
+          <td>More polished visual presentation and layout depth in stash.</td>
+          <td>Low: mostly presentation-level recovery.</td>
+        </tr>
+        <tr>
+          <td><span class="rank">4</span></td>
+          <td><code>src/pages/index.astro</code></td>
+          <td><span class="score">5/10</span></td>
+          <td>Close call, but stash may contain stronger hero/section visual tuning.</td>
+          <td>Low: optional enhancement, not critical.</td>
+        </tr>
+        <tr>
+          <td><span class="rank">5</span></td>
+          <td><code>src/pages/services.astro</code></td>
+          <td><span class="score">4/10</span></td>
+          <td>Only minor visual differences; recover only if you prefer stash styling.</td>
+          <td>Low: mostly cosmetic.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="phase">
+      <strong>Recommended sequence</strong>
+      <ul>
+        <li>Phase 1 (must recover): <code>src/pages/projects/[slug].astro</code></li>
+        <li>Phase 2 (brand/story boost): <code>src/pages/about.astro</code>, <code>src/pages/contact.astro</code></li>
+        <li>Phase 3 (optional polish): <code>src/pages/index.astro</code>, <code>src/pages/services.astro</code></li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <strong>Keep current versions</strong>
+      <ul>
+        <li><code>src/pages/projects.astro</code> (current seems stronger for listing UX)</li>
+        <li><code>src/layouts/Layout.astro</code> (current global structure is cleaner)</li>
+        <li><code>src/components/layout/Header.astro</code> (nearly tied, keep current)</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <strong>Report file</strong>: <code>reports/recovery-recommendation-visual.html</code>
+    </div>
+  </div>
+</body>
+</html>

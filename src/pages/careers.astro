@@ -1,102 +1,132 @@
 ---
+// Careers page - ULTRACTION General Contracting LLC
+// Upgraded to match the premium industrial design system
+
 import Layout from '../layouts/Layout.astro';
+import MagneticButton from '../components/ui/MagneticButton.astro';
+import Globe3DDemo from '../components/3d-globe-demo';
+
+// SEO Metadata
+const title = "Careers - ULTRACTION GENERAL CONTRACTING LLC";
+const description = "Join the ULTRACTION team. We are looking for driven engineers, site professionals, and project leaders to build high-impact infrastructure in the UAE and KSA.";
 ---
 
-<Layout title="Careers - ULTRACTION GENERAL CONTRACTING LLC">
-  <section class="careers-hero">
-    <div class="careers-card">
-      <p class="eyebrow">Careers</p>
-      <h1>Join Our Team</h1>
-      <p class="lead">
-        ULTRACTION is always looking for driven engineers, site professionals, and project leaders who want to build high-impact infrastructure.
-      </p>
-      <p class="body">
-        If you are ready to contribute to complex construction and contracting projects across the UAE and KSA, send us your profile and tell us where you can add value.
-      </p>
-      <a class="cta" href="/contact?subject=careers">Apply via Contact Form</a>
-      <p class="note">Include your role, years of experience, availability, and a link to your CV or portfolio in the message.</p>
-    </div>
-  </section>
+<Layout
+  title={title}
+  description={description}
+  image="/logo/UGC-HEADER.png"
+>
+  <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-104px)] border-t border-border">
+      
+      <!-- Left: Content (Brand Beige) -->
+      <div class="bg-surface text-primary p-8 lg:p-20 flex flex-col justify-center order-2 lg:order-1 relative z-10 border-r border-primary/20 overflow-hidden">
+        {/* Grid pattern overlay */}
+        <div class="absolute inset-0 pointer-events-none opacity-[0.03]" style={{
+          backgroundImage: `
+            linear-gradient(to right, currentColor 1px, transparent 1px),
+            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px'
+        }}></div>
+
+        {/* Animated gradient accent */}
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+
+        <div class="max-w-xl mx-auto w-full relative z-10">
+          <span class="text-xs font-bold uppercase tracking-widest opacity-80 mb-4 block">Careers</span>
+          <h1 class="text-5xl lg:text-7xl font-bold uppercase leading-none mb-12 font-heading">
+            Join Our<br/><span class="text-accent italic">Expert Team</span>.
+          </h1>
+          
+          <div class="space-y-6 text-lg opacity-80 leading-relaxed font-body">
+            <p>
+              ULTRACTION is always looking for driven engineers, site professionals, and project leaders who want to build high-impact infrastructure.
+            </p>
+            <p>
+              If you are ready to contribute to complex construction and contracting projects across the UAE and KSA, we want to hear from you.
+            </p>
+          </div>
+
+          <div class="mt-12 p-8 bg-background/30 backdrop-blur-sm border border-primary/10 rounded-none relative overflow-hidden group">
+            <div class="absolute top-0 left-0 w-1 h-full bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+            <p class="text-sm uppercase tracking-widest font-bold mb-6 flex items-center gap-3">
+              <span class="w-8 h-[1px] bg-accent"></span>
+              How to Apply
+            </p>
+            <p class="text-sm opacity-70 mb-8 leading-relaxed">
+              Include your target role, years of experience, availability, and a link to your CV or portfolio in your message.
+            </p>
+            
+            <MagneticButton
+              href="/contact?subject=careers"
+              variant="primary"
+              size="lg"
+              class="w-full sm:w-auto"
+            >
+              <span class="flex items-center gap-4">
+                Apply via Contact Form
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </span>
+            </MagneticButton>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Visual (Default Background) -->
+      <div class="bg-background relative min-h-[50vh] lg:min-h-screen order-1 lg:order-2 overflow-hidden flex items-center justify-center">
+          <div class="absolute inset-0 z-0 flex items-center justify-center">
+               <Globe3DDemo client:only="react" className="h-[700px] w-[125%] -translate-y-14" />
+          </div>
+
+          {/* Grid pattern overlay */}
+          <div class="absolute inset-0 pointer-events-none opacity-[0.03]" style={{
+            backgroundImage: `
+              linear-gradient(to right, currentColor 1px, transparent 1px),
+              linear-gradient(to bottom, currentColor 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px'
+          }}></div>
+
+          {/* Animated gradient accent */}
+          <div class="absolute top-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+
+          <!-- Feature Tag -->
+          <div class="absolute top-12 right-12 z-20 hidden lg:block">
+            <div class="bg-surface/90 backdrop-blur-md px-6 py-4 border border-primary/10 flex flex-col items-end">
+              <span class="text-[10px] uppercase tracking-[0.3em] text-accent font-bold mb-1">Global Reach</span>
+              <span class="text-xs font-bold opacity-60">UAE & KSA Operations</span>
+            </div>
+          </div>
+
+          <!-- Why Join Section (Small overlay) -->
+          <div class="absolute bottom-12 right-12 z-20 hidden xl:block max-w-xs">
+            <div class="bg-surface/80 backdrop-blur-xl p-8 border border-primary/20">
+              <h3 class="text-xl font-bold uppercase mb-4 font-heading tracking-tight">Why ULTRACTION?</h3>
+              <ul class="space-y-3 text-xs uppercase tracking-widest font-bold opacity-70">
+                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> Iconic Projects</li>
+                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> Expert Leadership</li>
+                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> Innovation Driven</li>
+              </ul>
+            </div>
+          </div>
+      </div>
+  </div>
 </Layout>
 
 <style>
-  .careers-hero {
-    min-height: calc(100vh - 104px);
-    display: grid;
-    place-items: center;
-    padding: 3rem 1.5rem;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(221, 212, 197, 0.7) 0%, rgba(221, 212, 197, 0) 45%),
-      linear-gradient(135deg, #f7f2e8 0%, #e9e0d1 42%, #d8cfbf 100%);
+  /* Slow pulse for accent blob */
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.3);
+    }
   }
 
-  .careers-card {
-    width: min(760px, 100%);
-    padding: clamp(2rem, 4vw, 3.75rem);
-    border: 1px solid rgba(35, 35, 35, 0.2);
-    background: rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(4px);
-    box-shadow: 0 24px 50px rgba(35, 35, 35, 0.12);
-  }
-
-  .eyebrow {
-    margin: 0 0 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.22em;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: #5f5346;
-  }
-
-  h1 {
-    margin: 0;
-    color: #1d1d1d;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    line-height: 0.95;
-    text-transform: uppercase;
-    font-family: var(--font-heading);
-  }
-
-  .lead {
-    margin: 1.5rem 0 0;
-    color: #2a2a2a;
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    line-height: 1.65;
-    max-width: 62ch;
-  }
-
-  .body {
-    margin: 1rem 0 0;
-    color: rgba(29, 29, 29, 0.84);
-    line-height: 1.75;
-    max-width: 62ch;
-  }
-
-  .cta {
-    margin-top: 2rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.95rem 1.4rem;
-    background: #1d1d1d;
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 0.78rem;
-    font-weight: 700;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-  }
-
-  .cta:hover {
-    background: #000;
-    transform: translateY(-2px);
-  }
-
-  .note {
-    margin-top: 1rem;
-    color: rgba(29, 29, 29, 0.72);
-    font-size: 0.9rem;
-    line-height: 1.6;
+  .animate-pulse-slow {
+    animation: pulse-slow 12s ease-in-out infinite;
   }
 </style>

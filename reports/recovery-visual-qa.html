@@ -1,0 +1,65 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visual QA - Recovered Pages</title>
+  <style>
+    body{margin:0;padding:24px;font-family:Segoe UI,Arial,sans-serif;background:#f5f7fb;color:#1f2937}
+    .wrap{max-width:1280px;margin:0 auto}
+    h1{margin:0 0 8px}
+    .sub{color:#6b7280;margin:0 0 18px}
+    .note{background:#fff;border:1px solid #dbe3ef;border-radius:10px;padding:12px 14px;margin:0 0 16px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px}
+    .card{background:#fff;border:1px solid #dbe3ef;border-radius:12px;padding:12px}
+    .title{font-weight:700;margin:0 0 8px}
+    .imgs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    img{width:100%;height:auto;border:1px solid #e5e7eb;border-radius:8px;background:#fafafa}
+    .meta{font-size:12px;color:#6b7280;margin-top:8px}
+    code{background:#f3f4f6;padding:1px 4px;border-radius:4px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Visual QA Snapshot</h1>
+    <p class="sub">Recovered files: <code>about.astro</code>, <code>contact.astro</code>, <code>projects/[slug].astro</code></p>
+
+    <div class="note">
+      <strong>Automated QA findings:</strong> no JavaScript crashes observed. Contact page has 2 failed network requests (likely external resources). About + Project Detail show broken image references that should be corrected before release.
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <p class="title">About Page</p>
+        <div class="imgs">
+          <div><img src="./screenshots/recovery/about-desktop.png" alt="about desktop" /></div>
+          <div><img src="./screenshots/recovery/about-mobile.png" alt="about mobile" /></div>
+        </div>
+        <div class="meta">Route: <code>/about</code> | Status: visually rich, but includes broken client logo images.</div>
+      </div>
+
+      <div class="card">
+        <p class="title">Contact Page</p>
+        <div class="imgs">
+          <div><img src="./screenshots/recovery/contact-desktop.png" alt="contact desktop" /></div>
+          <div><img src="./screenshots/recovery/contact-mobile.png" alt="contact mobile" /></div>
+        </div>
+        <div class="meta">Route: <code>/contact</code> | Status: no broken local images detected; 2 failed requests during load.</div>
+      </div>
+
+      <div class="card" style="grid-column:1 / -1;">
+        <p class="title">Project Detail Page</p>
+        <div class="imgs">
+          <div><img src="./screenshots/recovery/project-detail-desktop.png" alt="project detail desktop" /></div>
+          <div><img src="./screenshots/recovery/project-detail-mobile.png" alt="project detail mobile" /></div>
+        </div>
+        <div class="meta">Route: <code>/projects/example-project</code> | Status: strongest visual depth, but project gallery image paths are currently broken.</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Next recommended fix:</strong> update image paths used by recovered <code>src/pages/projects/[slug].astro</code> and client images in <code>src/pages/about.astro</code> so the design renders fully.
+    </div>
+  </div>
+</body>
+</html>
