@@ -17,13 +17,16 @@ const isActive = (href: string) => {
       </a>
       <button
         id="mobile-menu-toggle"
-        class="md:hidden text-foreground p-2 min-h-[44px] min-w-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        class="md:hidden text-foreground p-2 min-h-[44px] min-w-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary group/menu"
         aria-label="Open navigation menu"
         aria-controls="mobile-nav"
         aria-expanded="false"
       >
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="h-6 w-6 menu-open-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        <svg class="h-6 w-6 menu-close-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
         </svg>
       </button>
     </div>
@@ -93,6 +96,15 @@ const isActive = (href: string) => {
     toggle.setAttribute('aria-expanded', String(isOpen));
     toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
     mobileNav.classList.toggle('hidden', !isOpen);
+
+    // Toggle icons
+    const openIcon = toggle.querySelector('.menu-open-icon');
+    const closeIcon = toggle.querySelector('.menu-close-icon');
+    if (openIcon && closeIcon) {
+      openIcon.classList.toggle('hidden', isOpen);
+      closeIcon.classList.toggle('hidden', !isOpen);
+    }
+
     // Prevent body scroll when menu is open
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
   }
