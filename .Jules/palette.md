@@ -11,3 +11,7 @@
 ## 2026-02-14 - Accessible Async Interactions
 **Learning:** For icon-only or secondary buttons that trigger async actions, purely visual feedback (like a color change) is insufficient for screen readers. Using `aria-busy` combined with a text label update (e.g., "Sending...") provides the necessary semantic update.
 **Action:** Pair `aria-busy` with a temporary text-content change inside action buttons to ensure both visual and cognitive feedback.
+
+## 2026-02-14 - Interactive Navigation Feedback and Component Extensibility
+**Learning:** Mobile menu toggles that don't change their icon (e.g., staying as a hamburger when open) fail to provide immediate visual confirmation of the menu state. Additionally, internal UI components like 'MagneticButton' must support attribute spreading to allow developers to inject critical accessibility attributes (like aria-label) without modifying the base component.
+**Action:** Ensure all toggle interactions have distinct visual states (icons/colors) and ensure all base UI components spread '...rest' props to their root interactive element.
