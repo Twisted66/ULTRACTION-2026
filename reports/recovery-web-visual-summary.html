@@ -1,0 +1,51 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web View Visual Summary - Quick Fix</title>
+  <style>
+    body{margin:0;padding:24px;font-family:Segoe UI,Arial,sans-serif;background:#f4f7fb;color:#1f2937}
+    .wrap{max-width:1280px;margin:0 auto}
+    h1{margin:0 0 8px}
+    .sub{margin:0 0 14px;color:#6b7280}
+    .ok{background:#fff;border:1px solid #d6e6dc;border-left:5px solid #059669;border-radius:10px;padding:12px 14px;margin-bottom:16px}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px}
+    .card{background:#fff;border:1px solid #dbe3ef;border-radius:12px;padding:12px}
+    .title{font-weight:700;margin:0 0 8px}
+    img{width:100%;height:auto;border:1px solid #e5e7eb;border-radius:8px;background:#fafafa}
+    .meta{font-size:12px;color:#6b7280;margin-top:8px}
+    code{background:#f3f4f6;padding:1px 4px;border-radius:4px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Web View Visual Summary (After Quick Fix)</h1>
+    <p class="sub">Desktop-only snapshots for the recovered pages after fixing project image references.</p>
+
+    <div class="ok">
+      <strong>QA status:</strong> no JavaScript errors, no failed requests, and no broken image renders detected on the checked desktop views.
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <p class="title">About Page</p>
+        <img src="./screenshots/recovery-web/about-desktop.png" alt="about desktop" />
+        <div class="meta">Route: <code>/about</code></div>
+      </div>
+
+      <div class="card">
+        <p class="title">Contact Page</p>
+        <img src="./screenshots/recovery-web/contact-desktop.png" alt="contact desktop" />
+        <div class="meta">Route: <code>/contact</code></div>
+      </div>
+
+      <div class="card">
+        <p class="title">Project Detail Page</p>
+        <img src="./screenshots/recovery-web/project-detail-desktop.png" alt="project detail desktop" />
+        <div class="meta">Route: <code>/projects/example-project</code></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

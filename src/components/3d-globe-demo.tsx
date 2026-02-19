@@ -71,12 +71,17 @@ const sampleMarkers: GlobeMarker[] = [
   },
 ];
 
-export default function Globe3DDemo() {
+interface Globe3DDemoProps {
+  className?: string;
+}
+
+export default function Globe3DDemo({ className }: Globe3DDemoProps) {
   return (
     <Globe3D
+      className={className}
       markers={sampleMarkers}
       config={{
-        radius: 2.4,
+        radius: 3.2,
         atmosphereColor: "#4da6ff",
         atmosphereIntensity: 20,
         bumpScale: 5,

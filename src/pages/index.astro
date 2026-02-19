@@ -8,6 +8,7 @@ import InfiniteScroll from '../components/common/InfiniteScroll.astro';
 import SectionBackground from '../components/common/SectionBackground';
 import ClientPartners from '../components/about/ClientPartners';
 import ServicesCarousel from '../components/sections/ServicesCarousel';
+import Stats from '../components/sections/Stats';
 import { services } from '../data/services';
 
 const galleryImages = [
@@ -112,77 +113,7 @@ const structuredData = {
   </section>
 
   <!-- Stats Section - Grid with numbers and images -->
-  <section class="border-b border-black dark:border-black">
-    <div class="flex flex-col lg:flex-row">
-      <div class="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 border-r-0 lg:border-r border-black dark:border-black">
-        <div class="p-6 sm:p-8 border-b md:border-r border-black dark:border-black min-h-[240px] sm:h-80 flex flex-col justify-between">
-          <div>
-            <span class="block text-5xl sm:text-6xl font-bold mb-2">400</span>
-            <span class="text-xs uppercase tracking-widest font-bold">Professionals</span>
-          </div>
-          <p class="text-sm leading-relaxed mt-4">
-            Skilled professionals on our team. Our team brings together many professionals ready to take on any size challenge. We create a team that inspires trust.
-          </p>
-        </div>
-        <div class="border-b border-black dark:border-black min-h-[240px] sm:h-80 overflow-hidden relative group">
-          <img alt="Al Tallah Road Bridge" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-110" src="/images/projects/al-tallah-bridge/photo_003.jpeg" />
-        </div>
-        <div class="border-b border-black dark:border-black md:border-r min-h-[200px] sm:h-64 overflow-hidden">
-          <img alt="E20 Traffic Bridge" class="w-full h-full object-cover" src="/images/projects/e20-traffic-bridges/photo_010.jpeg" />
-        </div>
-        <div class="p-6 sm:p-8 border-b border-black dark:border-black min-h-[200px] sm:h-64 flex flex-col justify-between">
-          <div>
-            <span class="block text-5xl sm:text-6xl font-bold mb-2">18</span>
-            <span class="text-xs uppercase tracking-widest font-bold">Awards</span>
-          </div>
-          <p class="text-sm leading-relaxed mt-4">
-            Construction quality awards. Our commitment has been recognized with awards and certifications.
-          </p>
-        </div>
-        <div class="p-6 sm:p-8 border-b border-black dark:border-black md:border-r min-h-[200px] sm:h-64 flex flex-col justify-between">
-          <div>
-            <span class="block text-4xl sm:text-6xl font-bold mb-2">62</span>
-            <span class="text-[10px] sm:text-xs uppercase tracking-widest font-bold">Cities</span>
-          </div>
-          <p class="text-[13px] sm:text-sm leading-relaxed mt-4">
-            Cities where we have left our mark. Our construction achievements span more than 62 cities.
-          </p>
-        </div>
-        <div class="border-b border-black dark:border-black min-h-[200px] sm:h-64 overflow-hidden relative">
-          <img alt="Inner Bypass E45 Road" class="w-full h-full object-cover" src="/images/projects/inner-bypass-e45/photo_014.jpeg" />
-        </div>
-        <div class="p-6 sm:p-8 border-b md:border-b-0 md:border-r border-black dark:border-black min-h-[200px] sm:h-64 flex flex-col justify-between">
-          <div>
-            <span class="block text-4xl sm:text-6xl font-bold mb-2">4</span>
-            <span class="text-[10px] sm:text-xs uppercase tracking-widest font-bold">Thousands</span>
-          </div>
-          <p class="text-[13px] sm:text-sm leading-relaxed mt-4">
-            Satisfied customers. We've built not just buildings, but long-term relationships.
-          </p>
-        </div>
-        <div class="p-6 sm:p-8 min-h-[200px] sm:h-64 flex flex-col justify-between">
-          <div>
-            <span class="block text-4xl sm:text-6xl font-bold mb-2">98</span>
-            <span class="text-[10px] sm:text-xs uppercase tracking-widest font-bold">Percent</span>
-          </div>
-          <p class="text-[13px] sm:text-sm leading-relaxed mt-4">
-            Satisfied customers. Our commitment to service excellence is reflected in our customer satisfaction levels.
-          </p>
-        </div>
-      </div>
-      <div class="w-full lg:w-1/2 flex flex-col bg-background dark:bg-card">
-        <div class="flex-1 p-0 flex items-stretch justify-stretch min-h-[250px] lg:min-h-0">
-          <div class="stats-motion-frame w-full h-full relative overflow-hidden shadow-2xl">
-            <img 
-              src="/images/bridge_hero_v2.png" 
-              alt="Bridge Construction Hero" 
-              class="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <Stats client:visible />
 
   <!-- Services Overview - Carousel -->
   <section id="services" class="border-t border-black dark:border-black bg-surface">
@@ -250,6 +181,7 @@ const structuredData = {
             </div>
           </a>
     </div>
+  </div>
   <!-- Gallery Section - Infinite Scroll Moved Here -->
   <InfiniteScroll images={galleryImages} />
 
@@ -341,7 +273,6 @@ const structuredData = {
           </div>
         </div>
       </div>
-    </div>
   </SectionBackground>
 
   <!-- CTO Section -->
@@ -366,7 +297,7 @@ const structuredData = {
   </SectionBackground>
 
   <!-- Client Partners Section -->
-  <ClientPartners />
+  <ClientPartners client:visible />
 </Layout>
 
 <!-- Page-specific structured data -->

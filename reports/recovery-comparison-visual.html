@@ -1,0 +1,238 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recovery Comparison Report</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #1f2a37;
+      --muted: #6b7280;
+      --line: #d8e1eb;
+      --current: #1b9aaa;
+      --stash: #f28f3b;
+      --accent: #0f172a;
+      --good: #0f766e;
+      --warn: #b45309;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(140deg, #eef4ff 0%, #f9fbff 45%, #fff9f2 100%);
+      color: var(--text);
+      padding: 28px;
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    .sub { color: var(--muted); margin-bottom: 18px; }
+    .notice {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--accent);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .metric {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .metric .k { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+    .metric .v { font-size: 26px; margin-top: 6px; font-weight: 700; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td {
+      border-bottom: 1px solid #e6edf5;
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+    th {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: #4b5563;
+      background: #f8fbff;
+    }
+    tr:last-child td { border-bottom: none; }
+    .bar {
+      height: 10px;
+      border-radius: 999px;
+      background: #edf2f7;
+      overflow: hidden;
+      margin-top: 6px;
+      position: relative;
+    }
+    .bar span { display: inline-block; height: 100%; }
+    .cur { background: var(--current); }
+    .sta { background: var(--stash); }
+    .pill {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .pill-current { background: #d9f3f6; color: #0f5f6a; }
+    .pill-stash { background: #ffe7d1; color: #8a4a0f; }
+    .pill-tie { background: #e5e7eb; color: #374151; }
+    .takeaway {
+      margin-top: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .small { color: var(--muted); font-size: 12px; }
+    code { background: #f3f4f6; padding: 1px 5px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Recovery Comparison Report</h1>
+    <div class="sub">Current branch (<code>HEAD/master</code>) vs recovered stash snapshot (<code>972c2b5</code>)</div>
+
+    <div class="notice">
+      <strong>Plain-language verdict:</strong> The recovered stash version is more content-heavy and ambitious on key pages, especially the project detail page. The current branch is cleaner and more modular, which is usually easier to maintain long-term.
+    </div>
+
+    <div class="grid">
+      <div class="metric">
+        <div class="k">Most Advanced Single Page</div>
+        <div class="v">Projects Detail</div>
+        <div class="small"><code>src/pages/projects/[slug].astro</code> is much richer in the stash snapshot.</div>
+      </div>
+      <div class="metric">
+        <div class="k">Best Maintainability</div>
+        <div class="v">Current Branch</div>
+        <div class="small">Current keeps large About features split into reusable components.</div>
+      </div>
+      <div class="metric">
+        <div class="k">Where Most Work Went</div>
+        <div class="v">Projects + About + Contact</div>
+        <div class="small">These pages hold the biggest strategy and messaging differences.</div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Page/File</th>
+          <th>Current Size</th>
+          <th>Stash Size</th>
+          <th>Visual Difference</th>
+          <th>Which Feels More Advanced</th>
+          <th>What It Means (Non-Technical)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>src/pages/about.astro</code></td>
+          <td>130 lines</td>
+          <td>352 lines</td>
+          <td>
+            <div>Current vs Stash</div>
+            <div class="bar"><span class="cur" style="width:37%"></span><span class="sta" style="width:63%"></span></div>
+          </td>
+          <td><span class="pill pill-stash">Stash Snapshot</span></td>
+          <td>Stash tells a bigger story on this page; current is shorter and cleaner.</td>
+        </tr>
+        <tr>
+          <td><code>src/pages/contact.astro</code></td>
+          <td>256 lines</td>
+          <td>366 lines</td>
+          <td>
+            <div class="bar"><span class="cur" style="width:41%"></span><span class="sta" style="width:59%"></span></div>
+          </td>
+          <td><span class="pill pill-stash">Stash Snapshot</span></td>
+          <td>Stash appears to have more presentation/detail depth for the contact experience.</td>
+        </tr>
+        <tr>
+          <td><code>src/pages/index.astro</code></td>
+          <td>417 lines</td>
+          <td>435 lines</td>
+          <td>
+            <div class="bar"><span class="cur" style="width:49%"></span><span class="sta" style="width:51%"></span></div>
+          </td>
+          <td><span class="pill pill-tie">Close / Tie</span></td>
+          <td>Both are similarly developed; differences are mostly style and layout choices.</td>
+        </tr>
+        <tr>
+          <td><code>src/pages/projects.astro</code></td>
+          <td>699 lines</td>
+          <td>635 lines</td>
+          <td>
+            <div class="bar"><span class="cur" style="width:52%"></span><span class="sta" style="width:48%"></span></div>
+          </td>
+          <td><span class="pill pill-current">Current Branch</span></td>
+          <td>Current looks more complete for the project listing/browsing page.</td>
+        </tr>
+        <tr>
+          <td><code>src/pages/projects/[slug].astro</code></td>
+          <td>242 lines</td>
+          <td>1043 lines</td>
+          <td>
+            <div class="bar"><span class="cur" style="width:19%"></span><span class="sta" style="width:81%"></span></div>
+          </td>
+          <td><span class="pill pill-stash">Stash Snapshot (Most Advanced)</span></td>
+          <td>This is the biggest gap. Stash is far more built out here and likely where your missing work is most visible.</td>
+        </tr>
+        <tr>
+          <td><code>src/pages/services.astro</code></td>
+          <td>345 lines</td>
+          <td>348 lines</td>
+          <td>
+            <div class="bar"><span class="cur" style="width:50%"></span><span class="sta" style="width:50%"></span></div>
+          </td>
+          <td><span class="pill pill-tie">Close / Tie</span></td>
+          <td>Very close maturity level; likely refinements rather than big capability changes.</td>
+        </tr>
+        <tr>
+          <td><code>src/layouts/Layout.astro</code></td>
+          <td>187 lines</td>
+          <td>157 lines</td>
+          <td>
+            <div class="bar"><span class="cur" style="width:54%"></span><span class="sta" style="width:46%"></span></div>
+          </td>
+          <td><span class="pill pill-current">Current Branch</span></td>
+          <td>Current has slightly more global structure and utilities.</td>
+        </tr>
+        <tr>
+          <td><code>src/components/layout/Header.astro</code></td>
+          <td>118 lines</td>
+          <td>112 lines</td>
+          <td>
+            <div class="bar"><span class="cur" style="width:51%"></span><span class="sta" style="width:49%"></span></div>
+          </td>
+          <td><span class="pill pill-tie">Close / Tie</span></td>
+          <td>Header versions are very similar; this is not where major missing work sits.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="takeaway">
+      <strong>Important context:</strong> In the stash snapshot, several About-related reusable files are missing and their content appears pushed directly into pages. That means stash may feel more "advanced" on individual pages, while current feels better organized for ongoing updates.
+      <div class="small" style="margin-top:8px;">Visual report path: <code>reports/recovery-comparison-visual.html</code></div>
+    </div>
+  </div>
+</body>
+</html>
