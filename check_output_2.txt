@@ -1,0 +1,130 @@
+
+> ultraction-website@0.0.1 astro
+> astro check
+
+[2m14:53:43[22m [34m[vite][39m Re-optimizing dependencies because lockfile has changed
+[2m14:53:44[22m [34m[content][39m Syncing content
+[2m14:53:44[22m [34m[content][39m Synced content
+[2m14:53:44[22m [34m[types][39m Generated [2m714ms[22m
+[2m14:53:44[22m [34m[check][39m Getting diagnostics for Astro files in C:\Users\Twisted\ULTRACTION-2026...
+[96mmcp/element-inspector-app/main.ts[0m:[93m54[0m:[93m40[0m - [91merror[0m[90m ts(7006): [0mParameter 'err' implicitly has an 'any' type.
+
+[7m54[0m   const httpServer = app.listen(port, (err) => {
+[7m  [0m [91m                                       ~~~[0m
+[96mmcp/element-inspector-app/main.ts[0m:[93m12[0m:[93m40[0m - [91merror[0m[90m ts(2307): [0mCannot find module 'express' or its corresponding type declarations.
+
+[7m12[0m import type { Request, Response } from "express";
+[7m  [0m [91m                                       ~~~~~~~~~[0m
+[96mmcp/element-inspector-app/main.ts[0m:[93m11[0m:[93m18[0m - [91merror[0m[90m ts(2307): [0mCannot find module 'cors' or its corresponding type declarations.
+
+[7m11[0m import cors from "cors";
+[7m  [0m [91m                 ~~~~~~[0m
+[96mmcp/element-inspector-app/main.ts[0m:[93m10[0m:[93m47[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@modelcontextprotocol/sdk/server/streamableHttp.js' or its corresponding type declarations.
+
+[7m10[0m import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+[7m  [0m [91m                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mmcp/element-inspector-app/main.ts[0m:[93m9[0m:[93m32[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@modelcontextprotocol/sdk/server/mcp.js' or its corresponding type declarations.
+
+[7m9[0m import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+[7m [0m [91m                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mmcp/element-inspector-app/main.ts[0m:[93m8[0m:[93m37[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@modelcontextprotocol/sdk/server/express.js' or its corresponding type declarations.
+
+[7m8[0m import { createMcpExpressApp } from "@modelcontextprotocol/sdk/server/express.js";
+[7m [0m [91m                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mmcp/element-inspector-app/main.ts[0m:[93m7[0m:[93m38[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@modelcontextprotocol/sdk/server/stdio.js' or its corresponding type declarations.
+
+[7m7[0m import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+[7m [0m [91m                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96mmcp/element-inspector-app/server.ts[0m:[93m58[0m:[93m12[0m - [91merror[0m[90m ts(7006): [0mParameter 'input' implicitly has an 'any' type.
+
+[7m58[0m     async (input): Promise<CallToolResult> => {
+[7m  [0m [91m           ~~~~~[0m
+[96mmcp/element-inspector-app/server.ts[0m:[93m33[0m:[93m72[0m - [91merror[0m[90m ts(2339): [0mProperty 'trim' does not exist on type '{}'.
+
+[7m33[0m   const text = input.textContent?.trim() ? ` text="${input.textContent.trim().slice(0, 80)}"` : "";
+[7m  [0m [91m                                                                       ~~~~[0m
+[96mmcp/element-inspector-app/server.ts[0m:[93m33[0m:[93m35[0m - [91merror[0m[90m ts(2339): [0mProperty 'trim' does not exist on type '{}'.
+
+[7m33[0m   const text = input.textContent?.trim() ? ` text="${input.textContent.trim().slice(0, 80)}"` : "";
+[7m  [0m [91m                                  ~~~~[0m
+[96mmcp/element-inspector-app/server.ts[0m:[93m20[0m:[93m14[0m - [91merror[0m[90m ts(2339): [0mProperty 'url' does not exist on type 'typeof import("C:/Users/Twisted/ULTRACTION-2026/node_modules/zod/v3/external")'.
+
+[7m20[0m   pageUrl: z.url(),
+[7m  [0m [91m             ~~~[0m
+[96mmcp/element-inspector-app/server.ts[0m:[93m3[0m:[93m57[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@modelcontextprotocol/sdk/types.js' or its corresponding type declarations.
+
+[7m3[0m import type { CallToolResult, ReadResourceResult } from "@modelcontextprotocol/sdk/types.js";
+[7m [0m [91m                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mmcp/element-inspector-app/server.ts[0m:[93m2[0m:[93m27[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@modelcontextprotocol/sdk/server/mcp.js' or its corresponding type declarations.
+
+[7m2[0m import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+[7m [0m [91m                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mmcp/element-inspector-app/server.ts[0m:[93m1[0m:[93m74[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@modelcontextprotocol/ext-apps/server' or its corresponding type declarations.
+
+[7m1[0m import { registerAppResource, registerAppTool, RESOURCE_MIME_TYPE } from "@modelcontextprotocol/ext-apps/server";
+[7m [0m [91m                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96mmcp/element-inspector-app/vite.config.ts[0m:[93m2[0m:[93m32[0m - [91merror[0m[90m ts(2307): [0mCannot find module 'vite-plugin-singlefile' or its corresponding type declarations.
+
+[7m2[0m import { viteSingleFile } from "vite-plugin-singlefile";
+[7m [0m [91m                               ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96mmcp/element-inspector-app/src/mcp-app.ts[0m:[93m205[0m:[93m11[0m - [91merror[0m[90m ts(7006): [0mParameter 'error' implicitly has an 'any' type.
+
+[7m205[0m }).catch((error) => {
+[7m   [0m [91m          ~~~~~[0m
+[96mmcp/element-inspector-app/src/mcp-app.ts[0m:[93m184[0m:[93m16[0m - [91merror[0m[90m ts(7006): [0mParameter 'error' implicitly has an 'any' type.
+
+[7m184[0m app.onerror = (error) => {
+[7m   [0m [91m               ~~~~~[0m
+[96mmcp/element-inspector-app/src/mcp-app.ts[0m:[93m178[0m:[93m24[0m - [91merror[0m[90m ts(7006): [0mParameter 'params' implicitly has an 'any' type.
+
+[7m178[0m app.ontoolcancelled = (params) => {
+[7m   [0m [91m                       ~~~~~~[0m
+[96mmcp/element-inspector-app/src/mcp-app.ts[0m:[93m174[0m:[93m21[0m - [91merror[0m[90m ts(7006): [0mParameter 'result' implicitly has an 'any' type.
+
+[7m174[0m app.ontoolresult = (result) => {
+[7m   [0m [91m                    ~~~~~~[0m
+[96mmcp/element-inspector-app/src/mcp-app.ts[0m:[93m166[0m:[93m20[0m - [91merror[0m[90m ts(7006): [0mParameter 'params' implicitly has an 'any' type.
+
+[7m166[0m app.ontoolinput = (params) => {
+[7m   [0m [91m                   ~~~~~~[0m
+[96mmcp/element-inspector-app/src/mcp-app.ts[0m:[93m8[0m:[93m37[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@modelcontextprotocol/sdk/types.js' or its corresponding type declarations.
+
+[7m8[0m import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
+[7m [0m [91m                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96mmcp/element-inspector-app/src/mcp-app.ts[0m:[93m7[0m:[93m8[0m - [91merror[0m[90m ts(2307): [0mCannot find module '@modelcontextprotocol/ext-apps' or its corresponding type declarations.
+
+[7m7[0m } from "@modelcontextprotocol/ext-apps";
+[7m [0m [91m       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/sections/Stats.tsx[0m:[93m1[0m:[93m39[0m - [93mwarning[0m[90m ts(6133): [0m'useCallback' is declared but its value is never read.
+
+[7m1[0m import { useState, useEffect, useRef, useCallback } from 'react';
+[7m [0m [93m                                      ~~~~~~~~~~~[0m
+
+[96msrc/components/ui/3d-globe.tsx[0m:[93m124[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'defaultSize' is declared but its value is never read.
+
+[7m124[0m   defaultSize,
+[7m   [0m [93m  ~~~~~~~~~~~[0m
+
+[96msrc/pages/about.astro[0m:[93m12[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'capabilityStages' is declared but its value is never read.
+
+[7m12[0m const capabilityStages = [
+[7m  [0m [93m      ~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/about.astro[0m:[93m3[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'LogoLoop' is declared but its value is never read.
+
+[7m3[0m import LogoLoop from '../components/common/LogoLoop.astro';
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/contact.astro[0m:[93m6[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'SectionBackground' is declared but its value is never read.
+
+[7m6[0m import SectionBackground from '../components/common/SectionBackground';
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+Result (83 files): 
+- 22 errors
+- 0 warnings
+- 5 hints
+

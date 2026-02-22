@@ -1,0 +1,9 @@
+{
+  "pid": 280024,
+  "started_at": "2026-02-22T16:57:07.924Z",
+  "cwd": "/mnt/c/Users/Twisted/ULTRACTION-2026",
+  "notify_script": "/home/twisted/.local/lib/node_modules/oh-my-codex/scripts/notify-hook.js",
+  "poll_ms": 700,
+  "tracked_files": 1,
+  "seen_turns": 2
+}

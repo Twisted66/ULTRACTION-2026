@@ -35,18 +35,18 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
   <section class="grid grid-cols-1 lg:grid-cols-2 border-t border-b border-black dark:border-black min-h-[75vh] lg:min-h-[85vh]">
     <!-- Left Column: Text -->
     <div class="flex flex-col justify-center px-6 py-16 md:px-12 lg:p-24 border-r border-black dark:border-black relative bg-surface h-full">
-      <span class="text-xs uppercase tracking-[0.2em] text-black/60 mb-6 block">Strategic Portfolio</span>
-      <h1 class="text-4xl sm:text-5xl lg:text-7xl font-light font-heading leading-tight mb-8">
-        Precision in <br/> <span class="italic font-bold text-black">Execution</span>
+      <span class="text-xs font-bold uppercase tracking-widest opacity-80 mb-4 block">Strategic Portfolio</span>
+      <h1 class="text-5xl lg:text-7xl font-bold uppercase leading-none mb-12 font-heading">
+        Precision in <br/> <span class="text-accent italic">Execution</span>
       </h1>
       <div class="w-12 h-[1px] bg-black/20 mb-8"></div>
-      <p class="text-base font-light leading-loose opacity-80 max-w-sm text-black">
+      <p class="text-lg mb-6 opacity-80 leading-relaxed max-w-sm text-black">
         Explore a distinguished record of structural excellence across the UAE. From complex infrastructure and industrial facilities to precision-engineered residential developments, our portfolio reflects a legacy of transformative growth and unwavering quality.
       </p>
     </div>
 
     <!-- Right Column: HD Standalone Image (100% Occupancy) -->
-    <div class="relative overflow-hidden h-[320px] sm:h-[420px] lg:h-full bg-surface">
+    <div class="relative overflow-hidden min-h-[280px] sm:min-h-[360px] lg:h-full bg-surface">
       <img 
         src="/images/projects-hero-v2.png" 
         alt="Naseem Al Bar Bridge construction project" 
@@ -185,7 +185,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
 
       <!-- Column 1 -->
       <div class="col-span-12 md:col-span-4 flex flex-col border-r border-black" data-category="infrastructure all">
-        <div class="project-card relative group overflow-hidden h-[350px] md:h-[450px] border-b border-black">
+        <div class="project-card relative group overflow-hidden min-h-[18rem] md:min-h-[24rem] border-b border-black">
           <img alt="Al Tallah Road Bridge Construction, Ajman" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/al-tallah-bridge/photo_010.jpeg" />
           <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors motion-base"></div>
           <div class="absolute bottom-4 left-4 right-4 z-20">
@@ -209,7 +209,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
             </a>
           </div>
         </div>
-        <div class="project-card relative group overflow-hidden h-[250px] md:h-[350px]" data-category="infrastructure all">
+        <div class="project-card relative group overflow-hidden min-h-[15rem] md:min-h-[21rem]" data-category="infrastructure all">
           <img alt="E20 Traffic Improvement and Bridge Construction" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/e20-traffic-bridges/photo_010.jpeg" />
           <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors motion-base"></div>
           <div class="absolute bottom-4 left-4 z-20 text-white">
@@ -232,9 +232,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
 
       <!-- Column 2 - Company Logo & Projects List (Center) -->
       <div class="col-span-12 md:col-span-4 flex flex-col border-r border-black" data-category="infrastructure all">
-        <div class="relative h-[600px] md:h-[800px] border-b md:border-b-0 border-black flex flex-col">
+        <div class="relative min-h-[32rem] md:min-h-[44rem] border-b md:border-b-0 border-black flex flex-col">
           <!-- Logo Section -->
-          <div class="h-[280px] md:h-[300px] flex items-center justify-center p-8 md:p-10 bg-background">
+          <div class="min-h-[14rem] md:min-h-[16rem] flex items-center justify-center p-8 md:p-10 bg-background">
             <img
               alt="ULTRACTION GENERAL CONTRACTING LLC Logo"
               src="/logo/UGC-LOGO-HQ.png"
@@ -271,6 +271,15 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
               </div>
             </div>
             <div class="mt-5 flex items-center justify-center gap-3">
+              <button
+                type="button"
+                class="projects-list-nav inline-flex h-7 px-3 items-center justify-center rounded-full border border-primary/35 text-[10px] font-bold uppercase tracking-widest text-primary hover:bg-primary hover:text-white transition-colors motion-base"
+                data-projects-toggle
+                aria-label="Play project list autoplay"
+                aria-pressed="true"
+              >
+                <span data-projects-toggle-label>Play</span>
+              </button>
               <button
                 type="button"
                 class="projects-list-nav inline-flex h-7 w-7 items-center justify-center rounded-full border border-primary/35 text-primary hover:bg-primary hover:text-white transition-colors motion-base"
@@ -320,7 +329,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
 
       <!-- Column 3 -->
       <div class="col-span-12 md:col-span-4 flex flex-col" data-category="infrastructure all">
-        <div class="project-card relative group overflow-hidden h-[250px] md:h-[350px] border-b border-black">
+        <div class="project-card relative group overflow-hidden min-h-[15rem] md:min-h-[21rem] border-b border-black">
           <img alt="Inner Bypass Parallel to E45 Madinat Zayed" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/inner-bypass-e45/photo_014.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute top-4 right-4 z-20">
@@ -342,7 +351,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
             </a>
           </div>
         </div>
-        <div class="project-card relative group overflow-hidden h-[350px] md:h-[450px]" data-category="infrastructure all">
+        <div class="project-card relative group overflow-hidden min-h-[18rem] md:min-h-[24rem]" data-category="infrastructure all">
           <img alt="Utility Structure Design & Build" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/utility-structure/photo_005.jpeg" />
           <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors motion-base"></div>
           <div class="absolute top-6 left-6 z-20">
@@ -370,7 +379,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
 
       <!-- Additional Projects Row -->
       <div class="col-span-12 md:col-span-4 flex flex-col border-r border-t border-black" data-category="infrastructure all">
-        <div class="project-card relative group overflow-hidden h-[300px] md:h-[400px] border-b border-black">
+        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem] border-b border-black">
           <img alt="Infrastructure Road Works" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/inner-bypass-e45/photo_006.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -387,7 +396,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
             </a>
           </div>
         </div>
-        <div class="project-card relative group overflow-hidden h-[300px] md:h-[400px]" data-category="infrastructure all">
+        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem]" data-category="infrastructure all">
           <img alt="E20 Bridge Construction" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/e20-traffic-bridges/photo_020.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -406,7 +415,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
       </div>
 
       <div class="col-span-12 md:col-span-4 flex flex-col border-r border-t border-black" data-category="infrastructure all">
-        <div class="project-card relative group overflow-hidden h-[300px] md:h-[400px] border-b border-black">
+        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem] border-b border-black">
           <img alt="Naseem Al Bar Bridge Foundation Work" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/naseem-albar-bridge/photo_038.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -422,7 +431,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
             </a>
           </div>
         </div>
-        <div class="project-card relative group overflow-hidden h-[300px] md:h-[400px]" data-category="infrastructure all">
+        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem]" data-category="infrastructure all">
           <img alt="Al Tallah Road Bridge Ajman" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/al-tallah-bridge/photo_016.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -441,7 +450,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
       </div>
 
       <div class="col-span-12 md:col-span-4 flex flex-col border-t border-black" data-category="infrastructure all">
-        <div class="project-card relative group overflow-hidden h-[300px] md:h-[400px] border-b border-black">
+        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem] border-b border-black">
           <img alt="Inner Bypass E45 Madinat Zayed Road Work" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/inner-bypass-e45/photo_023.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -457,7 +466,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
             </a>
           </div>
         </div>
-        <div class="project-card relative group overflow-hidden h-[300px] md:h-[400px]" data-category="infrastructure all">
+        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem]" data-category="infrastructure all">
           <img alt="Utility Structure Construction" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/utility-structure/photo_010.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -663,10 +672,13 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
   const projectListDots = document.querySelectorAll('.projects-list-dot');
   const projectListPrev = document.querySelector('[data-projects-prev]');
   const projectListNext = document.querySelector('[data-projects-next]');
+  const projectListToggle = document.querySelector('[data-projects-toggle]');
+  const projectListToggleLabel = projectListToggle?.querySelector('[data-projects-toggle-label]');
   const projectListStatus = document.getElementById('projects-list-status');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let projectListActiveIndex = 0;
   let projectListTimer = 0;
+  let projectListPausedByUser = true;
 
   const setProjectListPage = (targetIndex: number, announce = true): void => {
     if (!(projectListTrack instanceof HTMLElement) || projectListPages.length === 0) return;
@@ -705,11 +717,31 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
   };
 
   const startProjectListAutoplay = () => {
-    if (prefersReducedMotion || projectListPages.length <= 1) return;
+    if (prefersReducedMotion || projectListPages.length <= 1 || projectListPausedByUser) return;
     stopProjectListAutoplay();
     projectListTimer = window.setInterval(() => {
       setProjectListPage(projectListActiveIndex + 1, false);
     }, 4500);
+  };
+
+  const updateProjectListToggle = () => {
+    if (!(projectListToggle instanceof HTMLElement)) return;
+    projectListToggle.setAttribute('aria-pressed', String(projectListPausedByUser));
+    const label = projectListPausedByUser ? 'Play' : 'Pause';
+    projectListToggle.setAttribute('aria-label', `${label} project list autoplay`);
+    if (projectListToggleLabel instanceof HTMLElement) {
+      projectListToggleLabel.textContent = label;
+    } else {
+      projectListToggle.textContent = label;
+    }
+
+    if (prefersReducedMotion) {
+      projectListToggle.setAttribute('disabled', 'true');
+      projectListToggle.setAttribute('title', 'Autoplay is disabled while reduced motion is enabled.');
+    } else {
+      projectListToggle.removeAttribute('disabled');
+      projectListToggle.removeAttribute('title');
+    }
   };
 
   projectListDots.forEach((dot) => {
@@ -738,11 +770,30 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
 
   if (projectListCarousel instanceof HTMLElement) {
     projectListCarousel.addEventListener('mouseenter', stopProjectListAutoplay);
-    projectListCarousel.addEventListener('mouseleave', startProjectListAutoplay);
+    projectListCarousel.addEventListener('mouseleave', () => {
+      if (!projectListPausedByUser) startProjectListAutoplay();
+    });
     projectListCarousel.addEventListener('focusin', stopProjectListAutoplay);
-    projectListCarousel.addEventListener('focusout', startProjectListAutoplay);
+    projectListCarousel.addEventListener('focusout', () => {
+      if (!projectListPausedByUser) startProjectListAutoplay();
+    });
   }
 
+  if (projectListToggle instanceof HTMLElement) {
+    projectListToggle.addEventListener('click', () => {
+      if (prefersReducedMotion) return;
+      projectListPausedByUser = !projectListPausedByUser;
+      updateProjectListToggle();
+
+      if (projectListPausedByUser) {
+        stopProjectListAutoplay();
+      } else {
+        startProjectListAutoplay();
+      }
+    });
+  }
+
+  updateProjectListToggle();
   setProjectListPage(0, false);
   startProjectListAutoplay();
 </script>
@@ -756,6 +807,12 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
 
   .projects-list-track {
     transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .projects-list-nav[disabled] {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 
   .projects-list-link {
@@ -783,6 +840,21 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
   .projects-list-link:hover .project-link-label::after,
   .projects-list-link:focus-visible .project-link-label::after {
     transform: scaleX(1);
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 15;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.62) 5%, rgb(0 0 0 / 0.18) 45%, rgb(0 0 0 / 0.06) 100%);
+  }
+
+  .project-card h3,
+  .project-card p,
+  .project-card span {
+    text-shadow: 0 2px 12px rgb(0 0 0 / 0.65);
   }
 
   /* Animation for CTA section */
@@ -876,5 +948,3 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
     }
   }
 </style>
-
-

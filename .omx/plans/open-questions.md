@@ -1,0 +1,13 @@
+## Careers Backend + Custom GPT Actions Plan (v1) - 2026-02-22
+- [ ] Do you want live runtime APIs in production, or an external backend service while site remains static? — This is the primary feasibility decision.
+- [ ] What storage system is approved for jobs in v1 (managed DB, file store, third-party backend)? — Determines durability and implementation path.
+- [ ] Which GPT Action operations are in scope for v1 (`create`, `update`, `close`, `delete`, `list`)? — Needed to define endpoints and auth permissions.
+- [ ] What exact job fields are required vs optional? — Required for validation schema and UI rendering.
+- [ ] What sort/filter logic defines “open jobs list” (e.g., newest first, by location, by department)? — Needed for deterministic behavior.
+- [ ] Should each job have a dedicated apply URL, or all applications continue through contact form? — Affects UX and data model.
+- [ ] What auth mechanism should GPT Action use (API key, OAuth, signed requests), and where will secrets be managed? — Critical security control.
+- [ ] Is change audit history mandatory for compliance/operations? — Determines logging and rollback requirements.
+- [ ] What is the acceptable propagation delay from mutation to visible page update? — Sets caching and rendering strategy.
+- [ ] What is explicitly out of scope under “no broad refactor”? — Prevents ambiguous expansion during planning.
+- [ ] Is multi-language content (EN/AR) in scope for jobs now or later? — Impacts schema and UI if included.
+- [ ] What deployment command/runtime is canonical (current docs vs scripts mismatch)? — Needed to avoid release-time failure.

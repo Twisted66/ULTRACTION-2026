@@ -87,12 +87,11 @@ const MissionVision: React.FC<MissionVisionProps> = ({ className = '' }) => {
 
       <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10">
 
-        {/* Section Header */}
-        <div className="text-center mb-16 md:mb-24">
-          <div className="flex items-center justify-center gap-4 mb-4">
+        {/* Section Header - Left Aligned */}
+        <div className="mb-16 md:mb-24">
+          <div className="flex items-center gap-4 mb-4">
             <div className="h-[1px] w-12 bg-accent"></div>
             <span className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Our Purpose</span>
-            <div className="h-[1px] w-12 bg-accent"></div>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold text-primary leading-tight">
             Guided by Vision, <br className="hidden md:block" />
@@ -122,11 +121,11 @@ const MissionVision: React.FC<MissionVisionProps> = ({ className = '' }) => {
 
             <div className="grid grid-cols-1 gap-6">
               {missionData.pillars.map((pillar, idx) => (
-                <div key={idx} className="flex items-start gap-4 p-4 border border-primary/5 hover:border-accent/30 bg-surface hover:bg-white transition-all duration-300">
-                  <div className="text-accent mt-1">{pillar.icon}</div>
+                <div key={idx} className="flex items-start gap-4 p-4 border border-primary/5 hover:border-accent/30 bg-surface hover:bg-accent hover:text-white transition-all duration-300 group">
+                  <div className="text-accent mt-1 group-hover:text-white transition-colors duration-300">{pillar.icon}</div>
                   <div>
-                    <h4 className="text-sm font-bold text-primary uppercase tracking-wide">{pillar.title}</h4>
-                    <p className="text-sm text-primary/60 mt-1">{pillar.text}</p>
+                    <h4 className="text-sm font-bold text-primary uppercase tracking-wide group-hover:text-white transition-colors duration-300">{pillar.title}</h4>
+                    <p className="text-sm text-primary/60 mt-1 group-hover:text-white/80 transition-colors duration-300">{pillar.text}</p>
                   </div>
                 </div>
               ))}
@@ -168,8 +167,8 @@ const MissionVision: React.FC<MissionVisionProps> = ({ className = '' }) => {
 
         {/* Quality Banner - Industrial Footer */}
         <div className="mt-16 bg-primary text-white p-8 md:p-12 relative overflow-hidden">
-          {/* Decorative grid on dark background */}
-          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+          {/* Decorative grid on dark background - maroon dots */}
+          <div className="absolute inset-0 opacity-15" style={{ backgroundImage: 'radial-gradient(circle, hsl(var(--accent)) 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5">

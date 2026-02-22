@@ -107,6 +107,8 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
   const [viewportWidth, setViewportWidth] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isAutoplayEnabled, setIsAutoplayEnabled] = useState(true);
 
   const cardsPerView = useMemo(() => {
     if (viewportWidth >= 1280) {
@@ -145,6 +147,20 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
   }, [maxIndex]);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const applyMotionPreference = () => {
+      setPrefersReducedMotion(mediaQuery.matches);
+      if (mediaQuery.matches) {
+        setIsAutoplayEnabled(false);
+      }
+    };
+
+    applyMotionPreference();
+    mediaQuery.addEventListener('change', applyMotionPreference);
+    return () => mediaQuery.removeEventListener('change', applyMotionPreference);
+  }, []);
+
+  useEffect(() => {
     if (stepWidth <= 0) {
       return;
     }
@@ -161,7 +177,7 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
   }, [activeIndex, stepWidth, x]);
 
   useEffect(() => {
-    if (isPaused || isDragging || maxIndex <= 0) {
+    if (isPaused || isDragging || maxIndex <= 0 || !isAutoplayEnabled || prefersReducedMotion) {
       return;
     }
 
@@ -170,7 +186,7 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
     }, 4200);
 
     return () => window.clearInterval(autoplay);
-  }, [isPaused, isDragging, maxIndex]);
+  }, [isPaused, isDragging, isAutoplayEnabled, maxIndex, prefersReducedMotion]);
 
   const goToPrevious = () => {
     setActiveIndex((current) => (current <= 0 ? maxIndex : current - 1));
@@ -222,6 +238,15 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
             <ArrowRight size={16} />
           </div>
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setIsAutoplayEnabled((current) => !current)}
+              className="px-3 h-10 border border-black text-[10px] uppercase tracking-[0.2em] font-semibold hover:bg-primary hover:text-white transition-colors motion-base"
+              aria-label={isAutoplayEnabled ? 'Pause services carousel autoplay' : 'Play services carousel autoplay'}
+              aria-pressed={isAutoplayEnabled}
+            >
+              {isAutoplayEnabled ? 'Pause' : 'Play'}
+            </button>
             <button
               type="button"
               onClick={goToPrevious}
@@ -295,7 +320,7 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
                 </div>
               </div>
 
-              <div className="p-7 md:p-8 flex-1 flex flex-col justify-between min-h-[290px] bg-surface group-hover:bg-white transition-colors duration-300">
+              <div className="p-7 md:p-8 flex-1 flex flex-col justify-between min-h-[240px] md:min-h-[260px] bg-surface group-hover:bg-white transition-colors duration-300">
                 <div>
                   <h3 className="text-lg md:text-xl font-heading mb-5 group-hover:text-accent transition-colors text-black uppercase leading-tight">
                     {service.title}

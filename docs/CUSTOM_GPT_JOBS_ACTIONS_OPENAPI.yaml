@@ -1,0 +1,419 @@
+openapi: 3.0.3
+info:
+  title: ULTRACTION Jobs API for Custom GPT Actions
+  version: 1.1.0
+  description: >
+    Backend jobs management API used by Custom GPT Actions to list, create,
+    update, and archive career openings.
+servers:
+  - url: https://your-api-domain.com
+    description: Replace with your live API domain
+tags:
+  - name: Jobs
+paths:
+  /api/jobs:
+    get:
+      tags: [Jobs]
+      operationId: listJobs
+      summary: List jobs
+      description: >
+        Returns open jobs by default. `status=closed` and `status=all` require
+        write authentication.
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [open, closed, all]
+            default: open
+      responses:
+        '200':
+          description: Jobs returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListJobsSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      tags: [Jobs]
+      operationId: createJob
+      summary: Create a new job
+      security:
+        - BearerAuth: []
+        - JobsApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateJobRequest'
+      responses:
+        '201':
+          description: Job created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobSuccess'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    patch:
+      tags: [Jobs]
+      operationId: updateJob
+      summary: Update an existing job
+      security:
+        - BearerAuth: []
+        - JobsApiKey: []
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: Job ID to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateJobRequest'
+      responses:
+        '200':
+          description: Job updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobSuccess'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      tags: [Jobs]
+      operationId: archiveJob
+      summary: Archive a job (set status=closed)
+      security:
+        - BearerAuth: []
+        - JobsApiKey: []
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: Job ID to archive
+          schema:
+            type: string
+        - name: confirm
+          in: query
+          required: true
+          description: Must be true to confirm archive action
+          schema:
+            type: boolean
+            enum: [true]
+        - name: confirmTitle
+          in: query
+          required: true
+          description: Must exactly match the current job title
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 120
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArchiveJobRequest'
+      responses:
+        '200':
+          description: Job archived
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobSuccess'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: APIKey
+      description: 'Send Authorization header: Bearer <JOBS_API_KEY>'
+    JobsApiKey:
+      type: apiKey
+      in: header
+      name: x-jobs-api-key
+      description: Alternative header for the same key
+  schemas:
+    Job:
+      type: object
+      required:
+        - id
+        - slug
+        - title
+        - location
+        - description
+        - status
+        - createdAt
+        - updatedAt
+        - postedAt
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        title:
+          type: string
+        location:
+          type: string
+        description:
+          type: string
+        department:
+          type: string
+          nullable: true
+        employmentType:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: [open, closed]
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        postedAt:
+          type: string
+          format: date-time
+        closedAt:
+          type: string
+          format: date-time
+          nullable: true
+    CreateJobRequest:
+      type: object
+      required: [title, location, description]
+      properties:
+        title:
+          type: string
+          minLength: 2
+          maxLength: 120
+        location:
+          type: string
+          minLength: 2
+          maxLength: 120
+        description:
+          type: string
+          minLength: 20
+          maxLength: 5000
+        department:
+          type: string
+          maxLength: 120
+        employmentType:
+          type: string
+          maxLength: 80
+        postedAt:
+          type: string
+          format: date-time
+    UpdateJobRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+          minLength: 2
+          maxLength: 120
+        location:
+          type: string
+          minLength: 2
+          maxLength: 120
+        description:
+          type: string
+          minLength: 20
+          maxLength: 5000
+        department:
+          type: string
+          maxLength: 120
+        employmentType:
+          type: string
+          maxLength: 80
+        postedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [open, closed]
+    ArchiveJobRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        confirmArchive:
+          type: boolean
+          enum: [true]
+        confirmTitle:
+          type: string
+          minLength: 2
+          maxLength: 120
+    JobSuccess:
+      type: object
+      required: [ok, data]
+      properties:
+        ok:
+          type: boolean
+          enum: [true]
+        data:
+          type: object
+          required: [job]
+          properties:
+            job:
+              $ref: '#/components/schemas/Job'
+    ListJobsSuccess:
+      type: object
+      required: [ok, data]
+      properties:
+        ok:
+          type: boolean
+          enum: [true]
+        data:
+          type: object
+          required: [jobs]
+          properties:
+            jobs:
+              type: array
+              items:
+                $ref: '#/components/schemas/Job'
+    ErrorResponse:
+      type: object
+      required: [ok, error]
+      properties:
+        ok:
+          type: boolean
+          enum: [false]
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            fieldErrors:
+              type: object
+              additionalProperties:
+                type: string
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: Validation failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Job not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Conflict:
+      description: Operation conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnsupportedMediaType:
+      description: Content-Type must be application/json
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: Too many requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Misconfigured:
+      description: Jobs API server configuration missing required secret(s)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
