@@ -1,6 +1,12 @@
 ---
 // Footer.astro - ULTRACTION Website Footer (Nova Construct Design Pattern)
 const currentYear = new Date().getFullYear();
+const pathname = Astro.url.pathname.replace(/\/$/, "");
+const isActive = (href: string) => {
+  const normalizedHref = href.replace(/\/$/, "");
+  if (normalizedHref === "") return pathname === "";
+  return pathname === normalizedHref || pathname.startsWith(`${normalizedHref}/`);
+};
 ---
 
 <footer class="border-t border-black dark:border-black bg-primary text-white">
@@ -10,7 +16,9 @@ const currentYear = new Date().getFullYear();
       <!-- Left Column: Company Info -->
       <div class="w-full lg:w-1/3 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10">
         <div class="mb-6">
-          <img src="/logo/UGC-HEADER.png" alt="ULTRACTION" class="h-8 w-auto brightness-0 invert" />
+          <a href="/" class="inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent" aria-label="Go to homepage">
+            <img src="/logo/UGC-HEADER.png" alt="ULTRACTION" class="h-8 w-auto brightness-0 invert" />
+          </a>
         </div>
         <h3 class="text-lg font-bold uppercase tracking-wide mb-4 font-heading">
           Building Excellence,<br/>Delivering Quality
@@ -30,12 +38,12 @@ const currentYear = new Date().getFullYear();
       <div class="w-full lg:w-1/3 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10">
         <h4 class="text-xs font-bold uppercase tracking-widest text-white/50 mb-6">Quick Links</h4>
         <nav aria-label="Footer navigation" class="space-y-3">
-          <a href="/about" class="block text-sm hover:text-accent transition-colors">About Us</a>
-          <a href="/services" class="block text-sm hover:text-accent transition-colors">Services</a>
-          <a href="/projects" class="block text-sm hover:text-accent transition-colors">Projects</a>
-          <a href="/blog" class="block text-sm hover:text-accent transition-colors">News & Insights</a>
-          <a href="/careers" class="block text-sm hover:text-accent transition-colors">Careers</a>
-          <a href="/contact" class="block text-sm hover:text-accent transition-colors">Contact</a>
+          <a href="/about" aria-current={isActive('/about') ? 'page' : undefined} class={`block text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${isActive('/about') ? 'text-accent font-bold' : 'hover:text-accent'}`}>About Us</a>
+          <a href="/services" aria-current={isActive('/services') ? 'page' : undefined} class={`block text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${isActive('/services') ? 'text-accent font-bold' : 'hover:text-accent'}`}>Services</a>
+          <a href="/projects" aria-current={isActive('/projects') ? 'page' : undefined} class={`block text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${isActive('/projects') ? 'text-accent font-bold' : 'hover:text-accent'}`}>Projects</a>
+          <a href="/blog" aria-current={isActive('/blog') ? 'page' : undefined} class={`block text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${isActive('/blog') ? 'text-accent font-bold' : 'hover:text-accent'}`}>News & Insights</a>
+          <a href="/careers" aria-current={isActive('/careers') ? 'page' : undefined} class={`block text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${isActive('/careers') ? 'text-accent font-bold' : 'hover:text-accent'}`}>Careers</a>
+          <a href="/contact" aria-current={isActive('/contact') ? 'page' : undefined} class={`block text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${isActive('/contact') ? 'text-accent font-bold' : 'hover:text-accent'}`}>Contact</a>
         </nav>
       </div>
 
@@ -48,7 +56,7 @@ const currentYear = new Date().getFullYear();
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
             <div>
-              <a href="mailto:info@ultraction.ae" class="text-sm hover:text-accent transition-colors">
+              <a href="mailto:info@ultraction.ae" class="text-sm hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
                 info@ultraction.ae
               </a>
             </div>
@@ -57,11 +65,11 @@ const currentYear = new Date().getFullYear();
             <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
-            <div>
-              <a href="tel:+97126501694" class="text-sm hover:text-accent transition-colors block">
+            <div class="flex flex-col gap-1">
+              <a href="tel:+97126501694" class="text-sm hover:text-accent transition-colors block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
                 +971 2 650 1694
               </a>
-              <a href="tel:+971564444045" class="text-sm hover:text-accent transition-colors block opacity-70">
+              <a href="tel:+971564444045" class="text-sm hover:text-accent transition-colors block opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
                 +971 56 444 4045
               </a>
             </div>
@@ -75,7 +83,7 @@ const currentYear = new Date().getFullYear();
               href="https://maps.app.goo.gl/etmYuASN7jvvHGkWA"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-sm leading-relaxed hover:text-accent transition-colors"
+              class="text-sm leading-relaxed hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             >
               Ultraction General Contracting L.L.C<br/>Office M05, C32, Shabiya 9,<br/>MBZ City, Abu Dhabi, UAE
             </a>
@@ -88,7 +96,7 @@ const currentYear = new Date().getFullYear();
             href="https://www.facebook.com/ultraction"
             target="_blank"
             rel="noopener noreferrer"
-            class="w-10 h-10 flex items-center justify-center border border-background/20 hover:bg-accent hover:border-accent transition-colors"
+            class="w-10 h-10 flex items-center justify-center border border-background/20 hover:bg-accent hover:border-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             aria-label="Facebook"
           >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -99,7 +107,7 @@ const currentYear = new Date().getFullYear();
             href="https://www.linkedin.com/company/ultraction"
             target="_blank"
             rel="noopener noreferrer"
-            class="w-10 h-10 flex items-center justify-center border border-background/20 hover:bg-accent hover:border-accent transition-colors"
+            class="w-10 h-10 flex items-center justify-center border border-background/20 hover:bg-accent hover:border-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             aria-label="LinkedIn"
           >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -117,8 +125,8 @@ const currentYear = new Date().getFullYear();
       &copy; {currentYear} ULTRACTION General Contracting LLC. All rights reserved.
     </p>
     <div class="flex gap-4">
-      <a href="/privacy" class="text-xs opacity-60 hover:opacity-100 transition-opacity">Privacy Policy</a>
-      <a href="/terms" class="text-xs opacity-60 hover:opacity-100 transition-opacity">Terms of Service</a>
+      <a href="/privacy" aria-current={isActive('/privacy') ? 'page' : undefined} class={`text-xs transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${isActive('/privacy') ? 'text-accent opacity-100 font-bold' : 'opacity-60 hover:opacity-100'}`}>Privacy Policy</a>
+      <a href="/terms" aria-current={isActive('/terms') ? 'page' : undefined} class={`text-xs transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${isActive('/terms') ? 'text-accent opacity-100 font-bold' : 'opacity-60 hover:opacity-100'}`}>Terms of Service</a>
     </div>
   </div>
 </footer>

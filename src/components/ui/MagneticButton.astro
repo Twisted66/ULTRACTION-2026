@@ -9,7 +9,9 @@
  * - Works with any button content
  */
 
-interface Props {
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'button'>, HTMLAttributes<'a'> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   magnetic?: boolean; // Enable magnetic effect
