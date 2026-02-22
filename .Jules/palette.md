@@ -19,3 +19,7 @@
 ## 2026-02-14 - Interactive Navigation Feedback and Component Extensibility
 **Learning:** Mobile menu toggles that don't change their icon (e.g., staying as a hamburger when open) fail to provide immediate visual confirmation of the menu state. Additionally, internal UI components like 'MagneticButton' must support attribute spreading to allow developers to inject critical accessibility attributes (like aria-label) without modifying the base component.
 **Action:** Ensure all toggle interactions have distinct visual states (icons/colors) and ensure all base UI components spread '...rest' props to their root interactive element.
+
+## 2026-02-22 - Refined Link Interactions and Hit Areas
+**Learning:** Interactive text links in flex columns can have unexpectedly large hit areas if they default to full width. Using 'w-fit' ensures the interaction area is constrained to the text itself, preventing accidental clicks. Additionally, maintaining consistent 'focus-visible' behavior across different background colors (using primary for light and accent for dark) ensures a unified and accessible navigation experience.
+**Action:** Always apply 'w-fit' to standalone links in flex containers and match 'focus-visible' outline colors to the brand's primary or accent color based on background contrast.
