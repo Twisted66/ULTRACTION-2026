@@ -1,0 +1,307 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'Careers Admin - ULTRACTION';
+const description =
+  'Internal HR panel for manually publishing open roles to the careers feed.';
+const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
+---
+
+<Layout title={title} description={description} image="/logo/UGC-HEADER.png">
+  <section class="border-t border-border bg-background py-20">
+    <div class="container mx-auto px-6 lg:px-10 max-w-4xl">
+      <div class="mb-10">
+        <p class="text-xs uppercase tracking-[0.28em] text-accent font-bold mb-4">Internal HR</p>
+        <h1 class="text-4xl lg:text-6xl font-heading font-bold uppercase leading-none mb-4">
+          Careers Admin
+        </h1>
+        <p class="text-sm opacity-70 max-w-2xl">
+          Use this page to manually publish open career opportunities. Keep this route private and
+          only share with authorized HR staff.
+        </p>
+      </div>
+
+      <div class="border border-primary/15 bg-surface/70 p-8 mb-8">
+        <form id="create-job-form" class="space-y-6" autocomplete="off">
+          <div class="space-y-2">
+            <label class="text-xs uppercase tracking-[0.2em] font-bold" for="jobs-api-key"
+              >Jobs API Key</label
+            >
+            <input
+              id="jobs-api-key"
+              name="jobsApiKey"
+              type="password"
+              required
+              class="w-full bg-background border border-primary/20 px-4 py-3 text-sm"
+              placeholder="Paste server-side JOBS_API_KEY"
+            />
+            <p class="text-xs opacity-60">
+              Never commit this key. It stays in your browser session only.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <label class="text-xs uppercase tracking-[0.2em] font-bold" for="title">Role Title</label>
+              <input
+                id="title"
+                name="title"
+                type="text"
+                required
+                minlength="2"
+                maxlength="120"
+                class="w-full bg-background border border-primary/20 px-4 py-3 text-sm"
+                placeholder="Site Engineer"
+              />
+            </div>
+            <div class="space-y-2">
+              <label class="text-xs uppercase tracking-[0.2em] font-bold" for="location">Location</label>
+              <input
+                id="location"
+                name="location"
+                type="text"
+                required
+                minlength="2"
+                maxlength="120"
+                class="w-full bg-background border border-primary/20 px-4 py-3 text-sm"
+                placeholder="Abu Dhabi, UAE"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <label class="text-xs uppercase tracking-[0.2em] font-bold" for="department"
+                >Department (Optional)</label
+              >
+              <input
+                id="department"
+                name="department"
+                type="text"
+                maxlength="120"
+                class="w-full bg-background border border-primary/20 px-4 py-3 text-sm"
+                placeholder="Operations"
+              />
+            </div>
+            <div class="space-y-2">
+              <label class="text-xs uppercase tracking-[0.2em] font-bold" for="employmentType"
+                >Employment Type (Optional)</label
+              >
+              <input
+                id="employmentType"
+                name="employmentType"
+                type="text"
+                maxlength="80"
+                class="w-full bg-background border border-primary/20 px-4 py-3 text-sm"
+                placeholder="full-time"
+              />
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label class="text-xs uppercase tracking-[0.2em] font-bold" for="postedAt"
+              >Posted Date (Optional)</label
+            >
+            <input
+              id="postedAt"
+              name="postedAt"
+              type="datetime-local"
+              class="w-full md:w-72 bg-background border border-primary/20 px-4 py-3 text-sm"
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label class="text-xs uppercase tracking-[0.2em] font-bold" for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              rows={6}
+              required
+              minlength="20"
+              maxlength="5000"
+              class="w-full bg-background border border-primary/20 px-4 py-3 text-sm resize-y"
+              placeholder="Describe responsibilities, required experience, and qualifications."
+            ></textarea>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <button
+              id="create-job-submit"
+              type="submit"
+              class="bg-[#800000] text-white px-7 py-3 text-xs uppercase tracking-[0.2em] font-bold"
+            >
+              Publish Role
+            </button>
+            <button
+              id="refresh-jobs"
+              type="button"
+              class="border border-primary/25 px-7 py-3 text-xs uppercase tracking-[0.2em] font-bold"
+            >
+              Refresh Open Roles
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="border border-primary/15 bg-surface/70 p-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <h2 class="text-sm uppercase tracking-[0.2em] font-bold">Status</h2>
+          <span id="open-roles-count" class="text-[10px] uppercase tracking-[0.2em] opacity-60">-</span>
+        </div>
+        <p id="admin-status" class="text-sm opacity-70">Ready.</p>
+        <ul id="open-roles-list" class="mt-6 space-y-3"></ul>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline define:vars={{ jobsApiBaseUrl }}>
+  const form = document.getElementById('create-job-form');
+  const apiKeyInput = document.getElementById('jobs-api-key');
+  const postedAtInput = document.getElementById('postedAt');
+  const statusElement = document.getElementById('admin-status');
+  const listElement = document.getElementById('open-roles-list');
+  const rolesCountElement = document.getElementById('open-roles-count');
+  const submitButton = document.getElementById('create-job-submit');
+  const refreshButton = document.getElementById('refresh-jobs');
+
+  const base = typeof jobsApiBaseUrl === 'string' ? jobsApiBaseUrl.trim().replace(/\/$/, '') : '';
+  const endpoint = base ? `${base}/api/jobs` : '/api/jobs';
+  const API_KEY_STORAGE_KEY = 'ultraction-jobs-api-key';
+
+  function setStatus(message, isError = false) {
+    if (!statusElement) return;
+    statusElement.textContent = message;
+    statusElement.classList.toggle('text-red-600', isError);
+    statusElement.classList.toggle('text-emerald-700', !isError);
+  }
+
+  function toIsoFromLocalDateTime(value) {
+    if (!value) return undefined;
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;');
+  }
+
+  function renderRoles(jobs) {
+    if (!rolesCountElement || !listElement) return;
+    if (!Array.isArray(jobs) || jobs.length === 0) {
+      rolesCountElement.textContent = '0 Open Roles';
+      listElement.innerHTML = '<li class="text-sm opacity-60">No open roles yet.</li>';
+      return;
+    }
+
+    rolesCountElement.textContent = `${jobs.length} Open Role${jobs.length > 1 ? 's' : ''}`;
+    listElement.innerHTML = jobs
+      .map((job) => {
+        const title = escapeHtml(job?.title ?? 'Untitled Role');
+        const location = escapeHtml(job?.location ?? 'UAE');
+        const department = escapeHtml(job?.department ?? '');
+        const postedAt = job?.postedAt ? new Date(job.postedAt).toLocaleDateString() : '-';
+
+        return `
+          <li class="border border-primary/15 px-4 py-4">
+            <p class="text-sm font-bold uppercase leading-tight">${title}</p>
+            <p class="text-xs uppercase tracking-widest opacity-65 mt-2">${location}${department ? ` • ${department}` : ''}</p>
+            <p class="text-[11px] opacity-60 mt-2">Posted: ${postedAt}</p>
+          </li>
+        `;
+      })
+      .join('');
+  }
+
+  async function loadOpenRoles() {
+    try {
+      const response = await fetch(endpoint, {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+        cache: 'no-store',
+      });
+      const payload = await response.json();
+      const jobs = payload?.data?.jobs ?? payload?.jobs ?? [];
+      renderRoles(jobs);
+    } catch (error) {
+      console.error('Unable to refresh open roles on /careers-admin:', error);
+    }
+  }
+
+  if (apiKeyInput) {
+    const savedApiKey = sessionStorage.getItem(API_KEY_STORAGE_KEY);
+    if (savedApiKey) {
+      apiKeyInput.value = savedApiKey;
+    }
+  }
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const apiKey = String(formData.get('jobsApiKey') ?? '').trim();
+    const title = String(formData.get('title') ?? '').trim();
+    const location = String(formData.get('location') ?? '').trim();
+    const description = String(formData.get('description') ?? '').trim();
+    const department = String(formData.get('department') ?? '').trim();
+    const employmentType = String(formData.get('employmentType') ?? '').trim();
+    const postedAt = toIsoFromLocalDateTime(String(formData.get('postedAt') ?? '').trim());
+
+    if (!apiKey) {
+      setStatus('Missing Jobs API key. Ask engineering for JOBS_API_KEY.', true);
+      return;
+    }
+
+    const body = { title, location, description };
+    if (department) body.department = department;
+    if (employmentType) body.employmentType = employmentType;
+    if (postedAt) body.postedAt = postedAt;
+
+    try {
+      if (submitButton) submitButton.setAttribute('disabled', 'true');
+      setStatus('Publishing role...');
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify(body),
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        const message = payload?.error?.message ?? `Request failed (${response.status})`;
+        throw new Error(message);
+      }
+
+      sessionStorage.setItem(API_KEY_STORAGE_KEY, apiKey);
+      form.reset();
+      if (apiKeyInput) apiKeyInput.value = apiKey;
+      if (postedAtInput) postedAtInput.value = '';
+      const createdTitle = payload?.data?.job?.title ?? title;
+      setStatus(`Published successfully: ${createdTitle}`);
+      await loadOpenRoles();
+    } catch (error) {
+      console.error('Unable to create job from /careers-admin:', error);
+      const message = error instanceof Error ? error.message : 'Unable to publish role.';
+      setStatus(message, true);
+    } finally {
+      if (submitButton) submitButton.removeAttribute('disabled');
+    }
+  });
+
+  refreshButton?.addEventListener('click', async () => {
+    setStatus('Refreshing open roles...');
+    await loadOpenRoles();
+    setStatus('Open roles refreshed.');
+  });
+
+  loadOpenRoles();
+</script>
