@@ -1,15 +1,27 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
 test.describe('UX Improvements Verification', () => {
-  test('Mobile menu toggle swaps icons', async ({ page }) => {
+  test('Mobile menu toggle swaps icons', async ({ page }: { page: Page }) => {
     // Set viewport to mobile size
     await page.setViewportSize({ width: 375, height: 667 });
 
     await page.goto('/');
 
+    page.on('console', msg => console.log('BROWSER LOG:', msg.text()));
+    page.on('pageerror', err => console.log('BROWSER ERROR:', err.message));
+
+    // Wait for Astro scripts to mount
+    await page.waitForTimeout(1000);
+
+    // Remove the dev-only ElementCaptureWidget to prevent it from intercepting clicks
+    await page.evaluate(() => {
+      const widget = document.getElementById('element-capture-widget');
+      if (widget) widget.remove();
+    });
+
     const toggle = page.locator('#mobile-menu-toggle');
-    const openIcon = toggle.locator('.menu-open-icon');
-    const closeIcon = toggle.locator('.menu-close-icon');
+    const openIcon = toggle.locator('#hamburger-icon');
+    const closeIcon = toggle.locator('#close-icon');
 
     // Initially, open icon should be visible, close icon should be hidden
     await expect(openIcon).toBeVisible();
@@ -30,7 +42,7 @@ test.describe('UX Improvements Verification', () => {
     await expect(closeIcon).toBeHidden();
   });
 
-  test('MagneticButton handles spread props', async ({ page }) => {
+  test('MagneticButton handles spread props', async ({ page }: { page: Page }) => {
     await page.goto('/contact');
 
     // The MagneticButton in contact.astro has data-submit-button

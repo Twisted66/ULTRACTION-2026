@@ -113,7 +113,6 @@ function latLngToVector3(
 interface MarkerProps {
   marker: GlobeMarker;
   radius: number;
-  defaultSize: number;
   onClick?: (marker: GlobeMarker) => void;
   onHover?: (marker: GlobeMarker | null) => void;
 }
@@ -121,7 +120,6 @@ interface MarkerProps {
 function Marker({
   marker,
   radius,
-  defaultSize,
   onClick,
   onHover,
 }: MarkerProps) {
@@ -288,7 +286,6 @@ function RotatingGlobe({
           key={`marker-${index}-${marker.lat}-${marker.lng}`}
           marker={marker}
           radius={config.radius}
-          defaultSize={config.markerSize}
           onClick={onMarkerClick}
           onHover={onMarkerHover}
         />

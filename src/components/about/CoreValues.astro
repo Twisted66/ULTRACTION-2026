@@ -1,5 +1,5 @@
 ---
-// ULTRACTION Core Values Section - Enhanced Design
+// ULTRACTION Core Values Section - Masonry Design with Headers & Watermark
 // Uses design tokens from global.css
 
 interface CoreValue {
@@ -15,23 +15,23 @@ const coreValues: CoreValue[] = [
   {
     id: 'integrity',
     title: 'Integrity',
-    description: 'Unwavering honesty and transparency in every interaction and commitment',
+    description: 'Unwavering honesty and transparency in every interaction and commitment.',
     insight: 'We communicate clearly, honor commitments, and take ownership from planning to handover.',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3 8 3v7c0 6-8 10-8 10z"/><path d="M12 12v8"/><path d="M8 10l4-2 4 2"/><path d="M12 22c-2-2-4-4-4-8"/></svg>`,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3 8 3v7c0 6-8 10-8 10z"/></svg>`,
     image: '/images/core-values/integrity.svg'
   },
   {
     id: 'team-spirit',
     title: 'Team Spirit',
-    description: 'Collaborative excellence driven by shared purpose and mutual respect',
+    description: 'Collaborative excellence driven by shared purpose and mutual respect.',
     insight: 'Engineers, supervisors, and site teams align early so execution stays coordinated and efficient.',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="2.5"/><path d="M12 12c-3.333 0-5 1.667-5 5v1h10v-1c0-3.333-1.667-5-5-5z"/><path d="M6 12c-3.333 0-5 1.667-5 5v1h10v-1c0-3.333-1.667-5-5-5z" opacity="0.4"/></svg>`,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="2.5"/><path d="M12 12c-3.333 0-5 1.667-5 5v1h10v-1c0-3.333-1.667-5-5-5z"/></svg>`,
     image: '/images/core-values/team-spirit.svg'
   },
   {
     id: 'commitment',
     title: 'Commitment',
-    description: 'Dedicated to delivering excellence from foundation to final handover',
+    description: 'Dedicated to delivering excellence from foundation to final handover.',
     insight: 'We stay accountable to schedule, quality, and client outcomes across every project milestone.',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
     image: '/images/core-values/commitment.svg'
@@ -39,23 +39,23 @@ const coreValues: CoreValue[] = [
   {
     id: 'sustainability',
     title: 'Sustainability',
-    description: 'Building responsibly for communities and the environment',
+    description: 'Building responsibly for communities and the environment.',
     insight: 'Our choices prioritize durable systems, reduced waste, and long-term value for the built environment.',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>`,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4"/><path d="M12 18v4"/><circle cx="12" cy="12" r="4"/></svg>`,
     image: '/images/core-values/sustainability.svg'
   },
   {
     id: 'performance',
     title: 'Performance',
-    description: 'Exceeding expectations through precision engineering and execution',
+    description: 'Exceeding expectations through precision engineering and execution.',
     insight: 'We track progress and quality continuously to deliver predictable results under real site constraints.',
-    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" opacity="0.3" transform="translate(2, 2)"/></svg>`,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
     image: '/images/core-values/performance.svg'
   },
   {
     id: 'safety',
     title: 'Safety',
-    description: 'Uncompromising standards protecting our people and communities',
+    description: 'Uncompromising standards protecting our people and communities.',
     insight: 'Risk planning, safe methods, and disciplined site behavior protect teams and project continuity.',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3 8 3v7c0 6-8 10-8 10z"/><path d="M9 12l2 2 4-4"/></svg>`,
     image: '/images/core-values/safety.svg'
@@ -63,7 +63,7 @@ const coreValues: CoreValue[] = [
 ];
 ---
 
-<!-- ULTRACTION Core Values Section -->
+<!-- ULTRACTION Core Values Section - Masonry Layout -->
 <section class="ultra-core-values relative bg-surface text-primary overflow-hidden border-y border-primary/20">
   {/* Background pattern */}
   <div class="absolute inset-0 pointer-events-none">
@@ -87,109 +87,64 @@ const coreValues: CoreValue[] = [
   </div>
 
   {/* Content wrapper with relative positioning for z-index */}
-  <div class="relative z-10">
+  <div class="relative z-10 px-6 md:px-12 lg:px-16 py-20 md:py-32">
     <div class="ucv-header">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="h-[1px] w-12 bg-accent"></div>
+        <span class="text-xs font-bold uppercase tracking-[0.3em] text-accent">Our Foundation</span>
+      </div>
       <h2 class="ucv-title">Core Values</h2>
+      <p class="ucv-subtitle">The principles that guide every decision we make and every structure we build.</p>
       <div class="ucv-underline"></div>
     </div>
 
-  <div class="ucv-grid">
-    {coreValues.map((value, index) => (
-      <div class="ucv-card" data-value={value.id} style={`--delay: ${index * 100}ms`}>
-        <button
-          class="ucv-card-toggle"
-          type="button"
-          aria-label={`${value.title}: ${value.description}. Click to toggle details.`}
-          aria-expanded="false"
-        >
-          <span class="sr-only">Core Value: {value.title}</span>
-          <div class="ucv-card-flip">
-            <div class="ucv-card-face ucv-card-front">
-              <div class="ucv-front-visual" aria-hidden="true">
-                <img src={value.image} alt={`${value.title} core value illustration`} loading="lazy" />
-              </div>
+    {/* Masonry Grid Container */}
+    <div class="ucv-masonry-container">
+      <div class="ucv-masonry">
+        {coreValues.map((value, index) => (
+          <article
+            class={`ucv-masonry-card ${index === 0 || index === 4 ? 'tall' : 'normal'}`}
+            data-value={value.id}
+            style={`--delay: ${index * 100}ms`}
+          >
+            {/* Card Watermark - UGC Logo */}
+            <div class="ucv-card-watermark" aria-hidden="true"></div>
 
-              <div class="ucv-card-shell">
-                <header class="ucv-face-header">
-                  <span>ULTRACTION</span>
-                  <span>Core Value</span>
-                </header>
+            {/* Card Header */}
+            <header class="ucv-card-header">
+              <span class="ucv-card-number">{'0' + (index + 1)}</span>
+              <div class="ucv-card-icon" set:html={value.icon} />
+              <h3 class="ucv-card-title">{value.title}</h3>
+            </header>
 
-                <div class="ucv-face-content"></div>
-
-                <footer class="ucv-face-footer">
-                  <div class="ucv-card-line"></div>
-                </footer>
-              </div>
+            {/* Card Content */}
+            <div class="ucv-card-content">
+              <p class="ucv-card-desc">{value.description}</p>
             </div>
-
-            <div class="ucv-card-face ucv-card-back">
-              <div class="ucv-logo-watermark" aria-hidden="true">
-                <img src="/logo/UGC-LOGO-HQ.png" alt="ULTRACTION logo watermark" loading="lazy" />
-              </div>
-
-              <div class="ucv-card-shell">
-                <header class="ucv-face-header">
-                  <span>ULTRACTION</span>
-                  <span>Value Insight</span>
-                </header>
-
-                <div class="ucv-face-content">
-                  <div class="ucv-number">{'0' + (index + 1)}</div>
-                  <h3 class="ucv-card-title">{value.title}</h3>
-                  <p class="ucv-card-kicker">Why it matters</p>
-                  <p class="ucv-card-desc">{value.description}</p>
-                  <p class="ucv-card-note">{value.insight}</p>
-                </div>
-
-                <footer class="ucv-face-footer">
-                  <div class="ucv-card-line"></div>
-                </footer>
-              </div>
-            </div>
-          </div>
-        </button>
+          </article>
+        ))}
       </div>
-    ))}
+    </div>
   </div>
 
   {/* Bottom decorative line */}
   <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent"></div>
-  </div>
 </section>
 
 <style>
-  /* ULTRACTION Core Values - Enhanced Design */
+  /* ULTRACTION Core Values - Masonry Design */
   .ultra-core-values {
-    /* Use design tokens from global.css instead of hardcoded colors */
     --ucv-primary: hsl(var(--color-primary));
     --ucv-accent: hsl(var(--color-accent));
     --ucv-bg: hsl(var(--color-bg));
     --ucv-card-bg: hsl(var(--color-surface));
     --ucv-text: hsl(var(--color-foreground));
-    --ucv-text-light: hsl(var(--color-foreground) / 0.7);
-
-    padding: 6rem 2rem;
     position: relative;
     overflow: hidden;
   }
 
-  /* Screen reader only content */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
-
-
   .ucv-header {
-    text-align: center;
+    text-align: left;
     margin-bottom: 4rem;
     position: relative;
     z-index: 1;
@@ -205,310 +160,193 @@ const coreValues: CoreValue[] = [
     letter-spacing: -0.02em;
   }
 
-  .ucv-title span {
-    font-weight: 600;
-    font-style: normal;
-  }
-
   .ucv-underline {
     width: 60px;
     height: 3px;
     background: var(--ucv-accent);
-    margin: 1.5rem auto 0;
+    margin: 1.5rem 0 0;
   }
 
-  .ucv-grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 2.75rem; /* 44px minimum touch target spacing */
-    max-width: 1400px;
+  .ucv-subtitle {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: hsl(var(--color-primary) / 0.7);
+    max-width: 600px;
+    margin: 1.5rem 0 0;
+    font-weight: 400;
+  }
+
+  /* Masonry Container */
+  .ucv-masonry-container {
+    max-width: 1200px;
     margin: 0 auto;
     position: relative;
-    z-index: 1;
   }
 
-  @media (min-width: 640px) {
-    .ucv-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .ucv-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-  }
-
-  .ucv-card {
-    position: relative;
-    aspect-ratio: 4 / 5;
-    perspective: 1200px;
-  }
-
-  .ucv-card-toggle {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    background: transparent;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    text-align: left;
-    display: block;
-    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-
-  .ucv-card:hover .ucv-card-toggle {
-    transform: translateY(-4px);
-  }
-
-  .ucv-card-toggle:focus-visible {
-    outline: 2px solid var(--ucv-accent);
-    outline-offset: 4px;
-  }
-
-  .ucv-card-flip {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-
-  .ucv-card.is-flipped .ucv-card-flip {
-    transform: rotateY(180deg);
-  }
-
-  .ucv-card-face {
-    position: absolute;
-    inset: 0;
-    backface-visibility: hidden;
-    height: 100%;
-    padding: 0;
-    background: var(--ucv-card-bg);
-    border: 1px solid hsl(var(--color-primary) / 0.1);
-    transition: box-shadow 0.4s ease, background 0.4s ease;
-  }
-
-  .ucv-card-front {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .ucv-card-back {
-    transform: rotateY(180deg);
-    background: hsl(var(--color-surface) / 0.88);
-  }
-
-  .ucv-card-shell {
-    height: 100%;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    position: relative;
-    z-index: 2;
-  }
-
-  .ucv-face-header,
-  .ucv-face-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    padding: 0.8rem 1.15rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 0.58rem;
-    font-weight: 600; /* Increased weight for better contrast */
-    color: var(--ucv-primary);
-    background: linear-gradient(90deg, hsl(var(--color-accent) / 0.88), hsl(var(--color-accent)));
-    border-bottom: 1px solid hsl(var(--color-accent) / 0.7);
-  }
-
-  .ucv-face-footer {
-    border-top: 1px solid hsl(var(--color-accent) / 0.7);
-    border-bottom: 0;
-    justify-content: flex-start;
-    gap: 0.7rem;
-    background: linear-gradient(90deg, hsl(var(--color-accent) / 0.92), hsl(var(--color-accent)));
-  }
-
-  .ucv-face-content {
-    padding: 1.6rem 1.35rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .ucv-card:hover .ucv-card-front,
-  .ucv-card.is-flipped .ucv-card-back {
-    background: hsl(var(--color-surface) / 0.95);
-    box-shadow: 0 20px 40px hsl(var(--color-primary) / 0.15);
-  }
-
-  .ucv-front-visual {
-    position: absolute;
-    inset: 0;
-    display: block;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .ucv-front-visual img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    opacity: 1;
-    user-select: none;
-    -webkit-user-drag: none;
-  }
-
-  .ucv-card-front .ucv-face-content {
-    justify-content: flex-end;
-    align-items: center;
-    text-align: center;
-    padding: 0 1.2rem 2rem;
-  }
-
-  .ucv-card-front .ucv-number {
-    margin-bottom: 0;
-    font-size: 0.62rem;
-  }
-
-  .ucv-card-front .ucv-icon-wrapper {
-    width: 36px;
-    height: 36px;
-    margin-bottom: 0;
-  }
-
-  .ucv-logo-watermark {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .ucv-logo-watermark img {
-    width: 112%;
-    height: 112%;
-    object-fit: contain;
-    object-position: center;
-    opacity: 0.1;
-    user-select: none;
-    -webkit-user-drag: none;
-  }
-
-  .ucv-number,
-  .ucv-icon-wrapper,
-  .ucv-card-title,
-  .ucv-card-desc,
-  .ucv-card-line,
-  .ucv-card-hint {
-    position: relative;
-    z-index: 1;
-  }
-
-  .ucv-number {
-    font-family: 'Public Sans', system-ui, sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    color: var(--ucv-accent);
-    margin-bottom: 1rem;
-    opacity: 1;
-  }
-
-  .ucv-icon-wrapper {
-    width: 56px;
-    height: 56px;
-    margin-bottom: 1.5rem;
-    position: relative;
-  }
-
-  .ucv-icon {
-    width: 100%;
-    height: 100%;
-    color: var(--ucv-accent);
-    transition: all 0.3s ease;
-  }
-
-  .ucv-icon :global(svg) {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  .ucv-card:hover .ucv-icon {
-    color: var(--ucv-accent);
-    transform: scale(1.1);
-  }
-
-  .ucv-icon-wrapper::before {
+  /* Container frame with UGC watermark background */
+  .ucv-masonry-container::before {
     content: '';
     position: absolute;
-    inset: -4px;
-    border: 1px solid var(--ucv-accent);
-    opacity: 0;
-    transition: all 0.3s ease;
+    inset: 0;
+    background-image: url('/logo/UGC-LOGO-HQ.png');
+    background-size: 100px 100px;
+    background-position: center;
+    background-repeat: repeat;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 12px;
+    opacity: 0.035;
+    filter: grayscale(100%);
   }
 
-  .ucv-card:hover .ucv-icon-wrapper::before {
-    inset: 0;
-    opacity: 0.3;
+  .ucv-masonry {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 24px;
+    border: 1px solid hsl(var(--color-accent) / 0.12);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Masonry Card */
+  .ucv-masonry-card {
+    background: #fff;
+    border: 1px solid hsl(var(--color-primary) / 0.08);
+    border-radius: 8px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+
+  .ucv-masonry-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px hsl(var(--color-primary) / 0.1);
+    border-color: hsl(var(--color-accent) / 0.2);
+  }
+
+  .ucv-masonry-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--ucv-accent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    z-index: 1;
+  }
+
+  .ucv-masonry-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  /* Card sizes */
+  .ucv-masonry-card.tall {
+    grid-row: span 2;
+    min-height: 320px;
+  }
+
+  .ucv-masonry-card.normal {
+    min-height: 180px;
+  }
+
+  /* Individual card watermark */
+  .ucv-card-watermark {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 120px;
+    height: 120px;
+    background-image: url('/logo/UGC-LOGO-HQ.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+    filter: grayscale(100%);
+  }
+
+  /* Card Header */
+  .ucv-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid hsl(var(--color-accent) / 0.1);
+    position: relative;
+    z-index: 1;
+  }
+
+  .ucv-card-number {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--ucv-accent);
+    opacity: 0.4;
+    text-transform: uppercase;
+  }
+
+  .ucv-card-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--ucv-accent);
+    flex-shrink: 0;
+  }
+
+  .ucv-masonry-card.tall .ucv-card-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .ucv-card-icon :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .ucv-card-title {
     font-family: 'Public Sans', system-ui, sans-serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--ucv-primary);
-    margin: 0 0 1rem 0;
-    letter-spacing: 0.02em;
+    font-size: 16px;
+    font-weight: 700;
     text-transform: uppercase;
-    opacity: 1;
+    letter-spacing: 0.08em;
+    color: var(--ucv-primary);
+    flex: 1;
+  }
+
+  .ucv-masonry-card.tall .ucv-card-title {
+    font-size: 20px;
+  }
+
+  /* Card Content */
+  .ucv-card-content {
+    position: relative;
+    z-index: 1;
   }
 
   .ucv-card-desc {
-    font-size: 0.88rem;
-    line-height: 1.65;
-    color: var(--ucv-primary);
-    margin: 0 0 0.8rem;
-    max-width: 30ch;
-    font-weight: 500;
-  }
-
-  .ucv-card-kicker {
-    margin: 0 0 0.45rem;
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ucv-accent);
-  }
-
-  .ucv-card-note {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    color: hsl(var(--color-primary) / 0.65);
     margin: 0;
-    font-size: 0.74rem;
-    line-height: 1.55;
-    color: hsl(var(--color-primary) / 0.72);
-    max-width: 32ch;
   }
 
-  .ucv-card-line {
-    width: 20px;
-    height: 2px;
-    background: var(--ucv-accent);
-    margin-top: 0;
-    transition: width 0.3s ease;
-    flex: 0 0 auto;
-  }
-
-  .ucv-card:hover .ucv-card-line {
-    width: 100%;
+  .ucv-masonry-card.tall .ucv-card-desc {
+    font-size: 15px;
+    line-height: 1.8;
   }
 
   /* Animation on load */
@@ -523,23 +361,29 @@ const coreValues: CoreValue[] = [
     }
   }
 
-  .ucv-card {
+  .ucv-masonry-card {
     animation: ucvFadeIn 0.6s ease-out forwards;
     animation-delay: var(--delay, 0ms);
     opacity: 0;
   }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .ucv-masonry {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .ucv-masonry {
+      grid-template-columns: 1fr;
+    }
+    .ucv-masonry-card.tall {
+      grid-row: span 1;
+      min-height: 200px;
+    }
+    .ucv-title {
+      font-size: clamp(2rem, 8vw, 2.5rem);
+    }
+  }
 </style>
-
-<script>
-  const cards = document.querySelectorAll('.ucv-card');
-
-  cards.forEach((card) => {
-    const button = card.querySelector('.ucv-card-toggle');
-    if (!(button instanceof HTMLButtonElement)) return;
-
-    button.addEventListener('click', () => {
-      const flipped = card.classList.toggle('is-flipped');
-      button.setAttribute('aria-expanded', String(flipped));
-    });
-  });
-</script>

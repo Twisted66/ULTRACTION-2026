@@ -1,0 +1,7 @@
+{
+  "id": "worker-2",
+  "pane": "%177",
+  "role": "executor",
+  "team": "team-1771752541-474ea241",
+  "task": "Update hero text color on About, Services, and Projects pages to match Contact Us page (change text-black to text-primary in hero sections)"
+}

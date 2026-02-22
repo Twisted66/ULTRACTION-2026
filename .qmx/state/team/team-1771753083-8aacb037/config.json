@@ -1,0 +1,10 @@
+{
+  "name": "team-1771753083-8aacb037",
+  "role": "executor",
+  "workers": 2,
+  "task": "Test team mode",
+  "mode": "default",
+  "createdAt": "2026-02-22T17:38:03+08:00",
+  "status": "running",
+  "panes": 
+}

@@ -324,16 +324,22 @@
 /* Project card overlay effects */
 .project-overlay {
   opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
   transition-property: opacity;
   transition-duration: var(--motion-duration-base);
   transition-timing-function: var(--motion-ease-standard);
 }
 
-.project-card:hover .project-overlay {
+.project-card:hover .project-overlay,
+.project-card:focus-within .project-overlay {
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
-.project-card:hover img {
+.project-card:hover img,
+.project-card:focus-within img {
   transform: scale(1.05);
 }
 

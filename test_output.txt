@@ -1,0 +1,93 @@
+
+Running 4 tests using 4 workers
+
+  Γ£ô  2 [chromium] ΓÇ║ tests\ux-verification.spec.ts:45:3 ΓÇ║ UX Improvements Verification ΓÇ║ MagneticButton handles spread props (5.9s)
+  Γ£ô  4 [Mobile Chrome] ΓÇ║ tests\ux-verification.spec.ts:45:3 ΓÇ║ UX Improvements Verification ΓÇ║ MagneticButton handles spread props (6.1s)
+Before click aria-expanded: false
+After click aria-expanded: false
+hamburger classes: h-6 w-6
+close classes: h-6 w-6 hidden
+BROWSER LOG: [vite] connected.
+BROWSER LOG: [vite] connecting...
+Before click aria-expanded: false
+After click aria-expanded: false
+hamburger classes: h-6 w-6
+close classes: h-6 w-6 hidden
+BROWSER LOG: [vite] connected.
+BROWSER LOG: [vite] connecting...
+BROWSER LOG: [vite] connecting...
+BROWSER LOG: [vite] connected.
+BROWSER LOG: [vite] connected.
+  Γ£ÿ  1 [chromium] ΓÇ║ tests\ux-verification.spec.ts:4:3 ΓÇ║ UX Improvements Verification ΓÇ║ Mobile menu toggle swaps icons (14.4s)
+BROWSER LOG: [vite] connecting...
+BROWSER LOG: [vite] connected.
+  Γ£ÿ  3 [Mobile Chrome] ΓÇ║ tests\ux-verification.spec.ts:4:3 ΓÇ║ UX Improvements Verification ΓÇ║ Mobile menu toggle swaps icons (17.2s)
+
+
+  1) [chromium] ΓÇ║ tests\ux-verification.spec.ts:4:3 ΓÇ║ UX Improvements Verification ΓÇ║ Mobile menu toggle swaps icons 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeHidden[2m([22m[2m)[22m failed
+
+    Locator:  locator('#mobile-menu-toggle').locator('#hamburger-icon')
+    Expected: hidden
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeHidden" with timeout 5000ms[22m
+    [2m  - waiting for locator('#mobile-menu-toggle').locator('#hamburger-icon')[22m
+    [2m    3 ├ù locator resolved to <svg fill="none" class="h-6 w-6" id="hamburger-icon" viewBox="0 0 24 24" stroke="currentColor">ΓÇª</svg>[22m
+    [2m      - unexpected value "visible"[22m
+    [2m    - waiting for" http://localhost:4321/" navigation to finish...[22m
+    [2m    - navigated to "http://localhost:4321/"[22m
+    [2m    2 ├ù locator resolved to <svg fill="none" class="h-6 w-6" id="hamburger-icon" viewBox="0 0 24 24" stroke="currentColor" data-astro-source-loc="25:104" data-astro-source-file="C:/Users/Twisted/ULTRACTION-2026/src/components/layout/Header.astro">ΓÇª</svg>[22m
+    [2m      - unexpected value "visible"[22m
+    [2m    - waiting for" http://localhost:4321/" navigation to finish...[22m
+
+
+      32 |
+      33 |     // Now, open icon should be hidden, close icon should be visible
+    > 34 |     await expect(openIcon).toBeHidden();
+         |                            ^
+      35 |     await expect(closeIcon).toBeVisible();
+      36 |
+      37 |     // Click again to close menu
+        at C:\Users\Twisted\ULTRACTION-2026\tests\ux-verification.spec.ts:34:28
+
+    Error Context: test-results\ux-verification-UX-Improve-4ecd5-ile-menu-toggle-swaps-icons-chromium\error-context.md
+
+  2) [Mobile Chrome] ΓÇ║ tests\ux-verification.spec.ts:4:3 ΓÇ║ UX Improvements Verification ΓÇ║ Mobile menu toggle swaps icons 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeHidden[2m([22m[2m)[22m failed
+
+    Locator:  locator('#mobile-menu-toggle').locator('#hamburger-icon')
+    Expected: hidden
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toBeHidden" with timeout 5000ms[22m
+    [2m  - waiting for locator('#mobile-menu-toggle').locator('#hamburger-icon')[22m
+    [2m    4 ├ù locator resolved to <svg fill="none" class="h-6 w-6" id="hamburger-icon" viewBox="0 0 24 24" stroke="currentColor">ΓÇª</svg>[22m
+    [2m      - unexpected value "visible"[22m
+    [2m    - waiting for" http://localhost:4321/" navigation to finish...[22m
+    [2m    - navigated to "http://localhost:4321/"[22m
+    [2m    2 ├ù locator resolved to <svg fill="none" class="h-6 w-6" id="hamburger-icon" viewBox="0 0 24 24" stroke="currentColor" data-astro-source-loc="25:104" data-astro-source-file="C:/Users/Twisted/ULTRACTION-2026/src/components/layout/Header.astro">ΓÇª</svg>[22m
+    [2m      - unexpected value "visible"[22m
+
+
+      32 |
+      33 |     // Now, open icon should be hidden, close icon should be visible
+    > 34 |     await expect(openIcon).toBeHidden();
+         |                            ^
+      35 |     await expect(closeIcon).toBeVisible();
+      36 |
+      37 |     // Click again to close menu
+        at C:\Users\Twisted\ULTRACTION-2026\tests\ux-verification.spec.ts:34:28
+
+    Error Context: test-results\ux-verification-UX-Improve-4ecd5-ile-menu-toggle-swaps-icons-Mobile-Chrome\error-context.md
+
+  2 failed
+    [chromium] ΓÇ║ tests\ux-verification.spec.ts:4:3 ΓÇ║ UX Improvements Verification ΓÇ║ Mobile menu toggle swaps icons 
+    [Mobile Chrome] ΓÇ║ tests\ux-verification.spec.ts:4:3 ΓÇ║ UX Improvements Verification ΓÇ║ Mobile menu toggle swaps icons 
+  2 passed (20.8s)
