@@ -38,3 +38,6 @@ email-signatures/
 
 # MCP element inspector app
 mcp/element-inspector-app/
+
+# OMX logs and state
+.omx/
