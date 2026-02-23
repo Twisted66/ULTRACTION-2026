@@ -41,3 +41,6 @@ mcp/element-inspector-app/
 
 # OMX logs and state
 .omx/
+
+# Dev-only API endpoints
+src/pages/api/element-capture.ts
