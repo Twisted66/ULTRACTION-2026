@@ -32,3 +32,9 @@ ultraction-cpanel-dist.zip
 
 .vercel
 .env*.local
+
+# email signatures
+email-signatures/
+
+# MCP element inspector app
+mcp/element-inspector-app/
