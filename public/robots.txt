@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /api/
+Disallow: /careers-admin
+Disallow: /projects-fixed
+Disallow: /tmp/
+
+Allow: /
+
+# Sitemap
+Sitemap: https://ultraction.ae/sitemap-index.xml
