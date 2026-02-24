@@ -209,9 +209,11 @@ const isActive = (href: string) => {
   function setBackgroundInert(isOpen: boolean) {
     if (!siteHeader) return;
     const bodyChildren = Array.from(document.body.children);
+    const appContainer = document.querySelector('.app-container');
+    const appChildren = appContainer ? Array.from(appContainer.children) : [];
 
-    bodyChildren.forEach((element) => {
-      if (element === siteHeader) return;
+    [...bodyChildren, ...appChildren].forEach((element) => {
+      if (element === siteHeader || element.contains(siteHeader)) return;
 
       if (isOpen) {
         element.setAttribute('inert', '');

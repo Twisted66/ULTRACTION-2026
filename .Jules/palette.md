@@ -19,3 +19,7 @@
 ## 2026-02-14 - Interactive Navigation Feedback and Component Extensibility
 **Learning:** Mobile menu toggles that don't change their icon (e.g., staying as a hamburger when open) fail to provide immediate visual confirmation of the menu state. Additionally, internal UI components like 'MagneticButton' must support attribute spreading to allow developers to inject critical accessibility attributes (like aria-label) without modifying the base component.
 **Action:** Ensure all toggle interactions have distinct visual states (icons/colors) and ensure all base UI components spread '...rest' props to their root interactive element.
+
+## 2026-02-14 - Character Counters and Robust Accessibility Blocking
+**Learning:** Textareas with character limits significantly benefit from real-time counters linked via 'aria-describedby' and 'aria-live="polite"'. Additionally, 'inert' logic for mobile menus must be robust to nesting; if the header is inside a wrapper (like '.app-container'), the script must check for both the header and its ancestors to prevent the menu itself from becoming non-interactive.
+**Action:** Implement real-time character counters with accessibility linking and ensure 'inert' background logic excludes the header and any containing wrapper elements.

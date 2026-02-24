@@ -91,7 +91,10 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                    Message <span class="text-accent">*</span>
                  </span>
                </label>
-               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder="Tell us about your project..." required aria-required="true"></textarea>
+               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder="Tell us about your project..." required aria-required="true" maxlength="5000" minlength="10" aria-describedby="message-char-count"></textarea>
+               <div id="message-char-count" class="text-[10px] uppercase tracking-widest mt-2 opacity-50 text-right" aria-live="polite">
+                 0 / 5000
+               </div>
             </div>
 
             <div class="group">
@@ -318,6 +321,25 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
     const subjectSelect = form.querySelector('#subject');
     const fileInput = document.querySelector('#attachment');
     const fileNameDisplay = document.getElementById('file-name');
+    const messageTextarea = document.getElementById('message');
+    const charCountDisplay = document.getElementById('message-char-count');
+
+    // Update message character count
+    if (messageTextarea instanceof HTMLTextAreaElement && charCountDisplay) {
+      messageTextarea.addEventListener('input', () => {
+        const length = messageTextarea.value.length;
+        charCountDisplay.textContent = `${length} / 5000`;
+
+        // Visual feedback when approaching limit
+        if (length > 4500) {
+          charCountDisplay.classList.add('text-accent', 'font-bold');
+          charCountDisplay.classList.remove('opacity-50');
+        } else {
+          charCountDisplay.classList.remove('text-accent', 'font-bold');
+          charCountDisplay.classList.add('opacity-50');
+        }
+      });
+    }
 
     // Display selected file name
     if (fileInput instanceof HTMLInputElement && fileNameDisplay) {
