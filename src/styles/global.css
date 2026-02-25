@@ -134,12 +134,14 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     font-family: var(--font-body);
     font-size: var(--text-base);
     line-height: var(--leading-normal);
+    overflow-x: hidden;
     @apply bg-background text-foreground;
   }
 
@@ -152,6 +154,9 @@
     font-family: var(--font-heading);
     line-height: var(--leading-tight);
     font-weight: 600;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
   }
 
   h1 {
