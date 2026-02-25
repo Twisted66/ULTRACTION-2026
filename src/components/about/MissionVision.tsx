@@ -85,7 +85,7 @@ const MissionVision: React.FC<MissionVisionProps> = ({ className = '' }) => {
         }}
       />
 
-      <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10">
+      <div className="w-full px-6 md:px-12 lg:px-24 relative z-10">
 
         {/* Section Header - Left Aligned - matching ClientPartners style */}
         <div className="mb-16 md:mb-24">
