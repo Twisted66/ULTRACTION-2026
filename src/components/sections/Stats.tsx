@@ -112,12 +112,12 @@ function AnimatedCounter({
 
 export default function Stats() {
   return (
-    <section className="border-b border-black dark:border-black">
+    <section className="border-b border-border dark:border-black">
       <div className="flex flex-col lg:flex-row">
         {/* Left: Stats Grid with interspersed images */}
-        <div className="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 border-r-0 lg:border-r border-black dark:border-black">
+        <div className="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 border-r-0 lg:border-r border-border dark:border-black">
           {/* Row 1: Stat + Image */}
-          <div className="p-6 sm:p-8 border-b md:border-r border-black dark:border-black min-h-[240px] sm:h-80 flex flex-col justify-between">
+          <div className="p-6 sm:p-8 border-b md:border-r border-border dark:border-black min-h-[240px] sm:h-80 flex flex-col justify-between">
             <div>
               <span className="block text-5xl sm:text-6xl font-bold mb-2">
                 <AnimatedCounter target={stats[0].number} suffix={stats[0].suffix} />
@@ -130,7 +130,7 @@ export default function Stats() {
               {statDescriptions[stats[0].label]}
             </p>
           </div>
-          <div className="border-b border-black dark:border-black min-h-[240px] sm:h-80 overflow-hidden relative group">
+          <div className="border-b border-border dark:border-black min-h-[240px] sm:h-80 overflow-hidden relative group">
             <img
               alt="Al Tallah Road Bridge"
               className="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-110"
@@ -139,14 +139,14 @@ export default function Stats() {
           </div>
 
           {/* Row 2: Image + Stat */}
-          <div className="border-b border-black dark:border-black md:border-r min-h-[200px] sm:h-64 overflow-hidden">
+          <div className="border-b border-border dark:border-black md:border-r min-h-[200px] sm:h-64 overflow-hidden">
             <img
               alt="E20 Traffic Bridge"
               className="w-full h-full object-cover"
               src="/images/projects/e20-traffic-bridges/photo_010.jpeg"
             />
           </div>
-          <div className="p-6 sm:p-8 border-b border-black dark:border-black min-h-[200px] sm:h-64 flex flex-col justify-between">
+          <div className="p-6 sm:p-8 border-b border-border dark:border-black min-h-[200px] sm:h-64 flex flex-col justify-between">
             <div>
               <span className="block text-5xl sm:text-6xl font-bold mb-2">
                 <AnimatedCounter target={stats[1].number} suffix={stats[1].suffix} />
@@ -161,7 +161,7 @@ export default function Stats() {
           </div>
 
           {/* Row 3: Stat + Image */}
-          <div className="p-6 sm:p-8 border-b border-black dark:border-black md:border-r min-h-[200px] sm:h-64 flex flex-col justify-between">
+          <div className="p-6 sm:p-8 border-b border-border dark:border-black md:border-r min-h-[200px] sm:h-64 flex flex-col justify-between">
             <div>
               <span className="block text-4xl sm:text-6xl font-bold mb-2">
                 <AnimatedCounter target={stats[2].number} suffix={stats[2].suffix} />
@@ -174,7 +174,7 @@ export default function Stats() {
               {statDescriptions[stats[2].label]}
             </p>
           </div>
-          <div className="border-b border-black dark:border-black min-h-[200px] sm:h-64 overflow-hidden relative">
+          <div className="border-b border-border dark:border-black min-h-[200px] sm:h-64 overflow-hidden relative">
             <img
               alt="Inner Bypass E45 Road"
               className="w-full h-full object-cover"
@@ -183,7 +183,7 @@ export default function Stats() {
           </div>
 
           {/* Row 4: Stat + Stat */}
-          <div className="p-6 sm:p-8 border-b md:border-b-0 md:border-r border-black dark:border-black min-h-[200px] sm:h-64 flex flex-col justify-between">
+          <div className="p-6 sm:p-8 border-b md:border-b-0 md:border-r border-border dark:border-black min-h-[200px] sm:h-64 flex flex-col justify-between">
             <div>
               <span className="block text-4xl sm:text-6xl font-bold mb-2">
                 <AnimatedCounter target={stats[3].number} suffix={stats[3].suffix} />

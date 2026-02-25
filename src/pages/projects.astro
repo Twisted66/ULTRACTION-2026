@@ -34,15 +34,15 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
   <!-- Hero Section - 2 Column Layout (Matching About/Services) -->
   <!-- Hero Section - Full Width Video Background -->
   <!-- Hero Section - 1:1 Split Layout -->
-  <section class="grid grid-cols-1 lg:grid-cols-2 border-t border-b border-black dark:border-black min-h-[75vh] lg:min-h-[85vh]">
+  <section class="grid grid-cols-1 lg:grid-cols-2 border-t border-b border-border min-h-[75vh] lg:min-h-[85vh]">
     <!-- Left Column: Text -->
-    <div class="flex flex-col justify-center px-6 py-16 md:px-12 lg:p-24 border-r border-black dark:border-black relative bg-surface h-full">
+    <div class="flex flex-col justify-center px-6 py-16 md:px-12 lg:p-24 border-r border-border relative bg-surface h-full">
       <span class="text-xs font-bold uppercase tracking-widest opacity-80 mb-4 block">Strategic Portfolio</span>
-      <h1 class="text-5xl lg:text-7xl font-bold uppercase leading-none mb-12 font-heading">
+      <h1 class="text-5xl lg:text-7xl font-bold uppercase leading-none mb-12 font-heading hero-text-reveal opacity-0">
         Precision in <br/> <span class="text-accent italic">Execution</span>
       </h1>
-      <div class="w-12 h-[1px] bg-black/20 mb-8"></div>
-      <p class="text-lg mb-6 opacity-80 leading-relaxed max-w-sm text-black">
+      <div class="w-12 h-[1px] bg-foreground/20 mb-8"></div>
+      <p class="text-lg mb-6 opacity-80 leading-relaxed max-w-sm text-foreground">
         Explore a distinguished record of structural excellence across the UAE. From complex infrastructure and industrial facilities to precision-engineered residential developments, our portfolio reflects a legacy of transformative growth and unwavering quality.
       </p>
     </div>
@@ -58,12 +58,12 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
       {/* Sophisticated brand overlays */}
       <div class="absolute inset-0 pointer-events-none bg-gradient-to-r from-surface via-surface/40 to-transparent z-10"></div>
       <div class="absolute inset-0 pointer-events-none bg-black/5 mix-blend-multiply z-10"></div>
-      <div class="absolute inset-0 pointer-events-none border-l border-black/5 z-20"></div>
+      <div class="absolute inset-0 pointer-events-none border-l border-foreground/5 z-20"></div>
     </div>
   </section>
 
   <!-- Filters Section - Full Width -->
-  <section class="border-b border-black">
+  <section class="border-b border-border">
     <div class="grid grid-cols-4 md:grid-cols-8" role="group" aria-label="Filter projects by category">
       <!-- ALL PROJECTS - Active -->
       <button
@@ -71,7 +71,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
         data-filter="all"
         aria-pressed="true"
         aria-controls="projects-grid"
-        class="filter-btn active h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-primary text-white"
+        class="filter-btn active h-24 border-r border-b md:border-b-0 border-border flex flex-col items-center justify-center gap-1 transition-all motion-base bg-primary text-white"
       >
         <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 3h6m-3-3v6"/>
@@ -85,7 +85,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
         data-filter="infrastructure"
         aria-pressed="false"
         aria-controls="projects-grid"
-        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
+        class="filter-btn h-24 border-r border-b md:border-b-0 border-border flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background hover:bg-surface text-foreground"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5m-4 0h4"/>
@@ -99,7 +99,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
         data-filter="marine"
         aria-pressed="false"
         aria-controls="projects-grid"
-        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
+        class="filter-btn h-24 border-r border-b md:border-b-0 border-border flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background hover:bg-surface text-foreground"
       >
         <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 19h16M6 17l6-11 6 11M12 6V3m0 14v2"/>
@@ -113,7 +113,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
         data-filter="heritage"
         aria-pressed="false"
         aria-controls="projects-grid"
-        class="filter-btn h-24 border-r border-b md:border-b-0 border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
+        class="filter-btn h-24 border-r border-b md:border-b-0 border-border flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background hover:bg-surface text-foreground"
       >
         <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M3 20h18M4 9l8-5 8 5M6 9v8m4-8v8m4-8v8m4-8v8"/>
@@ -127,7 +127,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
         data-filter="oil-gas"
         aria-pressed="false"
         aria-controls="projects-grid"
-        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
+        class="filter-btn h-24 border-r border-border flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background hover:bg-surface text-foreground"
       >
         <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M8 6h8m-8 0a2 2 0 0 0-2 2v9a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V8a2 2 0 0 0-2-2m-8 4h8"/>
@@ -141,7 +141,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
         data-filter="industrial"
         aria-pressed="false"
         aria-controls="projects-grid"
-        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
+        class="filter-btn h-24 border-r border-border flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background hover:bg-surface text-foreground"
       >
         <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M3 20h18M4 20V9l4 3V9l4 3V7l9 4v9M8 20v-3m4 3v-3m4 3v-3"/>
@@ -155,7 +155,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
         data-filter="residential"
         aria-pressed="false"
         aria-controls="projects-grid"
-        class="filter-btn h-24 border-r border-black dark:border-black flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background dark:bg-card text-black"
+        class="filter-btn h-24 border-r border-border flex flex-col items-center justify-center gap-1 transition-all motion-base bg-background hover:bg-surface text-foreground"
       >
         <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M3 11l9-7 9 7M5 10v10h14V10M9 20v-5h6v5"/>
@@ -181,13 +181,13 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
   </section>
 
   <!-- Projects Grid - 2:1:2 Masonry Layout -->
-  <section class="border-b border-black dark:border-black bg-background" aria-labelledby="projects-grid-heading">
+  <section class="border-b border-border bg-background" aria-labelledby="projects-grid-heading">
     <h2 id="projects-grid-heading" class="sr-only">Featured Projects</h2>
     <div class="grid grid-cols-1 md:grid-cols-12 auto-rows-min items-start" id="projects-grid">
 
       <!-- Column 1 -->
-      <div class="col-span-12 md:col-span-4 md:col-start-1 md:row-start-1 flex flex-col border-r border-black" data-category="infrastructure all">
-        <div class="project-card relative group overflow-hidden min-h-[18rem] md:min-h-[24rem] border-b border-black">
+      <div class="col-span-12 md:col-span-4 md:col-start-1 md:row-start-1 flex flex-col border-r border-border" data-category="infrastructure all">
+        <div class="project-card relative group overflow-hidden min-h-[18rem] md:min-h-[24rem] border-b border-border">
           <img alt="Al Tallah Road Bridge Construction, Ajman" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/al-tallah-bridge/photo_010.jpeg" />
           <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors motion-base"></div>
           <div class="absolute bottom-4 left-4 right-4 z-20">
@@ -206,7 +206,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
             <span class="text-[10px] uppercase tracking-widest text-white mb-2">Bridge Construction</span>
             <h3 class="text-2xl font-bold uppercase mb-3">Al Tallah Road Bridge 1, 2 &amp; 3</h3>
             <p class="text-xs opacity-90 mb-4 max-w-[260px]">Comprehensive bridge construction works delivering improved connectivity in Ajman, UAE.</p>
-            <a href="/projects/3-bridges-al-talah-road" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <a href="/projects/3-bridges-al-talah-road" class="text-[10px] uppercase tracking-widest font-bold border border-white/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
@@ -225,7 +225,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
               <p>Location: UAE</p>
               <p>Scope: Highway &amp; 2 Bridges</p>
             </div>
-            <a href="/projects/traffic-improvement-e20" class="mt-4 text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <a href="/projects/traffic-improvement-e20" class="mt-4 text-[10px] uppercase tracking-widest font-bold border border-white/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
@@ -233,8 +233,8 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
       </div>
 
       <!-- Column 2 - Company Logo & Projects List (Center) -->
-      <div class="col-span-12 md:col-span-4 md:col-start-5 md:row-start-1 flex flex-col border-r border-black" data-category="all infrastructure marine heritage oil-gas industrial residential commercial">
-        <div class="relative min-h-[30rem] md:min-h-[45rem] border-b md:border-b-0 border-black flex flex-col overflow-hidden">
+      <div class="col-span-12 md:col-span-4 md:col-start-5 md:row-start-1 flex flex-col border-r border-border" data-category="all infrastructure marine heritage oil-gas industrial residential commercial">
+        <div class="relative min-h-[30rem] md:min-h-[45rem] border-b md:border-b-0 border-border flex flex-col overflow-hidden">
           <!-- Logo Section -->
           <div class="min-h-[11rem] md:min-h-[12rem] flex items-center justify-center p-6 md:p-7 bg-background">
             <img
@@ -251,7 +251,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
 
           <!-- Projects List -->
           <div class="p-5 md:p-6 pt-3 md:pt-4 text-center flex-1">
-            <h3 class="text-sm font-bold uppercase tracking-widest mb-4 border-b border-black/20 pb-3 text-primary text-center">Our Projects</h3>
+            <h3 class="text-sm font-bold uppercase tracking-widest mb-4 border-b border-border/20 pb-3 text-primary text-center">Our Projects</h3>
             <div id="projects-list-carousel" class="projects-list-carousel relative overflow-hidden min-h-[210px]">
               <div id="projects-list-track" class="projects-list-track flex">
                 {projectCarouselPages.map((projectPage, pageIndex) => (
@@ -327,7 +327,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
             <p id="projects-list-status" class="sr-only" aria-live="polite">
               Showing projects page 1 of {projectCarouselPages.length}.
             </p>
-            <a href="/projects" class="mt-4 inline-block text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-primary hover:text-white transition-colors text-primary">
+            <a href="/projects" class="mt-4 inline-block text-[10px] uppercase tracking-widest font-bold border border-foreground/30 px-4 py-2 hover:bg-primary hover:text-white transition-colors text-primary">
               View All Projects
             </a>
           </div>
@@ -336,7 +336,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
 
       <!-- Column 3 -->
       <div class="col-span-12 md:col-span-4 md:col-start-9 md:row-start-1 flex flex-col" data-category="marine all">
-        <div class="project-card relative group overflow-hidden min-h-[15rem] md:min-h-[21rem] border-b border-black">
+        <div class="project-card relative group overflow-hidden min-h-[15rem] md:min-h-[21rem] border-b border-border">
           <img alt="Khalifa Port Marine Infrastructure" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/khalifa-port/hero.png" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute top-4 right-4 z-20">
@@ -353,7 +353,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
             <p class="text-[10px] uppercase tracking-widest mb-2 opacity-80">Abu Dhabi / UAE</p>
             <span class="inline-block w-8 h-[1px] bg-white/40"></span>
             <p class="mt-3 text-xs opacity-90 max-w-[240px]">Major marine infrastructure delivery expanding one of the UAE's key deep-water ports.</p>
-            <a href="/projects/khalifa-port" class="mt-4 text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <a href="/projects/khalifa-port" class="mt-4 text-[10px] uppercase tracking-widest font-bold border border-white/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
@@ -377,7 +377,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
             </svg>
             <h3 class="text-2xl font-bold uppercase mb-2">Marine Staging</h3>
             <p class="text-xs opacity-90 mb-4 max-w-[220px]">Specialized marine staging facility supporting offshore construction and logistics operations.</p>
-            <a href="/projects/marine-staging-yassat-island" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <a href="/projects/marine-staging-yassat-island" class="text-[10px] uppercase tracking-widest font-bold border border-white/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
@@ -385,8 +385,8 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
       </div>
 
       <!-- Additional Projects Row -->
-      <div class="col-span-12 md:col-span-4 md:col-start-1 md:row-start-2 flex flex-col border-r border-t border-black" data-category="commercial heritage all">
-        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem] border-b border-black">
+      <div class="col-span-12 md:col-span-4 md:col-start-1 md:row-start-2 flex flex-col border-r border-t border-border" data-category="commercial heritage all">
+        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem] border-b border-border">
           <img alt="Dubai Marina Commercial Tower" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/dubai-marina-tower/hero.png" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -398,7 +398,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
             <span class="text-[10px] uppercase tracking-widest text-white mb-2">Commercial</span>
             <h3 class="text-xl font-bold uppercase mb-3">Dubai Marina Tower</h3>
             <p class="text-xs opacity-90 mb-4 max-w-[240px]">Commercial tower delivery in Dubai Marina with integrated structural and finishing packages.</p>
-            <a href="/projects/dubai-marina-tower" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <a href="/projects/dubai-marina-tower" class="text-[10px] uppercase tracking-widest font-bold border border-white/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
@@ -414,15 +414,15 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
             <span class="text-[10px] uppercase tracking-widest text-white mb-2">Heritage</span>
             <h3 class="text-xl font-bold uppercase mb-3">Qidfah Revitalization</h3>
             <p class="text-xs opacity-90 mb-4 max-w-[240px]">Revitalization works preserving local identity while upgrading public realm and connectivity.</p>
-            <a href="/projects/qidfah-revitalization-project" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <a href="/projects/qidfah-revitalization-project" class="text-[10px] uppercase tracking-widest font-bold border border-white/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
         </div>
       </div>
 
-      <div class="col-span-12 md:col-span-4 md:col-start-5 md:row-start-2 flex flex-col border-r border-t border-black" data-category="residential all">
-        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem] border-b border-black">
+      <div class="col-span-12 md:col-span-4 md:col-start-5 md:row-start-2 flex flex-col border-r border-t border-border" data-category="residential all">
+        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem] border-b border-border">
           <img alt="Private Villas Project" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/p121_img01_xref6756.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -433,7 +433,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
             <span class="text-[10px] uppercase tracking-widest text-white mb-2">Residential</span>
             <h3 class="text-xl font-bold uppercase mb-3">Private Villas Project</h3>
             <p class="text-xs opacity-90 mb-4 max-w-[240px]">High-spec residential villa development delivered with premium civil and structural finishing.</p>
-            <a href="/projects/private-villas-project" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <a href="/projects/private-villas-project" class="text-[10px] uppercase tracking-widest font-bold border border-white/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
@@ -449,15 +449,15 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
             <span class="text-[10px] uppercase tracking-widest text-white mb-2">Residential</span>
             <h3 class="text-xl font-bold uppercase mb-3">Palm Jumeirah Villa</h3>
             <p class="text-xs opacity-90 mb-4 max-w-[240px]">Luxury waterfront villa construction at Palm Jumeirah with bespoke design detailing.</p>
-            <a href="/projects/palm-jumeirah-villa" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <a href="/projects/palm-jumeirah-villa" class="text-[10px] uppercase tracking-widest font-bold border border-white/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
         </div>
       </div>
 
-      <div class="col-span-12 md:col-span-4 md:col-start-9 md:row-start-2 flex flex-col border-t border-black" data-category="oil-gas industrial all">
-        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem] border-b border-black">
+      <div class="col-span-12 md:col-span-4 md:col-start-9 md:row-start-2 flex flex-col border-t border-border" data-category="oil-gas industrial all">
+        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem] border-b border-border">
           <img alt="Offshore Oil and Gas Field Infrastructure" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/p095_img01_xref6588.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -468,7 +468,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
             <span class="text-[10px] uppercase tracking-widest text-white mb-2">Oil &amp; Gas</span>
             <h3 class="text-xl font-bold uppercase mb-3">Offshore Oil &amp; Gas Field</h3>
             <p class="text-xs opacity-90 mb-4 max-w-[240px]">Offshore civil and structural works supporting critical energy-field operations.</p>
-            <a href="/projects/offshore-oil-gas-field" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <a href="/projects/offshore-oil-gas-field" class="text-[10px] uppercase tracking-widest font-bold border border-white/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
@@ -484,7 +484,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
             <span class="text-[10px] uppercase tracking-widest text-white mb-2">Industrial</span>
             <h3 class="text-xl font-bold uppercase mb-3">Utility Structures</h3>
             <p class="text-xs opacity-90 mb-4 max-w-[240px]">Specialized utility structures supporting critical services across multiple stations.</p>
-            <a href="/projects/utility-bridge" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <a href="/projects/utility-bridge" class="text-[10px] uppercase tracking-widest font-bold border border-white/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
@@ -518,7 +518,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
             <span class="text-[10px] uppercase tracking-widest text-white mb-2">Archive</span>
             <h3 class="text-sm font-bold uppercase mb-3">E20 Bridges</h3>
             <p class="text-xs opacity-90 mb-4 max-w-[220px]">Archived visual from the E20 bridge works portfolio.</p>
-            <a href="/projects/traffic-improvement-e20" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <a href="/projects/traffic-improvement-e20" class="text-[10px] uppercase tracking-widest font-bold border border-white/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
@@ -532,7 +532,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
             <span class="text-[10px] uppercase tracking-widest text-white mb-2">Archive</span>
             <h3 class="text-sm font-bold uppercase mb-3">Inner Bypass E45</h3>
             <p class="text-xs opacity-90 mb-4 max-w-[220px]">Selected archival imagery from the Inner Bypass E45 project.</p>
-            <a href="/projects/upgrading-inner-bypass-e45" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <a href="/projects/upgrading-inner-bypass-e45" class="text-[10px] uppercase tracking-widest font-bold border border-white/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
@@ -585,7 +585,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
         </h2>
 
         <a
-          class="group relative inline-flex items-center gap-3 px-10 py-5 bg-[#800000] text-white overflow-hidden transition-all duration-300 hover:bg-[#800000] hover:shadow-xl hover:shadow-[#800000]/20"
+          class="group relative inline-flex items-center gap-3 px-10 py-5 bg-accent text-primary-foreground overflow-hidden transition-all duration-300 hover:bg-accent/90"
           href="/contact"
         >
           <span class="relative z-10 text-xs font-bold uppercase tracking-[0.2em]">
@@ -678,7 +678,7 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
       emptyState = document.createElement('div');
       emptyState.setAttribute('data-projects-empty-state', 'true');
       emptyState.className =
-        'col-span-12 border-t border-black px-6 py-16 md:py-20 text-center text-primary bg-background';
+        'col-span-12 border-t border-border px-6 py-16 md:py-20 text-center text-primary bg-background';
       projectsGrid.appendChild(emptyState);
     }
 
@@ -891,6 +891,47 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
   startProjectListAutoplay();
 </script>
 
+<script>
+  // Direction-Aware Hover for Project Cards
+  function initDirectionAwareHover() {
+    const cards = document.querySelectorAll('.project-card');
+
+    cards.forEach((card) => {
+      const overlay = card.querySelector('.project-overlay');
+      if (!overlay || !(card instanceof HTMLElement) || !(overlay instanceof HTMLElement)) return;
+
+      const getDirection = (e: MouseEvent): string => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        // Determine which edge the mouse is closest to
+        const d = Math.atan2(y, x);
+        // Convert to 0-3 range: 0=right, 1=bottom, 2=left, 3=top
+        const direction = Math.round((d + Math.PI) / (Math.PI / 2)) % 4;
+        return ['left', 'bottom', 'right', 'top'][direction];
+      };
+
+      card.addEventListener('mouseenter', (e: MouseEvent) => {
+        const dir = getDirection(e);
+        overlay.setAttribute('data-direction', dir);
+        // Force reflow before adding visible class
+        void overlay.offsetWidth;
+        overlay.classList.add('is-visible');
+      });
+
+      card.addEventListener('mouseleave', (e: MouseEvent) => {
+        const dir = getDirection(e);
+        overlay.classList.remove('is-visible');
+        overlay.setAttribute('data-direction', dir);
+      });
+    });
+  }
+
+  // Initialize on page load and Astro page transitions
+  initDirectionAwareHover();
+  document.addEventListener('astro:page-load', initDirectionAwareHover);
+</script>
+
 <style>
   .filter-icon {
     width: 1.35rem;
@@ -971,6 +1012,11 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
   .project-card > img {
     position: absolute;
     inset: 0;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .project-card:hover > img {
+    transform: scale(1.06);
   }
 
   .project-card h3,
@@ -979,11 +1025,43 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
     text-shadow: 0 2px 12px rgb(0 0 0 / 0.65);
   }
 
+  /* Direction-aware overlay transitions */
+  .project-overlay {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Default slide-from direction */
+  .project-overlay[data-direction="top"] { transform: translateY(-100%); }
+  .project-overlay[data-direction="bottom"] { transform: translateY(100%); }
+  .project-overlay[data-direction="left"] { transform: translateX(-100%); }
+  .project-overlay[data-direction="right"] { transform: translateX(100%); }
+
+  .project-overlay.is-visible {
+    transform: translate(0, 0) !important;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Enhanced filter animations */
+  #projects-grid.is-filter-transitioning {
+    opacity: 0;
+    transform: scale(0.98) translateY(8px);
+    pointer-events: none;
+  }
+
+  #projects-grid > [data-category].is-filter-entering {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     #projects-grid,
-    #projects-grid > [data-category] {
-      transition: none;
-      transform: none;
+    #projects-grid > [data-category],
+    .project-overlay {
+      transition: none !important;
+      transform: none !important;
     }
   }
 </style>

@@ -9,9 +9,9 @@ const description = "Explore our portfolio of marine construction projects inclu
 
 <Layout title={title} description={description} image="/logo/UGC-HEADER.png">
   <!-- Projects Header with Navigation -->
-  <section class="border-b border-primary/20 dark:border-black/20">
+  <section class="border-b border-primary/20">
     <div class="grid grid-cols-1 md:grid-cols-12">
-      <div class="col-span-12 md:col-span-4 p-6 border-b md:border-b-0 md:border-r border-primary/20 dark:border-black/20 flex flex-col justify-center">
+      <div class="col-span-12 md:col-span-4 p-6 border-b md:border-b-0 md:border-r border-primary/20 flex flex-col justify-center">
         <a href="/projects" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest opacity-60 hover:opacity-100 mb-2 transition-opacity">
           <span class="material-symbols-outlined text-sm">arrow_back</span>
           Back to All Projects
@@ -22,27 +22,27 @@ const description = "Explore our portfolio of marine construction projects inclu
 
       <!-- Category Navigation - 6 Categories -->
       <div class="col-span-12 md:col-span-8 grid grid-cols-3 md:grid-cols-6">
-        <a href="/projects" class="h-24 border-r border-b md:border-b-0 border-primary/20 dark:border-black/20 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#DDD4C5] dark:bg-[#2A2621] text-primary dark:text-white hover:bg-primary hover:text-white">
+        <a href="/projects" class="h-24 border-r border-b md:border-b-0 border-primary/20 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-background hover:bg-surface text-foreground hover:bg-primary hover:text-white">
           <span class="material-symbols-outlined text-xl">apps</span>
           <span class="text-[10px] font-bold uppercase tracking-wider">ALL</span>
         </a>
-        <a href="/projects/infrastructure" class="h-24 border-r border-b md:border-b-0 border-primary/20 dark:border-black/20 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#DDD4C5] dark:bg-[#2A2621] text-primary dark:text-white hover:bg-primary hover:text-white">
+        <a href="/projects/infrastructure" class="h-24 border-r border-b md:border-b-0 border-primary/20 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-background hover:bg-surface text-foreground hover:bg-primary hover:text-white">
           <span class="material-symbols-outlined text-xl">bridge</span>
           <span class="text-[10px] font-bold uppercase tracking-wider">INFRASTRUCTURE</span>
         </a>
-        <a href="/projects/industrial" class="h-24 border-r border-b md:border-b-0 border-primary/20 dark:border-black/20 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#DDD4C5] dark:bg-[#2A2621] text-primary dark:text-white hover:bg-primary hover:text-white">
+        <a href="/projects/industrial" class="h-24 border-r border-b md:border-b-0 border-primary/20 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-background hover:bg-surface text-foreground hover:bg-primary hover:text-white">
           <span class="material-symbols-outlined text-xl">factory</span>
           <span class="text-[10px] font-bold uppercase tracking-wider">INDUSTRIAL</span>
         </a>
-        <a href="/projects/marine" class="h-24 border-r border-b md:border-b-0 border-primary/20 dark:border-black/20 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-primary text-white">
+        <a href="/projects/marine" class="h-24 border-r border-b md:border-b-0 border-primary/20 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-primary text-white">
           <span class="material-symbols-outlined text-xl">sailing</span>
           <span class="text-[10px] font-bold uppercase tracking-wider">MARINE</span>
         </a>
-        <a href="/projects/residential" class="h-24 border-r border-b md:border-b-0 border-primary/20 dark:border-black/20 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#DDD4C5] dark:bg-[#2A2621] text-primary dark:text-white hover:bg-primary hover:text-white">
+        <a href="/projects/residential" class="h-24 border-r border-b md:border-b-0 border-primary/20 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-background hover:bg-surface text-foreground hover:bg-primary hover:text-white">
           <span class="material-symbols-outlined text-xl">home_work</span>
           <span class="text-[10px] font-bold uppercase tracking-wider">RESIDENTIAL</span>
         </a>
-        <a href="/projects/commercial" class="h-24 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-[#DDD4C5] dark:bg-[#2A2621] text-primary dark:text-white hover:bg-primary hover:text-white">
+        <a href="/projects/commercial" class="h-24 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-background hover:bg-surface text-foreground hover:bg-primary hover:text-white">
           <span class="material-symbols-outlined text-xl">domain</span>
           <span class="text-[10px] font-bold uppercase tracking-wider">COMMERCIAL</span>
         </a>
@@ -51,12 +51,12 @@ const description = "Explore our portfolio of marine construction projects inclu
   </section>
 
   <!-- Projects Grid - 2:1:2 Masonry Layout -->
-  <section class="border-b border-primary/20 dark:border-black/20 bg-background dark:bg-card">
+  <section class="border-b border-primary/20 bg-background dark:bg-card">
     <div class="grid grid-cols-1 md:grid-cols-12 auto-rows-min">
 
       <!-- Column 1 -->
-      <div class="col-span-12 md:col-span-4 flex flex-col border-r border-primary/20 dark:border-black/20">
-        <div class="project-card relative group overflow-hidden h-[450px] border-b border-primary/20 dark:border-black/20" data-category="marine">
+      <div class="col-span-12 md:col-span-4 flex flex-col border-r border-primary/20">
+        <div class="project-card relative group overflow-hidden h-[450px] border-b border-primary/20" data-category="marine">
           <img alt="Port Development" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/p190_img01_xref7226.jpeg" />
           <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors"></div>
           <div class="absolute bottom-4 left-4 right-4 z-20">
@@ -84,8 +84,8 @@ const description = "Explore our portfolio of marine construction projects inclu
       </div>
 
       <!-- Column 2 - Featured Project -->
-      <div class="col-span-12 md:col-span-4 flex flex-col border-r border-primary/20 dark:border-black/20">
-        <div class="project-card relative group overflow-hidden h-[800px] border-b md:border-b-0 border-primary/20 dark:border-black/20" data-category="marine">
+      <div class="col-span-12 md:col-span-4 flex flex-col border-r border-primary/20">
+        <div class="project-card relative group overflow-hidden h-[800px] border-b md:border-b-0 border-primary/20" data-category="marine">
           <img alt="Marina Development" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="/images/projects/p149_img01_xref6933.jpeg" />
           <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 opacity-80"></div>
           <div class="absolute top-0 left-8 h-full w-[1px] bg-white/10 z-10"></div>
@@ -109,7 +109,7 @@ const description = "Explore our portfolio of marine construction projects inclu
 
       <!-- Column 3 -->
       <div class="col-span-12 md:col-span-4 flex flex-col">
-        <div class="project-card relative group overflow-hidden h-[350px] border-b border-primary/20 dark:border-black/20" data-category="marine">
+        <div class="project-card relative group overflow-hidden h-[350px] border-b border-primary/20" data-category="marine">
           <img alt="Waterfront Promenade" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/p118_img01_xref6741.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
           <div class="absolute top-4 right-4 z-20">
@@ -137,8 +137,8 @@ const description = "Explore our portfolio of marine construction projects inclu
       </div>
 
       <!-- Additional Row -->
-      <div class="col-span-12 md:col-span-4 flex flex-col border-r border-t border-primary/20 dark:border-black/20">
-        <div class="project-card relative group overflow-hidden h-[400px] border-b border-primary/20 dark:border-black/20" data-category="marine">
+      <div class="col-span-12 md:col-span-4 flex flex-col border-r border-t border-primary/20">
+        <div class="project-card relative group overflow-hidden h-[400px] border-b border-primary/20" data-category="marine">
           <img alt="Coastal Protection" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/p175_img01_xref7099.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -156,8 +156,8 @@ const description = "Explore our portfolio of marine construction projects inclu
         </div>
       </div>
 
-      <div class="col-span-12 md:col-span-4 flex flex-col border-r border-t border-primary/20 dark:border-black/20">
-        <div class="project-card relative group overflow-hidden h-[400px] border-b border-primary/20 dark:border-black/20" data-category="marine">
+      <div class="col-span-12 md:col-span-4 flex flex-col border-r border-t border-primary/20">
+        <div class="project-card relative group overflow-hidden h-[400px] border-b border-primary/20" data-category="marine">
           <img alt="Ship Repair Facility" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/p149_img01_xref6933.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
@@ -175,8 +175,8 @@ const description = "Explore our portfolio of marine construction projects inclu
         </div>
       </div>
 
-      <div class="col-span-12 md:col-span-4 flex flex-col border-t border-primary/20 dark:border-black/20">
-        <div class="project-card relative group overflow-hidden h-[400px] border-b border-primary/20 dark:border-black/20" data-category="marine">
+      <div class="col-span-12 md:col-span-4 flex flex-col border-t border-primary/20">
+        <div class="project-card relative group overflow-hidden h-[400px] border-b border-primary/20" data-category="marine">
           <img alt="Beach Reclamation" class="w-full h-full object-cover transition-transform duration-700" src="/images/projects/p118_img01_xref6741.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">

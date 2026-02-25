@@ -138,8 +138,8 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
   const activeService = services[activeIndex] ?? services[0];
 
   return (
-    <div className="w-full bg-surface border-b border-black">
-      <div className="flex flex-col lg:flex-row justify-between gap-10 lg:gap-8 px-8 lg:px-16 py-16 lg:py-20 border-b border-black">
+    <div className="w-full bg-surface border-b border-border">
+      <div className="flex flex-col lg:flex-row justify-between gap-10 lg:gap-8 px-8 lg:px-16 py-16 lg:py-20 border-b border-border">
         <div className="max-w-4xl">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-16 h-[2px] bg-accent"></div>
@@ -152,7 +152,7 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
           </h2>
           <a
             href="/services"
-            className="inline-flex items-center gap-3 px-6 py-3 border border-black text-xs sm:text-sm uppercase tracking-[0.2em] font-semibold hover:bg-primary hover:text-white transition-colors motion-base"
+            className="inline-flex items-center gap-3 px-6 py-3 border border-border text-xs sm:text-sm uppercase tracking-[0.2em] font-semibold hover:bg-primary hover:text-white transition-colors motion-base"
           >
             <span>Explore All Services</span>
             <ArrowUpRight size={16} />
@@ -169,7 +169,7 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
             <button
               type="button"
               onClick={goToPrevious}
-              className="w-10 h-10 border border-black flex items-center justify-center hover:bg-primary hover:text-white transition-colors motion-base"
+              className="w-10 h-10 border border-border flex items-center justify-center hover:bg-primary hover:text-white transition-colors motion-base"
               aria-label="Previous services"
             >
               <ArrowLeft size={16} />
@@ -177,7 +177,7 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
             <button
               type="button"
               onClick={goToNext}
-              className="w-10 h-10 border border-black flex items-center justify-center hover:bg-primary hover:text-white transition-colors motion-base"
+              className="w-10 h-10 border border-border flex items-center justify-center hover:bg-primary hover:text-white transition-colors motion-base"
               aria-label="Next services"
             >
               <ArrowRight size={16} />
@@ -186,7 +186,7 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
         </div>
       </div>
 
-      <div className="relative overflow-hidden border-b border-black h-[230px] md:h-[280px] lg:h-[340px] bg-black">
+      <div className="relative overflow-hidden border-b border-border h-[230px] md:h-[280px] lg:h-[340px] bg-black">
         <AnimatePresence mode="wait" initial={false}>
           <motion.img
             key={activeService.id}
@@ -231,8 +231,8 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
           style={{ x }}
         >
           {services.map((service, index) => (
-            <article key={service.id} className="basis-full md:basis-1/2 xl:basis-1/3 shrink-0 border-r border-black flex flex-col group">
-              <div className="aspect-[4/3] overflow-hidden relative border-b border-black">
+            <article key={service.id} className="basis-full md:basis-1/2 xl:basis-1/3 shrink-0 border-r border-border flex flex-col group">
+              <div className="aspect-[4/3] overflow-hidden relative border-b border-border">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -249,15 +249,15 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
 
               <div className="p-7 md:p-8 flex-1 flex flex-col justify-between min-h-[240px] md:min-h-[260px] bg-surface group-hover:bg-white transition-colors duration-300">
                 <div>
-                  <h3 className="text-lg md:text-xl font-heading mb-5 group-hover:text-accent transition-colors text-black uppercase leading-tight">
+                  <h3 className="text-lg md:text-xl font-heading mb-5 group-hover:text-accent transition-colors text-foreground uppercase leading-tight">
                     {service.title}
                   </h3>
-                  <p className="text-sm leading-relaxed mb-7 text-black/80 line-clamp-4">{service.description}</p>
+                  <p className="text-sm leading-relaxed mb-7 text-foreground/80 line-clamp-4">{service.description}</p>
 
                   {!!service.subservices?.length && (
                     <div className="grid grid-cols-1 gap-2">
                       {service.subservices.slice(0, 3).map((sub, subIndex) => (
-                        <div key={`${service.id}-${subIndex}`} className="flex items-center gap-3 text-xs uppercase tracking-widest text-black/70">
+                        <div key={`${service.id}-${subIndex}`} className="flex items-center gap-3 text-xs uppercase tracking-widest text-foreground/70">
                           <span className="w-4 h-[1px] bg-accent"></span>
                           {sub}
                         </div>
@@ -268,12 +268,12 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
 
                 <a
                   href={service.link}
-                  className="mt-8 pt-6 border-t border-black/15 flex justify-between items-center text-black group/link"
+                  className="mt-8 pt-6 border-t border-border/15 flex justify-between items-center text-foreground group/link"
                 >
                   <span className="text-xs uppercase tracking-widest font-semibold opacity-75 group-hover:opacity-100 transition-opacity">
                     View Service
                   </span>
-                  <div className="w-8 h-8 rounded-full border border-black/30 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all motion-base">
+                  <div className="w-8 h-8 rounded-full border border-border/30 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all motion-base">
                     <ArrowUpRight size={14} />
                   </div>
                 </a>
@@ -283,7 +283,7 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
         </motion.div>
       </div>
 
-      <div className="md:hidden py-5 flex justify-center border-t border-black">
+      <div className="md:hidden py-5 flex justify-center border-t border-border">
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest opacity-60">
           <ArrowLeft size={14} />
           <span>Swipe</span>

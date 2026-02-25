@@ -4,12 +4,12 @@ import { CoreValuesVideoPlayer } from '../../remotion/CoreValuesVideoPlayer';
 ---
 
 <section
-  class="relative isolate bg-surface border-y border-primary/20 overflow-hidden"
+  class="relative isolate bg-surface border-y border-primary/20 overflow-hidden min-h-[90vh] md:min-h-screen flex flex-col"
   aria-labelledby="core-values-title"
   aria-describedby="core-values-intro"
   data-core-values
 >
-  <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-0">
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-20">
     <div
       class="absolute inset-0 opacity-[0.03]"
       style={{
@@ -24,25 +24,25 @@ import { CoreValuesVideoPlayer } from '../../remotion/CoreValuesVideoPlayer';
     <div class="absolute bottom-0 right-1/4 h-80 w-80 rounded-full bg-primary/5 blur-3xl animate-pulse-slower"></div>
   </div>
 
-  <div class="relative z-10 mx-auto max-w-7xl px-6 py-20 pb-12 md:px-12 md:py-24 md:pb-16 lg:px-16 text-center">
-    <header class="mb-8">
-      <p class="mb-4 flex items-center justify-center gap-4 text-xs font-bold uppercase tracking-[0.3em] text-accent">
+  {/* Remotion Brand Trailer Embed - Interactive Island */}
+  <div class="absolute inset-0 z-0">
+    <CoreValuesVideoPlayer client:only="react" />
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-7xl px-6 py-20 pb-[50vh] md:px-12 md:pb-[60vh] lg:px-16 text-left border-t-2 border-accent/20 bg-surface/90 backdrop-blur-md">
+    <header class="max-w-3xl relative">
+      <p class="mb-4 flex items-center justify-start gap-4 text-xs font-bold uppercase tracking-[0.3em] text-accent">
         <span aria-hidden="true" class="h-px w-12 bg-accent"></span>
         Our Foundation
-        <span aria-hidden="true" class="h-px w-12 bg-accent"></span>
       </p>
-      <h2 id="core-values-title" class="font-heading text-4xl italic font-light tracking-tight md:text-5xl lg:text-6xl text-primary">
-        Core Values
+      <h2 id="core-values-title" class="font-heading flex flex-col gap-2 text-4xl italic font-light tracking-tight md:text-5xl lg:text-7xl text-primary drop-shadow-sm">
+        <span>Core</span> 
+        <span class="font-bold -mt-2">Values</span>
       </h2>
-      <p id="core-values-intro" class="mt-4 mx-auto max-w-2xl text-sm leading-relaxed text-primary/75 md:text-base">
+      <p id="core-values-intro" class="mt-6 max-w-xl text-sm leading-relaxed text-primary/80 font-medium md:text-base select-none">
         The principles that guide every decision we make and every structure we build.
       </p>
     </header>
-  </div>
-
-  {/* Remotion Brand Trailer Embed - Interactive Island */}
-  <div class="relative w-full h-[60vh] md:h-[80vh] bg-black/90 border-t border-b border-primary/10 overflow-hidden">
-    <CoreValuesVideoPlayer client:only="react" />
   </div>
 
   <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent z-20"></div>
