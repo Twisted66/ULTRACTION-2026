@@ -18,7 +18,11 @@ const coreValues = [
         description: 'Unwavering honesty and transparency in every interaction and commitment.',
         insight: 'We communicate clearly, honor commitments, and take ownership from planning to handover.',
         img: 'images/projects/photo_010.jpeg',
-        icon: Shield
+        icon: Shield,
+        stats: [
+            { label: 'Client Trust', value: '100%' },
+            { label: 'On-Time Delivery', value: '98%' }
+        ]
     },
     {
         id: 'team-spirit',
@@ -26,7 +30,11 @@ const coreValues = [
         description: 'Collaborative excellence driven by shared purpose and mutual respect.',
         insight: 'Engineers, supervisors, and site teams align early so execution stays coordinated and efficient.',
         img: 'images/projects/photo_016.jpeg',
-        icon: Users
+        icon: Users,
+        stats: [
+            { label: 'Team Collaboration', value: 'A+' },
+            { label: 'Safety Rating', value: '5-Star' }
+        ]
     },
     {
         id: 'commitment',
@@ -34,7 +42,11 @@ const coreValues = [
         description: 'Dedicated to delivering excellence from foundation to final handover.',
         insight: 'We stay accountable to schedule, quality, and client outcomes across every project milestone.',
         img: 'images/projects/photo_018.jpeg',
-        icon: Target
+        icon: Target,
+        stats: [
+            { label: 'Project Completion', value: '100%' },
+            { label: 'Client Satisfaction', value: '97%' }
+        ]
     },
     {
         id: 'sustainability',
@@ -42,7 +54,11 @@ const coreValues = [
         description: 'Building responsibly for communities and the environment.',
         insight: 'Our choices prioritize durable systems, reduced waste, and long-term value for the built environment.',
         img: 'images/projects/qidfah-revitalization/hero.png',
-        icon: Leaf
+        icon: Leaf,
+        stats: [
+            { label: 'Green Projects', value: '85%' },
+            { label: 'Waste Reduction', value: '40%' }
+        ]
     },
     {
         id: 'performance',
@@ -50,7 +66,11 @@ const coreValues = [
         description: 'Exceeding expectations through precision engineering and execution.',
         insight: 'We track progress and quality continuously to deliver predictable results under real site constraints.',
         img: 'images/projects/khalifa-port/hero.png',
-        icon: Zap
+        icon: Zap,
+        stats: [
+            { label: 'Quality Score', value: '99%' },
+            { label: 'Efficiency Rate', value: '95%' }
+        ]
     },
     {
         id: 'safety',
@@ -58,7 +78,11 @@ const coreValues = [
         description: 'Uncompromising standards protecting our people and communities.',
         insight: 'Risk planning, safe methods, and disciplined site behavior protect teams and project continuity.',
         img: 'images/projects/photo_015.jpeg',
-        icon: ShieldCheck
+        icon: ShieldCheck,
+        stats: [
+            { label: 'Accident-Free Days', value: '500+' },
+            { label: 'Safety Rating', value: 'ISO 45001' }
+        ]
     }
 ];
 
@@ -101,7 +125,7 @@ const CoreValueScene: React.FC<{
     const scale = interpolate(
         frame,
         [0, SCENE_DURATION_IN_FRAMES],
-        [1, 1.1],
+        [1, 1.15],
         { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
     );
 
@@ -121,28 +145,36 @@ const CoreValueScene: React.FC<{
 
     // Description spring animation
     const descY = spring({
-        frame: frame - 30,
+        frame: frame - 25,
         fps,
         config: { damping: 12 },
     });
 
     // Insight spring animation
     const insightY = spring({
+        frame: frame - 35,
+        fps,
+        config: { damping: 12 },
+    });
+
+    // Stats spring animation
+    const statsY = spring({
         frame: frame - 45,
         fps,
         config: { damping: 12 },
     });
 
     const iconTransform = `translateY(${interpolate(iconY, [0, 1], [50, 0])}px)`;
-
     const titleTransform = `translateY(${interpolate(titleY, [0, 1], [50, 0])}px)`;
     const descTransform = `translateY(${interpolate(descY, [0, 1], [50, 0])}px)`;
     const insightTransform = `translateY(${interpolate(insightY, [0, 1], [50, 0])}px)`;
+    const statsTransform = `translateY(${interpolate(statsY, [0, 1], [50, 0])}px)`;
 
     const iconOpacity = interpolate(iconY, [0, 1], [0, 1]);
     const titleOpacity = interpolate(titleY, [0, 1], [0, 1]);
     const descOpacity = interpolate(descY, [0, 1], [0, 1]);
     const insightOpacity = interpolate(insightY, [0, 1], [0, 1]);
+    const statsOpacity = interpolate(statsY, [0, 1], [0, 1]);
 
     const Icon = value.icon;
 
@@ -157,13 +189,13 @@ const CoreValueScene: React.FC<{
             </AbsoluteFill>
 
             {/* Dark Overlay focused on center */}
-            <AbsoluteFill className="bg-primary/75" />
+            <AbsoluteFill className="bg-primary/80" />
 
-            {/* Add subtle gradient to ensure text readability */}
-            <AbsoluteFill style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%)' }} />
+            {/* Subtle gradient to ensure text readability */}
+            <AbsoluteFill style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.85) 100%)' }} />
 
             {/* Content */}
-            <AbsoluteFill className="p-8 md:p-24 lg:p-32 flex flex-col justify-center items-start text-left w-full h-full">
+            <AbsoluteFill className="p-8 md:p-16 lg:p-24 flex flex-col justify-center items-start text-left w-full h-full">
                 {/* Number Watermark positioned behind the text but anchored right */}
                 <div className="absolute right-10 bottom-10 opacity-[0.03] pointer-events-none md:right-24 md:bottom-24">
                     <span className="font-heading text-[15rem] md:text-[30rem] italic leading-none font-bold text-white">
@@ -171,46 +203,90 @@ const CoreValueScene: React.FC<{
                     </span>
                 </div>
 
-                <div
-                    style={{
-                        transform: iconTransform,
-                        opacity: iconOpacity,
-                    }}
-                    className="mb-8 p-6 rounded-none bg-accent text-white relative z-10 shadow-2xl"
-                >
-                    <Icon size={64} strokeWidth={1.5} />
+                <div className="flex gap-8 lg:gap-16 items-center w-full max-w-7xl relative z-10">
+                    <div className="flex-1 max-w-3xl">
+                        <div
+                            style={{
+                                transform: iconTransform,
+                                opacity: iconOpacity,
+                            }}
+                            className="mb-8 p-5 rounded-none bg-accent text-white shadow-2xl inline-block"
+                        >
+                            <Icon size={48} strokeWidth={1.5} />
+                        </div>
+
+                        <h3
+                            style={{
+                                transform: titleTransform,
+                                opacity: titleOpacity,
+                            }}
+                            className="text-4xl md:text-5xl lg:text-7xl font-heading mb-6 text-white uppercase tracking-wider text-shadow-sm"
+                        >
+                            {value.title}
+                        </h3>
+
+                        <p
+                            style={{
+                                transform: descTransform,
+                                opacity: descOpacity,
+                            }}
+                            className="text-lg md:text-xl lg:text-2xl font-light leading-relaxed text-white/90 mb-8"
+                        >
+                            {value.description}
+                        </p>
+
+                        <div
+                            style={{
+                                transform: insightTransform,
+                                opacity: insightOpacity,
+                            }}
+                            className="px-6 py-4 bg-white/10 backdrop-blur-md border-l-4 border-accent shadow-xl"
+                        >
+                            <p className="text-sm md:text-base font-medium tracking-widest uppercase text-white">
+                                {value.insight}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Stats Section on Right Side */}
+                    <div
+                        style={{
+                            transform: statsTransform,
+                            opacity: statsOpacity,
+                        }}
+                        className="hidden md:flex flex-col gap-6"
+                    >
+                        {value.stats.map((stat, i) => (
+                            <div key={i} className="bg-surface/10 backdrop-blur-md border border-white/20 p-6 shadow-2xl w-64">
+                                <div className="text-4xl lg:text-5xl font-bold text-accent mb-2 font-heading italic">
+                                    {stat.value}
+                                </div>
+                                <div className="text-xs lg:text-sm uppercase tracking-[0.2em] text-white/80 font-bold">
+                                    {stat.label}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
-                <h3
-                    style={{
-                        transform: titleTransform,
-                        opacity: titleOpacity,
-                    }}
-                    className="text-4xl md:text-6xl font-heading mb-6 text-white uppercase tracking-wider relative z-10"
-                >
-                    {value.title}
-                </h3>
-
-                <p
-                    style={{
-                        transform: descTransform,
-                        opacity: descOpacity,
-                    }}
-                    className="text-xl md:text-2xl font-light leading-loose text-white/90 relative z-10 max-w-4xl"
-                >
-                    {value.description}
-                </p>
-
+                {/* Mobile Stats (only shown on small screens) */}
                 <div
                     style={{
-                        transform: insightTransform,
-                        opacity: insightOpacity,
+                        transform: statsTransform,
+                        opacity: statsOpacity,
                     }}
-                    className="mt-10 px-6 py-4 bg-white text-primary border-l-4 border-accent relative z-10 max-w-3xl shadow-xl"
+                    className="flex md:hidden gap-4 mt-8 w-full"
                 >
-                    <p className="text-sm md:text-base font-medium tracking-widest uppercase">
-                        {value.insight}
-                    </p>
+                    {value.stats.map((stat, i) => (
+                        <div key={i} className="bg-surface/10 backdrop-blur-sm border border-white/20 p-4 flex-1">
+                            <div className="text-2xl font-bold text-accent mb-1 font-heading italic">
+                                {stat.value}
+                            </div>
+                            <div className="text-[10px] uppercase tracking-wider text-white/80 font-bold">
+                                {stat.label}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </AbsoluteFill>
         </AbsoluteFill>

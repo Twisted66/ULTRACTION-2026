@@ -24,12 +24,8 @@ import { CoreValuesVideoPlayer } from '../../remotion/CoreValuesVideoPlayer';
     <div class="absolute bottom-0 right-1/4 h-80 w-80 rounded-full bg-primary/5 blur-3xl animate-pulse-slower"></div>
   </div>
 
-  {/* Remotion Brand Trailer Embed - Interactive Island */}
-  <div class="absolute inset-0 z-0">
-    <CoreValuesVideoPlayer client:only="react" />
-  </div>
-
-  <div class="relative z-10 mx-auto max-w-7xl px-6 py-20 pb-[50vh] md:px-12 md:pb-[60vh] lg:px-16 text-left border-t-2 border-accent/20 bg-surface/90 backdrop-blur-md">
+  {/* Header Section */}
+  <div class="relative z-10 mx-auto w-full max-w-7xl px-6 py-20 md:px-12 lg:px-16 text-left bg-surface shadow-lg mb-0 pb-16">
     <header class="max-w-3xl relative">
       <p class="mb-4 flex items-center justify-start gap-4 text-xs font-bold uppercase tracking-[0.3em] text-accent">
         <span aria-hidden="true" class="h-px w-12 bg-accent"></span>
@@ -45,5 +41,10 @@ import { CoreValuesVideoPlayer } from '../../remotion/CoreValuesVideoPlayer';
     </header>
   </div>
 
-  <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent z-20"></div>
+  {/* Remotion Brand Trailer Embed - Moved out of the background layer */}
+  <div class="relative z-0 w-full shadow-2xl overflow-hidden bg-black flex-grow min-h-[50vh] xl:min-h-[70vh]">
+    <CoreValuesVideoPlayer client:only="react" />
+  </div>
+
+  <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent z-20 pointer-events-none"></div>
 </section>
