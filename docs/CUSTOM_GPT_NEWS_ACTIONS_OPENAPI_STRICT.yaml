@@ -1,39 +1,40 @@
 openapi: 3.0.3
 info:
-  title: ULTRACTION Jobs API for Custom GPT Actions (Strict)
+  title: ULTRACTION News API for Custom GPT Actions (Strict)
   version: 1.1.0
   description: >
-    Restricted Actions spec exposing list, create, update, and remove/archive
-    operations for safer production usage.
+    Restricted Actions spec exposing list, update, and archive operations for
+    safer production usage. Draft creation can be handled internally or via
+    trusted tooling outside this strict action set.
 servers:
   - url: https://your-api-domain.com
     description: Replace with your live API domain
 tags:
-  - name: Jobs
+  - name: News
 paths:
-  /api/jobs:
+  /api/news:
     get:
-      tags: [Jobs]
-      operationId: listJobs
-      summary: List jobs
+      tags: [News]
+      operationId: listNews
+      summary: List news
       description: >
-        Returns open jobs by default. `status=closed` and `status=all` require
-        write authentication.
+        Returns published news by default. `status=draft`, `status=archived`,
+        and `status=all` require write authentication.
       parameters:
         - name: status
           in: query
           required: false
           schema:
             type: string
-            enum: [open, closed, all]
-            default: open
+            enum: [published, draft, archived, all]
+            default: published
       responses:
         '200':
-          description: Jobs returned
+          description: News returned
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListJobsSuccess'
+                $ref: '#/components/schemas/ListNewsSuccess'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -46,52 +47,21 @@ paths:
           $ref: '#/components/responses/Misconfigured'
         '500':
           $ref: '#/components/responses/InternalError'
-    post:
-      tags: [Jobs]
-      operationId: createJob
-      summary: Create a new job
-      security:
-        - BearerAuth: []
-        - JobsApiKey: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateJobRequest'
-      responses:
-        '201':
-          description: Job created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/JobSuccess'
-        '400':
-          $ref: '#/components/responses/ValidationError'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-        '403':
-          $ref: '#/components/responses/Forbidden'
-        '415':
-          $ref: '#/components/responses/UnsupportedMediaType'
-        '429':
-          $ref: '#/components/responses/RateLimited'
-        '503':
-          $ref: '#/components/responses/Misconfigured'
-        '500':
-          $ref: '#/components/responses/InternalError'
     patch:
-      tags: [Jobs]
-      operationId: updateJob
-      summary: Update an existing job
+      tags: [News]
+      operationId: updateNews
+      summary: Update an existing news item
+      description: >
+        Updates an existing news item. Use `status=published` to publish
+        reviewed drafts and `status=archived` to retire old items.
       security:
         - BearerAuth: []
-        - JobsApiKey: []
+        - NewsApiKey: []
       parameters:
         - name: id
           in: query
           required: true
-          description: Job ID to update
+          description: News ID to update
           schema:
             type: string
       requestBody:
@@ -99,14 +69,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateJobRequest'
+              $ref: '#/components/schemas/UpdateNewsRequest'
       responses:
         '200':
-          description: Job updated
+          description: News item updated
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/JobSuccess'
+                $ref: '#/components/schemas/NewsSuccess'
         '400':
           $ref: '#/components/responses/ValidationError'
         '401':
@@ -126,17 +96,17 @@ paths:
         '500':
           $ref: '#/components/responses/InternalError'
     delete:
-      tags: [Jobs]
-      operationId: archiveJob
-      summary: Remove / archive a job (set status=closed)
+      tags: [News]
+      operationId: archiveNews
+      summary: Archive a news item (set status=archived)
       security:
         - BearerAuth: []
-        - JobsApiKey: []
+        - NewsApiKey: []
       parameters:
         - name: id
           in: query
           required: true
-          description: Job ID to archive
+          description: News ID to archive
           schema:
             type: string
         - name: confirm
@@ -149,24 +119,24 @@ paths:
         - name: confirmTitle
           in: query
           required: true
-          description: Must exactly match the current job title
+          description: Must exactly match the current news title
           schema:
             type: string
             minLength: 2
-            maxLength: 120
+            maxLength: 180
       requestBody:
         required: false
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ArchiveJobRequest'
+              $ref: '#/components/schemas/ArchiveNewsRequest'
       responses:
         '200':
-          description: Job archived
+          description: News item archived
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/JobSuccess'
+                $ref: '#/components/schemas/NewsSuccess'
         '400':
           $ref: '#/components/responses/ValidationError'
         '401':
@@ -191,25 +161,31 @@ components:
       type: http
       scheme: bearer
       bearerFormat: APIKey
-      description: 'Send Authorization header: Bearer <JOBS_API_KEY>'
-    JobsApiKey:
+      description: 'Send Authorization header: Bearer <NEWS_API_KEY>'
+    NewsApiKey:
       type: apiKey
       in: header
-      name: x-jobs-api-key
+      name: x-news-api-key
       description: Alternative header for the same key
   schemas:
-    Job:
+    News:
       type: object
       required:
         - id
         - slug
         - title
-        - location
-        - description
+        - excerpt
+        - content
+        - category
+        - tags
+        - author
+        - image
+        - sourceName
+        - sourceUrl
+        - sourcePublishedAt
         - status
         - createdAt
         - updatedAt
-        - postedAt
       properties:
         id:
           type: string
@@ -217,58 +193,45 @@ components:
           type: string
         title:
           type: string
-        location:
+        excerpt:
           type: string
-        description:
+        content:
           type: string
-        department:
+        category:
           type: string
-          nullable: true
-        employmentType:
+        tags:
+          type: array
+          items:
+            type: string
+        author:
           type: string
-          nullable: true
+        image:
+          type: string
+        sourceName:
+          type: string
+        sourceUrl:
+          type: string
+        sourcePublishedAt:
+          type: string
+          format: date-time
         status:
           type: string
-          enum: [open, closed]
+          enum: [draft, published, archived]
         createdAt:
           type: string
           format: date-time
         updatedAt:
           type: string
           format: date-time
-        postedAt:
-          type: string
-          format: date-time
-        closedAt:
+        publishedAt:
           type: string
           format: date-time
           nullable: true
-    CreateJobRequest:
-      type: object
-      required: [title, location, description]
-      properties:
-        title:
-          type: string
-          minLength: 2
-          maxLength: 120
-        location:
-          type: string
-          minLength: 2
-          maxLength: 120
-        description:
-          type: string
-          minLength: 20
-          maxLength: 5000
-        department:
-          type: string
-          maxLength: 120
-        employmentType:
-          type: string
-          maxLength: 80
-        postedAt:
+        archivedAt:
           type: string
           format: date-time
-    UpdateJobRequest:
+          nullable: true
+    UpdateNewsRequest:
       type: object
       properties:
         id:
@@ -276,28 +239,48 @@ components:
         title:
           type: string
           minLength: 2
-          maxLength: 120
-        location:
+          maxLength: 180
+        excerpt:
+          type: string
+          minLength: 10
+          maxLength: 600
+        content:
+          type: string
+          minLength: 20
+          maxLength: 40000
+        category:
           type: string
           minLength: 2
           maxLength: 120
-        description:
+        tags:
+          type: array
+          items:
+            type: string
+          maxItems: 30
+        author:
           type: string
-          minLength: 20
-          maxLength: 5000
-        department:
-          type: string
+          minLength: 2
           maxLength: 120
-        employmentType:
+        image:
           type: string
-          maxLength: 80
-        postedAt:
+          maxLength: 1000
+        sourceName:
+          type: string
+          minLength: 2
+          maxLength: 160
+        sourceUrl:
+          type: string
+          maxLength: 2000
+        sourcePublishedAt:
           type: string
           format: date-time
         status:
           type: string
-          enum: [open, closed]
-    ArchiveJobRequest:
+          enum: [draft, published, archived]
+        publishedAt:
+          type: string
+          format: date-time
+    ArchiveNewsRequest:
       type: object
       properties:
         id:
@@ -308,8 +291,8 @@ components:
         confirmTitle:
           type: string
           minLength: 2
-          maxLength: 120
-    JobSuccess:
+          maxLength: 180
+    NewsSuccess:
       type: object
       required: [ok, data]
       properties:
@@ -318,11 +301,11 @@ components:
           enum: [true]
         data:
           type: object
-          required: [job]
+          required: [news]
           properties:
-            job:
-              $ref: '#/components/schemas/Job'
-    ListJobsSuccess:
+            news:
+              $ref: '#/components/schemas/News'
+    ListNewsSuccess:
       type: object
       required: [ok, data]
       properties:
@@ -331,12 +314,12 @@ components:
           enum: [true]
         data:
           type: object
-          required: [jobs]
+          required: [news]
           properties:
-            jobs:
+            news:
               type: array
               items:
-                $ref: '#/components/schemas/Job'
+                $ref: '#/components/schemas/News'
     ErrorResponse:
       type: object
       required: [ok, error]
@@ -382,7 +365,7 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
     NotFound:
-      description: Job not found
+      description: News item not found
       content:
         application/json:
           schema:
@@ -406,7 +389,7 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
     Misconfigured:
-      description: Jobs API server configuration missing required secret(s)
+      description: News API server configuration missing required secret(s)
       content:
         application/json:
           schema:

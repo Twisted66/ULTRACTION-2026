@@ -5,14 +5,148 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import SectionBackground from '../../components/common/SectionBackground.tsx';
+import * as newsStore from '../../lib/news-store';
 
-// Get all non-placeholder blog posts
-const allPosts = (await getCollection('blog')).filter((post) => post.slug !== 'example-post');
+export const prerender = false;
+
+interface BlogListItem {
+  slug: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  author: string;
+  category?: string;
+  image?: string;
+}
+
+type RuntimeNewsRecord = {
+  slug?: unknown;
+  title?: unknown;
+  description?: unknown;
+  excerpt?: unknown;
+  summary?: unknown;
+  author?: unknown;
+  category?: unknown;
+  image?: unknown;
+  pubDate?: unknown;
+  publishedAt?: unknown;
+  createdAt?: unknown;
+  updatedAt?: unknown;
+  status?: unknown;
+  state?: unknown;
+  published?: unknown;
+};
+
+function normalizeText(value: unknown): string | undefined {
+  if (typeof value !== 'string') {
+    return undefined;
+  }
+
+  const normalized = value.trim().replace(/\s+/g, ' ');
+  return normalized.length > 0 ? normalized : undefined;
+}
+
+function toDate(value: unknown): Date | undefined {
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    return value;
+  }
+
+  if (typeof value === 'string' || typeof value === 'number') {
+    const parsed = new Date(value);
+    if (!Number.isNaN(parsed.getTime())) {
+      return parsed;
+    }
+  }
+
+  return undefined;
+}
+
+function isPublishedRecord(record: RuntimeNewsRecord): boolean {
+  if (typeof record.published === 'boolean') {
+    return record.published;
+  }
+
+  const status = (normalizeText(record.status) ?? normalizeText(record.state))?.toLowerCase();
+  if (!status) {
+    return true;
+  }
+
+  return status === 'published';
+}
+
+function mapRuntimeNews(record: RuntimeNewsRecord): BlogListItem | null {
+  const slug = normalizeText(record.slug);
+  const title = normalizeText(record.title);
+  if (!slug || !title) {
+    return null;
+  }
+
+  const description =
+    normalizeText(record.description) ??
+    normalizeText(record.excerpt) ??
+    normalizeText(record.summary) ??
+    'Read the latest update from ULTRACTION.';
+
+  const pubDate =
+    toDate(record.publishedAt ?? record.pubDate ?? record.createdAt ?? record.updatedAt) ??
+    new Date(0);
+
+  return {
+    slug,
+    title,
+    description,
+    pubDate,
+    author: normalizeText(record.author) ?? 'ULTRACTION Team',
+    category: normalizeText(record.category),
+    image: normalizeText(record.image),
+  };
+}
+
+// Load legacy markdown posts as fallback content.
+const markdownPosts: BlogListItem[] = (await getCollection('blog'))
+  .filter((post) => post.slug !== 'example-post')
+  .map((post) => ({
+    slug: post.slug,
+    title: post.data.title,
+    description: post.data.description,
+    pubDate: post.data.pubDate,
+    author: post.data.author,
+    category: post.data.category,
+    image: post.data.image,
+  }));
+
+let runtimeRawRecords: RuntimeNewsRecord[] = [];
+try {
+  const listNewsFn = typeof newsStore.listNews === 'function' ? newsStore.listNews : null;
+  if (listNewsFn) {
+    const records = await listNewsFn();
+    runtimeRawRecords = Array.isArray(records)
+      ? records.filter((record): record is RuntimeNewsRecord => Boolean(record && typeof record === 'object'))
+      : [];
+  }
+} catch (error) {
+  console.error('[blog/index] Failed to load runtime news records.', error);
+}
+
+const runtimePosts = runtimeRawRecords
+  .filter((record) => isPublishedRecord(record))
+  .map((record) => mapRuntimeNews(record))
+  .filter((record): record is BlogListItem => record !== null);
+
+// Runtime items take precedence over markdown when slugs overlap.
+const allPostsMap = new Map<string, BlogListItem>();
+for (const post of [...runtimePosts, ...markdownPosts]) {
+  if (!allPostsMap.has(post.slug)) {
+    allPostsMap.set(post.slug, post);
+  }
+}
+const allPosts = Array.from(allPostsMap.values());
+
 const selectedCategory = Astro.url.searchParams.get('category')?.trim().toLowerCase() ?? '';
 const categories = Array.from(
   new Set(
     allPosts
-      .map((post) => post.data.category?.trim())
+      .map((post) => post.category?.trim())
       .filter((value): value is string => Boolean(value)),
   ),
 ).sort((a, b) => a.localeCompare(b));
@@ -23,9 +157,9 @@ const activeCategory = validCategories.has(selectedCategory) ? selectedCategory 
 const posts = allPosts
   .filter((post) => {
     if (!activeCategory) return true;
-    return (post.data.category ?? '').toLowerCase() === activeCategory;
+    return (post.category ?? '').toLowerCase() === activeCategory;
   })
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf())
   .slice(0, 9); // Show latest 9 posts
 
 // SEO Metadata
@@ -58,15 +192,15 @@ const description =
           Featured
         </span>
         <h2 class="text-3xl lg:text-4xl font-bold uppercase mb-4 font-heading">
-          {posts[0].data.title}
+          {posts[0].title}
         </h2>
         <p class="text-base opacity-80 mb-6 line-clamp-3">
-          {posts[0].data.description}
+          {posts[0].description}
         </p>
         <div class="flex items-center gap-4 text-xs opacity-60 mb-6">
-          <span>{posts[0].data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          <span>{posts[0].pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
           <span>&middot;</span>
-          <span>{posts[0].data.author}</span>
+          <span>{posts[0].author}</span>
         </div>
         <a
           href={`/blog/${posts[0].slug}`}
@@ -96,17 +230,17 @@ const description =
         {posts.slice(1).map((post) => (
           <article class="border-b md:border-b-0 lg:border-r border-primary/20 dark:border-black/20 p-8 lg:p-12">
             <div class="flex items-center gap-4 text-xs opacity-60 mb-4">
-              <time datetime={post.data.pubDate.toISOString()}>
-                {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+              <time datetime={post.pubDate.toISOString()}>
+                {post.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
               </time>
               <span>&middot;</span>
-              <span>{post.data.author}</span>
+              <span>{post.author}</span>
             </div>
             <h3 class="text-xl font-bold uppercase mb-3 font-heading line-clamp-2">
-              {post.data.title}
+              {post.title}
             </h3>
             <p class="text-sm opacity-80 mb-6 line-clamp-3">
-              {post.data.description}
+              {post.description}
             </p>
             <a
               href={`/blog/${post.slug}`}
