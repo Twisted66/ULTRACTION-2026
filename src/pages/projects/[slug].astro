@@ -170,14 +170,17 @@ function getCategoryIcon(category: string): string {
           {titleLine2 && <span class="block mt-1">{titleLine2}</span>}
         </h1>
 
-        <!-- Enhanced location with better styling -->
-        <p class="project-hero-location text-base md:text-lg text-white/80 font-light max-w-2xl flex items-center gap-3">
-          <svg class="w-4 h-4 text-accent/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-          {project.data.location}
-        </p>
+        <!-- Hero metadata -->
+        <div class="project-hero-meta">
+          <p class="project-hero-meta-item">
+            <span class="project-hero-meta-label">Project</span>
+            <span class="project-hero-meta-value">{project.data.title}</span>
+          </p>
+          <p class="project-hero-meta-item">
+            <span class="project-hero-meta-label">Location</span>
+            <span class="project-hero-meta-value">{project.data.location}</span>
+          </p>
+        </div>
 
         <!-- Scroll indicator -->
         <div class="mt-12 animate-bounce">
@@ -241,14 +244,6 @@ function getCategoryIcon(category: string): string {
         <div class="project-main-content">
           <!-- Enhanced Bento Gallery -->
           <div class="project-poster-shell" data-project-bento data-images={JSON.stringify(projectImages)}>
-            <!-- Decorative frame -->
-            <div class="project-poster-frame" aria-hidden="true">
-              <div class="frame-corner frame-tl"></div>
-              <div class="frame-corner frame-tr"></div>
-              <div class="frame-corner frame-bl"></div>
-              <div class="frame-corner frame-br"></div>
-            </div>
-
             <!-- Enhanced controls -->
             {showBentoPager && (
               <div class="project-bento-controls">
@@ -313,7 +308,6 @@ function getCategoryIcon(category: string): string {
 
           <!-- Project Overview Content -->
           <article class="project-overview-content">
-            <h2 class="content-section-title">Project Overview</h2>
             <div class="prose project-prose prose-lg dark:prose-invert max-w-none prose-headings:font-heading prose-headings:uppercase prose-p:font-light prose-li:font-light">
               <Content />
             </div>
@@ -565,10 +559,36 @@ function getCategoryIcon(category: string): string {
     }
   }
 
-  /* Enhanced location */
-  .project-hero-location {
-    letter-spacing: 0.03em;
-    font-weight: 400;
+  /* Hero metadata */
+  .project-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .project-hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.65rem 0.8rem;
+    min-width: min(100%, 280px);
+    border: 1px solid hsl(0 0% 100% / 0.16);
+    background: hsl(0 0% 100% / 0.08);
+    backdrop-filter: blur(4px);
+  }
+
+  .project-hero-meta-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: hsl(0 0% 100% / 0.62);
+  }
+
+  .project-hero-meta-value {
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    color: hsl(0 0% 100% / 0.92);
   }
 
   /* ============================================
@@ -577,23 +597,10 @@ function getCategoryIcon(category: string): string {
 
   .project-stats-sidebar {
     position: relative;
-    padding: clamp(1.2rem, 1rem + 1.2vw, 2rem);
-    background: linear-gradient(170deg,
-      hsl(var(--card) / 0.98),
-      hsl(var(--card) / 0.92)
-    );
-    border: 1px solid hsl(var(--primary) / 0.12);
-    box-shadow:
-      0 20px 50px -30px hsl(var(--primary) / 0.5),
-      0 0 0 1px hsl(var(--accent) / 0.05) inset;
   }
 
   .project-stats-sidebar::before {
-    content: '';
-    position: absolute;
-    inset: 10px;
-    border: 1px solid hsl(var(--accent) / 0.12);
-    pointer-events: none;
+    content: none;
   }
 
   .project-stats-list {
@@ -786,70 +793,16 @@ function getCategoryIcon(category: string): string {
 
   .project-poster-shell {
     position: relative;
-    padding: clamp(1rem, 0.8rem + 1vw, 1.8rem);
-    background:
-      linear-gradient(170deg, hsl(var(--background)), hsl(var(--card) / 0.95)),
-      radial-gradient(ellipse at top left, hsl(var(--accent) / 0.03), transparent 50%);
-    border: 1px solid hsl(var(--primary) / 0.1);
-    box-shadow:
-      0 25px 60px -30px hsl(var(--primary) / 0.5),
-      0 0 0 1px hsl(var(--accent) / 0.05) inset;
-    overflow: hidden;
-    margin-bottom: 2rem;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    overflow: visible;
+    margin-bottom: 1.5rem;
   }
 
   .project-poster-shell::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg,
-      transparent,
-      hsl(var(--accent) / 0.4),
-      transparent
-    );
-  }
-
-  /* Enhanced frame with corner accents */
-  .project-poster-frame {
-    position: absolute;
-    inset: 14px;
-    border: 1px solid hsl(var(--accent) / 0.1);
-    pointer-events: none;
-  }
-
-  .frame-corner {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-color: hsl(var(--accent) / 0.4);
-    border-style: solid;
-  }
-
-  .frame-tl {
-    top: -1px;
-    left: -1px;
-    border-width: 2px 0 0 2px;
-  }
-
-  .frame-tr {
-    top: -1px;
-    right: -1px;
-    border-width: 2px 2px 0 0;
-  }
-
-  .frame-bl {
-    bottom: -1px;
-    left: -1px;
-    border-width: 0 0 2px 2px;
-  }
-
-  .frame-br {
-    bottom: -1px;
-    right: -1px;
-    border-width: 0 2px 2px 0;
+    content: none;
   }
 
   /* Enhanced controls */
@@ -957,25 +910,6 @@ function getCategoryIcon(category: string): string {
     background: linear-gradient(90deg, hsl(var(--accent)), transparent);
   }
 
-  .content-section-title {
-    font-size: 1.5rem;
-    letter-spacing: 0.08em;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    color: hsl(var(--primary));
-    position: relative;
-  }
-
-  .content-section-title::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 80px;
-    height: 3px;
-    background: hsl(var(--accent));
-  }
-
   /* Prose styling */
   .project-prose :global(h2) {
     position: relative;
@@ -1037,9 +971,7 @@ function getCategoryIcon(category: string): string {
 
   .project-details-section {
     position: relative;
-    background:
-      radial-gradient(1400px 600px at -10% -20%, hsl(var(--accent) / 0.06), transparent 50%),
-      linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.98) 100%);
+    background: transparent;
   }
 
   .project-overview-bento-layout {
@@ -1056,10 +988,10 @@ function getCategoryIcon(category: string): string {
 
   .project-overview-content {
     position: relative;
-    padding: clamp(1.5rem, 1.2rem + 1.2vw, 2.5rem);
-    background: linear-gradient(170deg, hsl(var(--card) / 0.95), hsl(var(--card) / 0.9));
-    border: 1px solid hsl(var(--primary) / 0.1);
-    box-shadow: 0 15px 40px -25px hsl(var(--primary) / 0.3);
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
   }
 
   /* Tablet styles */
@@ -1076,10 +1008,6 @@ function getCategoryIcon(category: string): string {
     .project-bento-item.bento-featured {
       grid-column: span 2;
       grid-row: span 1;
-    }
-
-    .project-poster-frame {
-      inset: 10px;
     }
 
     .project-overview-bento-layout {
@@ -1127,11 +1055,12 @@ function getCategoryIcon(category: string): string {
     }
 
     .project-poster-shell {
-      padding: 1rem;
+      margin-bottom: 1.25rem;
     }
 
-    .project-poster-frame {
-      inset: 6px;
+    .project-hero-meta-item {
+      width: 100%;
+      min-width: 0;
     }
 
     .project-bento-controls {
@@ -1144,7 +1073,7 @@ function getCategoryIcon(category: string): string {
     }
 
     .project-overview-content {
-      padding: 1.25rem;
+      padding: 0;
     }
 
     .project-stats-list {

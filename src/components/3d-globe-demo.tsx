@@ -19,13 +19,17 @@ const sampleMarkers: GlobeMarker[] = [
 
 interface Globe3DDemoProps {
   className?: string;
+  showOfficeMarkers?: boolean;
 }
 
-export default function Globe3DDemo({ className }: Globe3DDemoProps) {
+export default function Globe3DDemo({
+  className,
+  showOfficeMarkers = true,
+}: Globe3DDemoProps) {
   return (
     <Globe3D
       className={className}
-      markers={sampleMarkers}
+      markers={showOfficeMarkers ? sampleMarkers : []}
       config={{
         radius: 3.2,
         atmosphereColor: "#4da6ff",

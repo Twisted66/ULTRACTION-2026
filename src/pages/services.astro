@@ -8,30 +8,29 @@ const description = 'Premium construction and contracting services in UAE';
 
 <Layout title={title} description={description}>
   <!-- Hero Section - 2 Column Layout (Matching About) -->
-  <section class="grid grid-cols-1 lg:grid-cols-2 border-t border-b border-black dark:border-black min-h-[75vh] lg:min-h-[85vh]">
+  <section class="grid grid-cols-1 lg:grid-cols-2 border-t border-b border-border min-h-[75vh] lg:min-h-[90vh]">
     <!-- Left Column: Text -->
-    <div class="flex flex-col justify-center px-6 py-16 md:px-12 lg:p-24 border-r border-black dark:border-black relative bg-surface h-full">
-      <span class="text-xs font-bold uppercase tracking-widest opacity-80 mb-4 block text-accent">Expertise</span>
-      <h1 class="text-5xl lg:text-7xl font-bold uppercase leading-none mb-12 font-heading">
-        Comprehensive <br/> <span class="text-accent italic">Construction</span> Services
+    <div class="flex flex-col justify-center px-6 py-16 md:px-12 lg:p-24 border-r border-border relative bg-surface h-full z-10">
+      <span class="text-xs font-bold uppercase tracking-[0.3em] opacity-80 mb-6 block text-accent">Expertise // 02</span>
+      <h1 class="text-6xl lg:text-8xl font-bold uppercase leading-none mb-12 font-heading tracking-tight">
+        Engineered <br/> <span class="text-accent italic">Excellence.</span>
       </h1>
-      <div class="w-12 h-[1px] bg-black/20 mb-8"></div>
-      <p class="text-lg mb-6 opacity-80 leading-relaxed max-w-sm text-black">
-        From critical infrastructure to heritage revitalization, we deliver excellence across the full spectrum of construction services with precision, expertise, and unwavering commitment to quality.
+      <div class="w-16 h-[2px] bg-accent mb-10"></div>
+      <p class="text-xl mb-6 opacity-90 leading-relaxed max-w-lg text-primary font-light">
+        From critical infrastructure to heritage revitalization, we deliver excellence across the full spectrum of construction services with precision, expertise, and an unwavering commitment to quality.
       </p>
     </div>
 
     <!-- Right Column: HD Standalone Image (100% Occupancy) -->
-    <div class="relative overflow-hidden h-[320px] sm:h-[420px] lg:h-full bg-surface">
+    <div class="relative overflow-hidden h-[40vh] sm:h-[50vh] lg:h-full bg-surface group">
       <img
         src="/images/services-hero-v2.png"
         alt="Naseem Al Bar bridge construction infrastructure"
-        class="absolute inset-0 w-full h-full object-cover"
+        class="absolute inset-0 w-full h-full object-cover transition-transform duration-[20s] group-hover:scale-110"
         loading="eager"
       />
-      <div class="absolute inset-0 pointer-events-none bg-gradient-to-r from-surface via-surface/40 to-transparent z-10"></div>
-      <div class="absolute inset-0 pointer-events-none bg-black/10 mix-blend-multiply z-10"></div>
-      <div class="absolute inset-0 pointer-events-none border-l border-black/5 z-20"></div>
+      <div class="absolute inset-0 pointer-events-none bg-gradient-to-r from-surface lg:from-surface/80 via-transparent to-transparent z-10"></div>
+      <div class="absolute inset-0 pointer-events-none bg-black/20 mix-blend-multiply z-10"></div>
     </div>
   </section>
 
@@ -44,312 +43,353 @@ const description = 'Premium construction and contracting services in UAE';
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2" aria-labelledby="services-heading">
+    <div class="flex flex-col border-b border-border" aria-labelledby="services-heading">
       <h2 id="services-heading" class="sr-only">Our Construction Services</h2>
-    <!-- Service 1: Bridges, Underpasses and Box Culverts -->
-    <div class="border-b border-r-0 md:border-r border-black flex flex-col group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
-      <div class="aspect-[4/3] overflow-hidden relative border-b border-black">
-        <img alt="Bridges, Underpasses and Box Culverts - Naseem Al Bar Bridge" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" src="/images/projects/naseem-albar-bridge/photo_019.jpeg" loading="lazy" />
-        <div class="absolute top-0 right-0 p-8">
-          <span class="font-heading text-5xl italic text-white group-hover:text-accent transition-colors">01</span>
+    <!-- Service 01: Bridges & Underpasses -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 border-t border-border group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
+
+      <div class="aspect-square lg:aspect-auto relative border-b lg:border-b-0 lg:border-r border-border overflow-hidden ">
+        <img alt="Bridges & Underpasses" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" src="/images/projects/naseem-albar-bridge/photo_019.jpeg" loading="lazy" />
+        <div class="absolute top-0 right-0 p-8 z-20">
+          <span class="font-heading text-6xl italic text-white mix-blend-difference opacity-80 group-hover:opacity-100 transition-opacity">01</span>
         </div>
-        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors motion-medium"></div>
+        <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors motion-medium z-10"></div>
       </div>
-      <div class="p-8 sm:p-12 lg:p-16 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 class="text-2xl font-heading mb-6 group-hover:text-color-accent transition-colors text-black">Bridges, Underpasses and Box Culverts</h3>
-          <p class="text-sm font-light leading-loose mb-8 pr-4 text-black">
-            End-to-end services from planning to construction to handover. Focus on safety, aesthetics, and functionality. Enhancing resilient transportation and water management systems.
-          </p>
-          <ul class="text-xs uppercase tracking-widest space-y-3 text-black">
-            <li class="flex items-center gap-3"><span class="w-8 h-[1px] bg-color-accent"></span>Bridge Construction</li>
-            <li class="flex items-center gap-3"><span class="w-8 h-[1px] bg-color-accent"></span>Underpasses</li>
-            <li class="flex items-center gap-3"><span class="w-8 h-[1px] bg-color-accent"></span>Box Culverts</li>
-          </ul>
+      <div class="p-8 sm:p-12 lg:p-24 flex flex-col justify-center relative ">
+        <div class="absolute top-0 right-0 p-8 opacity-5">
+           <span class="font-heading text-8xl md:text-[12rem] italic leading-none font-bold text-primary">01</span>
         </div>
-        <div class="mt-12 pt-8 border-t border-black/10 flex justify-between items-center opacity-60 group-hover:opacity-100 transition-opacity text-black">
-          <a href="/contact" class="text-xs uppercase tracking-widest font-medium hover:text-[#800000] transition-colors">Inquire</a>
-          <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        <h3 class="text-3xl md:text-5xl font-heading mb-8 group-hover:text-accent transition-colors text-primary uppercase relative z-10">Bridges & Underpasses</h3>
+        <p class="text-base md:text-lg font-light leading-loose mb-10 text-primary/80 max-w-xl relative z-10">
+          End-to-end services from planning to construction to handover. Focus on safety, aesthetics, and functionality. Enhancing resilient transportation and water management systems.
+        </p>
+        <ul class="text-sm uppercase tracking-widest space-y-4 text-primary relative z-10 font-medium">
+          <li class="flex items-center gap-4"><span class="w-12 h-[1px] bg-accent"></span>Bridge Construction</li>
+          <li class="flex items-center gap-4"><span class="w-12 h-[1px] bg-accent"></span>Underpasses</li>
+          <li class="flex items-center gap-4"><span class="w-12 h-[1px] bg-accent"></span>Box Culverts</li>
+        </ul>
+        <div class="mt-16 pt-8 border-t border-border flex justify-between items-center group-hover:opacity-100 transition-opacity text-primary relative z-10">
+          <a href="/contact?subject=Bridges" class="text-sm uppercase tracking-[0.2em] font-bold hover:text-accent transition-colors flex items-center gap-4">
+            Discuss Project
+            <span class="w-8 h-[1px] bg-current transform origin-left group-hover:scale-x-150 transition-transform"></span>
+          </a>
+          <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform motion-base text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </div>
       </div>
     </div>
+    <!-- Service 02: Buildings & Palaces -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 border-t border-border group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
 
-    <!-- Service 2: Industrial, Commercial and Residential Buildings -->
-    <div class="border-b border-black flex flex-col group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
-      <div class="aspect-[4/3] overflow-hidden relative border-b border-black">
-        <img alt="Industrial, Commercial and Residential Buildings" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" src="/images/projects/dubai-marina-tower/hero.png" loading="lazy" />
-        <div class="absolute top-0 right-0 p-8">
-          <span class="font-heading text-5xl italic text-white group-hover:text-accent transition-colors">02</span>
+      <div class="p-8 sm:p-12 lg:p-24 flex flex-col justify-center relative order-2 lg:order-1 lg:border-r border-border">
+        <div class="absolute top-0 left-0 p-8 opacity-5">
+           <span class="font-heading text-8xl md:text-[12rem] italic leading-none font-bold text-primary">02</span>
         </div>
-        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors motion-medium"></div>
+        <h3 class="text-3xl md:text-5xl font-heading mb-8 group-hover:text-accent transition-colors text-primary uppercase relative z-10">Buildings & Palaces</h3>
+        <p class="text-base md:text-lg font-light leading-loose mb-10 text-primary/80 max-w-xl relative z-10">
+          Constructing industrial, commercial, residential buildings, and palaces. Tailored services from planning to execution. Opulent palaces that epitomize grandeur and timeless elegance.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 text-sm uppercase tracking-widest text-primary font-medium relative z-10">
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Industrial Facilities</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Commercial Buildings</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Residential Complexes</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Palace Construction</span>
+        </div>
+        <div class="mt-16 pt-8 border-t border-border flex justify-between items-center group-hover:opacity-100 transition-opacity text-primary relative z-10">
+          <a href="/contact?subject=Buildings" class="text-sm uppercase tracking-[0.2em] font-bold hover:text-accent transition-colors flex items-center gap-4">
+            Discuss Project
+            <span class="w-8 h-[1px] bg-current transform origin-left group-hover:scale-x-150 transition-transform"></span>
+          </a>
+          <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform motion-base text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
       </div>
-      <div class="p-8 sm:p-12 lg:p-16 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 class="text-2xl font-heading mb-6 group-hover:text-color-accent transition-colors text-black">Industrial, Commercial and Residential Buildings</h3>
-          <p class="text-sm font-light leading-loose mb-8 pr-4 text-black">
-            Constructing industrial, commercial, residential buildings, and palaces. Tailored services from planning to execution. Opulent palaces that epitomize grandeur and timeless elegance.
-          </p>
-          <div class="grid grid-cols-2 gap-y-3 gap-x-4 text-xs uppercase tracking-widest text-black">
-            <span>Industrial Facilities</span>
-            <span>Commercial Buildings</span>
-            <span>Residential Complexes</span>
-            <span>Palace Construction</span>
+      <div class="aspect-square lg:aspect-auto relative border-b lg:border-b-0 border-border overflow-hidden order-1 lg:order-2">
+        <img alt="Buildings & Palaces" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" src="/images/projects/dubai-marina-tower/hero.png" loading="lazy" />
+        <div class="absolute top-0 right-0 p-8 z-20">
+          <span class="font-heading text-6xl italic text-white mix-blend-difference opacity-80 group-hover:opacity-100 transition-opacity">02</span>
+        </div>
+        <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors motion-medium z-10"></div>
+      </div>
+    </div>
+    <!-- Service 03: Water Reservoirs -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 border-t border-border group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
+
+      <div class="aspect-square lg:aspect-auto relative border-b lg:border-b-0 lg:border-r border-border overflow-hidden ">
+        <img alt="Water Reservoirs" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" src="/images/projects/water-reservoir-retaining-walls-yas-island/hero.png" loading="lazy" />
+        <div class="absolute top-0 right-0 p-8 z-20">
+          <span class="font-heading text-6xl italic text-white mix-blend-difference opacity-80 group-hover:opacity-100 transition-opacity">03</span>
+        </div>
+        <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors motion-medium z-10"></div>
+      </div>
+      <div class="p-8 sm:p-12 lg:p-24 flex flex-col justify-center relative ">
+        <div class="absolute top-0 right-0 p-8 opacity-5">
+           <span class="font-heading text-8xl md:text-[12rem] italic leading-none font-bold text-primary">03</span>
+        </div>
+        <h3 class="text-3xl md:text-5xl font-heading mb-8 group-hover:text-accent transition-colors text-primary uppercase relative z-10">Water Reservoirs</h3>
+        <p class="text-base md:text-lg font-light leading-loose mb-10 text-primary/80 max-w-xl relative z-10">
+          End-to-end services from design to maintenance. Efficient water management solutions. Sustainable and reliable water supply projects.
+        </p>
+        <ul class="text-sm uppercase tracking-widest space-y-4 text-primary relative z-10 font-medium">
+          <li class="flex items-center gap-4"><span class="w-12 h-[1px] bg-accent"></span>Water Reservoirs</li>
+          <li class="flex items-center gap-4"><span class="w-12 h-[1px] bg-accent"></span>Pump Stations</li>
+          <li class="flex items-center gap-4"><span class="w-12 h-[1px] bg-accent"></span>Maintenance Services</li>
+        </ul>
+        <div class="mt-16 pt-8 border-t border-border flex justify-between items-center group-hover:opacity-100 transition-opacity text-primary relative z-10">
+          <a href="/contact?subject=Water_Reservoirs" class="text-sm uppercase tracking-[0.2em] font-bold hover:text-accent transition-colors flex items-center gap-4">
+            Discuss Project
+            <span class="w-8 h-[1px] bg-current transform origin-left group-hover:scale-x-150 transition-transform"></span>
+          </a>
+          <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform motion-base text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+      </div>
+    </div>
+    <!-- Service 04: Power Plants & Substations -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 border-t border-border group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
+
+      <div class="p-8 sm:p-12 lg:p-24 flex flex-col justify-center relative order-2 lg:order-1 lg:border-r border-border">
+        <div class="absolute top-0 left-0 p-8 opacity-5">
+           <span class="font-heading text-8xl md:text-[12rem] italic leading-none font-bold text-primary">04</span>
+        </div>
+        <h3 class="text-3xl md:text-5xl font-heading mb-8 group-hover:text-accent transition-colors text-primary uppercase relative z-10">Power Plants & Substations</h3>
+        <p class="text-base md:text-lg font-light leading-loose mb-10 text-primary/80 max-w-xl relative z-10">
+          Complete civil works from planning to maintenance. Focus on precision and safety. Vital utility infrastructure supporting power distribution across the region.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 text-sm uppercase tracking-widest text-primary font-medium relative z-10">
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Power Plant Civil Works</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Distribution Substations</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Control Buildings</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Maintenance Services</span>
+        </div>
+        <div class="mt-16 pt-8 border-t border-border flex justify-between items-center group-hover:opacity-100 transition-opacity text-primary relative z-10">
+          <a href="/contact?subject=Power_Plants" class="text-sm uppercase tracking-[0.2em] font-bold hover:text-accent transition-colors flex items-center gap-4">
+            Discuss Project
+            <span class="w-8 h-[1px] bg-current transform origin-left group-hover:scale-x-150 transition-transform"></span>
+          </a>
+          <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform motion-base text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+      </div>
+      <div class="aspect-square lg:aspect-auto relative border-b lg:border-b-0 border-border overflow-hidden order-1 lg:order-2">
+        <img alt="Power Plants & Substations" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" src="/images/projects/distribution-substation-aqah/hero.png" loading="lazy" />
+        <div class="absolute top-0 right-0 p-8 z-20">
+          <span class="font-heading text-6xl italic text-white mix-blend-difference opacity-80 group-hover:opacity-100 transition-opacity">04</span>
+        </div>
+        <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors motion-medium z-10"></div>
+      </div>
+    </div>
+    <!-- Service 05: Seaports and Airports -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 border-t border-border group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
+
+      <div class="aspect-square lg:aspect-auto relative border-b lg:border-b-0 lg:border-r border-border overflow-hidden ">
+        <img alt="Seaports and Airports" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" src="/images/projects/khalifa-port/hero.png" loading="lazy" />
+        <div class="absolute top-0 right-0 p-8 z-20">
+          <span class="font-heading text-6xl italic text-white mix-blend-difference opacity-80 group-hover:opacity-100 transition-opacity">05</span>
+        </div>
+        <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors motion-medium z-10"></div>
+      </div>
+      <div class="p-8 sm:p-12 lg:p-24 flex flex-col justify-center relative ">
+        <div class="absolute top-0 right-0 p-8 opacity-5">
+           <span class="font-heading text-8xl md:text-[12rem] italic leading-none font-bold text-primary">05</span>
+        </div>
+        <h3 class="text-3xl md:text-5xl font-heading mb-8 group-hover:text-accent transition-colors text-primary uppercase relative z-10">Seaports and Airports</h3>
+        <p class="text-base md:text-lg font-light leading-loose mb-10 text-primary/80 max-w-xl relative z-10">
+          End-to-end services for critical infrastructure. International standards compliance. Maritime and aviation transportation hubs connecting the region to the world.
+        </p>
+        <ul class="text-sm uppercase tracking-widest space-y-4 text-primary relative z-10 font-medium">
+          <li class="flex items-center gap-4"><span class="w-12 h-[1px] bg-accent"></span>Seaport Infrastructure</li>
+          <li class="flex items-center gap-4"><span class="w-12 h-[1px] bg-accent"></span>Airport Civil Works</li>
+          <li class="flex items-center gap-4"><span class="w-12 h-[1px] bg-accent"></span>Marine Structures</li>
+        </ul>
+        <div class="mt-16 pt-8 border-t border-border flex justify-between items-center group-hover:opacity-100 transition-opacity text-primary relative z-10">
+          <a href="/contact?subject=Seaports_Airports" class="text-sm uppercase tracking-[0.2em] font-bold hover:text-accent transition-colors flex items-center gap-4">
+            Discuss Project
+            <span class="w-8 h-[1px] bg-current transform origin-left group-hover:scale-x-150 transition-transform"></span>
+          </a>
+          <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform motion-base text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+      </div>
+    </div>
+    <!-- Service 06: Oil and Gas Infrastructure -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 border-t border-border group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
+
+      <div class="p-8 sm:p-12 lg:p-24 flex flex-col justify-center relative order-2 lg:order-1 lg:border-r border-border">
+        <div class="absolute top-0 left-0 p-8 opacity-5">
+           <span class="font-heading text-8xl md:text-[12rem] italic leading-none font-bold text-primary">06</span>
+        </div>
+        <h3 class="text-3xl md:text-5xl font-heading mb-8 group-hover:text-accent transition-colors text-primary uppercase relative z-10">Oil and Gas Infrastructure</h3>
+        <p class="text-base md:text-lg font-light leading-loose mb-10 text-primary/80 max-w-xl relative z-10">
+          Planning, design, and execution of essential infrastructure. Safety, durability, and environmental compliance. Stringent industry standards for onshore and offshore operations.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 text-sm uppercase tracking-widest text-primary font-medium relative z-10">
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Onshore Facilities</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Offshore Structures</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Process Plant Civil Works</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Pipeline Infrastructure</span>
+        </div>
+        <div class="mt-16 pt-8 border-t border-border flex justify-between items-center group-hover:opacity-100 transition-opacity text-primary relative z-10">
+          <a href="/contact?subject=Oil_Gas" class="text-sm uppercase tracking-[0.2em] font-bold hover:text-accent transition-colors flex items-center gap-4">
+            Discuss Project
+            <span class="w-8 h-[1px] bg-current transform origin-left group-hover:scale-x-150 transition-transform"></span>
+          </a>
+          <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform motion-base text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
+      </div>
+      <div class="aspect-square lg:aspect-auto relative border-b lg:border-b-0 border-border overflow-hidden order-1 lg:order-2">
+        <img alt="Oil and Gas Infrastructure" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" src="/images/projects/marine-staging-yassat-island/hero.png" loading="lazy" />
+        <div class="absolute top-0 right-0 p-8 z-20">
+          <span class="font-heading text-6xl italic text-white mix-blend-difference opacity-80 group-hover:opacity-100 transition-opacity">06</span>
+        </div>
+        <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors motion-medium z-10"></div>
+      </div>
+    </div>
+    <!-- Service 07: Heritage Revitalization -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 border-t border-border group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
+
+      <div class="aspect-square lg:aspect-auto relative border-b lg:border-b-0 lg:border-r border-border overflow-hidden ">
+        <img alt="Heritage Revitalization" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" src="/images/projects/qidfah-revitalization/hero.png" loading="lazy" />
+        <div class="absolute top-0 right-0 p-8 z-20">
+          <span class="font-heading text-6xl italic text-white mix-blend-difference opacity-80 group-hover:opacity-100 transition-opacity">07</span>
+        </div>
+        <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors motion-medium z-10"></div>
+      </div>
+      <div class="p-8 sm:p-12 lg:p-24 flex flex-col justify-center relative ">
+        <div class="absolute top-0 right-0 p-8 opacity-5">
+           <span class="font-heading text-8xl md:text-[12rem] italic leading-none font-bold text-primary">07</span>
+        </div>
+        <h3 class="text-3xl md:text-5xl font-heading mb-8 group-hover:text-accent transition-colors text-primary uppercase relative z-10">Heritage Revitalization</h3>
+        <p class="text-base md:text-lg font-light leading-loose mb-10 text-primary/80 max-w-xl relative z-10">
+          Preserving and restoring historical and cultural landmarks. Advanced restoration techniques. Integrating modern amenities while honoring authenticity.
+        </p>
+        <div class="space-y-4 border-l border-border pl-6 relative z-10">
+          <div>
+            <span class="block text-xs font-bold uppercase tracking-widest mb-1 text-primary">Preservation</span>
+            <span class="text-xs font-light text-primary">Historical landmark restoration</span>
+          </div>
+          <div>
+            <span class="block text-xs font-bold uppercase tracking-widest mb-1 text-primary">Integration</span>
+            <span class="text-xs font-light text-primary">Modern amenities with authenticity</span>
           </div>
         </div>
-        <div class="mt-12 pt-8 border-t border-black/10 flex justify-between items-center opacity-60 group-hover:opacity-100 transition-opacity text-black">
-          <a href="/contact" class="text-xs uppercase tracking-widest font-medium hover:text-[#800000] transition-colors">Inquire</a>
-          <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        <div class="mt-16 pt-8 border-t border-border flex justify-between items-center group-hover:opacity-100 transition-opacity text-primary relative z-10">
+          <a href="/contact?subject=Heritage" class="text-sm uppercase tracking-[0.2em] font-bold hover:text-accent transition-colors flex items-center gap-4">
+            Discuss Project
+            <span class="w-8 h-[1px] bg-current transform origin-left group-hover:scale-x-150 transition-transform"></span>
+          </a>
+          <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform motion-base text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </div>
       </div>
     </div>
+    <!-- Service 08: Pipeline & Storm Network -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 border-t border-border group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
 
-    <!-- Service 3: Water Reservoir and Pump Stations -->
-    <div class="border-b border-r-0 md:border-r border-black flex flex-col group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
-      <div class="aspect-[4/3] overflow-hidden relative border-b border-black">
-        <img alt="Water Reservoir and Pump Stations" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" src="/images/projects/water-reservoir-retaining-walls-yas-island/hero.png" loading="lazy" />
-        <div class="absolute top-0 right-0 p-8">
-          <span class="font-heading text-5xl italic text-white group-hover:text-accent transition-colors">03</span>
+      <div class="p-8 sm:p-12 lg:p-24 flex flex-col justify-center relative order-2 lg:order-1 lg:border-r border-border">
+        <div class="absolute top-0 left-0 p-8 opacity-5">
+           <span class="font-heading text-8xl md:text-[12rem] italic leading-none font-bold text-primary">08</span>
         </div>
-        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors motion-medium"></div>
+        <h3 class="text-3xl md:text-5xl font-heading mb-8 group-hover:text-accent transition-colors text-primary uppercase relative z-10">Pipeline & Storm Network</h3>
+        <p class="text-base md:text-lg font-light leading-loose mb-10 text-primary/80 max-w-xl relative z-10">
+          Efficient transportation of substances and storm water management. Industry standards and environmental considerations. Sustainable urban and industrial environments.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 text-sm uppercase tracking-widest text-primary font-medium relative z-10">
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Pipeline Networks</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Storm Water Systems</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Drainage Infrastructure</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Environmental Compliance</span>
+        </div>
+        <div class="mt-16 pt-8 border-t border-border flex justify-between items-center group-hover:opacity-100 transition-opacity text-primary relative z-10">
+          <a href="/contact?subject=Pipeline" class="text-sm uppercase tracking-[0.2em] font-bold hover:text-accent transition-colors flex items-center gap-4">
+            Discuss Project
+            <span class="w-8 h-[1px] bg-current transform origin-left group-hover:scale-x-150 transition-transform"></span>
+          </a>
+          <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform motion-base text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </div>
       </div>
-      <div class="p-8 sm:p-12 lg:p-16 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 class="text-2xl font-heading mb-6 group-hover:text-color-accent transition-colors text-black">Water Reservoir and Pump Stations</h3>
-          <p class="text-sm font-light leading-loose mb-8 pr-4 text-black">
-            End-to-end services from design to maintenance. Efficient water management solutions. Sustainable and reliable water supply projects.
-          </p>
-          <ul class="text-xs uppercase tracking-widest space-y-3 text-black">
-            <li class="flex items-center gap-3"><span class="w-8 h-[1px] bg-color-accent"></span>Water Reservoirs</li>
-            <li class="flex items-center gap-3"><span class="w-8 h-[1px] bg-color-accent"></span>Pump Stations</li>
-            <li class="flex items-center gap-3"><span class="w-8 h-[1px] bg-color-accent"></span>Maintenance Services</li>
-          </ul>
+      <div class="aspect-square lg:aspect-auto relative border-b lg:border-b-0 border-border overflow-hidden order-1 lg:order-2">
+        <img alt="Pipeline & Storm Network" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" src="/images/projects/inner-bypass-e45/photo_018.jpeg" loading="lazy" />
+        <div class="absolute top-0 right-0 p-8 z-20">
+          <span class="font-heading text-6xl italic text-white mix-blend-difference opacity-80 group-hover:opacity-100 transition-opacity">08</span>
         </div>
-        <div class="mt-12 pt-8 border-t border-black/10 flex justify-between items-center opacity-60 group-hover:opacity-100 transition-opacity text-black">
-          <a href="/contact" class="text-xs uppercase tracking-widest font-medium hover:text-[#800000] transition-colors">Inquire</a>
-          <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors motion-medium z-10"></div>
+      </div>
+    </div>
+    <!-- Service 09: Road Works & Earthworks -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 border-t border-border group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
+
+      <div class="aspect-square lg:aspect-auto relative border-b lg:border-b-0 lg:border-r border-border overflow-hidden ">
+        <img alt="Road Works & Earthworks" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" src="/images/projects/al-tallah-bridge/photo_013.jpeg" loading="lazy" />
+        <div class="absolute top-0 right-0 p-8 z-20">
+          <span class="font-heading text-6xl italic text-white mix-blend-difference opacity-80 group-hover:opacity-100 transition-opacity">09</span>
+        </div>
+        <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors motion-medium z-10"></div>
+      </div>
+      <div class="p-8 sm:p-12 lg:p-24 flex flex-col justify-center relative ">
+        <div class="absolute top-0 right-0 p-8 opacity-5">
+           <span class="font-heading text-8xl md:text-[12rem] italic leading-none font-bold text-primary">09</span>
+        </div>
+        <h3 class="text-3xl md:text-5xl font-heading mb-8 group-hover:text-accent transition-colors text-primary uppercase relative z-10">Road Works & Earthworks</h3>
+        <p class="text-base md:text-lg font-light leading-loose mb-10 text-primary/80 max-w-xl relative z-10">
+          Comprehensive road construction and earthworks services. From site preparation to final paving. Delivering durable and resilient transportation infrastructure.
+        </p>
+        <ul class="text-sm uppercase tracking-widest space-y-4 text-primary relative z-10 font-medium">
+          <li class="flex items-center gap-4"><span class="w-12 h-[1px] bg-accent"></span>Road Construction</li>
+          <li class="flex items-center gap-4"><span class="w-12 h-[1px] bg-accent"></span>Earthworks</li>
+          <li class="flex items-center gap-4"><span class="w-12 h-[1px] bg-accent"></span>Site Preparation</li>
+        </ul>
+        <div class="mt-16 pt-8 border-t border-border flex justify-between items-center group-hover:opacity-100 transition-opacity text-primary relative z-10">
+          <a href="/contact?subject=Roads_Earthworks" class="text-sm uppercase tracking-[0.2em] font-bold hover:text-accent transition-colors flex items-center gap-4">
+            Discuss Project
+            <span class="w-8 h-[1px] bg-current transform origin-left group-hover:scale-x-150 transition-transform"></span>
+          </a>
+          <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform motion-base text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </div>
       </div>
     </div>
+    <!-- Service 10: Utilities Infrastructure -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 border-t border-border group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
 
-    <!-- Service 4: Power Plants & Distribution Substation (Civil Works) -->
-    <div class="border-b border-black flex flex-col group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
-      <div class="aspect-[4/3] overflow-hidden relative border-b border-black">
-        <img alt="Power Plants & Distribution Substation Civil Works" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" src="/images/projects/distribution-substation-aqah/hero.png" loading="lazy" />
-        <div class="absolute top-0 right-0 p-8">
-          <span class="font-heading text-5xl italic text-white group-hover:text-accent transition-colors">04</span>
+      <div class="p-8 sm:p-12 lg:p-24 flex flex-col justify-center relative order-2 lg:order-1 lg:border-r border-border">
+        <div class="absolute top-0 left-0 p-8 opacity-5">
+           <span class="font-heading text-8xl md:text-[12rem] italic leading-none font-bold text-primary">10</span>
         </div>
-        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors motion-medium"></div>
-      </div>
-      <div class="p-8 sm:p-12 lg:p-16 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 class="text-2xl font-heading mb-6 group-hover:text-color-accent transition-colors text-black">Power Plants & Distribution Substation (Civil Works)</h3>
-          <p class="text-sm font-light leading-loose mb-8 pr-4 text-black">
-            Complete services from planning to maintenance. Focus on precision and safety. Vital utility infrastructure supporting power distribution across the region.
-          </p>
-          <div class="grid grid-cols-2 gap-y-3 gap-x-4 text-xs uppercase tracking-widest text-black">
-            <span>Power Plant Civil Works</span>
-            <span>Distribution Substations</span>
-            <span>Control Buildings</span>
-            <span>Maintenance Services</span>
-          </div>
+        <h3 class="text-3xl md:text-5xl font-heading mb-8 group-hover:text-accent transition-colors text-primary uppercase relative z-10">Utilities Infrastructure</h3>
+        <p class="text-base md:text-lg font-light leading-loose mb-10 text-primary/80 max-w-xl relative z-10">
+          Complete utility infrastructure services including water distribution networks, drainage systems, power supply infrastructure, and communication lines.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 text-sm uppercase tracking-widest text-primary font-medium relative z-10">
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Water Distribution</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Drainage Systems</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Power Infrastructure</span>
+          <span class="flex items-center gap-3"><span class="w-2 h-2 bg-accent"></span>Communication Lines</span>
         </div>
-        <div class="mt-12 pt-8 border-t border-black/10 flex justify-between items-center opacity-60 group-hover:opacity-100 transition-opacity text-black">
-          <a href="/contact" class="text-xs uppercase tracking-widest font-medium hover:text-[#800000] transition-colors">Inquire</a>
-          <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        <div class="mt-16 pt-8 border-t border-border flex justify-between items-center group-hover:opacity-100 transition-opacity text-primary relative z-10">
+          <a href="/contact?subject=Utilities" class="text-sm uppercase tracking-[0.2em] font-bold hover:text-accent transition-colors flex items-center gap-4">
+            Discuss Project
+            <span class="w-8 h-[1px] bg-current transform origin-left group-hover:scale-x-150 transition-transform"></span>
+          </a>
+          <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform motion-base text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </div>
       </div>
-    </div>
-
-    <!-- Service 5: Civil Works for Seaports and Airports -->
-    <div class="border-b md:border-b-0 border-r-0 md:border-r border-black flex flex-col group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
-      <div class="aspect-[4/3] overflow-hidden relative border-b border-black">
-        <img alt="Civil Works for Seaports and Airports - Khalifa Port" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" src="/images/projects/khalifa-port/hero.png" loading="lazy" />
-        <div class="absolute top-0 right-0 p-8">
-          <span class="font-heading text-5xl italic text-white group-hover:text-accent transition-colors">05</span>
+      <div class="aspect-square lg:aspect-auto relative border-b lg:border-b-0 border-border overflow-hidden order-1 lg:order-2">
+        <img alt="Utilities Infrastructure" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110" src="/images/projects/utility-bridge/hero.png" loading="lazy" />
+        <div class="absolute top-0 right-0 p-8 z-20">
+          <span class="font-heading text-6xl italic text-white mix-blend-difference opacity-80 group-hover:opacity-100 transition-opacity">10</span>
         </div>
-        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors motion-medium"></div>
-      </div>
-      <div class="p-8 sm:p-12 lg:p-16 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 class="text-2xl font-heading mb-6 group-hover:text-color-accent transition-colors text-black">Civil Works for Seaports and Airports</h3>
-          <p class="text-sm font-light leading-loose mb-8 pr-4 text-black">
-            End-to-end services for critical infrastructure. International standards compliance. Maritime and aviation transportation hubs connecting the region to the world.
-          </p>
-          <ul class="text-xs uppercase tracking-widest space-y-3 text-black">
-            <li class="flex items-center gap-3"><span class="w-8 h-[1px] bg-color-accent"></span>Seaport Infrastructure</li>
-            <li class="flex items-center gap-3"><span class="w-8 h-[1px] bg-color-accent"></span>Airport Civil Works</li>
-            <li class="flex items-center gap-3"><span class="w-8 h-[1px] bg-color-accent"></span>Marine Structures</li>
-          </ul>
-        </div>
-        <div class="mt-12 pt-8 border-t border-black/10 flex justify-between items-center opacity-60 group-hover:opacity-100 transition-opacity text-black">
-          <a href="/contact" class="text-xs uppercase tracking-widest font-medium hover:text-[#800000] transition-colors">Inquire</a>
-          <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Service 6: Onshore and Offshore Civil Works (Oil and Gas) -->
-    <div class="border-b md:border-b-0 border-black flex flex-col group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
-      <div class="aspect-[4/3] overflow-hidden relative border-b border-black">
-        <img alt="Onshore and Offshore Civil Works Oil and Gas Field" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" src="/images/projects/marine-staging-yassat-island/hero.png" loading="lazy" />
-        <div class="absolute top-0 right-0 p-8">
-          <span class="font-heading text-5xl italic text-white group-hover:text-accent transition-colors">06</span>
-        </div>
-        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors motion-medium"></div>
-      </div>
-      <div class="p-8 sm:p-12 lg:p-16 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 class="text-2xl font-heading mb-6 group-hover:text-color-accent transition-colors text-black">Onshore and Offshore Civil Works (Oil and Gas)</h3>
-          <p class="text-sm font-light leading-loose mb-8 pr-4 text-black">
-            Planning, design, and execution of essential infrastructure. Safety, durability, and environmental compliance. Stringent industry standards for oil and gas operations.
-          </p>
-          <div class="grid grid-cols-2 gap-y-3 gap-x-4 text-xs uppercase tracking-widest text-black">
-            <span>Onshore Facilities</span>
-            <span>Offshore Structures</span>
-            <span>Process Plant Civil Works</span>
-            <span>Pipeline Infrastructure</span>
-          </div>
-        </div>
-        <div class="mt-12 pt-8 border-t border-black/10 flex justify-between items-center opacity-60 group-hover:opacity-100 transition-opacity text-black">
-          <a href="/contact" class="text-xs uppercase tracking-widest font-medium hover:text-[#800000] transition-colors">Inquire</a>
-          <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Service 7: Heritage Revitalization Project -->
-    <div class="border-b border-r-0 md:border-r border-black flex flex-col group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
-      <div class="aspect-[4/3] overflow-hidden relative border-b border-black">
-        <img alt="Heritage Revitalization Project - Qidfah" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" src="/images/projects/qidfah-revitalization/hero.png" loading="lazy" />
-        <div class="absolute top-0 right-0 p-8">
-          <span class="font-heading text-5xl italic text-white group-hover:text-accent transition-colors">07</span>
-        </div>
-        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors motion-medium"></div>
-      </div>
-      <div class="p-8 sm:p-12 lg:p-16 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 class="text-2xl font-heading mb-6 group-hover:text-color-accent transition-colors text-black">Heritage Revitalization Project</h3>
-          <p class="text-sm font-light leading-loose mb-8 pr-4 text-black">
-            Preserving and restoring historical and cultural landmarks. Advanced restoration techniques. Integrating modern amenities while honoring authenticity.
-          </p>
-          <div class="space-y-4 border-l border-color-border/10 pl-6">
-            <div>
-              <span class="block text-xs font-bold uppercase tracking-widest mb-1 text-black">Preservation</span>
-              <span class="text-xs font-light text-black">Historical landmark restoration</span>
-            </div>
-            <div>
-              <span class="block text-xs font-bold uppercase tracking-widest mb-1 text-black">Integration</span>
-              <span class="text-xs font-light text-black">Modern amenities with authenticity</span>
-            </div>
-          </div>
-        </div>
-        <div class="mt-12 pt-8 border-t border-black/10 flex justify-between items-center opacity-60 group-hover:opacity-100 transition-opacity text-black">
-          <a href="/contact" class="text-xs uppercase tracking-widest font-medium hover:text-[#800000] transition-colors">Inquire</a>
-          <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Service 8: Pipeline and Storm Network -->
-    <div class="border-b border-black flex flex-col group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
-      <div class="aspect-[4/3] overflow-hidden relative border-b border-black">
-        <img alt="Pipeline and Storm Network Infrastructure" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" src="/images/projects/inner-bypass-e45/photo_018.jpeg" loading="lazy" />
-        <div class="absolute top-0 right-0 p-8">
-          <span class="font-heading text-5xl italic text-white group-hover:text-accent transition-colors">08</span>
-        </div>
-        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors motion-medium"></div>
-      </div>
-      <div class="p-8 sm:p-12 lg:p-16 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 class="text-2xl font-heading mb-6 group-hover:text-color-accent transition-colors text-black">Pipeline and Storm Network</h3>
-          <p class="text-sm font-light leading-loose mb-8 pr-4 text-black">
-            Efficient transportation of substances and storm water management. Industry standards and environmental considerations. Sustainable urban and industrial environments.
-          </p>
-          <div class="grid grid-cols-2 gap-y-3 gap-x-4 text-xs uppercase tracking-widest text-black">
-            <span>Pipeline Networks</span>
-            <span>Storm Water Systems</span>
-            <span>Drainage Infrastructure</span>
-            <span>Environmental Compliance</span>
-          </div>
-        </div>
-        <div class="mt-12 pt-8 border-t border-black/10 flex justify-between items-center opacity-60 group-hover:opacity-100 transition-opacity text-black">
-          <a href="/contact" class="text-xs uppercase tracking-widest font-medium hover:text-[#800000] transition-colors">Inquire</a>
-          <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Service 9: Road Works and Earthworks -->
-    <div class="border-b md:border-b-0 border-r-0 md:border-r border-black flex flex-col group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
-      <div class="aspect-[4/3] overflow-hidden relative border-b border-black">
-        <img alt="Road Works and Earthworks Infrastructure" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" src="/images/projects/al-tallah-bridge/photo_013.jpeg" loading="lazy" />
-        <div class="absolute top-0 right-0 p-8">
-          <span class="font-heading text-5xl italic text-white group-hover:text-accent transition-colors">09</span>
-        </div>
-        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors motion-medium"></div>
-      </div>
-      <div class="p-8 sm:p-12 lg:p-16 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 class="text-2xl font-heading mb-6 group-hover:text-color-accent transition-colors text-black">Road Works and Earthworks</h3>
-          <p class="text-sm font-light leading-loose mb-8 pr-4 text-black">
-            Comprehensive road construction and earthworks services. From site preparation to final paving. Delivering durable transportation infrastructure.
-          </p>
-          <ul class="text-xs uppercase tracking-widest space-y-3 text-black">
-            <li class="flex items-center gap-3"><span class="w-8 h-[1px] bg-color-accent"></span>Road Construction</li>
-            <li class="flex items-center gap-3"><span class="w-8 h-[1px] bg-color-accent"></span>Earthworks</li>
-            <li class="flex items-center gap-3"><span class="w-8 h-[1px] bg-color-accent"></span>Site Preparation</li>
-          </ul>
-        </div>
-        <div class="mt-12 pt-8 border-t border-black/10 flex justify-between items-center opacity-60 group-hover:opacity-100 transition-opacity text-black">
-          <a href="/contact" class="text-xs uppercase tracking-widest font-medium hover:text-[#800000] transition-colors">Inquire</a>
-          <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Service 10: Utilities -->
-    <div class="border-b md:border-b-0 border-black flex flex-col group hover:bg-white dark:hover:bg-white/5 transition-colors motion-medium">
-      <div class="aspect-[4/3] overflow-hidden relative border-b border-black">
-        <img alt="Utilities Infrastructure - Water Distribution, Drainage, Power" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" src="/images/projects/utility-bridge/hero.png" loading="lazy" />
-        <div class="absolute top-0 right-0 p-8">
-          <span class="font-heading text-5xl italic text-white group-hover:text-accent transition-colors">10</span>
-        </div>
-        <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors motion-medium"></div>
-      </div>
-      <div class="p-8 sm:p-12 lg:p-16 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 class="text-2xl font-heading mb-6 group-hover:text-color-accent transition-colors text-black">Utilities</h3>
-          <p class="text-sm font-light leading-loose mb-8 pr-4 text-black">
-            Complete utility infrastructure services including water distribution networks, drainage systems, power supply infrastructure, and communication lines. Supporting modern urban development.
-          </p>
-          <div class="grid grid-cols-2 gap-y-3 gap-x-4 text-xs uppercase tracking-widest text-black">
-            <span>Water Distribution</span>
-            <span>Drainage Systems</span>
-            <span>Power Infrastructure</span>
-            <span>Communication Lines</span>
-          </div>
-        </div>
-        <div class="mt-12 pt-8 border-t border-black/10 flex justify-between items-center opacity-60 group-hover:opacity-100 transition-opacity text-black">
-          <a href="/contact" class="text-xs uppercase tracking-widest font-medium hover:text-[#800000] transition-colors">Inquire</a>
-          <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </div>
+        <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors motion-medium z-10"></div>
       </div>
     </div>
     </div>
   </SectionBackground>
 
   <!-- CTA Section -->
-  <SectionBackground variant="background" showTopBorder={true} showBottomBorder={false} showGrid={true} showAccentBlob={true} showBottomLine={false}>
-    <div class="flex flex-col items-center justify-center py-20 md:py-28 lg:py-32 px-6 text-center">
+  <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={false} showGrid={true} showAccentBlob={true} showBottomLine={false}>
+    <div class="flex flex-col items-center justify-center py-20 md:py-28 lg:py-32 px-6 text-center border-t border-border">
       <div class="flex items-center gap-3 mb-6">
         <div class="w-12 h-[2px] bg-accent"></div>
         <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">Start Your Project</span>
         <div class="w-12 h-[2px] bg-accent"></div>
       </div>
       <h2 class="text-4xl md:text-5xl font-heading italic mb-10 max-w-3xl leading-snug text-primary">
-        Let us build your vision into <br/><span class="not-italic font-light text-primary/80">lasting reality.</span>
+        Let us build your vision into <br/><span class="not-italic font-light opacity-80">lasting reality.</span>
       </h2>
-      <a class="group relative inline-flex items-center justify-center px-12 py-4 overflow-hidden font-medium tracking-widest transition motion-base border border-[#800000]/40 text-[#800000] hover:border-[#800000] hover:bg-[#800000] hover:text-white" href="/contact">
+      <a class="group relative inline-flex items-center justify-center px-12 py-4 overflow-hidden font-medium tracking-widest transition motion-base border border-accent/40 text-accent hover:border-accent hover:bg-accent hover:text-white" href="/contact">
         <span class="text-xs uppercase tracking-widest">Request Consultation</span>
       </a>
     </div>

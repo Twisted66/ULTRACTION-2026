@@ -1,103 +1,15 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { motion, useMotionValue, animate } from 'framer-motion';
+import { motion, useMotionValue, animate, AnimatePresence } from 'framer-motion';
+import type { PanInfo } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
-import { Player } from '@remotion/player';
-import { AbsoluteFill, Img, Sequence, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import type { Service } from '../../data/services';
 
 interface Props {
   services: Service[];
 }
 
-const SLIDE_FPS = 30;
-const SLIDE_DURATION_IN_FRAMES = 72;
-const TRANSITION_FRAMES = 18;
-
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
-
-type ServicesRemotionShowcaseProps = {
-  services: Service[];
-};
-
-const ServicesRemotionSlide: React.FC<{ service: Service; index: number; total: number }> = ({ service, index, total }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  const scale = interpolate(frame, [0, SLIDE_DURATION_IN_FRAMES], [1.1, 1], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
-
-  const fadeIn = spring({
-    frame,
-    fps,
-    config: { damping: 200 },
-    durationInFrames: TRANSITION_FRAMES,
-  });
-
-  const fadeOutStart = SLIDE_DURATION_IN_FRAMES - TRANSITION_FRAMES;
-  const fadeOut = spring({
-    frame: frame - fadeOutStart,
-    fps,
-    config: { damping: 200 },
-    durationInFrames: TRANSITION_FRAMES,
-  });
-
-  const opacity = fadeIn - fadeOut;
-  const textRise = interpolate(fadeIn, [0, 1], [18, 0], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
-
-  return (
-    <AbsoluteFill style={{ opacity, overflow: 'hidden' }}>
-      <Img
-        src={service.image}
-        style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          transform: `scale(${scale})`,
-        }}
-      />
-      <AbsoluteFill
-        style={{
-          background: 'linear-gradient(120deg, rgba(20,20,20,0.8) 8%, rgba(20,20,20,0.28) 55%, rgba(20,20,20,0.12) 100%)',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'flex-end',
-          padding: '40px 48px',
-          transform: `translateY(${textRise}px)`,
-        }}
-      >
-        <div style={{ color: '#fff', maxWidth: 760 }}>
-          <p style={{ fontSize: 14, letterSpacing: '0.28em', margin: 0, marginBottom: 12, opacity: 0.9 }}>
-            {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
-          </p>
-          <h3 style={{ margin: 0, fontSize: 44, lineHeight: 1.05, textTransform: 'uppercase' }}>{service.title}</h3>
-        </div>
-      </div>
-    </AbsoluteFill>
-  );
-};
-
-const ServicesRemotionShowcase: React.FC<ServicesRemotionShowcaseProps> = ({ services }) => {
-  return (
-    <AbsoluteFill>
-      {services.map((service, index) => (
-        <Sequence key={service.id} from={index * SLIDE_DURATION_IN_FRAMES} durationInFrames={SLIDE_DURATION_IN_FRAMES}>
-          <ServicesRemotionSlide service={service} index={index} total={services.length} />
-        </Sequence>
-      ))}
-    </AbsoluteFill>
-  );
-};
 
 const ServicesCarousel: React.FC<Props> = ({ services }) => {
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -108,7 +20,6 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [isAutoplayEnabled, setIsAutoplayEnabled] = useState(true);
 
   const cardsPerView = useMemo(() => {
     if (viewportWidth >= 1280) {
@@ -136,6 +47,11 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
     };
 
     updateWidth();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', updateWidth);
+      return () => window.removeEventListener('resize', updateWidth);
+    }
+
     const observer = new ResizeObserver(updateWidth);
     observer.observe(viewportRef.current);
 
@@ -150,9 +66,6 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const applyMotionPreference = () => {
       setPrefersReducedMotion(mediaQuery.matches);
-      if (mediaQuery.matches) {
-        setIsAutoplayEnabled(false);
-      }
     };
 
     applyMotionPreference();
@@ -177,7 +90,7 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
   }, [activeIndex, stepWidth, x]);
 
   useEffect(() => {
-    if (isPaused || isDragging || maxIndex <= 0 || !isAutoplayEnabled || prefersReducedMotion) {
+    if (isPaused || isDragging || maxIndex <= 0 || prefersReducedMotion) {
       return;
     }
 
@@ -186,7 +99,7 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
     }, 4200);
 
     return () => window.clearInterval(autoplay);
-  }, [isPaused, isDragging, isAutoplayEnabled, maxIndex, prefersReducedMotion]);
+  }, [isPaused, isDragging, maxIndex, prefersReducedMotion]);
 
   const goToPrevious = () => {
     setActiveIndex((current) => (current <= 0 ? maxIndex : current - 1));
@@ -196,10 +109,21 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
     setActiveIndex((current) => (current >= maxIndex ? 0 : current + 1));
   };
 
-  const handleDragEnd = () => {
+  const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     setIsDragging(false);
 
     if (stepWidth <= 0) {
+      return;
+    }
+
+    const dragThreshold = stepWidth * 0.18;
+    if (info.offset.x <= -dragThreshold) {
+      goToNext();
+      return;
+    }
+
+    if (info.offset.x >= dragThreshold) {
+      goToPrevious();
       return;
     }
 
@@ -207,7 +131,11 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
     setActiveIndex(clamp(projectedIndex, 0, maxIndex));
   };
 
-  const totalSlideDuration = Math.max(services.length * SLIDE_DURATION_IN_FRAMES, SLIDE_DURATION_IN_FRAMES);
+  if (!services.length) {
+    return null;
+  }
+
+  const activeService = services[activeIndex] ?? services[0];
 
   return (
     <div className="w-full bg-surface border-b border-black">
@@ -240,15 +168,6 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={() => setIsAutoplayEnabled((current) => !current)}
-              className="px-3 h-10 border border-black text-[10px] uppercase tracking-[0.2em] font-semibold hover:bg-primary hover:text-white transition-colors motion-base"
-              aria-label={isAutoplayEnabled ? 'Pause services carousel autoplay' : 'Play services carousel autoplay'}
-              aria-pressed={isAutoplayEnabled}
-            >
-              {isAutoplayEnabled ? 'Pause' : 'Play'}
-            </button>
-            <button
-              type="button"
               onClick={goToPrevious}
               className="w-10 h-10 border border-black flex items-center justify-center hover:bg-primary hover:text-white transition-colors motion-base"
               aria-label="Previous services"
@@ -267,25 +186,33 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
         </div>
       </div>
 
-      <div className="border-b border-black h-[230px] md:h-[280px] lg:h-[340px]">
-        <Player
-          component={ServicesRemotionShowcase}
-          inputProps={{ services }}
-          durationInFrames={totalSlideDuration}
-          compositionWidth={1920}
-          compositionHeight={720}
-          fps={SLIDE_FPS}
-          loop
-          autoPlay
-          controls={false}
-          acknowledgeRemotionLicense
-          style={{ width: '100%', height: '100%' }}
-        />
+      <div className="relative overflow-hidden border-b border-black h-[230px] md:h-[280px] lg:h-[340px] bg-black">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.img
+            key={activeService.id}
+            src={activeService.image}
+            alt={activeService.title}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.02 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.55, ease: 'easeOut' }}
+            loading="eager"
+          />
+        </AnimatePresence>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/20" />
+        <div className="absolute bottom-0 left-0 p-8 md:p-10 text-white">
+          <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] opacity-80 mb-2">
+            {String(activeIndex + 1).padStart(2, '0')} / {String(services.length).padStart(2, '0')}
+          </p>
+          <h3 className="text-xl md:text-3xl font-heading uppercase max-w-3xl">{activeService.title}</h3>
+        </div>
       </div>
 
       <div
         ref={viewportRef}
         className="overflow-hidden cursor-grab active:cursor-grabbing"
+        style={{ touchAction: 'pan-y' }}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onFocusCapture={() => setIsPaused(true)}

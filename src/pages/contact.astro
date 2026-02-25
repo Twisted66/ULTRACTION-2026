@@ -12,6 +12,12 @@ const description = "Get in touch with ULTRACTION for your construction project.
 const allowedSubjects = new Set(['project', 'careers', 'other']);
 const querySubject = Astro.url.searchParams.get('subject')?.toLowerCase() ?? '';
 const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
+const roleFromQuery = (Astro.url.searchParams.get('role') ?? '').trim();
+const selectedRole = roleFromQuery.slice(0, 120);
+const messagePlaceholder =
+  selectedSubject === 'careers' && selectedRole
+    ? `Applying for ${selectedRole}. Share your experience, availability, and CV details.`
+    : 'Tell us about your project...';
 ---
 
 <Layout
@@ -48,7 +54,7 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
             Fields marked with <span class="text-accent">*</span> are required.
           </p>
           
-          <form class="flex flex-col gap-8" method="POST" action="/api/contact" data-contact-form>
+          <form class="flex flex-col gap-8" method="POST" action="/api/contact" data-contact-form data-role={selectedRole}>
             <div class="group">
               <label class="block text-xs uppercase font-bold tracking-[0.2em] mb-3 opacity-70 text-accent" for="name">
                 <span class="flex items-center gap-2">
@@ -91,7 +97,7 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                    Message <span class="text-accent">*</span>
                  </span>
                </label>
-               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder="Tell us about your project..." required aria-required="true"></textarea>
+               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true"></textarea>
             </div>
 
             <div class="group">
@@ -139,7 +145,7 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
       <!-- Right: Globe (Default Background) -->
       <div class="bg-background relative min-h-[50vh] lg:min-h-screen order-1 lg:order-2 overflow-hidden flex items-start justify-center pt-10">
           <div class="absolute inset-0 z-0 flex items-center justify-center">
-               <Globe3DDemo client:only="react" className="h-[clamp(550px,80vh,900px)] w-[min(150%,1100px)] -translate-y-56 lg:-translate-y-72" />
+               <Globe3DDemo client:only="react" showOfficeMarkers={false} className="h-[clamp(550px,80vh,900px)] w-[min(150%,1100px)] -translate-y-56 lg:-translate-y-72" />
           </div>
 
           {/* Grid pattern overlay */}
@@ -159,17 +165,17 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
             class="absolute bottom-20 left-6 right-6 xl:bottom-12 xl:left-12 xl:right-12 z-20 pointer-events-none"
             aria-labelledby="contact-locations"
           >
-            <div class="text-primary pointer-events-auto bg-white/95 backdrop-blur-xl rounded-2xl border border-primary/20 w-full max-w-[900px] overflow-hidden">
-              <div class="bg-[#800000] px-6 py-4">
+            <div class="text-primary pointer-events-auto bg-surface/90 backdrop-blur-xl border border-border w-full max-w-[900px] overflow-hidden rounded-none">
+              <div class="bg-accent px-8 py-4">
                 <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-white">Main Headquarters</h3>
               </div>
 
-              <div class="p-6 grid gap-6 xl:grid-cols-2">
+              <div class="p-8 grid gap-8 xl:grid-cols-2">
                 <div>
                   <h2 id="contact-locations" class="sr-only">Contact Locations</h2>
-                  <div class="space-y-6 text-sm">
+                  <div class="space-y-7 text-sm">
                     <div class="group">
-                      <h4 class="font-bold uppercase tracking-widest text-[11px] text-accent mb-3">Abu Dhabi, UAE</h4>
+                      <h4 class="font-bold uppercase tracking-[0.2em] text-[10px] text-accent mb-3">Abu Dhabi, UAE</h4>
                       <p class="text-primary leading-relaxed font-semibold text-base">
                         Office 02, 1st Floor, 9 Ar Raha 6 St, Musaffah M3
                       </p>
@@ -180,8 +186,8 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                       </div>
                     </div>
 
-                    <div class="pt-5 border-t border-primary/20">
-                      <h4 class="font-bold uppercase tracking-widest text-[11px] text-accent mb-3">KSA Branch</h4>
+                    <div class="pt-6 border-t border-primary/20">
+                      <h4 class="font-bold uppercase tracking-[0.2em] text-[10px] text-accent mb-3">KSA Branch</h4>
                       <p class="text-primary leading-relaxed font-semibold text-base mb-1">AL Bawady International Contracting LLC</p>
                       <div class="flex flex-col gap-2 text-[14px] text-primary italic font-medium">
                         <span class="flex items-center gap-2">T: <a href="tel:+966500002281" class="not-italic font-bold hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">+966 50 000 2281</a></span>
@@ -199,8 +205,8 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                 </div>
 
                 <div class="flex flex-col">
-                  <h4 class="text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">Headquarters Map</h4>
-                  <div class="relative aspect-square min-h-[180px] overflow-hidden rounded-xl border border-primary/20 flex-1">
+                  <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-3">Headquarters Map</h4>
+                  <div class="relative aspect-square min-h-[180px] overflow-hidden rounded-none border border-primary/20 flex-1">
                     <iframe
                       src="https://maps.google.com/maps?q=24.3713,54.5205+(Office+02,+1st+Floor,+9+Ar+Raha+6+St,+Musaffah+M3,+Abu+Dhabi,+UAE)&t=&z=15&ie=UTF8&iwloc=&output=embed"
                       width="100%"
@@ -214,12 +220,12 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                     ></iframe>
                   </div>
 
-                  <div class="mt-2 flex gap-2">
+                  <div class="mt-3 flex gap-2">
                     <a
                       href="https://maps.google.com/?q=24.3713,54.5205"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="flex-1 bg-white backdrop-blur-md px-3 py-2 border-l-4 border-accent hover:bg-surface transition-colors group"
+                      class="flex-1 bg-background/60 backdrop-blur-md px-3 py-2 border border-primary/15 hover:border-accent/60 hover:bg-background transition-colors group"
                     >
                       <span class="block text-[9px] uppercase tracking-widest text-accent font-bold mb-0.5">Abu Dhabi HQ</span>
                       <span class="text-[10px] font-semibold text-primary flex items-center gap-1">
@@ -234,7 +240,7 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                       href="https://maps.google.com/?q=24.7136,46.6753"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="flex-1 bg-white backdrop-blur-md px-3 py-2 border-l-4 border-primary hover:bg-surface transition-colors group"
+                      class="flex-1 bg-background/60 backdrop-blur-md px-3 py-2 border border-primary/15 hover:border-accent/60 hover:bg-background transition-colors group"
                     >
                       <span class="block text-[9px] uppercase tracking-widest text-primary font-bold mb-0.5">KSA Branch</span>
                       <span class="text-[10px] font-semibold text-primary flex items-center gap-1">
@@ -316,8 +322,26 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
     const submitIcon = form.querySelector('[data-submit-icon]');
     const statusBox = document.getElementById('form-status');
     const subjectSelect = form.querySelector('#subject');
+    const messageInput = form.querySelector('#message');
     const fileInput = document.querySelector('#attachment');
     const fileNameDisplay = document.getElementById('file-name');
+    const roleFromQuery = form.dataset.role?.trim() ?? '';
+
+    const prefillCareerApplicationMessage = () => {
+      if (!(subjectSelect instanceof HTMLSelectElement) || !(messageInput instanceof HTMLTextAreaElement)) return;
+      if (subjectSelect.value !== 'careers' || !roleFromQuery || messageInput.value.trim()) return;
+      messageInput.value =
+        `Applying for: ${roleFromQuery}\n\n` +
+        'Years of experience:\n' +
+        'Current location:\n' +
+        'Availability:\n' +
+        'CV/Portfolio link:\n';
+    };
+
+    prefillCareerApplicationMessage();
+    if (subjectSelect instanceof HTMLSelectElement) {
+      subjectSelect.addEventListener('change', prefillCareerApplicationMessage);
+    }
 
     // Display selected file name
     if (fileInput instanceof HTMLInputElement && fileNameDisplay) {

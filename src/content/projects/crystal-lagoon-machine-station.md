@@ -16,8 +16,6 @@ images:
   - "/images/projects/p150_img02_xref6940.jpeg"
   - "/images/projects/p151_img01_xref6944.jpeg"
   - "/images/projects/p151_img02_xref6943.jpeg"
-  - "/images/projects/p152_img01_xref6944.jpeg"
-  - "/images/projects/p152_img02_xref6943.jpeg"
 duration: "24 months"
 status: "Completed"
 ---

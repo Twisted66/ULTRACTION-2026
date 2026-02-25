@@ -22,6 +22,8 @@ const projectChunkSize = Math.max(1, Math.ceil(projectEntries.length / 4));
 const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
   projectEntries.slice(pageIndex * projectChunkSize, (pageIndex + 1) * projectChunkSize)
 ).filter((page) => page.length > 0);
+const projectsLogoSrc = `${import.meta.env.BASE_URL}logo/UGC-LOGO-HQ.png`;
+const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`;
 ---
 
 <Layout
@@ -181,10 +183,10 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
   <!-- Projects Grid - 2:1:2 Masonry Layout -->
   <section class="border-b border-black dark:border-black bg-background" aria-labelledby="projects-grid-heading">
     <h2 id="projects-grid-heading" class="sr-only">Featured Projects</h2>
-    <div class="grid grid-cols-1 md:grid-cols-12 auto-rows-min" id="projects-grid">
+    <div class="grid grid-cols-1 md:grid-cols-12 auto-rows-min items-start" id="projects-grid">
 
       <!-- Column 1 -->
-      <div class="col-span-12 md:col-span-4 flex flex-col border-r border-black" data-category="infrastructure all">
+      <div class="col-span-12 md:col-span-4 md:col-start-1 md:row-start-1 flex flex-col border-r border-black" data-category="infrastructure all">
         <div class="project-card relative group overflow-hidden min-h-[18rem] md:min-h-[24rem] border-b border-black">
           <img alt="Al Tallah Road Bridge Construction, Ajman" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/al-tallah-bridge/photo_010.jpeg" />
           <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors motion-base"></div>
@@ -209,7 +211,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
             </a>
           </div>
         </div>
-        <div class="project-card relative group overflow-hidden min-h-[15rem] md:min-h-[21rem]" data-category="infrastructure all">
+        <div class="project-card relative group overflow-hidden min-h-[15rem] md:min-h-[21rem]">
           <img alt="E20 Traffic Improvement and Bridge Construction" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/e20-traffic-bridges/photo_010.jpeg" />
           <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors motion-base"></div>
           <div class="absolute bottom-4 left-4 z-20 text-white">
@@ -231,21 +233,26 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
       </div>
 
       <!-- Column 2 - Company Logo & Projects List (Center) -->
-      <div class="col-span-12 md:col-span-4 flex flex-col border-r border-black" data-category="infrastructure all">
-        <div class="relative min-h-[32rem] md:min-h-[44rem] border-b md:border-b-0 border-black flex flex-col">
+      <div class="col-span-12 md:col-span-4 md:col-start-5 md:row-start-1 flex flex-col border-r border-black" data-category="all infrastructure marine heritage oil-gas industrial residential commercial">
+        <div class="relative min-h-[30rem] md:min-h-[45rem] border-b md:border-b-0 border-black flex flex-col overflow-hidden">
           <!-- Logo Section -->
-          <div class="min-h-[14rem] md:min-h-[16rem] flex items-center justify-center p-8 md:p-10 bg-background">
+          <div class="min-h-[11rem] md:min-h-[12rem] flex items-center justify-center p-6 md:p-7 bg-background">
             <img
               alt="ULTRACTION GENERAL CONTRACTING LLC Logo"
-              src="/logo/UGC-LOGO-HQ.png"
-              class="max-w-full max-h-[300px] object-contain"
+              src={projectsLogoSrc}
+              width="928"
+              height="768"
+              loading="eager"
+              decoding="async"
+              onerror={`this.onerror=null;this.src='${projectsLogoFallbackSrc}';`}
+              class="max-w-full max-h-[210px] object-contain"
             />
           </div>
 
           <!-- Projects List -->
-          <div class="p-6 md:p-8 pt-4 md:pt-5 text-center flex-1">
+          <div class="p-5 md:p-6 pt-3 md:pt-4 text-center flex-1">
             <h3 class="text-sm font-bold uppercase tracking-widest mb-4 border-b border-black/20 pb-3 text-primary text-center">Our Projects</h3>
-            <div id="projects-list-carousel" class="projects-list-carousel relative overflow-hidden min-h-[250px]">
+            <div id="projects-list-carousel" class="projects-list-carousel relative overflow-hidden min-h-[210px]">
               <div id="projects-list-track" class="projects-list-track flex">
                 {projectCarouselPages.map((projectPage, pageIndex) => (
                   <div
@@ -270,7 +277,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
                 ))}
               </div>
             </div>
-            <div class="mt-5 flex items-center justify-center gap-3">
+            <div class="mt-4 flex items-center justify-center gap-3">
               <button
                 type="button"
                 class="projects-list-nav inline-flex h-7 px-3 items-center justify-center rounded-full border border-primary/35 text-[10px] font-bold uppercase tracking-widest text-primary hover:bg-primary hover:text-white transition-colors motion-base"
@@ -320,7 +327,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
             <p id="projects-list-status" class="sr-only" aria-live="polite">
               Showing projects page 1 of {projectCarouselPages.length}.
             </p>
-            <a href="/projects" class="mt-6 inline-block text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-primary hover:text-white transition-colors text-primary">
+            <a href="/projects" class="mt-4 inline-block text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-primary hover:text-white transition-colors text-primary">
               View All Projects
             </a>
           </div>
@@ -328,9 +335,9 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
       </div>
 
       <!-- Column 3 -->
-      <div class="col-span-12 md:col-span-4 flex flex-col" data-category="infrastructure all">
+      <div class="col-span-12 md:col-span-4 md:col-start-9 md:row-start-1 flex flex-col" data-category="marine all">
         <div class="project-card relative group overflow-hidden min-h-[15rem] md:min-h-[21rem] border-b border-black">
-          <img alt="Inner Bypass Parallel to E45 Madinat Zayed" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/inner-bypass-e45/photo_014.jpeg" />
+          <img alt="Khalifa Port Marine Infrastructure" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/khalifa-port/hero.png" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute top-4 right-4 z-20">
             <svg class="inline-flex w-5 h-5 text-white opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -338,39 +345,39 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
             </svg>
           </div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
-            <h3 class="text-xl font-bold uppercase mb-1">Inner Bypass E45</h3>
-            <p class="text-xs uppercase tracking-widest opacity-80">Selected Works 2020-2024</p>
+            <h3 class="text-xl font-bold uppercase mb-1">Khalifa Port</h3>
+            <p class="text-xs uppercase tracking-widest opacity-80">Marine Works</p>
           </div>
           <div class="project-overlay absolute inset-0 bg-primary/95 flex flex-col justify-center items-center text-white p-6 text-center z-30">
-            <h3 class="text-xl font-bold uppercase mb-2">Inner Bypass E45</h3>
-            <p class="text-[10px] uppercase tracking-widest mb-2 opacity-80">Madinat Zayed / Abu Dhabi</p>
+            <h3 class="text-xl font-bold uppercase mb-2">Khalifa Port</h3>
+            <p class="text-[10px] uppercase tracking-widest mb-2 opacity-80">Abu Dhabi / UAE</p>
             <span class="inline-block w-8 h-[1px] bg-white/40"></span>
-            <p class="mt-3 text-xs opacity-90 max-w-[240px]">Strategic inner bypass road upgrade improving access and traffic flow across key corridors.</p>
-            <a href="/projects/upgrading-inner-bypass-e45" class="mt-4 text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <p class="mt-3 text-xs opacity-90 max-w-[240px]">Major marine infrastructure delivery expanding one of the UAE's key deep-water ports.</p>
+            <a href="/projects/khalifa-port" class="mt-4 text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
         </div>
-        <div class="project-card relative group overflow-hidden min-h-[18rem] md:min-h-[24rem]" data-category="infrastructure all">
-          <img alt="Utility Structure Design & Build" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/utility-structure/photo_005.jpeg" />
+        <div class="project-card relative group overflow-hidden min-h-[18rem] md:min-h-[24rem]">
+          <img alt="Marine Staging Yassat Island" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/marine-staging-yassat-island/hero.png" />
           <div class="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors motion-base"></div>
           <div class="absolute top-6 left-6 z-20">
             <div class="flex flex-col items-start gap-1">
-              <span class="text-3xl font-bold text-white uppercase leading-none">04</span>
+              <span class="text-3xl font-bold text-white uppercase leading-none">M2</span>
               <span class="h-[1px] w-8 bg-white/50"></span>
             </div>
           </div>
           <div class="absolute bottom-6 right-6 z-20 text-right">
-            <h3 class="text-2xl font-bold text-white uppercase mb-1 leading-tight text-shadow-sm">Utility Structure<br/>Design & Build</h3>
-            <p class="text-[10px] text-white uppercase tracking-widest font-medium">Stations 6+623 &ndash; 7+897</p>
+            <h3 class="text-2xl font-bold text-white uppercase mb-1 leading-tight text-shadow-sm">Marine Staging<br/>Yassat Island</h3>
+            <p class="text-[10px] text-white uppercase tracking-widest font-medium">Abu Dhabi Ports</p>
           </div>
           <div class="project-overlay absolute inset-0 bg-primary/90 flex flex-col justify-center items-center text-white p-8 text-center z-30">
             <svg class="w-12 h-12 mb-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5m-4 0h4"/>
             </svg>
-            <h3 class="text-2xl font-bold uppercase mb-2">Utility Structures</h3>
-            <p class="text-xs opacity-90 mb-4 max-w-[200px]">Design & built of multiple utility structures across key stations.</p>
-            <a href="/projects/utility-bridge" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <h3 class="text-2xl font-bold uppercase mb-2">Marine Staging</h3>
+            <p class="text-xs opacity-90 mb-4 max-w-[220px]">Specialized marine staging facility supporting offshore construction and logistics operations.</p>
+            <a href="/projects/marine-staging-yassat-island" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
@@ -378,103 +385,103 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
       </div>
 
       <!-- Additional Projects Row -->
-      <div class="col-span-12 md:col-span-4 flex flex-col border-r border-t border-black" data-category="infrastructure all">
+      <div class="col-span-12 md:col-span-4 md:col-start-1 md:row-start-2 flex flex-col border-r border-t border-black" data-category="commercial heritage all">
         <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem] border-b border-black">
-          <img alt="Infrastructure Road Works" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/inner-bypass-e45/photo_006.jpeg" />
+          <img alt="Dubai Marina Commercial Tower" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/dubai-marina-tower/hero.png" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
-            <span class="text-[10px] uppercase tracking-widest text-white">Public Infrastructure</span>
-            <h3 class="text-xl font-bold uppercase mt-1">RAK Beach District</h3>
-            <p class="text-[10px] uppercase tracking-wide opacity-90 mt-1">Phase 1 &ndash; Road Infrastructure</p>
+            <span class="text-[10px] uppercase tracking-widest text-white">Commercial</span>
+            <h3 class="text-xl font-bold uppercase mt-1">Dubai Marina Tower</h3>
+            <p class="text-[10px] uppercase tracking-wide opacity-90 mt-1">High-Rise Construction</p>
           </div>
           <div class="project-overlay absolute inset-0 bg-primary/95 flex flex-col justify-center items-center text-white p-6 text-center z-30">
-            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Public Infrastructure</span>
-            <h3 class="text-xl font-bold uppercase mb-3">RAK Beach District</h3>
-            <p class="text-xs opacity-90 mb-4 max-w-[240px]">Road and infrastructure works supporting the development of the RAK Beach District.</p>
-            <a href="/projects" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Commercial</span>
+            <h3 class="text-xl font-bold uppercase mb-3">Dubai Marina Tower</h3>
+            <p class="text-xs opacity-90 mb-4 max-w-[240px]">Commercial tower delivery in Dubai Marina with integrated structural and finishing packages.</p>
+            <a href="/projects/dubai-marina-tower" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
         </div>
-        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem]" data-category="infrastructure all">
-          <img alt="E20 Bridge Construction" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/e20-traffic-bridges/photo_020.jpeg" />
+        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem]">
+          <img alt="Qidfah Revitalization Project" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/qidfah-revitalization/hero.png" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
-            <span class="text-[10px] uppercase tracking-widest text-white">Bridge Engineering</span>
-            <h3 class="text-xl font-bold uppercase mt-1">E20 Bridges Construction</h3>
+            <span class="text-[10px] uppercase tracking-widest text-white">Heritage</span>
+            <h3 class="text-xl font-bold uppercase mt-1">Qidfah Revitalization</h3>
           </div>
           <div class="project-overlay absolute inset-0 bg-primary/95 flex flex-col justify-center items-center text-white p-6 text-center z-30">
-            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Bridge Engineering</span>
-            <h3 class="text-xl font-bold uppercase mb-3">E20 Bridges Construction</h3>
-            <p class="text-xs opacity-90 mb-4 max-w-[240px]">Construction of multiple bridges enhancing traffic capacity and safety along the E20 corridor.</p>
-            <a href="/projects/traffic-improvement-e20" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Heritage</span>
+            <h3 class="text-xl font-bold uppercase mb-3">Qidfah Revitalization</h3>
+            <p class="text-xs opacity-90 mb-4 max-w-[240px]">Revitalization works preserving local identity while upgrading public realm and connectivity.</p>
+            <a href="/projects/qidfah-revitalization-project" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
         </div>
       </div>
 
-      <div class="col-span-12 md:col-span-4 flex flex-col border-r border-t border-black" data-category="infrastructure all">
+      <div class="col-span-12 md:col-span-4 md:col-start-5 md:row-start-2 flex flex-col border-r border-t border-black" data-category="residential all">
         <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem] border-b border-black">
-          <img alt="Naseem Al Bar Bridge Foundation Work" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/naseem-albar-bridge/photo_038.jpeg" />
+          <img alt="Private Villas Project" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/p121_img01_xref6756.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
-            <span class="text-[10px] uppercase tracking-widest text-white">Design & Build</span>
-            <h3 class="text-xl font-bold uppercase mt-1">Naseem Al Bar Bridge</h3>
+            <span class="text-[10px] uppercase tracking-widest text-white">Residential</span>
+            <h3 class="text-xl font-bold uppercase mt-1">Private Villas Project</h3>
           </div>
           <div class="project-overlay absolute inset-0 bg-primary/95 flex flex-col justify-center items-center text-white p-6 text-center z-30">
-            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Design &amp; Build</span>
-            <h3 class="text-xl font-bold uppercase mb-3">Naseem Al Bar Bridge</h3>
-            <p class="text-xs opacity-90 mb-4 max-w-[240px]">Bridge project delivering durable connectivity and improved capacity for the surrounding district.</p>
-            <a href="/projects/naseem-albar-bridge" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Residential</span>
+            <h3 class="text-xl font-bold uppercase mb-3">Private Villas Project</h3>
+            <p class="text-xs opacity-90 mb-4 max-w-[240px]">High-spec residential villa development delivered with premium civil and structural finishing.</p>
+            <a href="/projects/private-villas-project" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
         </div>
-        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem]" data-category="infrastructure all">
-          <img alt="Al Tallah Road Bridge Ajman" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/al-tallah-bridge/photo_016.jpeg" />
+        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem]">
+          <img alt="Luxury Villa Palm Jumeirah" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/p122_img01_xref6763.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
-            <span class="text-[10px] uppercase tracking-widest text-white">Infrastructure</span>
-            <h3 class="text-xl font-bold uppercase mt-1">Al Tallah Bridge Ajman</h3>
+            <span class="text-[10px] uppercase tracking-widest text-white">Residential</span>
+            <h3 class="text-xl font-bold uppercase mt-1">Palm Jumeirah Villa</h3>
           </div>
           <div class="project-overlay absolute inset-0 bg-primary/95 flex flex-col justify-center items-center text-white p-6 text-center z-30">
-            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Infrastructure</span>
-            <h3 class="text-xl font-bold uppercase mb-3">Al Tallah Bridge Ajman</h3>
-            <p class="text-xs opacity-90 mb-4 max-w-[240px]">Key bridge infrastructure supporting regional transport routes in Ajman, UAE.</p>
-            <a href="/projects/3-bridges-al-talah-road" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Residential</span>
+            <h3 class="text-xl font-bold uppercase mb-3">Palm Jumeirah Villa</h3>
+            <p class="text-xs opacity-90 mb-4 max-w-[240px]">Luxury waterfront villa construction at Palm Jumeirah with bespoke design detailing.</p>
+            <a href="/projects/palm-jumeirah-villa" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
         </div>
       </div>
 
-      <div class="col-span-12 md:col-span-4 flex flex-col border-t border-black" data-category="infrastructure all">
+      <div class="col-span-12 md:col-span-4 md:col-start-9 md:row-start-2 flex flex-col border-t border-black" data-category="oil-gas industrial all">
         <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem] border-b border-black">
-          <img alt="Inner Bypass E45 Madinat Zayed Road Work" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/inner-bypass-e45/photo_023.jpeg" />
+          <img alt="Offshore Oil and Gas Field Infrastructure" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/p095_img01_xref6588.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
-            <span class="text-[10px] uppercase tracking-widest text-white">Road Upgrade</span>
-            <h3 class="text-xl font-bold uppercase mt-1">Inner Bypass E45</h3>
+            <span class="text-[10px] uppercase tracking-widest text-white">Oil &amp; Gas</span>
+            <h3 class="text-xl font-bold uppercase mt-1">Offshore Field Works</h3>
           </div>
           <div class="project-overlay absolute inset-0 bg-primary/95 flex flex-col justify-center items-center text-white p-6 text-center z-30">
-            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Road Upgrade</span>
-            <h3 class="text-xl font-bold uppercase mb-3">Inner Bypass E45</h3>
-            <p class="text-xs opacity-90 mb-4 max-w-[240px]">Upgrading critical sections of the Inner Bypass E45 to improve safety and capacity.</p>
-            <a href="/projects/upgrading-inner-bypass-e45" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
+            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Oil &amp; Gas</span>
+            <h3 class="text-xl font-bold uppercase mb-3">Offshore Oil &amp; Gas Field</h3>
+            <p class="text-xs opacity-90 mb-4 max-w-[240px]">Offshore civil and structural works supporting critical energy-field operations.</p>
+            <a href="/projects/offshore-oil-gas-field" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
               Explore
             </a>
           </div>
         </div>
-        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem]" data-category="infrastructure all">
-          <img alt="Utility Structure Construction" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/utility-structure/photo_010.jpeg" />
+        <div class="project-card relative group overflow-hidden min-h-[17rem] md:min-h-[23rem]">
+          <img alt="Industrial Utility Structures" class="w-full h-full object-cover transition-transform motion-slow media-motion" src="/images/projects/utility-structure/photo_010.jpeg" />
           <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors motion-base"></div>
           <div class="absolute bottom-0 left-0 w-full p-6 text-white z-20 bg-gradient-to-t from-black/80 to-transparent">
-            <span class="text-[10px] uppercase tracking-widest text-white">Utility Works</span>
+            <span class="text-[10px] uppercase tracking-widest text-white">Industrial</span>
             <h3 class="text-xl font-bold uppercase mt-1">Utility Structures</h3>
           </div>
           <div class="project-overlay absolute inset-0 bg-primary/95 flex flex-col justify-center items-center text-white p-6 text-center z-30">
-            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Utility Works</span>
+            <span class="text-[10px] uppercase tracking-widest text-white mb-2">Industrial</span>
             <h3 class="text-xl font-bold uppercase mb-3">Utility Structures</h3>
             <p class="text-xs opacity-90 mb-4 max-w-[240px]">Specialized utility structures supporting critical services across multiple stations.</p>
             <a href="/projects/utility-bridge" class="text-[10px] uppercase tracking-widest font-bold border border-black/30 px-4 py-2 hover:bg-white hover:text-primary transition-colors cursor-pointer">
@@ -543,7 +550,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
     </section>
   </SectionBackground>
 
-  <!-- Final CTA Section - Matching About Page Style -->
+  <!-- Final CTA Section -->
   <section class="relative bg-surface text-primary overflow-hidden border-y border-primary/20">
     <div class="absolute inset-0 pointer-events-none">
       <div
@@ -560,35 +567,29 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
     </div>
 
     <div class="relative z-10 px-6 md:px-12 lg:px-24 py-20 md:py-28 lg:py-32">
-      <div class="projects-cta-shell flex flex-col items-center justify-center text-center max-w-5xl mx-auto">
+      <div class="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-12 h-[2px] bg-accent"></div>
           <span class="text-xs font-bold uppercase tracking-[0.3em] text-accent">
-            Start Your Project
+            Work With Us
           </span>
           <div class="w-12 h-[2px] bg-accent"></div>
         </div>
 
-        <h2 class="projects-cta-title text-4xl md:text-5xl lg:text-6xl font-bold font-heading leading-[0.95] tracking-tight mb-8 max-w-3xl">
-          Let's build infrastructure that
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading leading-[0.95] tracking-tight mb-8 max-w-3xl">
+          Build your next project with a team focused on
           <br />
           <span class="italic font-light text-primary/50 scale-y-75 inline-block">
-            stands the test of time.
+            safety, precision, and dependable delivery.
           </span>
         </h2>
 
-        <div class="projects-cta-pills mb-10">
-          <span>Design-Build Expertise</span>
-          <span>UAE Delivery Teams</span>
-          <span>Complex Civil Infrastructure</span>
-        </div>
-
         <a
-          class="projects-cta-btn group relative inline-flex items-center gap-3 px-10 py-5 bg-primary text-white overflow-hidden transition-all duration-300 hover:bg-accent hover:shadow-xl hover:shadow-accent/20"
+          class="group relative inline-flex items-center gap-3 px-10 py-5 bg-[#800000] text-white overflow-hidden transition-all duration-300 hover:bg-[#800000] hover:shadow-xl hover:shadow-[#800000]/20"
           href="/contact"
         >
           <span class="relative z-10 text-xs font-bold uppercase tracking-[0.2em]">
-            Discuss Your Project
+            Connect Today
           </span>
           <svg
             class="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
@@ -607,6 +608,7 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
       </div>
     </div>
 
+    {/* Bottom decorative line */}
     <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent"></div>
   </section>
 </Layout>
@@ -614,12 +616,131 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
 <script>
   // Carousel/Filter functionality
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const filterTargets = document.querySelectorAll('[data-category]');
+  const filterTargets = document.querySelectorAll('#projects-grid > [data-category]');
+  const projectsGrid = document.getElementById('projects-grid');
   const filterStatus = document.getElementById('projects-filter-status');
+  const prefersReducedFilterMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const FILTER_TRANSITION_MS = 180;
+  let activeFilter = 'all';
+  let pendingFilter = 'all';
+  let filterTransitionTimer = 0;
 
   const formatFilterLabel = (filter: string): string => {
     if (!filter || filter === 'all') return 'all';
     return filter.replace('-', ' ');
+  };
+
+  const setActiveFilterButton = (activeFilter: string): void => {
+    filterBtns.forEach((b) => {
+      if (!(b instanceof HTMLElement)) return;
+      const isActive = b.dataset.filter === activeFilter;
+      b.classList.toggle('active', isActive);
+      b.classList.toggle('bg-primary', isActive);
+      b.classList.toggle('text-white', isActive);
+      b.classList.toggle('bg-background', !isActive);
+      b.classList.toggle('dark:bg-card', !isActive);
+      b.classList.toggle('text-black', !isActive);
+      b.setAttribute('aria-pressed', String(isActive));
+    });
+  };
+
+  const applyFilter = (filter: string): number => {
+    let visibleCount = 0;
+
+    filterTargets.forEach((target) => {
+      if (!(target instanceof HTMLElement)) return;
+      const categories = (target.dataset.category ?? '').split(/\s+/).filter(Boolean);
+      const isMatch = filter === 'all' || categories.includes(filter);
+
+      if (isMatch) {
+        target.hidden = false;
+        target.removeAttribute('aria-hidden');
+        visibleCount += 1;
+      } else {
+        target.hidden = true;
+        target.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    return visibleCount;
+  };
+
+  const updateFilterStatus = (filter: string, visibleCount: number): void => {
+    if (!filterStatus) return;
+    filterStatus.textContent = `Showing ${formatFilterLabel(filter)} projects (${visibleCount} sections visible).`;
+  };
+
+  const updateEmptyState = (filter: string, visibleCount: number): void => {
+    if (!(projectsGrid instanceof HTMLElement)) return;
+    let emptyState = projectsGrid.querySelector('[data-projects-empty-state]');
+
+    if (!(emptyState instanceof HTMLElement)) {
+      emptyState = document.createElement('div');
+      emptyState.setAttribute('data-projects-empty-state', 'true');
+      emptyState.className =
+        'col-span-12 border-t border-black px-6 py-16 md:py-20 text-center text-primary bg-background';
+      projectsGrid.appendChild(emptyState);
+    }
+
+    if (visibleCount > 0) {
+      emptyState.hidden = true;
+      emptyState.setAttribute('aria-hidden', 'true');
+      emptyState.textContent = '';
+      return;
+    }
+
+    emptyState.hidden = false;
+    emptyState.removeAttribute('aria-hidden');
+    emptyState.textContent = `No ${formatFilterLabel(filter)} projects in this featured visual grid yet.`;
+  };
+
+  const animateVisibleSections = (): void => {
+    if (prefersReducedFilterMotion) return;
+    let staggerIndex = 0;
+
+    filterTargets.forEach((target) => {
+      if (!(target instanceof HTMLElement) || target.hidden) return;
+      target.style.setProperty('--filter-delay', `${staggerIndex * 45}ms`);
+      target.classList.add('is-filter-entering');
+
+      window.requestAnimationFrame(() => {
+        target.classList.remove('is-filter-entering');
+      });
+
+      staggerIndex += 1;
+    });
+  };
+
+  const commitFilter = (filter: string): void => {
+    const visibleCount = applyFilter(filter);
+    updateEmptyState(filter, visibleCount);
+    updateFilterStatus(filter, visibleCount);
+  };
+
+  const transitionFilter = (filter: string): void => {
+    if (filter === activeFilter && filterTransitionTimer === 0) return;
+    pendingFilter = filter;
+
+    if (filterTransitionTimer) {
+      window.clearTimeout(filterTransitionTimer);
+      filterTransitionTimer = 0;
+    }
+
+    if (!(projectsGrid instanceof HTMLElement) || prefersReducedFilterMotion) {
+      commitFilter(filter);
+      activeFilter = filter;
+      pendingFilter = filter;
+      return;
+    }
+
+    projectsGrid.classList.add('is-filter-transitioning');
+    filterTransitionTimer = window.setTimeout(() => {
+      commitFilter(pendingFilter);
+      activeFilter = pendingFilter;
+      projectsGrid.classList.remove('is-filter-transitioning');
+      animateVisibleSections();
+      filterTransitionTimer = 0;
+    }, FILTER_TRANSITION_MS);
   };
 
   filterBtns.forEach((btn) => {
@@ -628,42 +749,14 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
       const filter = btn.dataset.filter;
       if (!filter) return;
 
-      // Update active states on buttons
-      filterBtns.forEach((b) => {
-        if (!(b instanceof HTMLElement)) return;
-        b.classList.remove('active', 'bg-primary', 'text-white');
-        b.classList.add('bg-background', 'dark:bg-card', 'text-black');
-        b.setAttribute('aria-pressed', 'false');
-      });
-
-      // Set clicked button as active
-      btn.classList.add('active', 'bg-primary', 'text-white');
-      btn.classList.remove('bg-background', 'dark:bg-card', 'text-black');
-      btn.setAttribute('aria-pressed', 'true');
-
-      let visibleCount = 0;
-
-      // Filter all categorized containers/cards
-      filterTargets.forEach((target) => {
-        if (!(target instanceof HTMLElement)) return;
-        const categories = (target.dataset.category ?? '').split(/\s+/).filter(Boolean);
-        const isMatch = filter === 'all' || categories.includes(filter);
-
-        if (isMatch) {
-          target.hidden = false;
-          target.removeAttribute('aria-hidden');
-          visibleCount += 1;
-        } else {
-          target.hidden = true;
-          target.setAttribute('aria-hidden', 'true');
-        }
-      });
-
-      if (filterStatus) {
-        filterStatus.textContent = `Showing ${formatFilterLabel(filter)} projects (${visibleCount} sections visible).`;
-      }
+      setActiveFilterButton(filter);
+      transitionFilter(filter);
     });
   });
+
+  // Initial empty-state sync for the default "all" view.
+  setActiveFilterButton('all');
+  commitFilter('all');
 
   // Center list smooth carousel
   const projectListCarousel = document.getElementById('projects-list-carousel');
@@ -805,6 +898,29 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
     stroke-width: 1.7;
   }
 
+  #projects-grid {
+    transition: opacity 220ms ease, transform 220ms ease;
+    will-change: opacity, transform;
+  }
+
+  #projects-grid.is-filter-transitioning {
+    opacity: 0.22;
+    transform: translateY(10px);
+    pointer-events: none;
+  }
+
+  #projects-grid > [data-category] {
+    transition:
+      opacity 360ms cubic-bezier(0.22, 1, 0.36, 1) var(--filter-delay, 0ms),
+      transform 360ms cubic-bezier(0.22, 1, 0.36, 1) var(--filter-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  #projects-grid > [data-category].is-filter-entering {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
   .projects-list-track {
     transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -851,100 +967,23 @@ const projectCarouselPages = Array.from({ length: 4 }, (_, pageIndex) =>
     background: linear-gradient(to top, rgb(0 0 0 / 0.62) 5%, rgb(0 0 0 / 0.18) 45%, rgb(0 0 0 / 0.06) 100%);
   }
 
+  /* Keep card heights stable regardless of source image aspect ratios. */
+  .project-card > img {
+    position: absolute;
+    inset: 0;
+  }
+
   .project-card h3,
   .project-card p,
   .project-card span {
     text-shadow: 0 2px 12px rgb(0 0 0 / 0.65);
   }
 
-  /* Animation for CTA section */
-  @keyframes pulse-slow {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.1); }
-  }
-
-  .animate-pulse-slow {
-    animation: pulse-slow 8s ease-in-out infinite;
-  }
-
-  .projects-cta-shell {
-    position: relative;
-    border: 1px solid hsl(var(--primary) / 0.16);
-    padding: clamp(1.8rem, 1.1rem + 2vw, 3.25rem);
-    background:
-      radial-gradient(120% 120% at 0% 0%, hsl(var(--accent) / 0.08), transparent 55%),
-      linear-gradient(165deg, hsl(var(--background) / 0.96), hsl(var(--card) / 0.9));
-    box-shadow:
-      0 35px 80px -55px hsl(var(--primary) / 0.65),
-      0 0 0 1px hsl(var(--accent) / 0.08) inset;
-    overflow: hidden;
-  }
-
-  .projects-cta-shell::before {
-    content: '';
-    position: absolute;
-    inset: 14px;
-    border: 1px solid hsl(var(--accent) / 0.14);
-    pointer-events: none;
-  }
-
-  .projects-cta-shell::after {
-    content: '';
-    position: absolute;
-    top: -80px;
-    right: -60px;
-    width: 180px;
-    height: 180px;
-    border-radius: 999px;
-    background: radial-gradient(circle, hsl(var(--accent) / 0.26), transparent 65%);
-    pointer-events: none;
-  }
-
-  .projects-cta-title {
-    text-wrap: balance;
-    text-shadow: 0 14px 28px hsl(var(--primary) / 0.12);
-  }
-
-  .projects-cta-pills {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.65rem;
-  }
-
-  .projects-cta-pills span {
-    font-size: 0.625rem;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-weight: 700;
-    border: 1px solid hsl(var(--primary) / 0.2);
-    padding: 0.55rem 0.85rem;
-    background: hsl(var(--background) / 0.72);
-    backdrop-filter: blur(4px);
-  }
-
-  .projects-cta-btn {
-    box-shadow:
-      0 18px 30px -20px hsl(var(--primary) / 0.7),
-      0 0 0 1px hsl(0 0% 100% / 0.08) inset;
-  }
-
-  .projects-cta-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(115deg, transparent, hsl(0 0% 100% / 0.24), transparent);
-    transform: translateX(-115%);
-    transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .projects-cta-btn:hover::before {
-    transform: translateX(120%);
-  }
-
-  @media (max-width: 768px) {
-    .projects-cta-shell::before {
-      inset: 8px;
+  @media (prefers-reduced-motion: reduce) {
+    #projects-grid,
+    #projects-grid > [data-category] {
+      transition: none;
+      transform: none;
     }
   }
 </style>
