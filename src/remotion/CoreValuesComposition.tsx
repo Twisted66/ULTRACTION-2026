@@ -11,6 +11,11 @@ import {
 } from 'remotion';
 import { Shield, Users, Target, Leaf, Zap, ShieldCheck } from 'lucide-react';
 
+// Design tokens - pulled from project design system
+const ACCENT = '#9a3324';
+const WHITE = '#ffffff';
+const BLACK = '#000000';
+
 const coreValues = [
     {
         id: 'integrity',
@@ -90,7 +95,7 @@ export const SCENE_DURATION_IN_FRAMES = 120; // 4 seconds at 30fps
 
 export const CoreValuesComposition: React.FC = () => {
     return (
-        <AbsoluteFill className="bg-surface overflow-hidden">
+        <AbsoluteFill style={{ backgroundColor: '#0d0d0d', overflow: 'hidden' }}>
             {coreValues.map((value, index) => {
                 return (
                     <Sequence
@@ -113,7 +118,9 @@ const CoreValueScene: React.FC<{
     const frame = useCurrentFrame();
     const { fps } = useVideoConfig();
 
-    // Opacity fade in and out for the scene
+    // ── All animations via useCurrentFrame() (required by Remotion skill) ──
+
+    // Scene fade-in/out
     const opacity = interpolate(
         frame,
         [0, 15, SCENE_DURATION_IN_FRAMES - 15, SCENE_DURATION_IN_FRAMES],
@@ -121,172 +128,201 @@ const CoreValueScene: React.FC<{
         { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
     );
 
-    // Cinematic zoom for the image
-    const scale = interpolate(
+    // Cinematic parallax zoom on background image
+    const bgScale = interpolate(
         frame,
         [0, SCENE_DURATION_IN_FRAMES],
-        [1, 1.15],
+        [1.05, 1.18],
         { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
     );
 
-    // Icon spring animation
-    const iconY = spring({
-        frame: frame - 5,
-        fps,
-        config: { damping: 12 },
-    });
+    // Staggered spring entrances (recommended: damping: 200 for smooth no-bounce)
+    const iconSpring = spring({ frame: frame - 5, fps, config: { damping: 200 } });
+    const titleSpring = spring({ frame: frame - 12, fps, config: { damping: 200 } });
+    const descSpring = spring({ frame: frame - 22, fps, config: { damping: 200 } });
+    const insightSpring = spring({ frame: frame - 32, fps, config: { damping: 200 } });
+    const statsSpring = spring({ frame: frame - 42, fps, config: { damping: 200 } });
 
-    // Title spring animation
-    const titleY = spring({
-        frame: frame - 15,
-        fps,
-        config: { damping: 12 },
-    });
+    const yFrom = 60;
 
-    // Description spring animation
-    const descY = spring({
-        frame: frame - 25,
-        fps,
-        config: { damping: 12 },
-    });
-
-    // Insight spring animation
-    const insightY = spring({
-        frame: frame - 35,
-        fps,
-        config: { damping: 12 },
-    });
-
-    // Stats spring animation
-    const statsY = spring({
-        frame: frame - 45,
-        fps,
-        config: { damping: 12 },
-    });
-
-    const iconTransform = `translateY(${interpolate(iconY, [0, 1], [50, 0])}px)`;
-    const titleTransform = `translateY(${interpolate(titleY, [0, 1], [50, 0])}px)`;
-    const descTransform = `translateY(${interpolate(descY, [0, 1], [50, 0])}px)`;
-    const insightTransform = `translateY(${interpolate(insightY, [0, 1], [50, 0])}px)`;
-    const statsTransform = `translateY(${interpolate(statsY, [0, 1], [50, 0])}px)`;
-
-    const iconOpacity = interpolate(iconY, [0, 1], [0, 1]);
-    const titleOpacity = interpolate(titleY, [0, 1], [0, 1]);
-    const descOpacity = interpolate(descY, [0, 1], [0, 1]);
-    const insightOpacity = interpolate(insightY, [0, 1], [0, 1]);
-    const statsOpacity = interpolate(statsY, [0, 1], [0, 1]);
+    const iconY = interpolate(iconSpring, [0, 1], [yFrom, 0]);
+    const titleY = interpolate(titleSpring, [0, 1], [yFrom, 0]);
+    const descY = interpolate(descSpring, [0, 1], [yFrom, 0]);
+    const insightY = interpolate(insightSpring, [0, 1], [yFrom, 0]);
+    const statsY = interpolate(statsSpring, [0, 1], [yFrom, 0]);
 
     const Icon = value.icon;
 
     return (
         <AbsoluteFill style={{ opacity }}>
-            {/* Background Image */}
-            <AbsoluteFill style={{ transform: `scale(${scale})` }}>
+            {/* Background Image with Ken Burns zoom */}
+            <AbsoluteFill style={{ transform: `scale(${bgScale})`, transformOrigin: 'center center' }}>
                 <Img
                     src={staticFile(value.img)}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
             </AbsoluteFill>
 
-            {/* Dark Overlay focused on center */}
-            <AbsoluteFill className="bg-primary/80" />
+            {/* Dark overlay */}
+            <AbsoluteFill style={{ backgroundColor: 'rgba(0,0,0,0.78)' }} />
 
-            {/* Subtle gradient to ensure text readability */}
-            <AbsoluteFill style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.85) 100%)' }} />
+            {/* Left-to-right gradient for depth */}
+            <AbsoluteFill style={{
+                background: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.8) 100%)'
+            }} />
+
+            {/* Subtle accent corner glow */}
+            <AbsoluteFill style={{
+                background: `radial-gradient(ellipse at 0% 100%, ${ACCENT}22 0%, transparent 60%)`
+            }} />
 
             {/* Content */}
-            <AbsoluteFill className="p-8 md:p-16 lg:p-24 flex flex-col justify-center items-start text-left w-full h-full">
-                {/* Number Watermark positioned behind the text but anchored right */}
-                <div className="absolute right-10 bottom-10 opacity-[0.03] pointer-events-none md:right-24 md:bottom-24">
-                    <span className="font-heading text-[15rem] md:text-[30rem] italic leading-none font-bold text-white">
-                        {String(index + 1).padStart(2, '0')}
-                    </span>
+            <AbsoluteFill style={{
+                padding: '80px 120px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'flex-start',
+            }}>
+                {/* Watermark number */}
+                <div style={{
+                    position: 'absolute',
+                    right: 80,
+                    bottom: 60,
+                    opacity: 0.04,
+                    pointerEvents: 'none',
+                    fontSize: 400,
+                    fontWeight: 700,
+                    fontStyle: 'italic',
+                    color: WHITE,
+                    lineHeight: 1,
+                    letterSpacing: '-0.05em',
+                    fontFamily: 'serif',
+                }}>
+                    {String(index + 1).padStart(2, '0')}
                 </div>
 
-                <div className="flex gap-8 lg:gap-16 items-center w-full max-w-7xl relative z-10">
-                    <div className="flex-1 max-w-3xl">
-                        <div
-                            style={{
-                                transform: iconTransform,
-                                opacity: iconOpacity,
-                            }}
-                            className="mb-8 p-5 rounded-none bg-accent text-white shadow-2xl inline-block"
-                        >
-                            <Icon size={48} strokeWidth={1.5} />
+                {/* Left Content Column + Right Stats */}
+                <div style={{
+                    display: 'flex',
+                    gap: 80,
+                    alignItems: 'center',
+                    width: '100%',
+                    maxWidth: 1680,
+                }}>
+                    {/* Main text column */}
+                    <div style={{ flex: 1 }}>
+                        {/* Icon */}
+                        <div style={{
+                            transform: `translateY(${iconY}px)`,
+                            opacity: iconSpring,
+                            marginBottom: 40,
+                            padding: 24,
+                            backgroundColor: ACCENT,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            boxShadow: `0 20px 60px ${ACCENT}55`,
+                        }}>
+                            <Icon size={52} strokeWidth={1.5} color={WHITE} />
                         </div>
 
-                        <h3
-                            style={{
-                                transform: titleTransform,
-                                opacity: titleOpacity,
-                            }}
-                            className="text-4xl md:text-5xl lg:text-7xl font-heading mb-6 text-white uppercase tracking-wider text-shadow-sm"
-                        >
+                        {/* Title */}
+                        <h3 style={{
+                            transform: `translateY(${titleY}px)`,
+                            opacity: titleSpring,
+                            fontSize: 92,
+                            fontWeight: 700,
+                            color: WHITE,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.06em',
+                            lineHeight: 0.95,
+                            marginBottom: 32,
+                            fontFamily: 'sans-serif',
+                        }}>
                             {value.title}
                         </h3>
 
-                        <p
-                            style={{
-                                transform: descTransform,
-                                opacity: descOpacity,
-                            }}
-                            className="text-lg md:text-xl lg:text-2xl font-light leading-relaxed text-white/90 mb-8"
-                        >
+                        {/* Description */}
+                        <p style={{
+                            transform: `translateY(${descY}px)`,
+                            opacity: descSpring,
+                            fontSize: 28,
+                            fontWeight: 300,
+                            color: 'rgba(255,255,255,0.88)',
+                            lineHeight: 1.65,
+                            marginBottom: 40,
+                            maxWidth: 740,
+                            fontFamily: 'sans-serif',
+                        }}>
                             {value.description}
                         </p>
 
-                        <div
-                            style={{
-                                transform: insightTransform,
-                                opacity: insightOpacity,
-                            }}
-                            className="px-6 py-4 bg-white/10 backdrop-blur-md border-l-4 border-accent shadow-xl"
-                        >
-                            <p className="text-sm md:text-base font-medium tracking-widest uppercase text-white">
+                        {/* Insight box - glassmorphic */}
+                        <div style={{
+                            transform: `translateY(${insightY}px)`,
+                            opacity: insightSpring,
+                            padding: '20px 28px',
+                            backgroundColor: 'rgba(255,255,255,0.07)',
+                            borderLeft: `4px solid ${ACCENT}`,
+                            backdropFilter: 'blur(8px)',
+                            maxWidth: 740,
+                        }}>
+                            <p style={{
+                                fontSize: 18,
+                                fontWeight: 600,
+                                letterSpacing: '0.12em',
+                                textTransform: 'uppercase',
+                                color: 'rgba(255,255,255,0.9)',
+                                fontFamily: 'sans-serif',
+                                lineHeight: 1.6,
+                            }}>
                                 {value.insight}
                             </p>
                         </div>
                     </div>
 
-                    {/* Stats Section on Right Side */}
-                    <div
-                        style={{
-                            transform: statsTransform,
-                            opacity: statsOpacity,
-                        }}
-                        className="hidden md:flex flex-col gap-6"
-                    >
+                    {/* Stats Column */}
+                    <div style={{
+                        transform: `translateY(${statsY}px)`,
+                        opacity: statsSpring,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 24,
+                        flexShrink: 0,
+                    }}>
                         {value.stats.map((stat, i) => (
-                            <div key={i} className="bg-surface/10 backdrop-blur-md border border-white/20 p-6 shadow-2xl w-64">
-                                <div className="text-4xl lg:text-5xl font-bold text-accent mb-2 font-heading italic">
+                            <div key={i} style={{
+                                backgroundColor: 'rgba(255,255,255,0.06)',
+                                border: '1px solid rgba(255,255,255,0.15)',
+                                padding: '28px 36px',
+                                width: 280,
+                                backdropFilter: 'blur(8px)',
+                            }}>
+                                <div style={{
+                                    fontSize: 56,
+                                    fontWeight: 700,
+                                    fontStyle: 'italic',
+                                    color: ACCENT,
+                                    lineHeight: 1,
+                                    marginBottom: 8,
+                                    fontFamily: 'sans-serif',
+                                }}>
                                     {stat.value}
                                 </div>
-                                <div className="text-xs lg:text-sm uppercase tracking-[0.2em] text-white/80 font-bold">
+                                <div style={{
+                                    fontSize: 14,
+                                    fontWeight: 700,
+                                    letterSpacing: '0.2em',
+                                    textTransform: 'uppercase',
+                                    color: 'rgba(255,255,255,0.7)',
+                                    fontFamily: 'sans-serif',
+                                }}>
                                     {stat.label}
                                 </div>
                             </div>
                         ))}
                     </div>
-                </div>
-
-                {/* Mobile Stats (only shown on small screens) */}
-                <div
-                    style={{
-                        transform: statsTransform,
-                        opacity: statsOpacity,
-                    }}
-                    className="flex md:hidden gap-4 mt-8 w-full"
-                >
-                    {value.stats.map((stat, i) => (
-                        <div key={i} className="bg-surface/10 backdrop-blur-sm border border-white/20 p-4 flex-1">
-                            <div className="text-2xl font-bold text-accent mb-1 font-heading italic">
-                                {stat.value}
-                            </div>
-                            <div className="text-[10px] uppercase tracking-wider text-white/80 font-bold">
-                                {stat.label}
-                            </div>
-                        </div>
-                    ))}
                 </div>
             </AbsoluteFill>
         </AbsoluteFill>

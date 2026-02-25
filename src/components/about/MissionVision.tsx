@@ -87,15 +87,16 @@ const MissionVision: React.FC<MissionVisionProps> = ({ className = '' }) => {
 
       <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-10">
 
-        {/* Section Header - Left Aligned */}
+        {/* Section Header - Left Aligned - matching ClientPartners style */}
         <div className="mb-16 md:mb-24">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="h-[1px] w-12 bg-accent"></div>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-[2px] bg-accent"></div>
             <span className="text-xs font-bold uppercase tracking-[0.3em] text-accent">Our Purpose</span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold text-primary leading-tight">
-            Guided by Vision, <br className="hidden md:block" />
-            <span className="text-accent italic font-light">Driven by Mission</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-heading leading-[0.9] tracking-tight mb-6">
+            Guided by Vision,
+            <br />
+            <span className="italic font-light text-primary/50 scale-y-75 inline-block">Driven by Mission</span>
           </h2>
         </div>
 
