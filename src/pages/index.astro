@@ -59,21 +59,23 @@ const structuredData = {
     <!-- Hero Content -->
     <div class="relative z-10 h-full flex flex-col justify-center px-6 sm:px-8 lg:px-24 pt-16 sm:pt-20">
       <div class="max-w-[1400px] mx-auto w-full">
-        <h1 class="text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold uppercase leading-[0.9] sm:leading-[0.85] tracking-tight mb-6 sm:mb-8 lg:mb-12 font-heading text-primary-foreground">
+        <h1 class="hero-page-title mb-12 text-primary-foreground">
           Expert<br/>
           Construction<br/>
           Services For<br/>
-          <TextTypeAnimation
-            client:load
-            text={['Every Project', 'Your Vision', 'Dream Spaces', 'Modern Living']}
-            typingSpeed={75}
-            pauseDuration={1500}
-            deletingSpeed={50}
-            showCursor={true}
-            cursorCharacter="_"
-            className="text-primary-foreground inline"
-            cursorClassName="text-primary-foreground"
-          />
+          <span class="block mt-2 sm:mt-3">
+            <TextTypeAnimation
+              client:load
+              text={['Every Project', 'Your Vision', 'Dream Spaces', 'Modern Living']}
+              typingSpeed={75}
+              pauseDuration={1500}
+              deletingSpeed={50}
+              showCursor={true}
+              cursorCharacter="_"
+              className="text-primary-foreground inline tracking-[0.01em]"
+              cursorClassName="text-primary-foreground"
+            />
+          </span>
         </h1>
         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
           <a href="/contact" class="bg-accent backdrop-blur-sm hover:bg-accent/90 border border-accent hover:border-accent text-primary-foreground py-3 sm:py-4 px-6 sm:px-10 text-center font-medium transition-all motion-base uppercase tracking-wide text-xs sm:text-sm inline-block min-h-[44px] flex items-center">

@@ -165,7 +165,7 @@ function getCategoryIcon(category: string): string {
         </div>
 
         <!-- Enhanced title with better typography -->
-        <h1 class="project-hero-title font-bold text-white mb-6 uppercase leading-[0.92] font-heading">
+        <h1 class="project-hero-title hero-page-title text-white mb-6">
           <span class="block">{titleLine1}</span>
           {titleLine2 && <span class="block mt-1">{titleLine2}</span>}
         </h1>
@@ -516,8 +516,6 @@ function getCategoryIcon(category: string): string {
 
   /* Enhanced title */
   .project-hero-title {
-    font-size: clamp(2.5rem, 5vw, 5.5rem);
-    letter-spacing: -0.02em;
     max-width: 28ch;
     background: linear-gradient(
       135deg,
@@ -533,7 +531,6 @@ function getCategoryIcon(category: string): string {
     filter: drop-shadow(0 4px 20px hsl(0 0% 0% / 0.5));
     display: flex;
     flex-direction: column;
-    line-height: 0.95;
   }
 
   .project-hero-title > span {
