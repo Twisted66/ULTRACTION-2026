@@ -57,12 +57,13 @@ Base route: `/api/jobs`
 - `PATCH /api/jobs?id={jobId}`
   - Auth required.
   - Updates mutable fields.
-- `DELETE /api/jobs?id={jobId}`
+- `DELETE /api/jobs`
   - Auth required.
   - Archives the job (sets `status=closed`) instead of hard-delete.
+  - Provide exactly one selector: `id`, `slug`, or `title`.
   - Requires confirmation guard:
     - `confirm=true` (query) or `confirmArchive=true` (JSON body)
-    - `confirmTitle` must exactly match the current title
+    - `confirmTitle` optional when selector is `slug` or `title` (auto-resolved)
 
 Auth header options for write operations:
 
@@ -112,10 +113,10 @@ curl -X PATCH "http://localhost:4321/api/jobs?id=<JOB_ID>" \
   -d '{"description":"Updated role scope and responsibilities."}'
 ```
 
-Archive (safe delete):
+Archive (safe remove):
 
 ```bash
-curl -X DELETE "http://localhost:4321/api/jobs?id=<JOB_ID>&confirm=true&confirmTitle=<EXACT_JOB_TITLE>" \
+curl -X DELETE "http://localhost:4321/api/jobs?slug=<JOB_SLUG>&confirm=true" \
   -H "Authorization: Bearer $JOBS_API_KEY"
 ```
 
@@ -126,7 +127,7 @@ Recommended action operations:
 1. `listJobs` -> `GET /api/jobs`
 2. `createJob` -> `POST /api/jobs`
 3. `updateJob` -> `PATCH /api/jobs?id={id}`
-4. `archiveJob` -> `DELETE /api/jobs?id={id}&confirm=true&confirmTitle={title}`
+4. `removeJob` -> `DELETE /api/jobs?slug={slug}&confirm=true`
 
 Security requirements:
 
@@ -157,10 +158,10 @@ Recommended exposed actions:
 1. `listJobs`
 2. `createJob`
 3. `updateJob`
-4. `archiveJob`
+4. `removeJob`
 
 For safer production usage, import `docs/CUSTOM_GPT_JOBS_ACTIONS_OPENAPI_STRICT.yaml` and expose only:
 
 1. `listJobs`
 2. `updateJob`
-3. `archiveJob`
+3. `removeJob`

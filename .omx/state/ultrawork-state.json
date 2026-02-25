@@ -1,0 +1,10 @@
+{
+  "active": false,
+  "reinforcement_count": 1,
+  "started_at": "2026-02-22T18:30:00Z",
+  "current_phase": "executing",
+  "task_description": "Implement approved jobs/api/actions plan with Postgres fallback + remove/archive semantics",
+  "iteration": 7,
+  "last_turn_at": "2026-02-22T16:01:35.194Z",
+  "completed_at": "2026-02-22T16:02:23.419Z"
+}

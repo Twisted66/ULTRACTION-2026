@@ -1,0 +1,16 @@
+{
+  "active": false,
+  "mode": "team",
+  "iteration": 0,
+  "max_iterations": 50,
+  "current_phase": "cancelled",
+  "task_description": "Implement the approved Jobs API + Custom GPT Actions plan in this repo end-to-end. Include Postgres-backed canonical jobs datastore with file fallback, archive=status closed semantics, remove hard-delete with confirm flag/title guard, API and OpenAPI/docs parity updates, and full verification (astro check + build). Avoid unrelated files.",
+  "started_at": "2026-02-22T10:18:05.383Z",
+  "tmux_pane_id": "%160",
+  "tmux_pane_set_at": "2026-02-22T10:18:05.384Z",
+  "linked_ralph": false,
+  "team_name": "implement-the-approved-jobs-ap",
+  "agent_count": 3,
+  "agent_types": "executor",
+  "completed_at": "2026-02-22T10:22:50.986Z"
+}

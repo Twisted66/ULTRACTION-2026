@@ -210,8 +210,20 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
         return `
           <li class="border border-primary/15 px-4 py-4">
             <p class="text-sm font-bold uppercase leading-tight">${title}</p>
-            <p class="text-xs uppercase tracking-widest opacity-65 mt-2">${location}${department ? ` • ${department}` : ''}</p>
+            <p class="text-xs uppercase tracking-widest opacity-65 mt-2">${location}${department ? ` - ${department}` : ''}</p>
             <p class="text-[11px] opacity-60 mt-2">Posted: ${postedAt}</p>
+            <p class="text-[11px] opacity-50 mt-1">Slug: ${escapeHtml(job?.slug ?? '-')}</p>
+            <div class="mt-3">
+              <button
+                type="button"
+                data-archive-job="true"
+                data-job-slug="${escapeHtml(job?.slug ?? '')}"
+                data-job-title="${title}"
+                class="border border-red-600/40 text-red-700 px-3 py-2 text-[10px] uppercase tracking-[0.2em] font-bold"
+              >
+                Archive Role
+              </button>
+            </div>
           </li>
         `;
       })
@@ -301,6 +313,61 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
     setStatus('Refreshing open roles...');
     await loadOpenRoles();
     setStatus('Open roles refreshed.');
+  });
+
+  listElement?.addEventListener('click', async (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+
+    const button = target.closest('[data-archive-job="true"]');
+    if (!(button instanceof HTMLButtonElement)) return;
+
+    const apiKey = (apiKeyInput instanceof HTMLInputElement ? apiKeyInput.value : '').trim();
+    if (!apiKey) {
+      setStatus('Missing Jobs API key. Add key first, then archive.', true);
+      return;
+    }
+
+    const slug = (button.dataset.jobSlug ?? '').trim();
+    const title = (button.dataset.jobTitle ?? '').trim();
+    if (!slug) {
+      setStatus('Missing job slug. Refresh roles and try again.', true);
+      return;
+    }
+
+    const approved = window.confirm(`Archive role: ${title || slug}?`);
+    if (!approved) return;
+
+    const previousText = button.textContent;
+    try {
+      button.disabled = true;
+      button.textContent = 'Archiving...';
+      setStatus(`Archiving ${title || slug}...`);
+
+      const response = await fetch(`${endpoint}?slug=${encodeURIComponent(slug)}&confirm=true`, {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${apiKey}`,
+        },
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        const message = payload?.error?.message ?? `Request failed (${response.status})`;
+        throw new Error(message);
+      }
+
+      setStatus(`Archived successfully: ${title || slug}`);
+      await loadOpenRoles();
+    } catch (error) {
+      console.error('Unable to archive job from /careers-admin:', error);
+      const message = error instanceof Error ? error.message : 'Unable to archive role.';
+      setStatus(message, true);
+    } finally {
+      button.disabled = false;
+      button.textContent = previousText ?? 'Archive Role';
+    }
   });
 
   loadOpenRoles();

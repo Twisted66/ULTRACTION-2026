@@ -27,7 +27,7 @@ export default function Globe3DDemo({ className }: Globe3DDemoProps) {
       className={className}
       markers={sampleMarkers}
       config={{
-        radius: 3.2,
+        radius: 4.8,
         atmosphereColor: "#4da6ff",
         atmosphereIntensity: 20,
         bumpScale: 5,
