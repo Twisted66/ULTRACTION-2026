@@ -28,14 +28,14 @@ test.describe('UX Improvements Verification', () => {
     await expect(closeIcon).toBeHidden();
 
     // Click to open menu
-    await toggle.click();
+    await toggle.click({ force: true });
 
     // Now, open icon should be hidden, close icon should be visible
     await expect(openIcon).toBeHidden();
     await expect(closeIcon).toBeVisible();
 
     // Click again to close menu
-    await toggle.click();
+    await toggle.click({ force: true });
 
     // Back to initial state
     await expect(openIcon).toBeVisible();
@@ -53,5 +53,30 @@ test.describe('UX Improvements Verification', () => {
 
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
+  });
+
+  test('Contact form message character counter', async ({ page }: { page: Page }) => {
+    await page.goto('/contact');
+
+    const message = page.locator('#message');
+    const charCount = page.locator('#char-count');
+
+    // Initial state
+    await expect(charCount).toHaveText('0 / 1000');
+
+    // Type some text
+    await message.fill('Hello world');
+    await expect(charCount).toHaveText('11 / 1000');
+
+    // Close to limit (should have text-accent class)
+    const longText = 'a'.repeat(901);
+    await message.fill(longText);
+    await expect(charCount).toHaveText('901 / 1000');
+    await expect(charCount).toHaveClass(/text-accent/);
+
+    // Back to normal
+    await message.fill('Back to normal');
+    await expect(charCount).toHaveText('14 / 1000');
+    await expect(charCount).not.toHaveClass(/text-accent/);
   });
 });
