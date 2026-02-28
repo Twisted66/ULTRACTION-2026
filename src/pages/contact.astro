@@ -97,7 +97,10 @@ const messagePlaceholder =
                    Message <span class="text-accent">*</span>
                  </span>
                </label>
-               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true"></textarea>
+               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true" maxlength="5000" aria-describedby="message-counter"></textarea>
+               <div id="message-counter" class="text-xs uppercase tracking-widest mt-2 opacity-50 font-bold transition-colors duration-300" aria-live="polite">
+                 0 / 5000 characters
+               </div>
             </div>
 
             <div class="group">
@@ -327,6 +330,23 @@ const messagePlaceholder =
     const fileNameDisplay = document.getElementById('file-name');
     const roleFromQuery = form.dataset.role?.trim() ?? '';
 
+    const messageCounter = document.getElementById('message-counter');
+    const MAX_LENGTH = 5000;
+
+    const updateMessageCounter = () => {
+      if (!(messageInput instanceof HTMLTextAreaElement) || !(messageCounter instanceof HTMLElement)) return;
+      const currentLength = messageInput.value.length;
+      messageCounter.textContent = `${currentLength} / ${MAX_LENGTH} characters`;
+
+      if (currentLength >= MAX_LENGTH * 0.9) {
+        messageCounter.classList.add('text-accent');
+        messageCounter.classList.remove('opacity-50');
+      } else {
+        messageCounter.classList.remove('text-accent');
+        messageCounter.classList.add('opacity-50');
+      }
+    };
+
     const prefillCareerApplicationMessage = () => {
       if (!(subjectSelect instanceof HTMLSelectElement) || !(messageInput instanceof HTMLTextAreaElement)) return;
       if (subjectSelect.value !== 'careers' || !roleFromQuery || messageInput.value.trim()) return;
@@ -336,9 +356,14 @@ const messagePlaceholder =
         'Current location:\n' +
         'Availability:\n' +
         'CV/Portfolio link:\n';
+      updateMessageCounter();
     };
 
     prefillCareerApplicationMessage();
+    updateMessageCounter();
+    if (messageInput instanceof HTMLTextAreaElement) {
+      messageInput.addEventListener('input', updateMessageCounter);
+    }
     if (subjectSelect instanceof HTMLSelectElement) {
       subjectSelect.addEventListener('change', prefillCareerApplicationMessage);
     }

@@ -54,4 +54,22 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Contact form has character counter', async ({ page }: { page: Page }) => {
+    await page.goto('/contact');
+
+    const textarea = page.locator('#message');
+    const counter = page.locator('#message-counter');
+
+    await expect(counter).toHaveText('0 / 5000 characters');
+
+    await textarea.fill('Hello World');
+    await expect(counter).toHaveText('11 / 5000 characters');
+
+    // Test near limit (90% of 5000 is 4500)
+    const longText = 'a'.repeat(4501);
+    await textarea.fill(longText);
+    await expect(counter).toHaveText('4501 / 5000 characters');
+    await expect(counter).toHaveClass(/text-accent/);
+  });
 });
