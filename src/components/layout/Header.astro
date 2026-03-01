@@ -211,7 +211,7 @@ const isActive = (href: string) => {
     const bodyChildren = Array.from(document.body.children);
 
     bodyChildren.forEach((element) => {
-      if (element === siteHeader) return;
+      if (element === siteHeader || element.contains(siteHeader)) return;
 
       if (isOpen) {
         element.setAttribute('inert', '');
