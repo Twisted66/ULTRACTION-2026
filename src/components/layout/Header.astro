@@ -208,10 +208,14 @@ const isActive = (href: string) => {
 
   function setBackgroundInert(isOpen: boolean) {
     if (!siteHeader) return;
+
+    // 1. Handle siblings of the app-container or header at the body level
+    const appContainer = document.querySelector('.app-container');
     const bodyChildren = Array.from(document.body.children);
 
     bodyChildren.forEach((element) => {
-      if (element === siteHeader) return;
+      // Don't make the header or its parent container inert
+      if (element === siteHeader || element === appContainer || element.contains(siteHeader)) return;
 
       if (isOpen) {
         element.setAttribute('inert', '');
@@ -221,6 +225,22 @@ const isActive = (href: string) => {
         element.removeAttribute('aria-hidden');
       }
     });
+
+    // 2. Handle siblings of the header inside the app-container
+    if (appContainer && appContainer.contains(siteHeader)) {
+      const containerChildren = Array.from(appContainer.children);
+      containerChildren.forEach((element) => {
+        if (element === siteHeader || element.contains(siteHeader)) return;
+
+        if (isOpen) {
+          element.setAttribute('inert', '');
+          element.setAttribute('aria-hidden', 'true');
+        } else {
+          element.removeAttribute('inert');
+          element.removeAttribute('aria-hidden');
+        }
+      });
+    }
   }
 
   function closeMobileMenu() {

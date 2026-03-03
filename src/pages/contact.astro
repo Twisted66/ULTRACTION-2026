@@ -97,7 +97,8 @@ const messagePlaceholder =
                    Message <span class="text-accent">*</span>
                  </span>
                </label>
-               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true"></textarea>
+               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true" aria-describedby="message-counter" maxlength="5000"></textarea>
+               <div id="message-counter" class="text-[10px] uppercase tracking-widest mt-2 text-right opacity-50 font-bold" aria-live="polite">0 / 5000</div>
             </div>
 
             <div class="group">
@@ -327,6 +328,23 @@ const messagePlaceholder =
     const fileNameDisplay = document.getElementById('file-name');
     const roleFromQuery = form.dataset.role?.trim() ?? '';
 
+    // Character counter for message field
+    const counterDisplay = document.getElementById('message-counter');
+    const updateCounter = () => {
+      if (!(messageInput instanceof HTMLTextAreaElement) || !counterDisplay) return;
+      const length = messageInput.value.length;
+      counterDisplay.textContent = `${length} / 5000`;
+
+      // Apply warning style at 90% (4500 chars)
+      if (length >= 4500) {
+        counterDisplay.classList.add('text-accent');
+        counterDisplay.classList.remove('opacity-50');
+      } else {
+        counterDisplay.classList.remove('text-accent');
+        counterDisplay.classList.add('opacity-50');
+      }
+    };
+
     const prefillCareerApplicationMessage = () => {
       if (!(subjectSelect instanceof HTMLSelectElement) || !(messageInput instanceof HTMLTextAreaElement)) return;
       if (subjectSelect.value !== 'careers' || !roleFromQuery || messageInput.value.trim()) return;
@@ -336,11 +354,19 @@ const messagePlaceholder =
         'Current location:\n' +
         'Availability:\n' +
         'CV/Portfolio link:\n';
+      // Sync counter after pre-fill
+      updateCounter();
     };
 
     prefillCareerApplicationMessage();
     if (subjectSelect instanceof HTMLSelectElement) {
       subjectSelect.addEventListener('change', prefillCareerApplicationMessage);
+    }
+
+    if (messageInput instanceof HTMLTextAreaElement && counterDisplay) {
+      messageInput.addEventListener('input', updateCounter);
+      // Initial call
+      updateCounter();
     }
 
     // Display selected file name

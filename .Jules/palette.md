@@ -19,3 +19,7 @@
 ## 2026-02-14 - Interactive Navigation Feedback and Component Extensibility
 **Learning:** Mobile menu toggles that don't change their icon (e.g., staying as a hamburger when open) fail to provide immediate visual confirmation of the menu state. Additionally, internal UI components like 'MagneticButton' must support attribute spreading to allow developers to inject critical accessibility attributes (like aria-label) without modifying the base component.
 **Action:** Ensure all toggle interactions have distinct visual states (icons/colors) and ensure all base UI components spread '...rest' props to their root interactive element.
+
+## 2026-02-14 - Robust Inert Attributes and Syncing Input Counters
+**Learning:** When using the 'inert' attribute to manage background interaction for overlays like mobile menus, the exclusion logic must explicitly account for parent containers (e.g., '.app-container') to prevent the entire UI from becoming non-interactive. Additionally, real-time character counters for textareas must be manually triggered after any programmatic value changes (e.g., form pre-filling) to ensure the visual counter remains synchronized with the actual input.
+**Action:** Target only siblings or non-ancestor elements when applying 'inert' and ensure counter update functions are callable by both user events and pre-fill logic.
