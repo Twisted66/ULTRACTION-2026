@@ -18,6 +18,7 @@ pnpm-debug.log*
 test-results/
 .claude/
 ultraction-cpanel-dist.zip
+ultraction-cpanel-static.zip
 
 
 # environment variables
