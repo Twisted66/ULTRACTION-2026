@@ -399,23 +399,22 @@ const description = 'Premium construction and contracting services in UAE';
 <style>
   html.has-scroll-reveal .reveal-service-row {
     opacity: 0;
-    transform: translate3d(var(--reveal-shift-x, 0), 0, 0);
-    transition: opacity var(--motion-duration-medium) var(--motion-ease-emphasized),
-      transform var(--motion-duration-medium) var(--motion-ease-emphasized);
+    transform: translate3d(var(--reveal-shift-x, 0), 0, 0) scale(0.985);
+    transition:
+      opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
   }
 
   html.has-scroll-reveal .reveal-service-row.is-visible {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) scale(1);
   }
 
   @media (prefers-reduced-motion: reduce) {
     html.has-scroll-reveal .reveal-service-row,
     html.has-scroll-reveal .reveal-service-row.is-visible {
-      opacity: 1 !important;
-      transform: none !important;
-      transition: none !important;
+      transition-duration: 160ms !important;
     }
   }
 </style>
@@ -425,13 +424,19 @@ const description = 'Premium construction and contracting services in UAE';
     const rows = Array.from(document.querySelectorAll('.reveal-service-row'));
     if (!rows.length) return;
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) {
-      rows.forEach((row) => row.classList.add('is-visible'));
-      return;
-    }
-
     document.documentElement.classList.add('has-scroll-reveal');
+
+    // Ensure consistent initial state on each page load.
+    rows.forEach((row, index) => {
+      const isLeft = index % 2 === 0;
+      row.setAttribute('data-reveal-index', String(index));
+      row.setAttribute('data-reveal-side', isLeft ? 'left' : 'right');
+      row.style.setProperty('--reveal-shift-x', isLeft ? '-72px' : '72px');
+      row.classList.remove('is-visible');
+    });
+
+    const existingObserver = window.__servicesRevealObserver;
+    if (existingObserver) existingObserver.disconnect();
 
     const observer = new IntersectionObserver(
       (entries, obs) => {
@@ -445,24 +450,35 @@ const description = 'Premium construction and contracting services in UAE';
           obs.unobserve(element);
         });
       },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+      { rootMargin: '0px 0px -4% 0px', threshold: 0.35 }
     );
 
     rows.forEach((row, index) => {
-      row.setAttribute('data-reveal-index', String(index));
-      const isLeft = index % 2 === 0;
-      row.setAttribute('data-reveal-side', isLeft ? 'left' : 'right');
-      row.style.setProperty('--reveal-shift-x', isLeft ? '-56px' : '56px');
-      if (!row.classList.contains('is-visible')) {
-        observer.observe(row);
+      const rect = row.getBoundingClientRect();
+      const inInitialViewport = rect.top < window.innerHeight * 0.92;
+
+      if (inInitialViewport) {
+        window.setTimeout(() => row.classList.add('is-visible'), Math.min(index * 40, 180));
+        return;
       }
+
+      observer.observe(row);
     });
+
+    window.__servicesRevealObserver = observer;
+
+    // Safety net: never leave rows hidden if observer misses an entry.
+    window.setTimeout(() => {
+      rows.forEach((row) => row.classList.add('is-visible'));
+      observer.disconnect();
+    }, 1800);
   };
 
-  if (!(window).__servicesRevealListenersBound) {
+  const listenersBound = window.__servicesRevealListenersBound;
+  if (!listenersBound) {
     document.addEventListener('DOMContentLoaded', initServicesReveal);
     document.addEventListener('astro:page-load', initServicesReveal);
-    (window).__servicesRevealListenersBound = true;
+    window.__servicesRevealListenersBound = true;
   }
 
   initServicesReveal();
