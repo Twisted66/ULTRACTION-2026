@@ -11,29 +11,57 @@ export const CoreValuesVideoPlayer: React.FC = () => {
     const playerRef = useRef<PlayerRef>(null);
     const [dims, setDims] = useState({ width: 1920, height: 1080 });
 
-    // Compute player size to cover the container (CSS object-fit: cover logic)
+    // Compute player size based on container.
+    // Desktop keeps "cover" behavior; small viewports switch to "contain"
+    // so composition text stays readable without aggressive cropping.
     useEffect(() => {
         const update = () => {
             if (!containerRef.current) return;
-            const { clientWidth: cw, clientHeight: ch } = containerRef.current;
+            const { clientWidth: cw, clientHeight: chRaw } = containerRef.current;
+            if (cw === 0) return;
+            // If layout is still settling and height is 0, fall back to 16:9
+            // so the player can render immediately and recover on next resize tick.
+            const ch = chRaw > 0 ? chRaw : Math.max(1, Math.round(cw / (16 / 9)));
             const compositionAspect = 1920 / 1080;
             const containerAspect = cw / ch;
             let w: number, h: number;
-            if (containerAspect > compositionAspect) {
-                // Container is wider → fit width, overflow height
-                w = cw;
-                h = cw / compositionAspect;
+            const useContain = cw < 768;
+            if (useContain) {
+                if (containerAspect > compositionAspect) {
+                    h = ch;
+                    w = ch * compositionAspect;
+                } else {
+                    w = cw;
+                    h = cw / compositionAspect;
+                }
             } else {
-                // Container is taller → fit height, overflow width
-                h = ch;
-                w = ch * compositionAspect;
+                if (containerAspect > compositionAspect) {
+                    // Container is wider -> fit width, overflow height
+                    w = cw;
+                    h = cw / compositionAspect;
+                } else {
+                    // Container is taller -> fit height, overflow width
+                    h = ch;
+                    w = ch * compositionAspect;
+                }
             }
             setDims({ width: Math.round(w), height: Math.round(h) });
         };
         update();
-        const ro = new ResizeObserver(update);
-        if (containerRef.current) ro.observe(containerRef.current);
-        return () => ro.disconnect();
+        let ro: ResizeObserver | null = null;
+        if ('ResizeObserver' in window) {
+            ro = new ResizeObserver(update);
+            if (containerRef.current) ro.observe(containerRef.current);
+        } else {
+            window.addEventListener('resize', update);
+        }
+        return () => {
+            if (ro) {
+                ro.disconnect();
+            } else {
+                window.removeEventListener('resize', update);
+            }
+        };
     }, []);
 
     return (
@@ -43,6 +71,7 @@ export const CoreValuesVideoPlayer: React.FC = () => {
                 position: 'relative',
                 width: '100%',
                 height: '100%',
+                minHeight: 320,
                 overflow: 'hidden',
                 backgroundColor: '#0d0d0d',
             }}
@@ -68,6 +97,7 @@ export const CoreValuesVideoPlayer: React.FC = () => {
                 controls={false}
                 allowFullscreen={false}
                 clickToPlay={false}
+                acknowledgeRemotionLicense
             />
             {/* Decorative accent lines */}
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: 'linear-gradient(to right, transparent, hsl(var(--accent)), transparent)', opacity: 0.5, zIndex: 10 }} />

@@ -1,0 +1,14 @@
+{
+  "collection": "ultraction_site",
+  "last_updated": 1772632146.8766108,
+  "files": {
+    "src/remotion/CoreValuesVideoPlayer.tsx": {
+      "path": "src/remotion/CoreValuesVideoPlayer.tsx",
+      "last_indexed": 1772632146.8139167,
+      "content_hash": "",
+      "chunk_count": 0,
+      "chunk_hashes": [],
+      "git_commit": "a1f1695748d16e5653a2e77f978bd4081cf8cdeb"
+    }
+  }
+}
