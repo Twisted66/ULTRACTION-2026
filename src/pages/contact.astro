@@ -25,10 +25,10 @@ const messagePlaceholder =
   description={description}
   image="/logo/UGC-HEADER.png"
 >
-  <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-104px)] border-t border-border">
+  <div class="grid grid-cols-1 xl:grid-cols-2 min-h-[calc(100vh-72px)] xl:min-h-[calc(100vh-104px)] border-t border-border">
       
       <!-- Left: Form (Brand Beige) -->
-      <div class="bg-surface text-primary p-8 lg:p-20 flex flex-col justify-center order-2 lg:order-1 relative z-10 border-r border-primary/20 overflow-hidden">
+      <div class="bg-surface text-primary p-8 lg:p-20 flex flex-col justify-center order-2 xl:order-1 relative z-10 xl:border-r border-primary/20 overflow-hidden">
         {/* Grid pattern overlay */}
         <div class="absolute inset-0 pointer-events-none opacity-[0.03]" style={{
           backgroundImage: `
@@ -143,9 +143,11 @@ const messagePlaceholder =
       </div>
 
       <!-- Right: Globe (Default Background) -->
-      <div class="bg-background relative min-h-[50vh] lg:min-h-screen order-1 lg:order-2 overflow-hidden flex items-start justify-center pt-10">
-          <div class="absolute inset-0 z-0 flex items-center justify-center">
-               <Globe3DDemo client:only="react" showOfficeMarkers={false} className="h-[clamp(550px,80vh,900px)] w-[min(150%,1100px)] -translate-y-56 lg:-translate-y-72" />
+      <div class="bg-background relative isolate z-0 min-h-[50vh] xl:min-h-screen order-1 xl:order-2 overflow-hidden flex flex-col">
+          <div class="relative z-0 h-[44vh] sm:h-[52vh] md:h-[58vh] xl:h-[62vh] overflow-hidden border-b border-primary/10">
+            <div class="absolute inset-0 flex items-center justify-center">
+                 <Globe3DDemo client:only="react" showOfficeMarkers={false} className="h-[clamp(360px,56vh,900px)] sm:h-[clamp(420px,64vh,900px)] xl:h-[clamp(520px,72vh,920px)] w-[min(135%,980px)] sm:w-[min(145%,1100px)] translate-y-8 sm:translate-y-2 xl:-translate-y-6 2xl:-translate-y-16" />
+            </div>
           </div>
 
           {/* Grid pattern overlay */}
@@ -159,13 +161,14 @@ const messagePlaceholder =
 
           {/* Animated gradient accent */}
           <div class="absolute top-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+          <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent pointer-events-none z-10"></div>
 
-          <!-- Location Overlay -->
+          <!-- Location Card -->
           <div
-            class="absolute bottom-20 left-6 right-6 xl:bottom-12 xl:left-12 xl:right-12 z-20 pointer-events-none"
+            class="relative z-20 px-4 sm:px-6 xl:px-10 py-6 xl:py-8 pointer-events-none"
             aria-labelledby="contact-locations"
           >
-            <div class="text-primary pointer-events-auto bg-surface/90 backdrop-blur-xl border border-border w-full max-w-[900px] overflow-hidden rounded-none">
+            <div class="text-primary pointer-events-auto bg-surface/95 backdrop-blur-xl border border-border w-full max-w-[920px] overflow-hidden rounded-none mx-auto shadow-[0_24px_60px_rgba(0,0,0,0.28)]">
               <div class="bg-accent px-8 py-4">
                 <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-white">Main Headquarters</h3>
               </div>

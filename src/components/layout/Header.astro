@@ -11,13 +11,13 @@ const isActive = (href: string) => {
 <header id="site-header" class="w-full border-b border-border fixed top-0 left-0 right-0 z-50 bg-background">
   <div class="flex flex-nowrap">
     <!-- Logo - Left Side -->
-    <div class="w-full md:w-96 px-6 py-3 md:px-12 md:py-5 flex items-center justify-between">
-      <a href="/" class="font-bold text-lg tracking-wide uppercase flex items-center gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-        <img src="/logo/UGC-HEADER.png" alt="ULTRACTION" class="h-12 md:h-16 w-auto" />
+    <div class="w-full xl:w-96 px-4 py-2 sm:px-6 sm:py-3 xl:px-12 xl:py-5 flex items-center justify-between gap-3">
+      <a href="/" class="font-bold text-lg tracking-wide uppercase flex items-center gap-3 min-w-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <img src="/logo/UGC-HEADER.png" alt="ULTRACTION" class="h-10 sm:h-12 xl:h-16 w-auto max-w-[220px] sm:max-w-[280px] xl:max-w-none object-contain" />
       </a>
       <button
         id="mobile-menu-toggle"
-        class="md:hidden text-foreground p-2 min-h-[44px] min-w-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        class="lg:hidden text-foreground p-2 min-h-[44px] min-w-[44px] shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         aria-label="Open navigation menu"
         aria-controls="mobile-nav"
         aria-expanded="false"
@@ -32,27 +32,27 @@ const isActive = (href: string) => {
     </div>
 
     <!-- Spacer to push nav to the right -->
-    <div class="hidden md:flex flex-1"></div>
+    <div class="hidden lg:flex flex-1"></div>
 
     <!-- Right Navigation - All links -->
-    <div class="hidden md:flex">
-      <a href="/" aria-current={isActive('/') ? 'page' : undefined} class="px-8 lg:px-12 py-6 text-foreground hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+    <div class="hidden lg:flex">
+      <a href="/" aria-current={isActive('/') ? 'page' : undefined} class="px-6 2xl:px-12 py-6 text-foreground hover:bg-primary/10 transition-colors flex items-center justify-between gap-3 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">HOME</span>
         <span class={`w-1.5 h-1.5 rounded-full bg-primary group-hover:opacity-100 transition-opacity ${isActive('/') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
-      <a href="/about" aria-current={isActive('/about') ? 'page' : undefined} class="px-8 lg:px-12 py-6 text-foreground hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/about" aria-current={isActive('/about') ? 'page' : undefined} class="px-6 2xl:px-12 py-6 text-foreground hover:bg-primary/10 transition-colors flex items-center justify-between gap-3 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">ABOUT US</span>
         <span class={`w-1.5 h-1.5 rounded-full bg-primary group-hover:opacity-100 transition-opacity ${isActive('/about') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
-      <a href="/services" aria-current={isActive('/services') ? 'page' : undefined} class="px-8 lg:px-12 py-6 text-foreground hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/services" aria-current={isActive('/services') ? 'page' : undefined} class="px-6 2xl:px-12 py-6 text-foreground hover:bg-primary/10 transition-colors flex items-center justify-between gap-3 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">SERVICES</span>
         <span class={`w-1.5 h-1.5 rounded-full bg-primary group-hover:opacity-100 transition-opacity ${isActive('/services') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
-      <a href="/projects" aria-current={isActive('/projects') ? 'page' : undefined} class="px-8 lg:px-12 py-6 text-foreground hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/projects" aria-current={isActive('/projects') ? 'page' : undefined} class="px-6 2xl:px-12 py-6 text-foreground hover:bg-primary/10 transition-colors flex items-center justify-between gap-3 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">PROJECTS</span>
         <span class={`w-1.5 h-1.5 rounded-full bg-primary group-hover:opacity-100 transition-opacity ${isActive('/projects') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
-      <a href="/contact" aria-current={isActive('/contact') ? 'page' : undefined} class="px-8 lg:px-12 py-6 text-foreground hover:bg-primary/10 transition-colors flex items-center justify-between gap-4 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <a href="/contact" aria-current={isActive('/contact') ? 'page' : undefined} class="px-6 2xl:px-12 py-6 text-foreground hover:bg-primary/10 transition-colors flex items-center justify-between gap-3 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         <span class="font-bold tracking-tight text-sm lg:text-base">CONTACT</span>
         <span class={`w-1.5 h-1.5 rounded-full bg-primary group-hover:opacity-100 transition-opacity ${isActive('/contact') ? 'opacity-100' : 'opacity-0'}`}></span>
       </a>
@@ -60,8 +60,8 @@ const isActive = (href: string) => {
   </div>
 
   <!-- Mobile Navigation Menu -->
-  <nav id="mobile-nav" class="hidden md:hidden fixed inset-0 z-40 bg-background border-t border-border top-[72px]" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
-    <div class="flex flex-col h-full overflow-y-auto max-h-[calc(100vh-72px)]">
+  <nav id="mobile-nav" class="hidden lg:hidden fixed inset-x-0 bottom-0 z-40 bg-background border-t border-border" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
+    <div class="flex flex-col h-full overflow-y-auto">
       <a href="/" aria-current={isActive('/') ? 'page' : undefined} class={`flex items-center justify-between px-6 min-h-[44px] transition-colors font-medium border-b border-border/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isActive('/') ? 'bg-primary/5 text-accent' : 'text-foreground hover:bg-primary/10'}`}>
         <span>HOME</span>
         <svg class={`w-4 h-4 ${isActive('/') ? 'text-accent' : 'text-foreground'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
@@ -87,143 +87,145 @@ const isActive = (href: string) => {
 </header>
 
 <script>
-  // Mobile menu toggle functionality
-  const toggle = document.getElementById('mobile-menu-toggle');
-  const mobileNav = document.getElementById('mobile-nav');
-  const siteHeader = document.getElementById('site-header');
-  let lastFocusedElement: HTMLElement | null = null;
+  type HeaderCleanup = (() => void) | undefined;
+  type HeaderState = { cleanup?: HeaderCleanup };
 
-  function setMobileMenuState(isOpen: boolean) {
-    if (!toggle || !mobileNav) return;
-
+  function initHeaderMenu() {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    const siteHeader = document.getElementById('site-header');
     const hamburgerIcon = document.getElementById('hamburger-icon');
     const closeIcon = document.getElementById('close-icon');
 
-    toggle.setAttribute('aria-expanded', String(isOpen));
-    toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
-    mobileNav.classList.toggle('hidden', !isOpen);
-    mobileNav.setAttribute('aria-hidden', String(!isOpen));
+    if (!(toggle instanceof HTMLButtonElement) || !(mobileNav instanceof HTMLElement)) return;
 
-    if (hamburgerIcon && closeIcon) {
-      hamburgerIcon.classList.toggle('hidden', isOpen);
-      closeIcon.classList.toggle('hidden', !isOpen);
-    }
+    const setMobileNavOffset = () => {
+      const headerHeight = siteHeader?.offsetHeight ?? 72;
+      mobileNav.style.top = `${headerHeight}px`;
+      mobileNav.style.maxHeight = `calc(100vh - ${headerHeight}px)`;
+    };
 
-    setBackgroundInert(isOpen);
+    let lastFocusedElement: HTMLElement | null = null;
 
-    // Prevent body scroll when menu is open
-    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+    const getFocusableElements = (container: HTMLElement) => {
+      const selectors = [
+        'a[href]',
+        'button:not([disabled])',
+        'textarea:not([disabled])',
+        'input:not([disabled])',
+        'select:not([disabled])',
+        '[tabindex]:not([tabindex="-1"])'
+      ];
+      return Array.from(container.querySelectorAll<HTMLElement>(selectors.join(','))).filter((el) => {
+        return !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true';
+      });
+    };
 
-    if (isOpen) {
-      const focusTargets = getFocusableElements(mobileNav);
-      window.requestAnimationFrame(() => {
-        const firstTarget = focusTargets[0];
-        if (firstTarget) {
-          firstTarget.focus();
+    const setBackgroundInert = (isOpen: boolean) => {
+      if (!siteHeader) return;
+      Array.from(document.body.children).forEach((element) => {
+        if (element === siteHeader) return;
+        if (isOpen) {
+          element.setAttribute('inert', '');
+          element.setAttribute('aria-hidden', 'true');
+        } else {
+          element.removeAttribute('inert');
+          element.removeAttribute('aria-hidden');
         }
       });
-    } else {
-      const focusRestoreTarget =
-        lastFocusedElement && document.contains(lastFocusedElement) ? lastFocusedElement : toggle;
-      window.requestAnimationFrame(() => {
-        if (focusRestoreTarget instanceof HTMLElement) {
-          focusRestoreTarget.focus();
-        }
-      });
-    }
-  }
+    };
 
-  toggle?.addEventListener('click', () => {
-    if (document.activeElement instanceof HTMLElement) {
-      lastFocusedElement = document.activeElement;
-    }
-    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-    setMobileMenuState(!isExpanded);
-  });
+    const setMobileMenuState = (isOpen: boolean) => {
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      mobileNav.classList.toggle('hidden', !isOpen);
+      mobileNav.setAttribute('aria-hidden', String(!isOpen));
 
-  // Close mobile nav when clicking a link
-  const mobileLinks = mobileNav?.querySelectorAll('a');
-  mobileLinks?.forEach((link) => {
-    link.addEventListener('click', () => {
-      setMobileMenuState(false);
-    });
-  });
+      if (hamburgerIcon && closeIcon) {
+        hamburgerIcon.classList.toggle('hidden', isOpen);
+        closeIcon.classList.toggle('hidden', !isOpen);
+      }
 
-  // Close mobile nav when clicking outside or pressing Escape
-  document.addEventListener('click', (e) => {
-    if (toggle && mobileNav && e.target instanceof HTMLElement && !toggle.contains(e.target) && !mobileNav.contains(e.target)) {
-      closeMobileMenu();
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeMobileMenu();
-      return;
-    }
-
-    if (e.key === 'Tab' && toggle?.getAttribute('aria-expanded') === 'true' && mobileNav instanceof HTMLElement) {
-      trapMobileMenuFocus(e);
-    }
-  });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 768) {
-      closeMobileMenu();
-    }
-  });
-
-  function getFocusableElements(container: HTMLElement) {
-    const selectors = [
-      'a[href]',
-      'button:not([disabled])',
-      'textarea:not([disabled])',
-      'input:not([disabled])',
-      'select:not([disabled])',
-      '[tabindex]:not([tabindex="-1"])'
-    ];
-
-    return Array.from(container.querySelectorAll<HTMLElement>(selectors.join(','))).filter((el) => {
-      return !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true';
-    });
-  }
-
-  function trapMobileMenuFocus(event: KeyboardEvent) {
-    if (!(mobileNav instanceof HTMLElement)) return;
-    const focusable = getFocusableElements(mobileNav);
-    if (focusable.length === 0) return;
-
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    const activeElement = document.activeElement;
-
-    if (event.shiftKey && activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  }
-
-  function setBackgroundInert(isOpen: boolean) {
-    if (!siteHeader) return;
-    const bodyChildren = Array.from(document.body.children);
-
-    bodyChildren.forEach((element) => {
-      if (element === siteHeader) return;
+      setBackgroundInert(isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
 
       if (isOpen) {
-        element.setAttribute('inert', '');
-        element.setAttribute('aria-hidden', 'true');
+        const first = getFocusableElements(mobileNav)[0];
+        if (first) requestAnimationFrame(() => first.focus());
       } else {
-        element.removeAttribute('inert');
-        element.removeAttribute('aria-hidden');
+        const fallback = lastFocusedElement && document.contains(lastFocusedElement) ? lastFocusedElement : toggle;
+        requestAnimationFrame(() => fallback.focus());
       }
-    });
+    };
+
+    const closeMobileMenu = () => setMobileMenuState(false);
+
+    const onToggleClick = () => {
+      if (document.activeElement instanceof HTMLElement) {
+        lastFocusedElement = document.activeElement;
+      }
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      setMobileMenuState(!isExpanded);
+    };
+
+    const onDocumentClick = (e: MouseEvent) => {
+      if (!(e.target instanceof HTMLElement)) return;
+      if (!toggle.contains(e.target) && !mobileNav.contains(e.target)) {
+        closeMobileMenu();
+      }
+    };
+
+    const onDocumentKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeMobileMenu();
+        return;
+      }
+      if (e.key !== 'Tab' || toggle.getAttribute('aria-expanded') !== 'true') return;
+
+      const focusable = getFocusableElements(mobileNav);
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    const onResize = () => {
+      setMobileNavOffset();
+      if (window.innerWidth >= 1024) closeMobileMenu();
+    };
+
+    setMobileNavOffset();
+    toggle.addEventListener('click', onToggleClick);
+    document.addEventListener('click', onDocumentClick);
+    document.addEventListener('keydown', onDocumentKeyDown);
+    window.addEventListener('resize', onResize);
+    mobileNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMobileMenu));
+
+    return () => {
+      toggle.removeEventListener('click', onToggleClick);
+      document.removeEventListener('click', onDocumentClick);
+      document.removeEventListener('keydown', onDocumentKeyDown);
+      window.removeEventListener('resize', onResize);
+      mobileNav.querySelectorAll('a').forEach((link) => link.removeEventListener('click', closeMobileMenu));
+      closeMobileMenu();
+    };
   }
 
-  function closeMobileMenu() {
-    setMobileMenuState(false);
-  }
+  const headerStateKey = '__ultractionHeaderMenuState';
+  const headerState = (window as unknown as Record<string, HeaderState>)[headerStateKey] ?? {};
+  headerState.cleanup?.();
+  headerState.cleanup = initHeaderMenu();
+  (window as unknown as Record<string, HeaderState>)[headerStateKey] = headerState;
+
+  document.addEventListener('astro:before-swap', () => {
+    headerState.cleanup?.();
+    headerState.cleanup = undefined;
+  }, { once: true });
 </script>
