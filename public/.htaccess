@@ -25,15 +25,16 @@
   Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
 
   # Content Security Policy
-  # Allows: self, Google Fonts, inline styles/scripts (Astro uses inline), videos, images
+  # Allows: site assets, Google Fonts, Google Maps iframe embeds, globe texture CDN
   Header always set Content-Security-Policy "\
 default-src 'self'; \
 script-src 'self' 'unsafe-inline'; \
 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
 font-src 'self' https://fonts.gstatic.com data:; \
-img-src 'self' data: blob:; \
+img-src 'self' data: blob: https://unpkg.com https://*.google.com https://*.gstatic.com; \
 media-src 'self' blob:; \
 connect-src 'self'; \
+frame-src https://www.google.com https://maps.google.com; \
 frame-ancestors 'self'; \
 base-uri 'self'; \
 form-action 'self'"

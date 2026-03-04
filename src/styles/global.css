@@ -343,6 +343,49 @@
     transition-property: opacity, background-color;
   }
 
+  .motion-reveal {
+    opacity: 0;
+    transform: translate3d(0, 1.25rem, 0);
+    transition-property: opacity, transform;
+    transition-duration: var(--motion-duration-medium);
+    transition-timing-function: var(--motion-ease-emphasized);
+    will-change: opacity, transform;
+  }
+
+  .motion-reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .motion-reveal-x {
+    opacity: 0;
+    transform: translate3d(1.25rem, 0, 0);
+    transition-property: opacity, transform;
+    transition-duration: var(--motion-duration-medium);
+    transition-timing-function: var(--motion-ease-emphasized);
+    will-change: opacity, transform;
+  }
+
+  .motion-reveal-x.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .motion-stagger > * {
+    opacity: 0;
+    transform: translate3d(0, 0.875rem, 0);
+    transition-property: opacity, transform;
+    transition-duration: var(--motion-duration-base);
+    transition-timing-function: var(--motion-ease-standard);
+    transition-delay: calc(var(--motion-stagger-step, 70ms) * var(--motion-item-index, 0));
+    will-change: opacity, transform;
+  }
+
+  .motion-stagger.is-visible > * {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
   /* Grid border utilities (PROMINENT) */
   .grid-border-r {
     border-right: 1px solid currentColor;
@@ -432,11 +475,21 @@
   .project-overlay,
   .project-card img,
   .media-motion,
-  .overlay-motion {
+  .overlay-motion,
+  .motion-reveal,
+  .motion-reveal-x,
+  .motion-stagger > * {
     transition: none !important;
   }
 
-  .project-card:hover img {
+  .project-card:hover img,
+  .motion-reveal,
+  .motion-reveal.is-visible,
+  .motion-reveal-x,
+  .motion-reveal-x.is-visible,
+  .motion-stagger > *,
+  .motion-stagger.is-visible > * {
+    opacity: 1 !important;
     transform: none !important;
   }
 

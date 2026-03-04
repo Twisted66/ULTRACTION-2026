@@ -7,7 +7,14 @@ import { getCollection } from 'astro:content';
 import SectionBackground from '../../components/common/SectionBackground.tsx';
 import * as newsStore from '../../lib/news-store';
 
-export const prerender = false;
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const markdownPosts = await getCollection('blog');
+  return markdownPosts
+    .filter((post) => post.slug !== 'example-post')
+    .map((post) => ({ params: { slug: post.slug } }));
+}
 
 type RuntimeNewsRecord = {
   slug?: unknown;
