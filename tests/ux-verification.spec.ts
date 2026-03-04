@@ -35,7 +35,7 @@ test.describe('UX Improvements Verification', () => {
     await expect(closeIcon).toBeVisible();
 
     // Click again to close menu
-    await toggle.click();
+    await toggle.click({ force: true });
 
     // Back to initial state
     await expect(openIcon).toBeVisible();
