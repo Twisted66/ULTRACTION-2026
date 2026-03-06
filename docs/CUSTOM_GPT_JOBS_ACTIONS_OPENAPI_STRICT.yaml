@@ -1,10 +1,17 @@
 openapi: 3.0.3
 info:
   title: ULTRACTION Jobs API for Custom GPT Actions (Strict)
+<<<<<<< HEAD
   version: 1.2.0
   description: >
     Restricted Actions spec exposing list, update, and archive operations for
     safer production usage.
+=======
+  version: 1.1.0
+  description: >
+    Restricted Actions spec exposing list, create, update, and remove/archive
+    operations for safer production usage.
+>>>>>>> origin/master
 servers:
   - url: https://your-api-domain.com
     description: Replace with your live API domain
@@ -46,6 +53,43 @@ paths:
           $ref: '#/components/responses/Misconfigured'
         '500':
           $ref: '#/components/responses/InternalError'
+<<<<<<< HEAD
+=======
+    post:
+      tags: [Jobs]
+      operationId: createJob
+      summary: Create a new job
+      security:
+        - BearerAuth: []
+        - JobsApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateJobRequest'
+      responses:
+        '201':
+          description: Job created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobSuccess'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+        '500':
+          $ref: '#/components/responses/InternalError'
+>>>>>>> origin/master
     patch:
       tags: [Jobs]
       operationId: updateJob
@@ -93,18 +137,24 @@ paths:
           $ref: '#/components/responses/InternalError'
     delete:
       tags: [Jobs]
+<<<<<<< HEAD
       operationId: removeJob
       summary: Remove a job (archives it)
       description: >
         Archives a job by selector. Provide exactly one selector: `id`, `slug`,
         or `title`. If `confirmTitle` is omitted and selector is `slug` or
         `title`, the API resolves it automatically.
+=======
+      operationId: archiveJob
+      summary: Remove / archive a job (set status=closed)
+>>>>>>> origin/master
       security:
         - BearerAuth: []
         - JobsApiKey: []
       parameters:
         - name: id
           in: query
+<<<<<<< HEAD
           required: false
           description: Job ID to archive
           schema:
@@ -121,6 +171,12 @@ paths:
           description: Exact job title to archive (only if unique)
           schema:
             type: string
+=======
+          required: true
+          description: Job ID to archive
+          schema:
+            type: string
+>>>>>>> origin/master
         - name: confirm
           in: query
           required: true
@@ -130,8 +186,13 @@ paths:
             enum: [true]
         - name: confirmTitle
           in: query
+<<<<<<< HEAD
           required: false
           description: Optional exact title confirmation (auto-resolved when using slug/title)
+=======
+          required: true
+          description: Must exactly match the current job title
+>>>>>>> origin/master
           schema:
             type: string
             minLength: 2
@@ -225,6 +286,34 @@ components:
           type: string
           format: date-time
           nullable: true
+<<<<<<< HEAD
+=======
+    CreateJobRequest:
+      type: object
+      required: [title, location, description]
+      properties:
+        title:
+          type: string
+          minLength: 2
+          maxLength: 120
+        location:
+          type: string
+          minLength: 2
+          maxLength: 120
+        description:
+          type: string
+          minLength: 20
+          maxLength: 5000
+        department:
+          type: string
+          maxLength: 120
+        employmentType:
+          type: string
+          maxLength: 80
+        postedAt:
+          type: string
+          format: date-time
+>>>>>>> origin/master
     UpdateJobRequest:
       type: object
       properties:
@@ -259,10 +348,13 @@ components:
       properties:
         id:
           type: string
+<<<<<<< HEAD
         slug:
           type: string
         title:
           type: string
+=======
+>>>>>>> origin/master
         confirmArchive:
           type: boolean
           enum: [true]

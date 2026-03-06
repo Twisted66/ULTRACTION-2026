@@ -50,6 +50,10 @@ const ClientPartners: React.FC<ClientPartnersProps> = ({
       <style>{`
         .client-logo-track {
           animation: clientLogoScrollLeft 40s linear infinite;
+<<<<<<< HEAD
+=======
+          will-change: transform;
+>>>>>>> origin/master
         }
 
         .client-logo-container:hover .client-logo-track {
@@ -67,8 +71,12 @@ const ClientPartners: React.FC<ClientPartnersProps> = ({
 
         @media (prefers-reduced-motion: reduce) {
           .client-logo-track {
+<<<<<<< HEAD
             animation: none;
             transform: none;
+=======
+            animation-duration: 90s;
+>>>>>>> origin/master
           }
         }
       `}</style>

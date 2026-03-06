@@ -9,8 +9,11 @@ import {
 } from '../../lib/jobs-store';
 import type { JobStatus } from '../../lib/jobs-store';
 
+<<<<<<< HEAD
 export const prerender = false;
 
+=======
+>>>>>>> origin/master
 const READ_RATE_LIMIT_WINDOW_MS = 60_000;
 const READ_RATE_LIMIT_MAX_REQUESTS = 120;
 const WRITE_RATE_LIMIT_WINDOW_MS = 60_000;
@@ -21,7 +24,10 @@ const rateLimitMap = new Map<string, { count: number; windowStart: number }>();
 
 interface JobWriteRequestBody {
   id?: string;
+<<<<<<< HEAD
   slug?: string;
+=======
+>>>>>>> origin/master
   title?: string;
   location?: string;
   description?: string;
@@ -40,10 +46,13 @@ function jsonResponse(status: number, body: Record<string, unknown>): Response {
     headers: {
       'Content-Type': 'application/json',
       'Cache-Control': 'no-store',
+<<<<<<< HEAD
       // CORS headers for Custom GPT Actions
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-jobs-api-key',
+=======
+>>>>>>> origin/master
     },
   });
 }
@@ -152,7 +161,11 @@ function isRateLimited(ip: string, scope: 'read' | 'write'): boolean {
 }
 
 function ensureWriteAuth(request: Request): { ok: true } | { ok: false; response: Response } {
+<<<<<<< HEAD
   const expectedApiKey = (import.meta.env.JOBS_API_KEY ?? process.env.JOBS_API_KEY)?.trim();
+=======
+  const expectedApiKey = process.env.JOBS_API_KEY?.trim();
+>>>>>>> origin/master
   if (!expectedApiKey) {
     return {
       ok: false,
@@ -210,6 +223,7 @@ async function parseJsonBody(request: Request): Promise<JobWriteRequestBody | nu
   }
 }
 
+<<<<<<< HEAD
 async function resolveJobForArchive(
   url: URL,
   body: JobWriteRequestBody | null,
@@ -330,6 +344,8 @@ async function resolveJobForArchive(
   }
 }
 
+=======
+>>>>>>> origin/master
 export const GET: APIRoute = async ({ request, url }) => {
   const ip = getClientIp(request);
   if (isRateLimited(ip, 'read')) {
@@ -598,12 +614,40 @@ export const DELETE: APIRoute = async ({ request, url }) => {
   }
 
   const body = await parseJsonBody(request);
+<<<<<<< HEAD
   const resolved = await resolveJobForArchive(url, body);
   if ('error' in resolved) {
     return resolved.error;
   }
 
   const jobId = resolved.id;
+=======
+  const jobId = (url.searchParams.get('id') ?? '').trim();
+
+  if (!jobId) {
+    return jsonResponse(400, {
+      ok: false,
+      error: {
+        code: 'missing_id',
+        message: 'A job id is required via ?id=...',
+      },
+    });
+  }
+
+  const bodyId = body?.id?.trim();
+  if (bodyId && bodyId !== jobId) {
+    return jsonResponse(400, {
+      ok: false,
+      error: {
+        code: 'validation_error',
+        message: 'Invalid archive payload.',
+        fieldErrors: {
+          id: 'body.id must match query parameter id.',
+        },
+      },
+    });
+  }
+>>>>>>> origin/master
 
   const confirmParam = url.searchParams.get('confirm')?.trim().toLowerCase();
   const confirmFromQuery =
@@ -613,7 +657,10 @@ export const DELETE: APIRoute = async ({ request, url }) => {
     body?.confirmTitle?.trim() ??
     url.searchParams.get('confirmTitle')?.trim() ??
     url.searchParams.get('title')?.trim() ??
+<<<<<<< HEAD
     resolved.title ??
+=======
+>>>>>>> origin/master
     '';
 
   const confirmationErrors: Record<string, string> = {};
@@ -676,6 +723,7 @@ export const DELETE: APIRoute = async ({ request, url }) => {
   }
 };
 
+<<<<<<< HEAD
 // Handle OPTIONS preflight requests for CORS
 export const OPTIONS: APIRoute = async () => {
   return new Response(null, {
@@ -703,10 +751,17 @@ export const ALL: APIRoute = async (context) => {
     });
   }
   return jsonResponse(405, {
+=======
+export const ALL: APIRoute = async () =>
+  jsonResponse(405, {
+>>>>>>> origin/master
     ok: false,
     error: {
       code: 'method_not_allowed',
       message: 'Method not allowed.',
     },
   });
+<<<<<<< HEAD
 };
+=======
+>>>>>>> origin/master

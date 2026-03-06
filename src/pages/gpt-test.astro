@@ -1,0 +1,589 @@
+---
+// GPT Test Page - Jobs API testing interface for Custom GPT Actions
+// Development tool for testing the /api/gpt-test endpoint
+
+import Layout from '../layouts/Layout.astro';
+
+// SEO Metadata
+const title = "Jobs API Test Suite - ULTRACTION";
+const description = "Testing playground for Custom GPT Actions integration with the ULTRACTION Jobs API.";
+---
+
+<Layout
+  title={title}
+  description={description}
+  image="/logo/UGC-HEADER.png"
+>
+  <div class="min-h-screen bg-background py-12 px-4 md:px-8">
+    <div class="max-w-5xl mx-auto">
+
+      <!-- Header Section -->
+      <header class="mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-accent mb-4 block">
+          Development Tools
+        </span>
+        <h1 class="text-4xl md:text-5xl font-bold font-heading text-primary mb-4">
+          Jobs API Test Suite
+        </h1>
+        <p class="text-lg text-primary/80 max-w-2xl">
+          Testing playground for Custom GPT Actions integration with the ULTRACTION Jobs API.
+          Test endpoints, verify connectivity, and create sample jobs.
+        </p>
+      </header>
+
+      <!-- Configuration Section -->
+      <section class="surface-card mb-8">
+        <h2 class="text-xl font-bold font-heading text-primary mb-6 flex items-center gap-3">
+          <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+          </svg>
+          Authentication (for POST requests)
+        </h2>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs uppercase font-bold tracking-widest text-accent mb-3" for="api-key">
+              <span class="flex items-center gap-2">
+                <span class="w-4 h-[2px] bg-accent"></span>
+                JOBS_API_KEY
+              </span>
+            </label>
+            <div class="flex gap-3 flex-wrap">
+              <input
+                class="flex-1 min-w-[200px] bg-card border-b-2 border-primary/20 py-3 text-base transition-all duration-300 placeholder-primary/30 focus-visible:border-accent focus-visible:outline-none"
+                id="api-key"
+                name="api-key"
+                type="password"
+                placeholder="Enter your JOBS_API_KEY for authenticated tests..."
+                autocomplete="off"
+              />
+              <button
+                id="save-key-btn"
+                class="px-6 py-3 bg-accent text-card font-bold uppercase tracking-wider text-sm hover:bg-accent/90 transition-colors"
+              >
+                Save Key
+              </button>
+            </div>
+            <p class="text-xs text-primary/60 mt-2">
+              Key is stored in browser session only. Required for "Create Mock Job" test.
+            </p>
+          </div>
+
+          <div>
+            <label class="block text-xs uppercase font-bold tracking-widest text-accent mb-3">
+              <span class="flex items-center gap-2">
+                <span class="w-4 h-[2px] bg-accent"></span>
+                Test Endpoint
+              </span>
+            </label>
+            <div class="bg-card p-4 border border-primary/10 font-mono text-sm">
+              <span class="text-accent">/api/gpt-test</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Test Endpoints Section -->
+      <section class="surface-card mb-8">
+        <h2 class="text-xl font-bold font-heading text-primary mb-6 flex items-center gap-3">
+          <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          Test Endpoints
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Test Suite Info -->
+          <div class="test-option group">
+            <button
+              data-test="info"
+              data-needs-auth="false"
+              class="test-button w-full bg-card hover:bg-surface border border-primary/20 hover:border-accent transition-all duration-300 p-6 text-left"
+            >
+              <span class="text-xs uppercase tracking-widest text-primary/60 block mb-2">GET</span>
+              <span class="text-lg font-bold text-primary block mb-2">Test Suite Info</span>
+              <span class="text-sm text-primary/70">/api/gpt-test</span>
+              <span class="text-xs text-primary/50 block mt-1">Returns test suite information</span>
+            </button>
+          </div>
+
+          <!-- Echo Test -->
+          <div class="test-option group">
+            <button
+              data-test="echo"
+              data-needs-auth="false"
+              class="test-button w-full bg-card hover:bg-surface border border-primary/20 hover:border-accent transition-all duration-300 p-6 text-left"
+            >
+              <span class="text-xs uppercase tracking-widest text-primary/60 block mb-2">GET</span>
+              <span class="text-lg font-bold text-primary block mb-2">Echo Test</span>
+              <span class="text-sm text-primary/70">/api/gpt-test?echo=true</span>
+              <span class="text-xs text-primary/50 block mt-1">Verifies API connectivity</span>
+            </button>
+          </div>
+
+          <!-- Sample Job -->
+          <div class="test-option group">
+            <button
+              data-test="sample-job"
+              data-needs-auth="false"
+              class="test-button w-full bg-card hover:bg-surface border border-primary/20 hover:border-accent transition-all duration-300 p-6 text-left"
+            >
+              <span class="text-xs uppercase tracking-widest text-primary/60 block mb-2">GET</span>
+              <span class="text-lg font-bold text-primary block mb-2">Sample Job</span>
+              <span class="text-sm text-primary/70">/api/gpt-test?sample=job</span>
+              <span class="text-xs text-primary/50 block mt-1">Returns a sample single job</span>
+            </button>
+          </div>
+
+          <!-- Sample List -->
+          <div class="test-option group">
+            <button
+              data-test="sample-list"
+              data-needs-auth="false"
+              class="test-button w-full bg-card hover:bg-surface border border-primary/20 hover:border-accent transition-all duration-300 p-6 text-left"
+            >
+              <span class="text-xs uppercase tracking-widest text-primary/60 block mb-2">GET</span>
+              <span class="text-lg font-bold text-primary block mb-2">Sample Job List</span>
+              <span class="text-sm text-primary/70">/api/gpt-test?sample=list</span>
+              <span class="text-xs text-primary/50 block mt-1">Returns sample job list</span>
+            </button>
+          </div>
+
+          <!-- OpenAPI Spec -->
+          <div class="test-option group">
+            <button
+              data-test="spec"
+              data-needs-auth="false"
+              class="test-button w-full bg-card hover:bg-surface border border-primary/20 hover:border-accent transition-all duration-300 p-6 text-left"
+            >
+              <span class="text-xs uppercase tracking-widest text-primary/60 block mb-2">GET</span>
+              <span class="text-lg font-bold text-primary block mb-2">OpenAPI Spec</span>
+              <span class="text-sm text-primary/70">/api/gpt-test?spec=openapi</span>
+              <span class="text-xs text-primary/50 block mt-1">YAML specification</span>
+            </button>
+          </div>
+
+          <!-- Create Mock Job -->
+          <div class="test-option group">
+            <button
+              data-test="create-mock"
+              data-needs-auth="true"
+              class="test-button w-full bg-card hover:bg-surface border border-primary/20 hover:border-accent transition-all duration-300 p-6 text-left"
+            >
+              <span class="text-xs uppercase tracking-widest text-accent block mb-2">POST • Auth Required</span>
+              <span class="text-lg font-bold text-primary block mb-2">Create Mock Job</span>
+              <span class="text-sm text-primary/70">/api/gpt-test?create=mock</span>
+              <span class="text-xs text-primary/50 block mt-1">Creates a real test job</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Response Section -->
+      <section class="surface-card">
+        <h2 class="text-xl font-bold font-heading text-primary mb-6 flex items-center gap-3">
+          <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          API Response
+          <span id="response-status" class="ml-auto text-xs font-normal text-primary/60"></span>
+        </h2>
+
+        <div class="relative">
+          <pre id="response-output" class="bg-card border border-primary/10 p-6 overflow-x-auto text-sm font-mono min-h-[200px] max-h-[500px] overflow-y-auto"><code class="text-primary/70">// Click a test button above to see the response here</code></pre>
+          <button
+            id="copy-response"
+            class="absolute top-4 right-4 bg-primary text-card px-3 py-1 text-xs uppercase tracking-wider hover:bg-accent transition-colors opacity-0 pointer-events-none"
+            aria-label="Copy response to clipboard"
+          >
+            Copy
+          </button>
+        </div>
+
+        <div id="response-meta" class="mt-4 flex gap-6 text-xs text-primary/60 hidden">
+          <span>Status: <span id="meta-status" class="font-mono">-</span></span>
+          <span>Time: <span id="meta-time" class="font-mono">-</span></span>
+          <span>Size: <span id="meta-size" class="font-mono">-</span></span>
+        </div>
+      </section>
+
+      <!-- Documentation Section -->
+      <section class="mt-12">
+        <h2 class="text-xl font-bold font-heading text-primary mb-6 flex items-center gap-3">
+          <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+          Setup Instructions
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Start Dev Server -->
+          <div class="surface-card">
+            <h3 class="text-lg font-bold font-heading text-primary mb-4">1. Start Dev Server</h3>
+            <pre class="bg-card p-4 rounded border border-primary/10 text-sm font-mono text-primary/80 overflow-x-auto">npm run dev</pre>
+            <p class="text-sm text-primary/60 mt-3">
+              Server runs at <code class="bg-card px-2 py-1 text-xs">http://localhost:4321</code>
+            </p>
+          </div>
+
+          <!-- ngrok Setup -->
+          <div class="surface-card">
+            <h3 class="text-lg font-bold font-heading text-primary mb-4">2. Set up ngrok</h3>
+            <pre class="bg-card p-4 rounded border border-primary/10 text-sm font-mono text-primary/80 overflow-x-auto"># Install ngrok from https://ngrok.com/download
+ngrok http 4321</pre>
+            <p class="text-sm text-primary/60 mt-3">
+              Use the resulting https://xxx.ngrok.io URL in Custom GPT configuration.
+            </p>
+          </div>
+
+          <!-- Create Custom GPT -->
+          <div class="surface-card">
+            <h3 class="text-lg font-bold font-heading text-primary mb-4">3. Create Custom GPT</h3>
+            <ol class="space-y-2 text-sm text-primary/80">
+              <li class="flex gap-3">
+                <span class="flex-shrink-0 w-6 h-6 bg-accent text-card rounded flex items-center justify-center text-xs font-bold">1</span>
+                <span>Go to <a href="https://chat.openai.com/" target="_blank" class="text-accent underline">chat.openai.com</a> and create a new GPT</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="flex-shrink-0 w-6 h-6 bg-accent text-card rounded flex items-center justify-center text-xs font-bold">2</span>
+                <span>In "Actions", import the OpenAPI spec from your ngrok URL</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="flex-shrink-0 w-6 h-6 bg-accent text-card rounded flex items-center justify-center text-xs font-bold">3</span>
+                <span>Set authentication: Bearer token (use your JOBS_API_KEY)</span>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Demo Flow -->
+          <div class="surface-card">
+            <h3 class="text-lg font-bold font-heading text-primary mb-4">4. Demo Flow</h3>
+            <ul class="space-y-2 text-sm text-primary/80">
+              <li class="flex gap-3">
+                <span class="text-accent">•</span>
+                <span>"List all open jobs"</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-accent">•</span>
+                <span>"Create a new job for Senior Project Manager in Dubai"</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-accent">•</span>
+                <span>"Show me details of the first job"</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-accent">•</span>
+                <span>"Close the job titled [title]"</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="surface-card mt-6">
+          <h3 class="text-lg font-bold font-heading text-primary mb-4">Important Notes</h3>
+          <ul class="space-y-2 text-sm text-primary/80 list-disc list-inside">
+            <li>Real jobs are created (not mocked) - they will persist in your database/file store</li>
+            <li>Test jobs are tagged with department containing "[TEST]" for easy identification</li>
+            <li>All responses match the exact schema from the production API</li>
+            <li>ngrok is required for Custom GPT to access your local dev server</li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .test-button {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .test-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: hsl(var(--color-accent));
+    transform: scaleY(0);
+    transition: transform var(--motion-duration-base) var(--motion-ease-standard);
+  }
+
+  .test-button:hover::before,
+  .test-button:focus::before {
+    transform: scaleY(1);
+  }
+
+  .test-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .test-button:disabled::before {
+    display: none;
+  }
+
+  #response-output code {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  }
+
+  /* Syntax highlighting for JSON */
+  .json-key { color: hsl(var(--color-accent)); }
+  .json-string { color: hsl(var(--color-primary)); }
+  .json-number { color: #0550ae; }
+  .json-boolean { color: #cf222e; }
+  .json-null { color: #6e7781; }
+
+  /* Loading spinner */
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .loading-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid hsl(var(--color-primary) / 0.2);
+    border-top-color: hsl(var(--color-accent));
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const apiKeyInput = document.getElementById('api-key');
+    const saveKeyBtn = document.getElementById('save-key-btn');
+    const responseOutput = document.getElementById('response-output');
+    const copyButton = document.getElementById('copy-response');
+    const responseStatus = document.getElementById('response-status');
+    const responseMeta = document.getElementById('response-meta');
+    const metaStatus = document.getElementById('meta-status');
+    const metaTime = document.getElementById('meta-time');
+    const metaSize = document.getElementById('meta-size');
+    const testButtons = document.querySelectorAll('.test-button');
+
+    const API_BASE = '/api/gpt-test';
+    let currentResponseData = '';
+
+    // Load saved API key on page load
+    const savedKey = sessionStorage.getItem('jobs_api_key');
+    if (savedKey) {
+      apiKeyInput.value = savedKey;
+    }
+
+    // Save API key
+    saveKeyBtn.addEventListener('click', () => {
+      const key = apiKeyInput.value.trim();
+      if (key) {
+        sessionStorage.setItem('jobs_api_key', key);
+        alert('API key saved to session storage');
+      }
+    });
+
+    // Syntax highlight JSON
+    const syntaxHighlight = (json) => {
+      if (typeof json !== 'string') {
+        json = JSON.stringify(json, null, 2);
+      }
+      return json.replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, (match) => {
+          let cls = 'json-number';
+          if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+              cls = 'json-key';
+            } else {
+              cls = 'json-string';
+            }
+          } else if (/true|false/.test(match)) {
+            cls = 'json-boolean';
+          } else if (/null/.test(match)) {
+            cls = 'json-null';
+          }
+          return '<span class="' + cls + '">' + match + '</span>';
+        });
+    };
+
+    // Set response content
+    const setResponse = (content, isError = false) => {
+      responseOutput.innerHTML = '<code>' + content + '</code>';
+      copyButton.style.opacity = '1';
+      copyButton.style.pointerEvents = 'auto';
+      currentResponseData = content.replace(/<[^>]*>/g, '');
+    };
+
+    // Set loading state
+    const setLoading = (isLoading, button = null) => {
+      if (isLoading) {
+        responseOutput.innerHTML = '<code class="flex items-center gap-3"><span class="loading-spinner"></span> Loading...</code>';
+        responseStatus.textContent = 'Fetching...';
+        if (button) button.disabled = true;
+      } else {
+        if (button) button.disabled = false;
+      }
+    };
+
+    // Set status indicator
+    const setStatus = (status, text) => {
+      responseStatus.textContent = text;
+      if (status === 'success') {
+        responseStatus.className = 'ml-auto text-xs font-normal text-green-700';
+      } else if (status === 'error') {
+        responseStatus.className = 'ml-auto text-xs font-normal text-red-700';
+      } else {
+        responseStatus.className = 'ml-auto text-xs font-normal text-primary/60';
+      }
+    };
+
+    // Copy response to clipboard
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(currentResponseData);
+        const originalText = copyButton.textContent;
+        copyButton.textContent = 'Copied!';
+        setTimeout(() => {
+          copyButton.textContent = originalText;
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    });
+
+    // Test endpoint configurations
+    const testConfigs = {
+      'info': {
+        url: API_BASE,
+        method: 'GET',
+        needsAuth: false,
+      },
+      'echo': {
+        url: API_BASE + '?echo=true',
+        method: 'GET',
+        needsAuth: false,
+      },
+      'sample-job': {
+        url: API_BASE + '?sample=job',
+        method: 'GET',
+        needsAuth: false,
+      },
+      'sample-list': {
+        url: API_BASE + '?sample=list',
+        method: 'GET',
+        needsAuth: false,
+      },
+      'spec': {
+        url: API_BASE + '?spec=openapi',
+        method: 'GET',
+        needsAuth: false,
+      },
+      'create-mock': {
+        url: API_BASE + '?create=mock',
+        method: 'POST',
+        needsAuth: true,
+        body: {
+          title: 'Test Position',
+          location: 'Dubai, UAE',
+          description: 'This is a test job created via the visual test interface.',
+        },
+      },
+    };
+
+    // Handle test button clicks
+    testButtons.forEach(button => {
+      button.addEventListener('click', async () => {
+        const testType = button.getAttribute('data-test');
+        const config = testConfigs[testType];
+
+        if (!config) return;
+
+        // Check for API key if needed
+        if (config.needsAuth) {
+          const apiKey = apiKeyInput.value.trim();
+          if (!apiKey) {
+            setResponse('<span class="text-red-700">Error: API Key required for this test. Please enter your JOBS_API_KEY above.</span>', true);
+            setStatus('error', 'Authentication required');
+            return;
+          }
+        }
+
+        setLoading(true, button);
+        const startTime = performance.now();
+
+        try {
+          const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+          };
+
+          // Add Authorization header if auth is needed
+          if (config.needsAuth) {
+            headers['Authorization'] = `Bearer ${apiKeyInput.value.trim()}`;
+            headers['x-jobs-api-key'] = apiKeyInput.value.trim();
+          }
+
+          // For spec endpoint, let browser handle content type
+          if (testType === 'spec') {
+            delete headers['Content-Type'];
+          }
+
+          const options: RequestInit = {
+            method: config.method,
+            headers,
+          };
+
+          if (config.body) {
+            options.body = JSON.stringify(config.body);
+          }
+
+          const response = await fetch(config.url, options);
+
+          const endTime = performance.now();
+          const duration = Math.round(endTime - startTime);
+
+          // Update meta info
+          responseMeta.classList.remove('hidden');
+          metaStatus.textContent = `${response.status}`;
+          metaTime.textContent = `${duration}ms`;
+
+          const contentType = response.headers.get('content-type') || '';
+          let responseData;
+
+          if (contentType.includes('application/json')) {
+            responseData = await response.json();
+            metaSize.textContent = `${JSON.stringify(responseData).length} bytes`;
+            setResponse(syntaxHighlight(responseData));
+          } else {
+            responseData = await response.text();
+            metaSize.textContent = `${responseData.length} bytes`;
+            setResponse(responseData);
+          }
+
+          if (response.ok) {
+            setStatus('success', `Success (${response.status})`);
+          } else {
+            setStatus('error', `Error (${response.status})`);
+          }
+
+        } catch (error) {
+          const endTime = performance.now();
+          const duration = Math.round(endTime - startTime);
+
+          responseMeta.classList.remove('hidden');
+          metaStatus.textContent = 'Error';
+          metaTime.textContent = `${duration}ms`;
+
+          const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+          setResponse(`<span class="text-red-700">Error: ${errorMessage}</span>`, true);
+          setStatus('error', 'Network error');
+        } finally {
+          setLoading(false, button);
+        }
+      });
+    });
+  });
+</script>

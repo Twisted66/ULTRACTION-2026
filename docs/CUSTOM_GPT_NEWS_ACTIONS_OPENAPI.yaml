@@ -1,0 +1,490 @@
+openapi: 3.0.3
+info:
+  title: ULTRACTION News API for Custom GPT Actions
+  version: 1.1.0
+  description: >
+    Backend news management API used by Custom GPT Actions to list, create,
+    update, publish, and archive news articles.
+servers:
+  - url: https://your-api-domain.com
+    description: Replace with your live API domain
+tags:
+  - name: News
+paths:
+  /api/news:
+    get:
+      tags: [News]
+      operationId: listNews
+      summary: List news
+      description: >
+        Returns published news by default. `status=draft`, `status=archived`,
+        and `status=all` require write authentication.
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [published, draft, archived, all]
+            default: published
+      responses:
+        '200':
+          description: News returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNewsSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      tags: [News]
+      operationId: createNews
+      summary: Create a draft news item
+      description: >
+        Creates a new news item in `draft` status. Draft-first workflow:
+        publish it later by calling `PATCH /api/news` with `status=published`.
+      security:
+        - BearerAuth: []
+        - NewsApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNewsRequest'
+      responses:
+        '201':
+          description: News item created as draft
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsSuccess'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    patch:
+      tags: [News]
+      operationId: updateNews
+      summary: Update an existing news item
+      description: >
+        Updates an existing news item. To publish a draft, set
+        `status=published` in the request body.
+      security:
+        - BearerAuth: []
+        - NewsApiKey: []
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: News ID to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNewsRequest'
+      responses:
+        '200':
+          description: News item updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsSuccess'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    delete:
+      tags: [News]
+      operationId: archiveNews
+      summary: Archive a news item (set status=archived)
+      security:
+        - BearerAuth: []
+        - NewsApiKey: []
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: News ID to archive
+          schema:
+            type: string
+        - name: confirm
+          in: query
+          required: true
+          description: Must be true to confirm archive action
+          schema:
+            type: boolean
+            enum: [true]
+        - name: confirmTitle
+          in: query
+          required: true
+          description: Must exactly match the current news title
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 180
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArchiveNewsRequest'
+      responses:
+        '200':
+          description: News item archived
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsSuccess'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: APIKey
+      description: 'Send Authorization header: Bearer <NEWS_API_KEY>'
+    NewsApiKey:
+      type: apiKey
+      in: header
+      name: x-news-api-key
+      description: Alternative header for the same key
+  schemas:
+    News:
+      type: object
+      required:
+        - id
+        - slug
+        - title
+        - excerpt
+        - content
+        - category
+        - tags
+        - author
+        - image
+        - sourceName
+        - sourceUrl
+        - sourcePublishedAt
+        - status
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: string
+        content:
+          type: string
+        category:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        author:
+          type: string
+        image:
+          type: string
+        sourceName:
+          type: string
+        sourceUrl:
+          type: string
+        sourcePublishedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [draft, published, archived]
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        publishedAt:
+          type: string
+          format: date-time
+          nullable: true
+        archivedAt:
+          type: string
+          format: date-time
+          nullable: true
+    CreateNewsRequest:
+      type: object
+      required:
+        - title
+        - excerpt
+        - content
+        - category
+        - author
+        - image
+        - sourceName
+        - sourceUrl
+      properties:
+        title:
+          type: string
+          minLength: 2
+          maxLength: 180
+        excerpt:
+          type: string
+          minLength: 10
+          maxLength: 600
+        content:
+          type: string
+          minLength: 20
+          maxLength: 40000
+        category:
+          type: string
+          minLength: 2
+          maxLength: 120
+        tags:
+          type: array
+          items:
+            type: string
+          maxItems: 30
+        author:
+          type: string
+          minLength: 2
+          maxLength: 120
+        image:
+          type: string
+          maxLength: 1000
+        sourceName:
+          type: string
+          minLength: 2
+          maxLength: 160
+        sourceUrl:
+          type: string
+          maxLength: 2000
+        sourcePublishedAt:
+          type: string
+          format: date-time
+    UpdateNewsRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+          minLength: 2
+          maxLength: 180
+        excerpt:
+          type: string
+          minLength: 10
+          maxLength: 600
+        content:
+          type: string
+          minLength: 20
+          maxLength: 40000
+        category:
+          type: string
+          minLength: 2
+          maxLength: 120
+        tags:
+          type: array
+          items:
+            type: string
+          maxItems: 30
+        author:
+          type: string
+          minLength: 2
+          maxLength: 120
+        image:
+          type: string
+          maxLength: 1000
+        sourceName:
+          type: string
+          minLength: 2
+          maxLength: 160
+        sourceUrl:
+          type: string
+          maxLength: 2000
+        sourcePublishedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [draft, published, archived]
+        publishedAt:
+          type: string
+          format: date-time
+    ArchiveNewsRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        confirmArchive:
+          type: boolean
+          enum: [true]
+        confirmTitle:
+          type: string
+          minLength: 2
+          maxLength: 180
+    NewsSuccess:
+      type: object
+      required: [ok, data]
+      properties:
+        ok:
+          type: boolean
+          enum: [true]
+        data:
+          type: object
+          required: [news]
+          properties:
+            news:
+              $ref: '#/components/schemas/News'
+    ListNewsSuccess:
+      type: object
+      required: [ok, data]
+      properties:
+        ok:
+          type: boolean
+          enum: [true]
+        data:
+          type: object
+          required: [news]
+          properties:
+            news:
+              type: array
+              items:
+                $ref: '#/components/schemas/News'
+    ErrorResponse:
+      type: object
+      required: [ok, error]
+      properties:
+        ok:
+          type: boolean
+          enum: [false]
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            fieldErrors:
+              type: object
+              additionalProperties:
+                type: string
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ValidationError:
+      description: Validation failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: News item not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Conflict:
+      description: Operation conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnsupportedMediaType:
+      description: Content-Type must be application/json
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimited:
+      description: Too many requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Misconfigured:
+      description: News API server configuration missing required secret(s)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

@@ -1,0 +1,331 @@
+---
+// GPT Setup Guide - Instructions for connecting Custom GPT to Jobs API via ngrok
+// Reference page for developers setting up Custom GPT Actions
+
+import Layout from '../layouts/Layout.astro';
+
+// SEO Metadata
+const title = "Custom GPT Setup Guide - ULTRACTION";
+const description = "Step-by-step guide for connecting Custom GPT Actions to ULTRACTION Jobs API using ngrok for local testing.";
+---
+
+<Layout
+  title={title}
+  description={description}
+  image="/logo/UGC-HEADER.png"
+>
+  <div class="min-h-screen bg-background py-12 px-4 md:px-8">
+    <div class="max-w-4xl mx-auto">
+
+      <!-- Header Section -->
+      <header class="mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-accent mb-4 block">
+          Developer Guide
+        </span>
+        <h1 class="text-4xl md:text-5xl font-bold font-heading text-primary mb-4">
+          Custom GPT Setup
+        </h1>
+        <p class="text-lg text-primary/80 max-w-2xl">
+          Connect OpenAI Custom GPT Actions to the ULTRACTION Jobs API for testing with ngrok,
+          then switch to production with a simple URL change.
+        </p>
+      </header>
+
+      <!-- Quick Overview -->
+      <section class="surface-card mb-8">
+        <h2 class="text-xl font-bold font-heading text-primary mb-4 flex items-center gap-3">
+          <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          How It Works
+        </h2>
+        <p class="text-primary/80 mb-4">
+          The ULTRACTION Jobs API is already built and running. This guide shows how to expose it
+          via ngrok for Custom GPT testing, then switch to production later.
+        </p>
+        <div class="bg-card p-4 border-l-4 border-accent">
+          <p class="text-sm text-primary">
+            <strong class="text-accent">Key insight:</strong> The same API works for both testing and production.
+            Only the URL changes when you deploy.
+          </p>
+        </div>
+      </section>
+
+      <!-- Step 1: Start Dev Server -->
+      <section class="surface-card mb-6">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="flex-shrink-0 w-10 h-10 bg-accent text-card rounded-full flex items-center justify-center text-lg font-bold font-heading">1</span>
+          <h2 class="text-xl font-bold font-heading text-primary">Start the Dev Server</h2>
+        </div>
+        <p class="text-primary/80 mb-4 pl-14">
+          First, make sure your local development server is running.
+        </p>
+        <pre class="bg-card p-4 rounded border border-primary/10 text-sm font-mono text-primary/80 overflow-x-auto ml-14">cd ultraction-website
+npm run dev</pre>
+        <p class="text-sm text-primary/60 mt-3 ml-14">
+          Server runs at <code class="bg-card px-2 py-1 text-xs">http://localhost:4321</code>
+        </p>
+      </section>
+
+      <!-- Step 2: Install and Run ngrok -->
+      <section class="surface-card mb-6">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="flex-shrink-0 w-10 h-10 bg-accent text-card rounded-full flex items-center justify-center text-lg font-bold font-heading">2</span>
+          <h2 class="text-xl font-bold font-heading text-primary">Set up ngrok</h2>
+        </div>
+        <p class="text-primary/80 mb-4 pl-14">
+          ngrok creates a secure tunnel from the public internet to your local server.
+        </p>
+
+        <div class="ml-14 space-y-4">
+          <!-- Install -->
+          <div>
+            <h3 class="text-sm font-bold text-accent uppercase tracking-wider mb-2">Install ngrok</h3>
+            <p class="text-sm text-primary/70 mb-2">Download from <a href="https://ngrok.com/download" target="_blank" class="text-accent underline">ngrok.com/download</a> or use:</p>
+            <pre class="bg-card p-3 rounded border border-primary/10 text-xs font-mono text-primary/80 overflow-x-auto"># macOS (Homebrew)
+brew install ngrok
+
+# Windows (Chocolatey)
+choco install ngrok
+
+# Or download directly from ngrok.com</pre>
+          </div>
+
+          <!-- Run ngrok -->
+          <div>
+            <h3 class="text-sm font-bold text-accent uppercase tracking-wider mb-2">Run ngrok</h3>
+            <pre class="bg-card p-3 rounded border border-primary/10 text-sm font-mono text-primary/80 overflow-x-auto">ngrok http 4321</pre>
+            <p class="text-sm text-primary/70 mt-2">
+              You'll see output like:
+            </p>
+            <pre class="bg-card p-3 rounded border border-primary/10 text-xs font-mono text-primary/60 mt-2 overflow-x-auto">Forwarding  https://abc123-def456.ngrok.io -> http://localhost:4321</pre>
+            <div class="bg-surface p-3 border border-accent/30 rounded mt-3">
+              <p class="text-sm text-primary">
+                <strong class="text-accent">Copy your ngrok URL:</strong> <code class="bg-card px-2 py-1 text-xs">https://xxx.ngrok.io</code>
+              </p>
+              <p class="text-xs text-primary/60 mt-1">You'll need this for the Custom GPT configuration.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 3: Get Your API Key -->
+      <section class="surface-card mb-6">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="flex-shrink-0 w-10 h-10 bg-accent text-card rounded-full flex items-center justify-center text-lg font-bold font-heading">3</span>
+          <h2 class="text-xl font-bold font-heading text-primary">Get Your API Key</h2>
+        </div>
+        <p class="text-primary/80 mb-4 pl-14">
+          Find your <code class="bg-card px-2 py-1 text-xs">JOBS_API_KEY</code> from the environment.
+        </p>
+        <div class="ml-14 bg-card p-4 border border-primary/10">
+          <p class="text-sm text-primary mb-2"><strong>Check your .env file:</strong></p>
+          <pre class="text-sm font-mono text-primary/80">JOBS_API_KEY=your-secret-key-here</pre>
+        </div>
+        <p class="text-sm text-primary/60 mt-3 ml-14">
+          This key is required for write operations (create, update, delete). List operations work without authentication.
+        </p>
+      </section>
+
+      <!-- Step 4: Create Custom GPT -->
+      <section class="surface-card mb-6">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="flex-shrink-0 w-10 h-10 bg-accent text-card rounded-full flex items-center justify-center text-lg font-bold font-heading">4</span>
+          <h2 class="text-xl font-bold font-heading text-primary">Create Custom GPT with Actions</h2>
+        </div>
+
+        <div class="ml-14 space-y-6">
+          <!-- Sub-steps -->
+          <div class="space-y-3">
+            <div class="flex gap-4">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary text-card rounded-full flex items-center justify-center text-xs font-bold">a</span>
+              <div>
+                <h3 class="font-bold text-primary">Go to ChatGPT</h3>
+                <p class="text-sm text-primary/70">Visit <a href="https://chat.openai.com/" target="_blank" class="text-accent underline">chat.openai.com</a> → Create a new GPT</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary text-card rounded-full flex items-center justify-center text-xs font-bold">b</span>
+              <div>
+                <h3 class="font-bold text-primary">Configure Actions</h3>
+                <p class="text-sm text-primary/70">Click "Configure" → "Actions" → "Create new action"</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary text-card rounded-full flex items-center justify-center text-xs font-bold">c</span>
+              <div>
+                <h3 class="font-bold text-primary">Import OpenAPI Spec</h3>
+                <p class="text-sm text-primary/70 mb-2">Paste your ngrok URL with the OpenAPI endpoint:</p>
+                <div class="bg-surface p-3 border border-accent/30 rounded">
+                  <code class="text-sm font-mono text-accent break-all">https://xxx.ngrok.io/api/openapi.yaml</code>
+                </div>
+                <p class="text-xs text-primary/60 mt-2">Replace <code class="bg-card px-1">xxx.ngrok.io</code> with your actual ngrok URL</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary text-card rounded-full flex items-center justify-center text-xs font-bold">d</span>
+              <div>
+                <h3 class="font-bold text-primary">Set Authentication</h3>
+                <p class="text-sm text-primary/70 mb-2">In the "Authentication" section:</p>
+                <ul class="text-sm text-primary/70 list-disc list-inside space-y-1">
+                  <li>Type: <strong>Bearer token</strong></li>
+                  <li>Token: Your <code class="bg-card px-1 text-xs">JOBS_API_KEY</code> value</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <span class="flex-shrink-0 w-6 h-6 bg-primary text-card rounded-full flex items-center justify-center text-xs font-bold">e</span>
+              <div>
+                <h3 class="font-bold text-primary">Save and Test</h3>
+                <p class="text-sm text-primary/70">Click "Save" and try a test message</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 5: Test Your GPT -->
+      <section class="surface-card mb-6">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="flex-shrink-0 w-10 h-10 bg-accent text-card rounded-full flex items-center justify-center text-lg font-bold font-heading">5</span>
+          <h2 class="text-xl font-bold font-heading text-primary">Test Your Custom GPT</h2>
+        </div>
+        <p class="text-primary/80 mb-4 pl-14">
+          Try these prompts to verify everything works:
+        </p>
+        <div class="ml-14 space-y-2">
+          <div class="bg-card p-3 border-l-2 border-accent flex gap-3 items-start">
+            <span class="text-accent">•</span>
+            <code class="text-sm text-primary">"List all open jobs"</code>
+          </div>
+          <div class="bg-card p-3 border-l-2 border-accent flex gap-3 items-start">
+            <span class="text-accent">•</span>
+            <code class="text-sm text-primary">"Show me jobs in Dubai"</code>
+          </div>
+          <div class="bg-card p-3 border-l-2 border-accent flex gap-3 items-start">
+            <span class="text-accent">•</span>
+            <code class="text-sm text-primary">"Create a new job for Senior Project Manager in Dubai"</code>
+          </div>
+          <div class="bg-card p-3 border-l-2 border-accent flex gap-3 items-start">
+            <span class="text-accent">•</span>
+            <code class="text-sm text-primary">"Update the last job's location to Abu Dhabi"</code>
+          </div>
+          <div class="bg-card p-3 border-l-2 border-accent flex gap-3 items-start">
+            <span class="text-accent">•</span>
+            <code class="text-sm text-primary">"Close the job titled [job title]"</code>
+          </div>
+        </div>
+      </section>
+
+      <!-- Production Switch -->
+      <section class="surface-card mb-8 bg-gradient-to-r from-accent/10 to-transparent">
+        <h2 class="text-xl font-bold font-heading text-primary mb-4 flex items-center gap-3">
+          <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          Switching to Production
+        </h2>
+        <p class="text-primary/80 mb-4">
+          When you're ready to go live, you only need to change the URL in Custom GPT.
+        </p>
+        <div class="bg-card p-4 border border-primary/10 rounded">
+          <p class="text-sm text-primary mb-2"><strong>Before (ngrok):</strong></p>
+          <pre class="text-sm font-mono text-primary/60 mb-4">https://xxx.ngrok.io/api/openapi.yaml</pre>
+          <p class="text-sm text-primary mb-2"><strong>After (production):</strong></p>
+          <pre class="text-sm font-mono text-accent">https://ultraction.ae/api/openapi.yaml</pre>
+        </div>
+        <p class="text-sm text-primary/60 mt-3">
+          No code changes needed. The API schema and endpoints remain identical.
+        </p>
+      </section>
+
+      <!-- Quick Reference -->
+      <section class="surface-card">
+        <h2 class="text-xl font-bold font-heading text-primary mb-6 flex items-center gap-3">
+          <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+          </svg>
+          Quick Reference
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- API Endpoint -->
+          <div class="bg-card p-4 border border-primary/10">
+            <h3 class="text-sm font-bold text-accent uppercase tracking-wider mb-2">OpenAPI Spec</h3>
+            <p class="text-xs text-primary/60 mb-1">For Custom GPT import:</p>
+            <code class="text-xs font-mono text-primary break-all">/api/openapi.yaml</code>
+          </div>
+
+          <!-- Jobs API -->
+          <div class="bg-card p-4 border border-primary/10">
+            <h3 class="text-sm font-bold text-accent uppercase tracking-wider mb-2">Jobs API</h3>
+            <p class="text-xs text-primary/60 mb-1">Main API endpoint:</p>
+            <code class="text-xs font-mono text-primary break-all">/api/jobs</code>
+          </div>
+
+          <!-- Auth Header -->
+          <div class="bg-card p-4 border border-primary/10">
+            <h3 class="text-sm font-bold text-accent uppercase tracking-wider mb-2">Authentication</h3>
+            <p class="text-xs text-primary/60 mb-1">For write operations:</p>
+            <code class="text-xs font-mono text-primary">Authorization: Bearer &lt;KEY&gt;</code>
+          </div>
+
+          <!-- Environment -->
+          <div class="bg-card p-4 border border-primary/10">
+            <h3 class="text-sm font-bold text-accent uppercase tracking-wider mb-2">Environment</h3>
+            <p class="text-xs text-primary/60 mb-1">Required variable:</p>
+            <code class="text-xs font-mono text-primary">JOBS_API_KEY</code>
+          </div>
+        </div>
+
+        <!-- API Methods -->
+        <div class="mt-4">
+          <h3 class="text-sm font-bold text-accent uppercase tracking-wider mb-3">Available Operations</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div class="bg-card p-2 border border-primary/10 text-center">
+              <span class="text-xs font-mono text-accent">GET</span>
+              <p class="text-xs text-primary/60">List jobs</p>
+            </div>
+            <div class="bg-card p-2 border border-primary/10 text-center">
+              <span class="text-xs font-mono text-accent">POST</span>
+              <p class="text-xs text-primary/60">Create job</p>
+            </div>
+            <div class="bg-card p-2 border border-primary/10 text-center">
+              <span class="text-xs font-mono text-accent">PATCH</span>
+              <p class="text-xs text-primary/60">Update job</p>
+            </div>
+            <div class="bg-card p-2 border border-primary/10 text-center">
+              <span class="text-xs font-mono text-accent">DELETE</span>
+              <p class="text-xs text-primary/60">Archive job</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Links -->
+      <div class="mt-8 flex gap-4 justify-center">
+        <a href="/gpt-test" class="text-accent underline text-sm hover:text-accent/80 transition-colors">
+          → Test the API interactively
+        </a>
+        <a href="/careers" class="text-accent underline text-sm hover:text-accent/80 transition-colors">
+          → View the Careers page
+        </a>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Surface card styling - reusing from global styles */
+  .surface-card {
+    background: hsl(var(--color-surface));
+    border: 1px solid hsl(var(--color-border) / 0.3);
+    border-radius: var(--radius);
+    padding: 2rem;
+  }
+</style>

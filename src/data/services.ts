@@ -60,6 +60,7 @@ export const services: Service[] = [
             "Maintenance Services"
         ]
     },
+<<<<<<< HEAD
     {
         id: "seaports-airports",
         title: "Civil Works for Seaports and Airports",
@@ -70,6 +71,18 @@ export const services: Service[] = [
             "Seaport Infrastructure",
             "Airport Civil Works",
             "Marine Structures"
+=======
+    {
+        id: "seaports-airports",
+        title: "Civil Works for Seaports and Airports",
+        description: "End-to-end services for critical infrastructure. International standards compliance. Maritime and aviation transportation hubs connecting the region to the world.",
+        image: "/images/projects/photo_026.jpeg",
+        link: "/services#seaports-airports",
+        subservices: [
+            "Seaport Infrastructure",
+            "Airport Civil Works",
+            "Marine Structures"
+>>>>>>> origin/master
         ]
     },
     {
@@ -85,6 +98,7 @@ export const services: Service[] = [
             "Pipeline Infrastructure"
         ]
     },
+<<<<<<< HEAD
     {
         id: "heritage",
         title: "Heritage Revitalization Project",
@@ -95,6 +109,18 @@ export const services: Service[] = [
             "Preservation",
             "Integration"
         ]
+=======
+    {
+        id: "heritage",
+        title: "Heritage Revitalization Project",
+        description: "Preserving and restoring historical and cultural landmarks. Advanced restoration techniques. Integrating modern amenities while honoring authenticity.",
+        image: "/images/projects/photo_012.jpeg",
+        link: "/services#heritage",
+        subservices: [
+            "Preservation",
+            "Integration"
+        ]
+>>>>>>> origin/master
     },
     {
         id: "pipeline-storm",

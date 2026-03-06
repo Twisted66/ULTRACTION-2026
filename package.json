@@ -5,13 +5,23 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+<<<<<<< HEAD
+=======
+    "start": "node ./dist/server/entry.mjs",
+>>>>>>> origin/master
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@astrojs/check": "^0.9.6",
     "@astrojs/node": "^9.5.3",
     "@astrojs/react": "^4.4.2",
+=======
+    "@astrojs/node": "^9.5.4",
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.7.0",
+>>>>>>> origin/master
     "@fontsource/inter": "^5.2.8",
     "@fontsource/public-sans": "^5.2.7",
     "@react-three/drei": "^10.7.7",
@@ -23,9 +33,15 @@
     "clsx": "^2.1.1",
     "cobe": "^0.6.5",
     "framer-motion": "^12.34.0",
+<<<<<<< HEAD
     "lucide-react": "^0.563.0",
     "pg": "^8.13.1",
     "react": "^19.2.4",
+=======
+    "lucide-react": "^0.563.0",
+    "pg": "^8.13.1",
+    "react": "^19.2.4",
+>>>>>>> origin/master
     "react-dom": "^19.2.4",
     "react-spring": "^10.0.3",
     "remotion": "^4.0.421",
@@ -46,6 +62,13 @@
     "@react-spring/zdog": {
       "react": "^19.2.4",
       "react-dom": "^19.2.4"
+<<<<<<< HEAD
     }
+=======
+    },
+    "minimatch": "^10.2.1",
+    "glob": "^11.0.0",
+    "rimraf": "^6.0.0"
+>>>>>>> origin/master
   }
 }

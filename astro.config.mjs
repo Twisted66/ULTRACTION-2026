@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // @ts-check
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
@@ -16,3 +17,24 @@ export default defineConfig({
     format: 'directory',
   },
 });
+=======
+// @ts-check
+import { defineConfig } from 'astro/config';
+import react from '@astrojs/react';
+import tailwindcss from '@tailwindcss/vite';
+
+import sitemap from '@astrojs/sitemap';
+
+// https://astro.build/config
+export default defineConfig({
+  output: 'static',
+  integrations: [react(), sitemap()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
+  site: 'https://ultraction.ae',
+  build: {
+    format: 'directory',
+  },
+});
+>>>>>>> origin/master

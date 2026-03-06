@@ -12,6 +12,7 @@ const description = 'ULTRACTION General Contracting LLC delivers civil construct
 
 <Layout title={title} description={description}>
   <section class="flex flex-col lg:grid lg:grid-cols-2 border-y border-black min-h-[75vh] lg:min-h-[85vh] bg-surface">
+<<<<<<< HEAD
     <div class="lg:col-span-1 flex flex-col justify-start px-6 py-16 md:px-12 lg:p-24 border-r border-black relative h-full">
       <span class="text-xs font-bold uppercase tracking-widest opacity-80 mb-4 block">Company Profile</span>
       <h1 class="text-5xl lg:text-7xl font-bold uppercase leading-none mb-12 font-heading">
@@ -19,6 +20,15 @@ const description = 'ULTRACTION General Contracting LLC delivers civil construct
       </h1>
       <div class="w-12 h-[1px] bg-black/20 mb-8"></div>
       <p class="text-lg mb-6 opacity-80 leading-relaxed max-w-md text-black">
+=======
+    <div class="lg:col-span-1 flex flex-col justify-start px-6 py-16 md:px-12 lg:p-24 border-r border-border relative h-full">
+      <span class="text-xs font-bold uppercase tracking-widest opacity-80 mb-4 block">Company Profile</span>
+      <h1 class="hero-page-title mb-12 hero-text-reveal opacity-0">
+        Building <br/> <span class="text-accent italic">Infrastructure</span> <br/> With Purpose
+      </h1>
+      <div class="w-12 h-[1px] bg-foreground/20 mb-8"></div>
+      <p class="text-lg mb-6 opacity-80 leading-relaxed max-w-md text-foreground">
+>>>>>>> origin/master
         ULTRACTION General Contracting LLC is a leader in civil construction and concrete structure works. We combine skilled engineering teams, hands-on execution, and value engineering to deliver safe, efficient, and high-performance outcomes across the UAE.
       </p>
     </div>
@@ -301,6 +311,65 @@ const description = 'ULTRACTION General Contracting LLC delivers civil construct
     }
   </script>
 
+<<<<<<< HEAD
+=======
+  <script>
+    // GM Section Scroll Parallax
+    function initGMParallax() {
+      const gmSection = document.querySelector('section:has(.cto-quote-mark)');
+      if (!gmSection) return;
+
+      const quoteMarks = gmSection.querySelectorAll('.cto-quote-mark');
+      const image = gmSection.querySelector('.aspect-\\[4\\/5\\]');
+      const statsCard = gmSection.querySelector('.cto-stats-card');
+
+      const handleScroll = () => {
+        const rect = gmSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        // Calculate how far the section is from center of viewport (0 = centered, -1 to 1 range)
+        const progress = (rect.top + rect.height / 2 - windowHeight / 2) / windowHeight;
+
+        if (rect.bottom < 0 || rect.top > windowHeight) return; // Skip if off screen
+
+        // Apply parallax transforms
+        quoteMarks.forEach((mark, i) => {
+          if (mark instanceof HTMLElement) {
+            const offset = progress * (i === 0 ? -40 : -60);
+            mark.style.transform = `translateY(${offset}px)`;
+          }
+        });
+
+        if (image instanceof HTMLElement) {
+          const imageOffset = progress * 25;
+          image.style.transform = `translateY(${imageOffset}px)`;
+        }
+
+        if (statsCard instanceof HTMLElement) {
+          const cardOffset = progress * -15;
+          statsCard.style.transform = `translateY(${cardOffset}px)`;
+        }
+      };
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            handleScroll();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+
+      handleScroll(); // Initial call
+    }
+
+    // Initialize
+    initGMParallax();
+    document.addEventListener('astro:page-load', initGMParallax);
+  </script>
+
+>>>>>>> origin/master
   <!-- Enhanced "How We Deliver" Section -->
   <HowWeDeliver client:visible />
 
@@ -347,7 +416,11 @@ const description = 'ULTRACTION General Contracting LLC delivers civil construct
         </h2>
 
         <a
+<<<<<<< HEAD
           class="group relative inline-flex items-center gap-3 px-10 py-5 bg-[#800000] text-white overflow-hidden transition-all duration-300 hover:bg-[#800000] hover:shadow-xl hover:shadow-[#800000]/20"
+=======
+          class="group relative inline-flex items-center gap-3 px-10 py-5 bg-accent text-primary-foreground overflow-hidden transition-all duration-300 hover:bg-accent/90"
+>>>>>>> origin/master
           href="/contact"
         >
           <span class="relative z-10 text-xs font-bold uppercase tracking-[0.2em]">

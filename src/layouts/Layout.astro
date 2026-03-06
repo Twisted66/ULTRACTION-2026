@@ -3,23 +3,32 @@
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import ElementCaptureWidget from '../components/layout/ElementCaptureWidget.astro';
+import { ViewTransitions } from 'astro:transitions';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  keywords?: string;
+  noIndex?: boolean;
 }
 
 const {
   title = 'ULTRACTION GENERAL CONTRACTING LLC',
   description = 'Premium construction services in UAE - Transforming visions into reality with excellence in general contracting, construction management, and project delivery.',
   image = '/logo/UGC-LOGO-HQ.png',
+  keywords = 'construction company UAE, general contracting Abu Dhabi, infrastructure construction, civil engineering UAE, ULTRACTION',
+  noIndex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const showElementCaptureWidget =
+<<<<<<< HEAD
   import.meta.env.DEV || import.meta.env.PUBLIC_ENABLE_ELEMENT_CAPTURE_WIDGET === 'true';
+=======
+  import.meta.env.PUBLIC_ENABLE_ELEMENT_CAPTURE_WIDGET === 'true';
+>>>>>>> origin/master
 ---
 
 <!doctype html>
@@ -29,10 +38,17 @@ const showElementCaptureWidget =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="ULTRACTION GENERAL CONTRACTING LLC" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#800000" />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
+
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/logo/UGC-LOGO-HQ.png" />
@@ -45,6 +61,7 @@ const showElementCaptureWidget =
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.url)} />
     <meta property="og:site_name" content="ULTRACTION GENERAL CONTRACTING LLC" />
+    <meta property="og:locale" content="en_AE" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -87,6 +104,7 @@ const showElementCaptureWidget =
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <title>{title}</title>
+    <ViewTransitions />
   </head>
 
   <body class="bg-background text-foreground antialiased">
@@ -101,7 +119,7 @@ const showElementCaptureWidget =
       <Header />
 
       <!-- Main Content -->
-      <main id="main-content" class="main-content pt-[72px] md:pt-[104px]">
+      <main id="main-content" class="main-content pt-[64px] sm:pt-[72px] xl:pt-[104px]">
         <slot />
       </main>
 
@@ -159,6 +177,78 @@ const showElementCaptureWidget =
           html.classList.remove('dark');
         }
       })();
+    </script>
+    <script>
+      // Global Hero Text Reveal Script
+      function initHeroTextReveal() {
+        const reveals = document.querySelectorAll('.hero-text-reveal');
+
+        reveals.forEach(el => {
+          if (el.classList.contains('is-initialized')) return;
+          el.classList.add('is-initialized');
+
+          // Temporarily hide to prevent flash
+          if (el instanceof HTMLElement) el.style.opacity = '0';
+
+          // We need to wrap TEXT nodes only, keeping HTML tags intact
+          const wrapTextNodes = (node: Node) => {
+            if (node.nodeType === Node.TEXT_NODE) {
+              const text = node.textContent;
+              if (!text || !text.trim()) return;
+
+              // Split text into words and spaces
+              const words = text.split(/(\s+)/);
+              const fragment = document.createDocumentFragment();
+
+              words.forEach(word => {
+                if (word.trim()) {
+                  const span = document.createElement('span');
+                  span.className = 'reveal-word opacity-0 inline-block translate-y-6 transition-all duration-700 ease-out';
+                  span.textContent = word;
+                  fragment.appendChild(span);
+                } else {
+                  // Keep the whitespace as a text node
+                  fragment.appendChild(document.createTextNode(word));
+                }
+              });
+
+              // Replace the original text node with our wrapped fragment
+              if (node.parentNode) {
+                node.parentNode.replaceChild(fragment, node);
+              }
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+              // Recursively process child nodes
+              const element = node as Element;
+              // Don't process elements if they shouldn't be revealed word by word
+              if (!element.classList.contains('no-reveal')) {
+                const childNodes = Array.from(element.childNodes);
+                childNodes.forEach(wrapTextNodes);
+              }
+            }
+          };
+
+          wrapTextNodes(el);
+
+          // Reveal after wrapping
+          requestAnimationFrame(() => {
+            if (el instanceof HTMLElement) el.style.opacity = '1';
+            const wordSpans = el.querySelectorAll('.reveal-word');
+            wordSpans.forEach((span, index) => {
+              setTimeout(() => {
+                span.classList.remove('opacity-0', 'translate-y-6');
+              }, 100 + (index * 40)); // Stagger delay
+            });
+          });
+        });
+      }
+
+      // Initialize on load and on astro page transitions
+      document.addEventListener('DOMContentLoaded', initHeroTextReveal);
+      document.addEventListener('astro:page-load', initHeroTextReveal);
+      // Run immediately if already loaded
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        initHeroTextReveal();
+      }
     </script>
   </body>
 </html>

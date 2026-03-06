@@ -7,7 +7,6 @@ category: "infrastructure"
 featured: true
 images:
   - "/images/projects/p096_img01_xref6595.jpeg"
-  - "/images/projects/p096_img01_xref6595.jpeg"
 duration: "36 months"
 status: "Completed"
 ---

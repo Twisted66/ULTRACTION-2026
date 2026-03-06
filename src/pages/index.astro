@@ -4,11 +4,19 @@
 
 import Layout from '../layouts/Layout.astro';
 import VideoPlayer from '../components/common/VideoPlayer.astro';
+<<<<<<< HEAD
+=======
+import TextTypeAnimation from '../components/animations/TextTypeAnimation';
+>>>>>>> origin/master
 import InfiniteScroll from '../components/common/InfiniteScroll.astro';
 import SectionBackground from '../components/common/SectionBackground';
 import ClientPartners from '../components/about/ClientPartners';
 import ServicesCarousel from '../components/sections/ServicesCarousel';
 import Stats from '../components/sections/Stats';
+<<<<<<< HEAD
+=======
+import FeaturedProjectCard from '../components/sections/FeaturedProjectCard';
+>>>>>>> origin/master
 import { services } from '../data/services';
 
 const galleryImages = [
@@ -45,7 +53,7 @@ const structuredData = {
   image="/logo/UGC-HEADER.png"
 >
   <!-- Hero Section - Full Screen Video -->
-  <section class="hero-fullscreen relative w-full h-screen min-h-[600px] overflow-hidden border-b border-black dark:border-black -mt-[72px] md:-mt-[104px]">
+  <section class="hero-fullscreen relative w-full h-screen min-h-[600px] overflow-hidden border-b border-black dark:border-black -mt-[64px] sm:-mt-[72px] xl:-mt-[104px]">
     <!-- Cinematic Video Background -->
     <div class="absolute inset-0 z-0">
       <VideoPlayer src="/video/hero.mp4" />
@@ -57,10 +65,11 @@ const structuredData = {
     <!-- Hero Content -->
     <div class="relative z-10 h-full flex flex-col justify-center px-6 sm:px-8 lg:px-24 pt-16 sm:pt-20">
       <div class="max-w-[1400px] mx-auto w-full">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[72px] xl:text-[90px] font-bold uppercase leading-[0.9] sm:leading-[0.85] tracking-tight mb-6 sm:mb-8 lg:mb-12 font-heading text-white">
+        <h1 class="hero-page-title mb-12 text-primary-foreground">
           Expert<br/>
           Construction<br/>
           Services For<br/>
+<<<<<<< HEAD
           <span class="text-white">Every Project</span>
         </h1>
         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
@@ -68,8 +77,29 @@ const structuredData = {
             Contact Us
           </a>
           <a href="/about" class="text-white hover:text-[#800000] text-xs sm:text-sm uppercase tracking-widest flex items-center gap-3 group transition-colors min-h-[44px]">
+=======
+          <span class="block mt-2 sm:mt-3">
+            <TextTypeAnimation
+              client:load
+              text={['Every Project', 'Your Vision', 'Dream Spaces', 'Modern Living']}
+              typingSpeed={75}
+              pauseDuration={1500}
+              deletingSpeed={50}
+              showCursor={true}
+              cursorCharacter="_"
+              className="text-primary-foreground inline tracking-[0.01em]"
+              cursorClassName="text-primary-foreground"
+            />
+          </span>
+        </h1>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+          <a href="/contact" class="bg-accent backdrop-blur-sm hover:bg-accent/90 border border-accent hover:border-accent text-primary-foreground py-3 sm:py-4 px-6 sm:px-10 text-center font-medium transition-all motion-base uppercase tracking-wide text-xs sm:text-sm inline-block min-h-[44px] flex items-center">
+            Contact Us
+          </a>
+          <a href="/about" class="text-primary-foreground hover:text-accent text-xs sm:text-sm uppercase tracking-widest flex items-center gap-3 group transition-colors min-h-[44px]">
+>>>>>>> origin/master
             <span>Learn More</span>
-            <div class="w-8 h-8 rounded-full border border-white/40 flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-all motion-base">
+            <div class="w-8 h-8 rounded-none border border-primary-foreground/40 flex items-center justify-center group-hover:bg-primary-foreground group-hover:text-primary transition-all motion-base">
               <svg class="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
               </svg>
@@ -89,11 +119,11 @@ const structuredData = {
   </section>
 
   <!-- Intro Section - 4-column grid -->
-  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-b border-black dark:border-black">
-    <div class="p-8 lg:border-r border-b lg:border-b-0 border-black dark:border-black">
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-b border-border">
+    <div class="p-8 lg:border-r border-b lg:border-b-0 border-border">
       <h2 class="font-bold text-lg mb-4 uppercase">Delivering iconic projects<br/>in partnership with our<br/>clients around the world</h2>
       <a class="inline-flex items-center gap-2 text-sm mt-8 group" href="/about">
-        <div class="w-6 h-6 rounded-full border border-primary dark:border-black flex items-center justify-center group-hover:bg-primary group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-primary transition-colors">
+        <div class="w-6 h-6 rounded-none border border-border flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
           <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
           </svg>
@@ -101,10 +131,10 @@ const structuredData = {
         <span class="uppercase text-xs tracking-wider">Learn more</span>
       </a>
     </div>
-    <div class="p-8 lg:border-r border-b md:border-b-0 border-black dark:border-black text-sm leading-relaxed">
+    <div class="p-8 lg:border-r border-b md:border-b-0 border-border text-sm leading-relaxed">
       With offices across the United Arab Emirates, we have a proven track record of delivering iconic and world-class projects for public and private clients in major cities and regional areas alike.
     </div>
-    <div class="p-8 lg:border-r border-b md:border-b-0 border-black dark:border-black text-sm leading-relaxed">
+    <div class="p-8 lg:border-r border-b md:border-b-0 border-border text-sm leading-relaxed">
       We seek collaborative, consultative relationships with clients and stakeholders to create common goals, moving standards forward in every phase of programme delivery.
     </div>
     <div class="p-8 text-sm leading-relaxed">
@@ -116,12 +146,21 @@ const structuredData = {
   <Stats client:visible />
 
   <!-- Services Overview - Carousel -->
+<<<<<<< HEAD
   <section id="services" class="border-t border-black dark:border-black bg-surface">
     <ServicesCarousel client:visible services={services} />
   </section>
 
   <!-- Featured Projects - Carousel Snippet -->
   <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={false} contentWrapperClassName="w-full p-12 lg:p-20 border-b border-black flex flex-col md:flex-row justify-between items-center">
+=======
+  <section id="services" class="border-t border-border bg-surface">
+    <ServicesCarousel client:load services={services} />
+  </section>
+
+  <!-- Featured Projects - Carousel Snippet -->
+  <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={false} contentWrapperClassName="w-full p-12 lg:p-20 border-b border-border flex flex-col md:flex-row justify-between items-center">
+>>>>>>> origin/master
     <div>
       <div class="flex items-center gap-3 mb-6">
         <div class="w-16 h-[2px] bg-accent"></div>
@@ -135,7 +174,7 @@ const structuredData = {
         </p>
         <a href="/projects" class="inline-flex items-center gap-3 text-sm uppercase tracking-widest hover:text-accent transition-colors group">
           <span>Explore Portfolio</span>
-          <div class="w-8 h-8 rounded-full border border-current/40 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all motion-base">
+          <div class="w-8 h-8 rounded-none border border-border flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all motion-base">
             <svg class="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
           </div>
         </a>
@@ -144,6 +183,7 @@ const structuredData = {
 
   <div class="w-full">
         <!-- Manually selected featured projects for now to ensure quality images -->
+<<<<<<< HEAD
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 h-full border-b border-black">
           <a href="/projects/naseem-albar-bridge" class="relative group h-[250px] sm:h-[400px] lg:h-[500px] overflow-hidden border-b lg:border-b-0 border-black lg:border-r block">
             <img src="/images/projects/naseem-albar-bridge/naseem.jpg" alt="Naseem Al Bar Bridge Construction Site" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" />
@@ -180,6 +220,35 @@ const structuredData = {
               <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
             </div>
           </a>
+=======
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 h-full border-b border-border">
+          <FeaturedProjectCard
+            client:visible
+            href="/projects/naseem-albar-bridge"
+            imgSrc="/images/projects/naseem-albar-bridge/naseem.jpg"
+            imgAlt="Naseem Al Bar Bridge Construction Site"
+            category="Infrastructure"
+            title="Naseem Al Bar Bridge"
+            className="border-b lg:border-b-0 border-border lg:border-r"
+          />
+          <FeaturedProjectCard
+            client:visible
+            href="/projects/etihad-rail-2f2-adp"
+            imgSrc="/images/projects/infrastructure/p082_img01_xref6357.jpeg"
+            imgAlt="Infrastructure Project"
+            category="Infrastructure"
+            title="Etihad Rail Projects"
+            className="border-b lg:border-b-0 border-border lg:border-r"
+          />
+          <FeaturedProjectCard
+            client:visible
+            href="/projects/utility-bridge"
+            imgSrc="/images/projects/utility-structure/photo_005.jpeg"
+            imgAlt="Utility Structure"
+            category="Industrial"
+            title="Utility Structures"
+          />
+>>>>>>> origin/master
     </div>
   </div>
   <!-- Gallery Section - Infinite Scroll Moved Here -->
@@ -188,7 +257,11 @@ const structuredData = {
 
 
   <!-- Why Choose ULTRACTION Section -->
+<<<<<<< HEAD
   <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={false} contentWrapperClassName="w-full p-12 lg:p-20 border-b border-black flex flex-col md:flex-row justify-between items-center">
+=======
+  <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={false} contentWrapperClassName="w-full p-12 lg:p-20 border-b border-border flex flex-col md:flex-row justify-between items-center">
+>>>>>>> origin/master
     <div>
       <div class="flex items-center gap-3 mb-6">
         <div class="w-16 h-[2px] bg-accent"></div>
@@ -203,6 +276,7 @@ const structuredData = {
       </div>
   </SectionBackground>
 
+<<<<<<< HEAD
   <div class="grid grid-cols-1 md:grid-cols-3 gap-0 px-0 max-w-full mx-auto border-b border-black">
     <div class="p-6 sm:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-black bg-surface text-center group hover:bg-primary/5 transition-colors">
       <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-all motion-base">
@@ -226,81 +300,199 @@ const structuredData = {
       </a>
       <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Safety First</h3>
       <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">Uncompromising commitment to health, safety, and environment (HSE) on every construction site.</p>
+=======
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-0 px-0 max-w-full mx-auto border-b border-border">
+    <div class="p-6 sm:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-border bg-surface text-center group hover:bg-primary/5 transition-colors">
+      <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-none flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all motion-base">
+        <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+      </a>
+      <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Quality Assurance</h3>
+      <p class="text-sm opacity-80 leading-relaxed">ISO-certified processes ensuring every project meets global standards of excellence and durability.</p>
+    </div>
+
+    <div class="p-6 sm:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-border bg-surface text-center group hover:bg-primary/5 transition-colors">
+      <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-none flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all motion-base">
+        <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+      </a>
+      <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">On-Time Delivery</h3>
+      <p class="text-sm opacity-80 leading-relaxed">Rigorous project management methodologies to ensure we deliver on schedule, every time.</p>
+    </div>
+
+    <div class="p-6 sm:p-8 lg:p-12 bg-surface text-center group hover:bg-primary/5 transition-colors">
+      <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-none flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all motion-base">
+        <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+      </a>
+      <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Safety First</h3>
+      <p class="text-sm opacity-80 leading-relaxed">Uncompromising commitment to health, safety, and environment (HSE) on every construction site.</p>
+>>>>>>> origin/master
     </div>
   </div>
 
   <!-- About Section - Numbered list -->
+<<<<<<< HEAD
   <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={true} showGrid={true} contentWrapperClassName="flex flex-col lg:flex-row">
     <div class="w-full lg:w-1/4 border-r border-black dark:border-black min-h-[200px] lg:min-h-[400px] overflow-hidden relative">
       <img alt="Naseem Al Bar Bridge Detail" class="w-full h-full object-cover" src="/images/projects/naseem-albar-bridge/photo_012.jpeg" />
+=======
+  <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={true} showGrid={true} contentWrapperClassName="flex flex-col lg:flex-row border-b border-border">
+    <div class="w-full lg:w-1/4 border-r border-border min-h-[200px] lg:min-h-[400px] overflow-hidden relative">
+      <img alt="Naseem Al Bar Bridge Detail" loading="lazy" class="w-full h-full object-cover" src="/images/projects/naseem-albar-bridge/photo_012.jpeg" />
+>>>>>>> origin/master
     </div>
     <div class="w-full lg:w-3/4 p-6 lg:p-20">
       <div class="flex items-center gap-3 mb-12">
         <div class="w-16 h-[2px] bg-accent"></div>
         <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">Our Commitment</span>
       </div>
+<<<<<<< HEAD
       <h2 class="text-2xl sm:text-4xl font-bold uppercase mb-12 lg:mb-20 max-w-2xl leading-[1.1]">
         We are committed to creating buildings that are not only functional and aesthetically pleasing.
       </h2>
         <div class="flex flex-col border-t border-black dark:border-black">
           <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-black dark:border-black gap-4 md:gap-16">
             <span class="text-[10px] sm:text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">About Us</span>
+=======
+      <h2 class="text-3xl sm:text-4xl font-bold uppercase mb-12 lg:mb-20 max-w-2xl leading-[1.1] font-heading">
+        We are committed to creating buildings that are not only functional and aesthetically pleasing.
+      </h2>
+        <div class="flex flex-col border-t border-border">
+          <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-border gap-4 md:gap-16">
+            <span class="text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">About Us</span>
+>>>>>>> origin/master
             <div class="flex gap-4 sm:gap-8 items-start flex-1">
-              <span class="text-xs sm:text-sm font-bold text-accent font-mono pt-1">[01]</span>
-              <p class="text-[13px] sm:text-sm uppercase tracking-widest leading-relaxed">ULTRACTION is a construction company that delivers exceptional projects across the UAE.</p>
+              <span class="text-sm font-bold text-accent font-mono pt-1">[01]</span>
+              <p class="text-sm border-l border-border pl-4 uppercase tracking-widest leading-relaxed">ULTRACTION is a construction company that delivers exceptional projects across the UAE.</p>
             </div>
           </div>
-          <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-black dark:border-black gap-4 md:gap-16">
-            <span class="text-[10px] sm:text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">Our Vision</span>
+          <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-border gap-4 md:gap-16">
+            <span class="text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">Our Vision</span>
             <div class="flex gap-4 sm:gap-8 items-start flex-1">
-              <span class="text-xs sm:text-sm font-bold text-accent font-mono pt-1">[02]</span>
-              <p class="text-[13px] sm:text-sm uppercase tracking-widest leading-relaxed">We believe that construction has the power to transform communities and lives.</p>
+              <span class="text-sm font-bold text-accent font-mono pt-1">[02]</span>
+              <p class="text-sm border-l border-border pl-4 uppercase tracking-widest leading-relaxed">We believe that construction has the power to transform communities and lives.</p>
             </div>
           </div>
-          <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-black dark:border-black gap-4 md:gap-16">
-            <span class="text-[10px] sm:text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">Our Approach</span>
+          <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-border gap-4 md:gap-16">
+            <span class="text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">Our Approach</span>
             <div class="flex gap-4 sm:gap-8 items-start flex-1">
-              <span class="text-xs sm:text-sm font-bold text-accent font-mono pt-1">[03]</span>
-              <p class="text-[13px] sm:text-sm uppercase tracking-widest leading-relaxed">We are committed to creating buildings that are not only functional and aesthetically pleasing.</p>
+              <span class="text-sm font-bold text-accent font-mono pt-1">[03]</span>
+              <p class="text-sm border-l border-border pl-4 uppercase tracking-widest leading-relaxed">We are committed to creating buildings that are not only functional and aesthetically pleasing.</p>
             </div>
           </div>
-          <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-black dark:border-black gap-4 md:gap-16">
-            <span class="text-[10px] sm:text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">Our Mission</span>
+          <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-border gap-4 md:gap-16">
+            <span class="text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">Our Mission</span>
             <div class="flex gap-4 sm:gap-8 items-start flex-1">
-              <span class="text-xs sm:text-sm font-bold text-accent font-mono pt-1">[04]</span>
-              <p class="text-[13px] sm:text-sm uppercase tracking-widest leading-relaxed">Our mission is to use our creativity and expertise to build spaces that make a positive impact on the world.</p>
+              <span class="text-sm font-bold text-accent font-mono pt-1">[04]</span>
+              <p class="text-sm border-l border-border pl-4 uppercase tracking-widest leading-relaxed">Our mission is to use our creativity and expertise to build spaces that make a positive impact on the world.</p>
             </div>
           </div>
         </div>
       </div>
   </SectionBackground>
 
+<<<<<<< HEAD
   <!-- CTO Section -->
   <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={true} showGrid={false} showAccentBlob={false} showBottomLine={false} contentWrapperClassName="flex flex-col md:flex-row">
      <div class="w-full md:w-1/2 min-h-[400px] md:min-h-[600px] relative order-2 md:order-1">
         <img src="/images/projects/naseem-albar-bridge/photo_044.jpeg" alt="Technical leadership at ULTRACTION" class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all motion-slow media-motion" />
+=======
+  <!-- General Manager Statement Section -->
+  <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={true} showGrid={false} showAccentBlob={false} showBottomLine={false} contentWrapperClassName="flex flex-col md:flex-row">
+     <div class="w-full md:w-1/2 min-h-[400px] md:min-h-[600px] relative order-2 md:order-1">
+        <img src="/images/projects/naseem-albar-bridge/photo_044.jpeg" alt="General Manager statement at ULTRACTION" loading="lazy" class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all motion-slow media-motion" />
+>>>>>>> origin/master
         <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
      </div>
      <div class="w-full md:w-1/2 p-12 lg:p-24 flex flex-col justify-center order-1 md:order-2">
         <div class="flex items-center gap-3 mb-8">
           <div class="w-16 h-[2px] bg-accent"></div>
+<<<<<<< HEAD
           <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">Technical Leadership</span>
+=======
+          <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">General Manager Statement</span>
+>>>>>>> origin/master
         </div>
           <blockquote class="text-3xl lg:text-4xl font-light leading-tight mb-10">
-            "We don't just build structures; we engineer legacies. Every project is an opportunity to push the boundaries of what's possible."
+            "At ULTRACTION, construction is more than assembling structures. It is about creating spaces that serve communities, uphold safety, and stand as lasting proof of quality and innovation."
           </blockquote>
           <cite class="not-italic">
-            <span class="block text-xl font-bold uppercase tracking-wider">Ahmed Hassan</span>
-            <span class="block text-sm text-primary/70 uppercase tracking-widest mt-2">Chief Technical Officer</span>
+            <span class="block text-xl font-bold uppercase tracking-wider">Engr. Wael Mahmah</span>
+            <span class="block text-sm text-primary/70 uppercase tracking-widest mt-2">General Manager</span>
           </cite>
      </div>
   </SectionBackground>
 
   <!-- Client Partners Section -->
   <ClientPartners client:visible />
+<<<<<<< HEAD
+=======
+
+  <!-- Final CTA Section -->
+  <section class="relative bg-surface text-primary overflow-hidden border-y border-primary/20">
+    <div class="absolute inset-0 pointer-events-none">
+      <div
+        class="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, currentColor 1px, transparent 1px),
+            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px'
+        }}
+      />
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse-slow" />
+    </div>
+
+    <div class="relative z-10 px-6 md:px-12 lg:px-24 py-20 md:py-28 lg:py-32">
+      <div class="flex flex-col items-center justify-center text-center max-w-4xl mx-auto">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-[2px] bg-accent"></div>
+          <span class="text-xs font-bold uppercase tracking-[0.3em] text-accent">
+            Work With Us
+          </span>
+          <div class="w-12 h-[2px] bg-accent"></div>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading leading-[0.95] tracking-tight mb-8 max-w-3xl">
+          Build your next project with a team focused on
+          <br />
+          <span class="italic font-light text-primary/50 scale-y-75 inline-block">
+            safety, precision, and dependable delivery.
+          </span>
+        </h2>
+
+        <a
+          class="group relative inline-flex items-center gap-3 px-10 py-5 bg-accent text-primary-foreground overflow-hidden transition-all duration-300 hover:bg-accent/90"
+          href="/contact"
+        >
+          <span class="relative z-10 text-xs font-bold uppercase tracking-[0.2em]">
+            Connect Today
+          </span>
+          <svg
+            class="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width={2}
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+  </section>
+>>>>>>> origin/master
 </Layout>
 
 <!-- Page-specific structured data -->
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/master

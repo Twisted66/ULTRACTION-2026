@@ -1,15 +1,22 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+<<<<<<< HEAD
 import { motion, useMotionValue, animate } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Player } from '@remotion/player';
 import { AbsoluteFill, Img, Sequence, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+=======
+import { motion, useMotionValue, animate, AnimatePresence } from 'framer-motion';
+import type { PanInfo } from 'framer-motion';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
+>>>>>>> origin/master
 import type { Service } from '../../data/services';
 
 interface Props {
   services: Service[];
 }
 
+<<<<<<< HEAD
 const SLIDE_FPS = 30;
 const SLIDE_DURATION_IN_FRAMES = 72;
 const TRANSITION_FRAMES = 18;
@@ -99,6 +106,10 @@ const ServicesRemotionShowcase: React.FC<ServicesRemotionShowcaseProps> = ({ ser
   );
 };
 
+=======
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+
+>>>>>>> origin/master
 const ServicesCarousel: React.FC<Props> = ({ services }) => {
   const viewportRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
@@ -108,7 +119,10 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+<<<<<<< HEAD
   const [isAutoplayEnabled, setIsAutoplayEnabled] = useState(true);
+=======
+>>>>>>> origin/master
 
   const cardsPerView = useMemo(() => {
     if (viewportWidth >= 1280) {
@@ -136,6 +150,14 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
     };
 
     updateWidth();
+<<<<<<< HEAD
+=======
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', updateWidth);
+      return () => window.removeEventListener('resize', updateWidth);
+    }
+
+>>>>>>> origin/master
     const observer = new ResizeObserver(updateWidth);
     observer.observe(viewportRef.current);
 
@@ -150,9 +172,12 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const applyMotionPreference = () => {
       setPrefersReducedMotion(mediaQuery.matches);
+<<<<<<< HEAD
       if (mediaQuery.matches) {
         setIsAutoplayEnabled(false);
       }
+=======
+>>>>>>> origin/master
     };
 
     applyMotionPreference();
@@ -177,7 +202,11 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
   }, [activeIndex, stepWidth, x]);
 
   useEffect(() => {
+<<<<<<< HEAD
     if (isPaused || isDragging || maxIndex <= 0 || !isAutoplayEnabled || prefersReducedMotion) {
+=======
+    if (isPaused || isDragging || maxIndex <= 0 || prefersReducedMotion) {
+>>>>>>> origin/master
       return;
     }
 
@@ -186,7 +215,11 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
     }, 4200);
 
     return () => window.clearInterval(autoplay);
+<<<<<<< HEAD
   }, [isPaused, isDragging, isAutoplayEnabled, maxIndex, prefersReducedMotion]);
+=======
+  }, [isPaused, isDragging, maxIndex, prefersReducedMotion]);
+>>>>>>> origin/master
 
   const goToPrevious = () => {
     setActiveIndex((current) => (current <= 0 ? maxIndex : current - 1));
@@ -196,22 +229,52 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
     setActiveIndex((current) => (current >= maxIndex ? 0 : current + 1));
   };
 
+<<<<<<< HEAD
   const handleDragEnd = () => {
+=======
+  const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+>>>>>>> origin/master
     setIsDragging(false);
 
     if (stepWidth <= 0) {
       return;
     }
 
+<<<<<<< HEAD
+=======
+    const dragThreshold = stepWidth * 0.18;
+    if (info.offset.x <= -dragThreshold) {
+      goToNext();
+      return;
+    }
+
+    if (info.offset.x >= dragThreshold) {
+      goToPrevious();
+      return;
+    }
+
+>>>>>>> origin/master
     const projectedIndex = Math.round(-x.get() / stepWidth);
     setActiveIndex(clamp(projectedIndex, 0, maxIndex));
   };
 
+<<<<<<< HEAD
   const totalSlideDuration = Math.max(services.length * SLIDE_DURATION_IN_FRAMES, SLIDE_DURATION_IN_FRAMES);
 
   return (
     <div className="w-full bg-surface border-b border-black">
       <div className="flex flex-col lg:flex-row justify-between gap-10 lg:gap-8 px-8 lg:px-16 py-16 lg:py-20 border-b border-black">
+=======
+  if (!services.length) {
+    return null;
+  }
+
+  const activeService = services[activeIndex] ?? services[0];
+
+  return (
+    <div className="w-full bg-surface border-b border-border">
+      <div className="flex flex-col lg:flex-row justify-between gap-10 lg:gap-8 px-8 lg:px-16 py-16 lg:py-20 border-b border-border">
+>>>>>>> origin/master
         <div className="max-w-4xl">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-16 h-[2px] bg-accent"></div>
@@ -224,7 +287,11 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
           </h2>
           <a
             href="/services"
+<<<<<<< HEAD
             className="inline-flex items-center gap-3 px-6 py-3 border border-black text-xs sm:text-sm uppercase tracking-[0.2em] font-semibold hover:bg-primary hover:text-white transition-colors motion-base"
+=======
+            className="inline-flex items-center gap-3 px-6 py-3 border border-border text-xs sm:text-sm uppercase tracking-[0.2em] font-semibold hover:bg-primary hover:text-white transition-colors motion-base"
+>>>>>>> origin/master
           >
             <span>Explore All Services</span>
             <ArrowUpRight size={16} />
@@ -240,6 +307,7 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
           <div className="flex items-center gap-2">
             <button
               type="button"
+<<<<<<< HEAD
               onClick={() => setIsAutoplayEnabled((current) => !current)}
               className="px-3 h-10 border border-black text-[10px] uppercase tracking-[0.2em] font-semibold hover:bg-primary hover:text-white transition-colors motion-base"
               aria-label={isAutoplayEnabled ? 'Pause services carousel autoplay' : 'Play services carousel autoplay'}
@@ -251,6 +319,10 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
               type="button"
               onClick={goToPrevious}
               className="w-10 h-10 border border-black flex items-center justify-center hover:bg-primary hover:text-white transition-colors motion-base"
+=======
+              onClick={goToPrevious}
+              className="w-10 h-10 border border-border flex items-center justify-center hover:bg-primary hover:text-white transition-colors motion-base"
+>>>>>>> origin/master
               aria-label="Previous services"
             >
               <ArrowLeft size={16} />
@@ -258,7 +330,11 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
             <button
               type="button"
               onClick={goToNext}
+<<<<<<< HEAD
               className="w-10 h-10 border border-black flex items-center justify-center hover:bg-primary hover:text-white transition-colors motion-base"
+=======
+              className="w-10 h-10 border border-border flex items-center justify-center hover:bg-primary hover:text-white transition-colors motion-base"
+>>>>>>> origin/master
               aria-label="Next services"
             >
               <ArrowRight size={16} />
@@ -267,6 +343,7 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
         </div>
       </div>
 
+<<<<<<< HEAD
       <div className="border-b border-black h-[230px] md:h-[280px] lg:h-[340px]">
         <Player
           component={ServicesRemotionShowcase}
@@ -281,11 +358,38 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
           acknowledgeRemotionLicense
           style={{ width: '100%', height: '100%' }}
         />
+=======
+      <div className="relative overflow-hidden border-b border-border h-[230px] md:h-[280px] lg:h-[340px] bg-black">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.img
+            key={activeService.id}
+            src={activeService.image}
+            alt={activeService.title}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.02 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.55, ease: 'easeOut' }}
+            loading="eager"
+          />
+        </AnimatePresence>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/20" />
+        <div className="absolute bottom-0 left-0 p-8 md:p-10 text-white">
+          <p className="text-[10px] md:text-xs uppercase tracking-[0.3em] opacity-80 mb-2">
+            {String(activeIndex + 1).padStart(2, '0')} / {String(services.length).padStart(2, '0')}
+          </p>
+          <h3 className="text-xl md:text-3xl font-heading uppercase max-w-3xl">{activeService.title}</h3>
+        </div>
+>>>>>>> origin/master
       </div>
 
       <div
         ref={viewportRef}
         className="overflow-hidden cursor-grab active:cursor-grabbing"
+<<<<<<< HEAD
+=======
+        style={{ touchAction: 'pan-y' }}
+>>>>>>> origin/master
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onFocusCapture={() => setIsPaused(true)}
@@ -304,8 +408,13 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
           style={{ x }}
         >
           {services.map((service, index) => (
+<<<<<<< HEAD
             <article key={service.id} className="basis-full md:basis-1/2 xl:basis-1/3 shrink-0 border-r border-black flex flex-col group">
               <div className="aspect-[4/3] overflow-hidden relative border-b border-black">
+=======
+            <article key={service.id} className="basis-full md:basis-1/2 xl:basis-1/3 shrink-0 border-r border-border flex flex-col group">
+              <div className="aspect-[4/3] overflow-hidden relative border-b border-border">
+>>>>>>> origin/master
                 <img
                   src={service.image}
                   alt={service.title}
@@ -322,15 +431,26 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
 
               <div className="p-7 md:p-8 flex-1 flex flex-col justify-between min-h-[240px] md:min-h-[260px] bg-surface group-hover:bg-white transition-colors duration-300">
                 <div>
+<<<<<<< HEAD
                   <h3 className="text-lg md:text-xl font-heading mb-5 group-hover:text-accent transition-colors text-black uppercase leading-tight">
                     {service.title}
                   </h3>
                   <p className="text-sm leading-relaxed mb-7 text-black/80 line-clamp-4">{service.description}</p>
+=======
+                  <h3 className="text-lg md:text-xl font-heading mb-5 group-hover:text-accent transition-colors text-foreground uppercase leading-tight">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed mb-7 text-foreground/80 line-clamp-4">{service.description}</p>
+>>>>>>> origin/master
 
                   {!!service.subservices?.length && (
                     <div className="grid grid-cols-1 gap-2">
                       {service.subservices.slice(0, 3).map((sub, subIndex) => (
+<<<<<<< HEAD
                         <div key={`${service.id}-${subIndex}`} className="flex items-center gap-3 text-xs uppercase tracking-widest text-black/70">
+=======
+                        <div key={`${service.id}-${subIndex}`} className="flex items-center gap-3 text-xs uppercase tracking-widest text-foreground/70">
+>>>>>>> origin/master
                           <span className="w-4 h-[1px] bg-accent"></span>
                           {sub}
                         </div>
@@ -341,12 +461,20 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
 
                 <a
                   href={service.link}
+<<<<<<< HEAD
                   className="mt-8 pt-6 border-t border-black/15 flex justify-between items-center text-black group/link"
+=======
+                  className="mt-8 pt-6 border-t border-border/15 flex justify-between items-center text-foreground group/link"
+>>>>>>> origin/master
                 >
                   <span className="text-xs uppercase tracking-widest font-semibold opacity-75 group-hover:opacity-100 transition-opacity">
                     View Service
                   </span>
+<<<<<<< HEAD
                   <div className="w-8 h-8 rounded-full border border-black/30 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all motion-base">
+=======
+                  <div className="w-8 h-8 rounded-full border border-border/30 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all motion-base">
+>>>>>>> origin/master
                     <ArrowUpRight size={14} />
                   </div>
                 </a>
@@ -356,7 +484,11 @@ const ServicesCarousel: React.FC<Props> = ({ services }) => {
         </motion.div>
       </div>
 
+<<<<<<< HEAD
       <div className="md:hidden py-5 flex justify-center border-t border-black">
+=======
+      <div className="md:hidden py-5 flex justify-center border-t border-border">
+>>>>>>> origin/master
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest opacity-60">
           <ArrowLeft size={14} />
           <span>Swipe</span>

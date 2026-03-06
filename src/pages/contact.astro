@@ -12,6 +12,12 @@ const description = "Get in touch with ULTRACTION for your construction project.
 const allowedSubjects = new Set(['project', 'careers', 'other']);
 const querySubject = Astro.url.searchParams.get('subject')?.toLowerCase() ?? '';
 const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
+const roleFromQuery = (Astro.url.searchParams.get('role') ?? '').trim();
+const selectedRole = roleFromQuery.slice(0, 120);
+const messagePlaceholder =
+  selectedSubject === 'careers' && selectedRole
+    ? `Applying for ${selectedRole}. Share your experience, availability, and CV details.`
+    : 'Tell us about your project...';
 ---
 
 <Layout
@@ -19,10 +25,14 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
   description={description}
   image="/logo/UGC-HEADER.png"
 >
-  <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-104px)] border-t border-border">
+  <div class="grid grid-cols-1 xl:grid-cols-2 min-h-[calc(100vh-72px)] xl:min-h-[calc(100vh-104px)] border-t border-border">
       
       <!-- Left: Form (Brand Beige) -->
+<<<<<<< HEAD
       <div class="bg-surface text-primary p-8 lg:p-20 flex flex-col justify-center order-2 lg:order-1 relative z-10 border-r border-primary/20 overflow-hidden">
+=======
+      <div class="bg-surface text-primary p-8 lg:p-20 flex flex-col justify-center order-2 xl:order-1 relative z-10 xl:border-r border-primary/20 overflow-hidden">
+>>>>>>> origin/master
         {/* Grid pattern overlay */}
         <div class="absolute inset-0 pointer-events-none opacity-[0.03]" style={{
           backgroundImage: `
@@ -37,7 +47,7 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
 
         <div class="max-w-xl mx-auto w-full relative z-10">
           <span class="text-xs font-bold uppercase tracking-widest opacity-80 mb-4 block">Contact Us</span>
-          <h1 class="text-5xl lg:text-7xl font-bold uppercase leading-none mb-12 font-heading">
+          <h1 class="hero-page-title mb-12 hero-text-reveal opacity-0">
             Building<br/><span class="text-accent italic">The Future</span>.
           </h1>
           <p class="text-lg mb-6 opacity-80 leading-relaxed">
@@ -48,7 +58,7 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
             Fields marked with <span class="text-accent">*</span> are required.
           </p>
           
-          <form class="flex flex-col gap-8" method="POST" action="/api/contact" data-contact-form>
+          <form class="flex flex-col gap-8" method="POST" action="/api/contact" data-contact-form data-role={selectedRole}>
             <div class="group">
               <label class="block text-xs uppercase font-bold tracking-[0.2em] mb-3 opacity-70 text-accent" for="name">
                 <span class="flex items-center gap-2">
@@ -91,7 +101,11 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                    Message <span class="text-accent">*</span>
                  </span>
                </label>
+<<<<<<< HEAD
                <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder="Tell us about your project..." required aria-required="true"></textarea>
+=======
+               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true"></textarea>
+>>>>>>> origin/master
             </div>
 
             <div class="group">
@@ -117,7 +131,11 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                 magnetic={false}
                 ripple={false}
                 size="lg"
+<<<<<<< HEAD
                 class="w-full sm:w-auto relative overflow-hidden bg-[#800000] text-white hover:bg-[#800000] focus-visible:outline-[#800000]"
+=======
+                class="w-full sm:w-auto relative overflow-hidden bg-accent text-primary-foreground hover:bg-accent/90 focus-visible:outline-accent"
+>>>>>>> origin/master
                 data-submit-button
               >
                 <span data-submit-label class="flex items-center gap-4 transition-all duration-300">
@@ -136,6 +154,7 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
         </div>
       </div>
 
+<<<<<<< HEAD
       <!-- Right: Globe and Details (Default Background) -->
       <div class="bg-background relative min-h-[50vh] lg:min-h-screen order-1 lg:order-2 flex flex-col items-center">
           
@@ -197,15 +216,86 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                           www.albawady.sa
                         </a>
                       </div>
+=======
+      <!-- Right: Globe (Default Background) -->
+      <div class="bg-background relative isolate z-0 min-h-[50vh] xl:min-h-screen order-1 xl:order-2 overflow-hidden flex flex-col">
+          <div class="relative z-0 h-[44vh] sm:h-[52vh] md:h-[58vh] xl:h-[62vh] overflow-hidden border-b border-primary/10">
+            <div class="absolute inset-0 flex items-center justify-center">
+                 <Globe3DDemo client:only="react" showOfficeMarkers={false} className="h-[clamp(360px,56vh,900px)] sm:h-[clamp(420px,64vh,900px)] xl:h-[clamp(520px,72vh,920px)] w-[min(135%,980px)] sm:w-[min(145%,1100px)] translate-y-8 sm:translate-y-2 xl:-translate-y-6 2xl:-translate-y-16" />
+            </div>
+          </div>
+
+          {/* Grid pattern overlay */}
+          <div class="absolute inset-0 pointer-events-none opacity-[0.03]" style={{
+            backgroundImage: `
+              linear-gradient(to right, currentColor 1px, transparent 1px),
+              linear-gradient(to bottom, currentColor 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px'
+          }}></div>
+
+          {/* Animated gradient accent */}
+          <div class="absolute top-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+          <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent pointer-events-none z-10"></div>
+
+          <!-- Location Card -->
+          <div
+            class="relative z-20 px-4 sm:px-6 xl:px-10 py-6 xl:py-8 pointer-events-none"
+            aria-labelledby="contact-locations"
+          >
+            <div class="text-primary pointer-events-auto bg-surface/95 backdrop-blur-xl border border-border w-full max-w-[920px] overflow-hidden rounded-none mx-auto shadow-[0_24px_60px_rgba(0,0,0,0.28)]">
+              <div class="bg-accent px-8 py-4">
+                <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-white">Main Headquarters</h3>
+              </div>
+
+              <div class="p-8 grid gap-8 xl:grid-cols-2">
+                <div>
+                  <h2 id="contact-locations" class="sr-only">Contact Locations</h2>
+                  <div class="space-y-7 text-sm">
+                    <div class="group">
+                      <h4 class="font-bold uppercase tracking-[0.2em] text-[10px] text-accent mb-3">Abu Dhabi, UAE</h4>
+                      <p class="text-primary leading-relaxed font-semibold text-base">
+                        Office 02, 1st Floor, 9 Ar Raha 6 St, Musaffah M3
+                      </p>
+                      <div class="mt-5 flex flex-col gap-2 text-[14px] text-primary italic font-medium">
+                        <span class="flex items-center gap-2">T: <a href="tel:+97126501694" class="not-italic font-bold hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">+971 2 650 1694</a></span>
+                        <span class="flex items-center gap-2">M: <a href="tel:+971564444045" class="not-italic font-bold hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">+971 56 444 4045</a></span>
+                        <a href="mailto:info@ultraction.ae" class="mt-1 not-italic font-bold text-accent hover:text-primary transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary w-fit">info@ultraction.ae</a>
+                      </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-primary/20">
+                      <h4 class="font-bold uppercase tracking-[0.2em] text-[10px] text-accent mb-3">KSA Branch</h4>
+                      <p class="text-primary leading-relaxed font-semibold text-base mb-1">AL Bawady International Contracting LLC</p>
+                      <div class="flex flex-col gap-2 text-[14px] text-primary italic font-medium">
+                        <span class="flex items-center gap-2">T: <a href="tel:+966500002281" class="not-italic font-bold hover:text-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">+966 50 000 2281</a></span>
+                        <a
+                          href="https://www.albawady.sa"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="not-italic font-bold text-accent underline hover:text-primary transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary w-fit"
+                        >
+                          www.albawady.sa
+                        </a>
+                      </div>
+>>>>>>> origin/master
                     </div>
                   </div>
                 </div>
 
+<<<<<<< HEAD
                 <div class="flex flex-col gap-6">
                   <h4 class="text-xs font-bold uppercase tracking-[0.2em] text-accent">Office Location</h4>
                   <div class="relative aspect-video xl:aspect-square overflow-hidden rounded-xl border border-primary/10 shadow-inner">
                     <iframe
                       src="https://maps.google.com/maps?q=24.3713,54.5205+(Office+02,+1st+Floor,+9+Ar+Raha+6+St,+Musaffah+M3,+Abu+Dhabi,+UAE)&t=&z=15&ie=UTF8&iwloc=&output=embed"
+=======
+                <div class="flex flex-col">
+                  <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-3">Headquarters Map</h4>
+                  <div class="relative aspect-square min-h-[180px] overflow-hidden rounded-none border border-primary/20 flex-1">
+                    <iframe
+                      src="https://www.google.com/maps?q=24.3713,54.5205+(Office+02,+1st+Floor,+9+Ar+Raha+6+St,+Musaffah+M3,+Abu+Dhabi,+UAE)&z=15&output=embed"
+>>>>>>> origin/master
                       width="100%"
                       height="100%"
                       style="border: 0;"
@@ -217,6 +307,7 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                     ></iframe>
                   </div>
 
+<<<<<<< HEAD
                   <div class="flex gap-4">
                     <a
                       href="https://maps.google.com/?q=24.3713,54.5205"
@@ -244,12 +335,44 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
                         <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                         </svg>
+=======
+                  <div class="mt-3 flex gap-2">
+                    <a
+                      href="https://www.google.com/maps?q=24.3713,54.5205"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex-1 bg-background/60 backdrop-blur-md px-3 py-2 border border-primary/15 hover:border-accent/60 hover:bg-background transition-colors group"
+                    >
+                      <span class="block text-[9px] uppercase tracking-widest text-accent font-bold mb-0.5">Abu Dhabi HQ</span>
+                      <span class="text-[10px] font-semibold text-primary flex items-center gap-1">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        Directions
+                      </span>
+                    </a>
+                    <a
+                      href="https://www.google.com/maps?q=24.7136,46.6753"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex-1 bg-background/60 backdrop-blur-md px-3 py-2 border border-primary/15 hover:border-accent/60 hover:bg-background transition-colors group"
+                    >
+                      <span class="block text-[9px] uppercase tracking-widest text-primary font-bold mb-0.5">KSA Branch</span>
+                      <span class="text-[10px] font-semibold text-primary flex items-center gap-1">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        Directions
+>>>>>>> origin/master
                       </span>
                     </a>
                   </div>
                 </div>
               </div>
             </div>
+<<<<<<< HEAD
 
           </div>
       </div>
@@ -257,6 +380,11 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
           </div>
       </div>
 
+=======
+          </div>
+      </div>
+
+>>>>>>> origin/master
     </div>
 
 </Layout>
@@ -321,8 +449,31 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
     const submitIcon = form.querySelector('[data-submit-icon]');
     const statusBox = document.getElementById('form-status');
     const subjectSelect = form.querySelector('#subject');
+<<<<<<< HEAD
     const fileInput = document.querySelector('#attachment');
     const fileNameDisplay = document.getElementById('file-name');
+=======
+    const messageInput = form.querySelector('#message');
+    const fileInput = document.querySelector('#attachment');
+    const fileNameDisplay = document.getElementById('file-name');
+    const roleFromQuery = form.dataset.role?.trim() ?? '';
+
+    const prefillCareerApplicationMessage = () => {
+      if (!(subjectSelect instanceof HTMLSelectElement) || !(messageInput instanceof HTMLTextAreaElement)) return;
+      if (subjectSelect.value !== 'careers' || !roleFromQuery || messageInput.value.trim()) return;
+      messageInput.value =
+        `Applying for: ${roleFromQuery}\n\n` +
+        'Years of experience:\n' +
+        'Current location:\n' +
+        'Availability:\n' +
+        'CV/Portfolio link:\n';
+    };
+
+    prefillCareerApplicationMessage();
+    if (subjectSelect instanceof HTMLSelectElement) {
+      subjectSelect.addEventListener('change', prefillCareerApplicationMessage);
+    }
+>>>>>>> origin/master
 
     // Display selected file name
     if (fileInput instanceof HTMLInputElement && fileNameDisplay) {
@@ -452,10 +603,18 @@ const selectedSubject = allowedSubjects.has(querySubject) ? querySubject : '';
   }
 
   /* Map marker button hover effects */
+<<<<<<< HEAD
+=======
+  a[href*='google.com/maps'] svg,
+>>>>>>> origin/master
   a[href*='maps.google.com'] svg {
     transition: transform 0.3s ease;
   }
 
+<<<<<<< HEAD
+=======
+  a[href*='google.com/maps']:hover svg,
+>>>>>>> origin/master
   a[href*='maps.google.com']:hover svg {
     transform: translateY(-2px);
   }

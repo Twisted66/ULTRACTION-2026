@@ -165,11 +165,16 @@ function getCategoryIcon(category: string): string {
         </div>
 
         <!-- Enhanced title with better typography -->
+<<<<<<< HEAD
         <h1 class="project-hero-title font-bold text-white mb-6 uppercase leading-[0.92] font-heading">
+=======
+        <h1 class="project-hero-title hero-page-title text-white mb-6">
+>>>>>>> origin/master
           <span class="block">{titleLine1}</span>
           {titleLine2 && <span class="block mt-1">{titleLine2}</span>}
         </h1>
 
+<<<<<<< HEAD
         <!-- Enhanced location with better styling -->
         <p class="project-hero-location text-base md:text-lg text-white/80 font-light max-w-2xl flex items-center gap-3">
           <svg class="w-4 h-4 text-accent/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -178,6 +183,19 @@ function getCategoryIcon(category: string): string {
           </svg>
           {project.data.location}
         </p>
+=======
+        <!-- Hero metadata -->
+        <div class="project-hero-meta">
+          <p class="project-hero-meta-item">
+            <span class="project-hero-meta-label">Project</span>
+            <span class="project-hero-meta-value">{project.data.title}</span>
+          </p>
+          <p class="project-hero-meta-item">
+            <span class="project-hero-meta-label">Location</span>
+            <span class="project-hero-meta-value">{project.data.location}</span>
+          </p>
+        </div>
+>>>>>>> origin/master
 
         <!-- Scroll indicator -->
         <div class="mt-12 animate-bounce">
@@ -239,6 +257,7 @@ function getCategoryIcon(category: string): string {
 
         <!-- Main Content Area -->
         <div class="project-main-content">
+<<<<<<< HEAD
           <!-- Enhanced Bento Gallery -->
           <div class="project-poster-shell" data-project-bento data-images={JSON.stringify(projectImages)}>
             <!-- Decorative frame -->
@@ -252,6 +271,13 @@ function getCategoryIcon(category: string): string {
             <!-- Enhanced controls -->
             {showBentoPager && (
               <div class="project-bento-controls">
+=======
+          <!-- Enhanced Bento Gallery -->
+          <div class="project-poster-shell" data-project-bento data-images={JSON.stringify(projectImages)}>
+            <!-- Enhanced controls -->
+            {showBentoPager && (
+              <div class="project-bento-controls">
+>>>>>>> origin/master
                 <button type="button" class="project-bento-control" data-bento-prev aria-label="Previous images">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -311,12 +337,20 @@ function getCategoryIcon(category: string): string {
             </div>
           </div>
 
+<<<<<<< HEAD
           <!-- Project Overview Content -->
           <article class="project-overview-content">
             <h2 class="content-section-title">Project Overview</h2>
             <div class="prose project-prose prose-lg dark:prose-invert max-w-none prose-headings:font-heading prose-headings:uppercase prose-p:font-light prose-li:font-light">
               <Content />
             </div>
+=======
+          <!-- Project Overview Content -->
+          <article class="project-overview-content">
+            <div class="prose project-prose prose-lg dark:prose-invert max-w-none prose-headings:font-heading prose-headings:uppercase prose-p:font-light prose-li:font-light">
+              <Content />
+            </div>
+>>>>>>> origin/master
           </article>
         </div>
       </div>
@@ -521,12 +555,19 @@ function getCategoryIcon(category: string): string {
   }
 
   /* Enhanced title */
+<<<<<<< HEAD
   .project-hero-title {
     font-size: clamp(2.5rem, 5vw, 5.5rem);
     letter-spacing: -0.02em;
     max-width: 28ch;
     background: linear-gradient(
       135deg,
+=======
+  .project-hero-title {
+    max-width: 28ch;
+    background: linear-gradient(
+      135deg,
+>>>>>>> origin/master
       hsl(0 0% 100%) 0%,
       hsl(0 0% 98%) 30%,
       hsl(0 0% 92%) 70%,
@@ -534,6 +575,7 @@ function getCategoryIcon(category: string): string {
     );
     -webkit-background-clip: text;
     background-clip: text;
+<<<<<<< HEAD
     color: transparent;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 4px 20px hsl(0 0% 0% / 0.5));
@@ -541,6 +583,14 @@ function getCategoryIcon(category: string): string {
     flex-direction: column;
     line-height: 0.95;
   }
+=======
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 20px hsl(0 0% 0% / 0.5));
+    display: flex;
+    flex-direction: column;
+  }
+>>>>>>> origin/master
 
   .project-hero-title > span {
     display: block;
@@ -565,16 +615,51 @@ function getCategoryIcon(category: string): string {
     }
   }
 
+<<<<<<< HEAD
   /* Enhanced location */
   .project-hero-location {
     letter-spacing: 0.03em;
     font-weight: 400;
   }
+=======
+  /* Hero metadata */
+  .project-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .project-hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.65rem 0.8rem;
+    min-width: min(100%, 280px);
+    border: 1px solid hsl(0 0% 100% / 0.16);
+    background: hsl(0 0% 100% / 0.08);
+    backdrop-filter: blur(4px);
+  }
+
+  .project-hero-meta-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: hsl(0 0% 100% / 0.62);
+  }
+
+  .project-hero-meta-value {
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    color: hsl(0 0% 100% / 0.92);
+  }
+>>>>>>> origin/master
 
   /* ============================================
      PROJECT STATS SIDEBAR
      ============================================ */
 
+<<<<<<< HEAD
   .project-stats-sidebar {
     position: relative;
     padding: clamp(1.2rem, 1rem + 1.2vw, 2rem);
@@ -595,6 +680,15 @@ function getCategoryIcon(category: string): string {
     border: 1px solid hsl(var(--accent) / 0.12);
     pointer-events: none;
   }
+=======
+  .project-stats-sidebar {
+    position: relative;
+  }
+
+  .project-stats-sidebar::before {
+    content: none;
+  }
+>>>>>>> origin/master
 
   .project-stats-list {
     display: flex;
@@ -784,6 +878,7 @@ function getCategoryIcon(category: string): string {
      ENHANCED POSTER SHELL
      ============================================ */
 
+<<<<<<< HEAD
   .project-poster-shell {
     position: relative;
     padding: clamp(1rem, 0.8rem + 1vw, 1.8rem);
@@ -851,6 +946,21 @@ function getCategoryIcon(category: string): string {
     right: -1px;
     border-width: 0 2px 2px 0;
   }
+=======
+  .project-poster-shell {
+    position: relative;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    overflow: visible;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-poster-shell::before {
+    content: none;
+  }
+>>>>>>> origin/master
 
   /* Enhanced controls */
   .project-bento-controls {
@@ -957,6 +1067,7 @@ function getCategoryIcon(category: string): string {
     background: linear-gradient(90deg, hsl(var(--accent)), transparent);
   }
 
+<<<<<<< HEAD
   .content-section-title {
     font-size: 1.5rem;
     letter-spacing: 0.08em;
@@ -977,6 +1088,9 @@ function getCategoryIcon(category: string): string {
   }
 
   /* Prose styling */
+=======
+  /* Prose styling */
+>>>>>>> origin/master
   .project-prose :global(h2) {
     position: relative;
     display: inline-block;
@@ -1035,12 +1149,19 @@ function getCategoryIcon(category: string): string {
      LAYOUT & RESPONSIVE
      ============================================ */
 
+<<<<<<< HEAD
   .project-details-section {
     position: relative;
     background:
       radial-gradient(1400px 600px at -10% -20%, hsl(var(--accent) / 0.06), transparent 50%),
       linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.98) 100%);
   }
+=======
+  .project-details-section {
+    position: relative;
+    background: transparent;
+  }
+>>>>>>> origin/master
 
   .project-overview-bento-layout {
     display: grid;
@@ -1054,6 +1175,7 @@ function getCategoryIcon(category: string): string {
     flex-direction: column;
   }
 
+<<<<<<< HEAD
   .project-overview-content {
     position: relative;
     padding: clamp(1.5rem, 1.2rem + 1.2vw, 2.5rem);
@@ -1061,6 +1183,15 @@ function getCategoryIcon(category: string): string {
     border: 1px solid hsl(var(--primary) / 0.1);
     box-shadow: 0 15px 40px -25px hsl(var(--primary) / 0.3);
   }
+=======
+  .project-overview-content {
+    position: relative;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+>>>>>>> origin/master
 
   /* Tablet styles */
   @media (max-width: 1023px) {
@@ -1078,6 +1209,7 @@ function getCategoryIcon(category: string): string {
       grid-row: span 1;
     }
 
+<<<<<<< HEAD
     .project-poster-frame {
       inset: 10px;
     }
@@ -1085,6 +1217,11 @@ function getCategoryIcon(category: string): string {
     .project-overview-bento-layout {
       grid-template-columns: 1fr;
       gap: 1.25rem;
+=======
+    .project-overview-bento-layout {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+>>>>>>> origin/master
     }
 
     .project-stats-sidebar {
@@ -1107,7 +1244,11 @@ function getCategoryIcon(category: string): string {
   }
 
   /* Mobile styles */
+<<<<<<< HEAD
   @media (max-width: 640px) {
+=======
+  @media (max-width: 640px) {
+>>>>>>> origin/master
     .project-hero-section {
       min-height: 600px;
     }
@@ -1126,6 +1267,7 @@ function getCategoryIcon(category: string): string {
       grid-column: span 1;
     }
 
+<<<<<<< HEAD
     .project-poster-shell {
       padding: 1rem;
     }
@@ -1133,6 +1275,16 @@ function getCategoryIcon(category: string): string {
     .project-poster-frame {
       inset: 6px;
     }
+=======
+    .project-poster-shell {
+      margin-bottom: 1.25rem;
+    }
+
+    .project-hero-meta-item {
+      width: 100%;
+      min-width: 0;
+    }
+>>>>>>> origin/master
 
     .project-bento-controls {
       padding: 0;
@@ -1143,9 +1295,15 @@ function getCategoryIcon(category: string): string {
       height: 2.25rem;
     }
 
+<<<<<<< HEAD
     .project-overview-content {
       padding: 1.25rem;
     }
+=======
+    .project-overview-content {
+      padding: 0;
+    }
+>>>>>>> origin/master
 
     .project-stats-list {
       flex-direction: column;

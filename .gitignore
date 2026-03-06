@@ -18,6 +18,7 @@ pnpm-debug.log*
 test-results/
 .claude/
 ultraction-cpanel-dist.zip
+ultraction-cpanel-static.zip
 
 
 # environment variables
@@ -32,3 +33,15 @@ ultraction-cpanel-dist.zip
 
 .vercel
 .env*.local
+
+# email signatures
+email-signatures/
+
+# MCP element inspector app
+mcp/element-inspector-app/
+
+# OMX logs and state
+.omx/
+
+# Dev-only API endpoints
+src/pages/api/element-capture.ts
