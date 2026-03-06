@@ -7,11 +7,7 @@ const description =
 const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
 ---
 
-<<<<<<< HEAD
-<Layout title={title} description={description} image="/logo/UGC-HEADER.png">
-=======
 <Layout title={title} description={description} image="/logo/UGC-HEADER.png" noIndex={true}>
->>>>>>> origin/master
   <section class="border-t border-border bg-background py-20">
     <div class="container mx-auto px-6 lg:px-10 max-w-4xl">
       <div class="mb-10">
@@ -23,13 +19,10 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
           Use this page to manually publish open career opportunities. Keep this route private and
           only share with authorized HR staff.
         </p>
-<<<<<<< HEAD
-=======
         <p class="text-xs opacity-65 max-w-2xl mt-3">
           This panel and ChatGPT Actions use the same backend endpoint: <code>/api/jobs</code>.
           Create, update, and archive roles from either interface.
         </p>
->>>>>>> origin/master
       </div>
 
       <div class="border border-primary/15 bg-surface/70 p-8 mb-8">
@@ -181,11 +174,7 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
   const API_KEY_STORAGE_KEY = 'ultraction-jobs-api-key';
 
   function setStatus(message, isError = false) {
-<<<<<<< HEAD
-    if (!statusElement) return;
-=======
     if (!(statusElement instanceof HTMLElement)) return;
->>>>>>> origin/master
     statusElement.textContent = message;
     statusElement.classList.toggle('text-red-600', isError);
     statusElement.classList.toggle('text-emerald-700', !isError);
@@ -206,10 +195,6 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
       .replaceAll("'", '&#39;');
   }
 
-<<<<<<< HEAD
-  function renderRoles(jobs) {
-    if (!rolesCountElement || !listElement) return;
-=======
   function getJobsApiKey() {
     if (!(apiKeyInput instanceof HTMLInputElement)) {
       return '';
@@ -244,7 +229,6 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
 
   function renderRoles(jobs) {
     if (!(rolesCountElement instanceof HTMLElement) || !(listElement instanceof HTMLElement)) return;
->>>>>>> origin/master
     if (!Array.isArray(jobs) || jobs.length === 0) {
       rolesCountElement.textContent = '0 Open Roles';
       listElement.innerHTML = '<li class="text-sm opacity-60">No open roles yet.</li>';
@@ -254,29 +238,6 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
     rolesCountElement.textContent = `${jobs.length} Open Role${jobs.length > 1 ? 's' : ''}`;
     listElement.innerHTML = jobs
       .map((job) => {
-<<<<<<< HEAD
-        const title = escapeHtml(job?.title ?? 'Untitled Role');
-        const location = escapeHtml(job?.location ?? 'UAE');
-        const department = escapeHtml(job?.department ?? '');
-        const postedAt = job?.postedAt ? new Date(job.postedAt).toLocaleDateString() : '-';
-
-        return `
-          <li class="border border-primary/15 px-4 py-4">
-            <p class="text-sm font-bold uppercase leading-tight">${title}</p>
-            <p class="text-xs uppercase tracking-widest opacity-65 mt-2">${location}${department ? ` - ${department}` : ''}</p>
-            <p class="text-[11px] opacity-60 mt-2">Posted: ${postedAt}</p>
-            <p class="text-[11px] opacity-50 mt-1">Slug: ${escapeHtml(job?.slug ?? '-')}</p>
-            <div class="mt-3">
-              <button
-                type="button"
-                data-archive-job="true"
-                data-job-slug="${escapeHtml(job?.slug ?? '')}"
-                data-job-title="${title}"
-                class="border border-red-600/40 text-red-700 px-3 py-2 text-[10px] uppercase tracking-[0.2em] font-bold"
-              >
-                Archive Role
-              </button>
-=======
         const title = typeof job?.title === 'string' ? job.title : 'Untitled Role';
         const location = typeof job?.location === 'string' ? job.location : 'UAE';
         const department = typeof job?.department === 'string' ? job.department : '';
@@ -314,7 +275,6 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
                     </button>`
                   : ''
               }
->>>>>>> origin/master
             </div>
           </li>
         `;
@@ -324,22 +284,6 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
 
   async function loadOpenRoles() {
     try {
-<<<<<<< HEAD
-      const response = await fetch(endpoint, {
-        method: 'GET',
-        headers: { Accept: 'application/json' },
-        cache: 'no-store',
-      });
-      const payload = await response.json();
-      const jobs = payload?.data?.jobs ?? payload?.jobs ?? [];
-      renderRoles(jobs);
-    } catch (error) {
-      console.error('Unable to refresh open roles on /careers-admin:', error);
-    }
-  }
-
-  if (apiKeyInput) {
-=======
       const payload = await sendRequest(endpoint, { method: 'GET' });
       const jobs = payload?.data?.jobs ?? payload?.jobs ?? [];
       if (!Array.isArray(jobs)) {
@@ -359,7 +303,6 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
   }
 
   if (apiKeyInput instanceof HTMLInputElement) {
->>>>>>> origin/master
     const savedApiKey = sessionStorage.getItem(API_KEY_STORAGE_KEY);
     if (savedApiKey) {
       apiKeyInput.value = savedApiKey;
@@ -368,11 +311,8 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
 
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
-<<<<<<< HEAD
-=======
     if (!(form instanceof HTMLFormElement)) return;
 
->>>>>>> origin/master
     const formData = new FormData(form);
     const apiKey = String(formData.get('jobsApiKey') ?? '').trim();
     const title = String(formData.get('title') ?? '').trim();
@@ -393,16 +333,6 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
     if (postedAt) body.postedAt = postedAt;
 
     try {
-<<<<<<< HEAD
-      if (submitButton) submitButton.setAttribute('disabled', 'true');
-      setStatus('Publishing role...');
-
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-=======
       if (submitButton instanceof HTMLButtonElement) {
         submitButton.setAttribute('disabled', 'true');
       }
@@ -412,30 +342,16 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
->>>>>>> origin/master
           Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify(body),
       });
 
-<<<<<<< HEAD
-      const payload = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        const message = payload?.error?.message ?? `Request failed (${response.status})`;
-        throw new Error(message);
-      }
-
-      sessionStorage.setItem(API_KEY_STORAGE_KEY, apiKey);
-      form.reset();
-      if (apiKeyInput) apiKeyInput.value = apiKey;
-      if (postedAtInput) postedAtInput.value = '';
-=======
       rememberJobsApiKey(apiKey);
       form.reset();
       if (apiKeyInput instanceof HTMLInputElement) apiKeyInput.value = apiKey;
       if (postedAtInput instanceof HTMLInputElement) postedAtInput.value = '';
 
->>>>>>> origin/master
       const createdTitle = payload?.data?.job?.title ?? title;
       setStatus(`Published successfully: ${createdTitle}`);
       await loadOpenRoles();
@@ -444,22 +360,13 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
       const message = error instanceof Error ? error.message : 'Unable to publish role.';
       setStatus(message, true);
     } finally {
-<<<<<<< HEAD
-      if (submitButton) submitButton.removeAttribute('disabled');
-=======
       if (submitButton instanceof HTMLButtonElement) {
         submitButton.removeAttribute('disabled');
       }
->>>>>>> origin/master
     }
   });
 
   refreshButton?.addEventListener('click', async () => {
-<<<<<<< HEAD
-    setStatus('Refreshing open roles...');
-    await loadOpenRoles();
-    setStatus('Open roles refreshed.');
-=======
     try {
       setStatus('Refreshing open roles...');
       await loadOpenRoles();
@@ -468,44 +375,10 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
       const message = error instanceof Error ? error.message : 'Unable to refresh open roles.';
       setStatus(message, true);
     }
->>>>>>> origin/master
   });
 
   listElement?.addEventListener('click', async (event) => {
     const target = event.target;
-<<<<<<< HEAD
-    if (!(target instanceof HTMLElement)) return;
-
-    const button = target.closest('[data-archive-job="true"]');
-    if (!(button instanceof HTMLButtonElement)) return;
-
-    const apiKey = (apiKeyInput instanceof HTMLInputElement ? apiKeyInput.value : '').trim();
-    if (!apiKey) {
-      setStatus('Missing Jobs API key. Add key first, then archive.', true);
-      return;
-    }
-
-    const slug = (button.dataset.jobSlug ?? '').trim();
-    const title = (button.dataset.jobTitle ?? '').trim();
-    if (!slug) {
-      setStatus('Missing job slug. Refresh roles and try again.', true);
-      return;
-    }
-
-    const approved = window.confirm(`Archive role: ${title || slug}?`);
-    if (!approved) return;
-
-    const previousText = button.textContent;
-    try {
-      button.disabled = true;
-      button.textContent = 'Archiving...';
-      setStatus(`Archiving ${title || slug}...`);
-
-      const response = await fetch(`${endpoint}?slug=${encodeURIComponent(slug)}&confirm=true`, {
-        method: 'DELETE',
-        headers: {
-          Accept: 'application/json',
-=======
     if (!(target instanceof Element)) return;
 
     const button = target.closest('[data-action="archive"]');
@@ -550,37 +423,18 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
       await sendRequest(archiveUrl, {
         method: 'DELETE',
         headers: {
->>>>>>> origin/master
           Authorization: `Bearer ${apiKey}`,
         },
       });
 
-<<<<<<< HEAD
-      const payload = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        const message = payload?.error?.message ?? `Request failed (${response.status})`;
-        throw new Error(message);
-      }
-
-      setStatus(`Archived successfully: ${title || slug}`);
-=======
       rememberJobsApiKey(apiKey);
       setStatus(`Archived role: ${jobTitle}`);
->>>>>>> origin/master
       await loadOpenRoles();
     } catch (error) {
       console.error('Unable to archive job from /careers-admin:', error);
       const message = error instanceof Error ? error.message : 'Unable to archive role.';
       setStatus(message, true);
     } finally {
-<<<<<<< HEAD
-      button.disabled = false;
-      button.textContent = previousText ?? 'Archive Role';
-    }
-  });
-
-  loadOpenRoles();
-=======
       button.removeAttribute('disabled');
     }
   });
@@ -592,5 +446,4 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
       setStatus(message, true);
     },
   );
->>>>>>> origin/master
 </script>

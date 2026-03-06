@@ -2,22 +2,6 @@
 // Blog index page - ULTRACTION General Contracting LLC
 // News and insights listing
 
-<<<<<<< HEAD
-import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-import SectionBackground from '../../components/common/SectionBackground.tsx';
-
-// Get all non-placeholder blog posts
-const allPosts = (await getCollection('blog')).filter((post) => post.slug !== 'example-post');
-const selectedCategory = Astro.url.searchParams.get('category')?.trim().toLowerCase() ?? '';
-const categories = Array.from(
-  new Set(
-    allPosts
-      .map((post) => post.data.category?.trim())
-      .filter((value): value is string => Boolean(value)),
-  ),
-).sort((a, b) => a.localeCompare(b));
-=======
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import SectionBackground from '../../components/common/SectionBackground.tsx';
@@ -166,20 +150,10 @@ const categories = Array.from(
       .filter((value): value is string => Boolean(value)),
   ),
 ).sort((a, b) => a.localeCompare(b));
->>>>>>> origin/master
 const validCategories = new Set(categories.map((category) => category.toLowerCase()));
 const activeCategory = validCategories.has(selectedCategory) ? selectedCategory : '';
 
 // Sort by date, newest first
-<<<<<<< HEAD
-const posts = allPosts
-  .filter((post) => {
-    if (!activeCategory) return true;
-    return (post.data.category ?? '').toLowerCase() === activeCategory;
-  })
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 9); // Show latest 9 posts
-=======
 const posts = allPosts
   .filter((post) => {
     if (!activeCategory) return true;
@@ -187,7 +161,6 @@ const posts = allPosts
   })
   .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf())
   .slice(0, 9); // Show latest 9 posts
->>>>>>> origin/master
 
 // SEO Metadata
 const title = 'News & Insights - ULTRACTION GENERAL CONTRACTING LLC';
@@ -203,11 +176,7 @@ const description =
   <!-- Page Header -->
   <SectionBackground client:visible contentWrapperClassName="p-8 lg:p-16">
     <span class="text-xs font-bold uppercase tracking-widest opacity-80 mb-4 block">Insights</span>
-<<<<<<< HEAD
-    <h1 class="text-5xl lg:text-7xl font-bold uppercase leading-none mb-12 font-heading">
-=======
     <h1 class="hero-page-title mb-12">
->>>>>>> origin/master
       News & <span class="text-accent italic">Insights</span>
     </h1>
     <p class="text-lg mb-6 opacity-80 leading-relaxed max-w-3xl">
@@ -219,24 +188,6 @@ const description =
   {posts.length > 0 && (
     <SectionBackground client:visible contentWrapperClassName="flex flex-col lg:flex-row">
       <div class="w-full lg:w-2/3 p-8 lg:p-12">
-<<<<<<< HEAD
-        <span class="inline-block px-3 py-1 border border-accent/30 text-accent text-[10px] uppercase tracking-[0.2em] mb-4">
-          Featured
-        </span>
-        <h2 class="text-3xl lg:text-4xl font-bold uppercase mb-4 font-heading">
-          {posts[0].data.title}
-        </h2>
-        <p class="text-base opacity-80 mb-6 line-clamp-3">
-          {posts[0].data.description}
-        </p>
-        <div class="flex items-center gap-4 text-xs opacity-60 mb-6">
-          <span>{posts[0].data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-          <span>&middot;</span>
-          <span>{posts[0].data.author}</span>
-        </div>
-        <a
-          href={`/blog/${posts[0].slug}`}
-=======
         <span class="inline-block px-3 py-1 border border-accent/30 text-accent text-[10px] uppercase tracking-[0.2em] mb-4">
           Featured
         </span>
@@ -253,7 +204,6 @@ const description =
         </div>
         <a
           href={`/blog/${posts[0].slug}`}
->>>>>>> origin/master
           class="inline-block border border-primary dark:border-black/30 hover:bg-primary hover:text-background dark:hover:text-white px-6 py-3 text-xs font-medium uppercase tracking-wide transition-colors"
         >
           Read More
@@ -277,25 +227,6 @@ const description =
       </div>
     ) : (
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-<<<<<<< HEAD
-        {posts.slice(1).map((post) => (
-          <article class="border-b md:border-b-0 lg:border-r border-primary/20 dark:border-black/20 p-8 lg:p-12">
-            <div class="flex items-center gap-4 text-xs opacity-60 mb-4">
-              <time datetime={post.data.pubDate.toISOString()}>
-                {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-              </time>
-              <span>&middot;</span>
-              <span>{post.data.author}</span>
-            </div>
-            <h3 class="text-xl font-bold uppercase mb-3 font-heading line-clamp-2">
-              {post.data.title}
-            </h3>
-            <p class="text-sm opacity-80 mb-6 line-clamp-3">
-              {post.data.description}
-            </p>
-            <a
-              href={`/blog/${post.slug}`}
-=======
         {posts.slice(1).map((post) => (
           <article class="border-b md:border-b-0 lg:border-r border-primary/20 dark:border-black/20 p-8 lg:p-12">
             <div class="flex items-center gap-4 text-xs opacity-60 mb-4">
@@ -313,7 +244,6 @@ const description =
             </p>
             <a
               href={`/blog/${post.slug}`}
->>>>>>> origin/master
               class="inline-block text-xs font-bold uppercase tracking-widest text-accent hover:opacity-80 transition-opacity"
             >
               Read Article &rarr;

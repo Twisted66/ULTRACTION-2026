@@ -165,25 +165,11 @@ function getCategoryIcon(category: string): string {
         </div>
 
         <!-- Enhanced title with better typography -->
-<<<<<<< HEAD
-        <h1 class="project-hero-title font-bold text-white mb-6 uppercase leading-[0.92] font-heading">
-=======
         <h1 class="project-hero-title hero-page-title text-white mb-6">
->>>>>>> origin/master
           <span class="block">{titleLine1}</span>
           {titleLine2 && <span class="block mt-1">{titleLine2}</span>}
         </h1>
 
-<<<<<<< HEAD
-        <!-- Enhanced location with better styling -->
-        <p class="project-hero-location text-base md:text-lg text-white/80 font-light max-w-2xl flex items-center gap-3">
-          <svg class="w-4 h-4 text-accent/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-          {project.data.location}
-        </p>
-=======
         <!-- Hero metadata -->
         <div class="project-hero-meta">
           <p class="project-hero-meta-item">
@@ -195,7 +181,6 @@ function getCategoryIcon(category: string): string {
             <span class="project-hero-meta-value">{project.data.location}</span>
           </p>
         </div>
->>>>>>> origin/master
 
         <!-- Scroll indicator -->
         <div class="mt-12 animate-bounce">
@@ -257,27 +242,11 @@ function getCategoryIcon(category: string): string {
 
         <!-- Main Content Area -->
         <div class="project-main-content">
-<<<<<<< HEAD
-          <!-- Enhanced Bento Gallery -->
-          <div class="project-poster-shell" data-project-bento data-images={JSON.stringify(projectImages)}>
-            <!-- Decorative frame -->
-            <div class="project-poster-frame" aria-hidden="true">
-              <div class="frame-corner frame-tl"></div>
-              <div class="frame-corner frame-tr"></div>
-              <div class="frame-corner frame-bl"></div>
-              <div class="frame-corner frame-br"></div>
-            </div>
-
-            <!-- Enhanced controls -->
-            {showBentoPager && (
-              <div class="project-bento-controls">
-=======
           <!-- Enhanced Bento Gallery -->
           <div class="project-poster-shell" data-project-bento data-images={JSON.stringify(projectImages)}>
             <!-- Enhanced controls -->
             {showBentoPager && (
               <div class="project-bento-controls">
->>>>>>> origin/master
                 <button type="button" class="project-bento-control" data-bento-prev aria-label="Previous images">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -337,20 +306,11 @@ function getCategoryIcon(category: string): string {
             </div>
           </div>
 
-<<<<<<< HEAD
-          <!-- Project Overview Content -->
-          <article class="project-overview-content">
-            <h2 class="content-section-title">Project Overview</h2>
-            <div class="prose project-prose prose-lg dark:prose-invert max-w-none prose-headings:font-heading prose-headings:uppercase prose-p:font-light prose-li:font-light">
-              <Content />
-            </div>
-=======
           <!-- Project Overview Content -->
           <article class="project-overview-content">
             <div class="prose project-prose prose-lg dark:prose-invert max-w-none prose-headings:font-heading prose-headings:uppercase prose-p:font-light prose-li:font-light">
               <Content />
             </div>
->>>>>>> origin/master
           </article>
         </div>
       </div>
@@ -555,19 +515,10 @@ function getCategoryIcon(category: string): string {
   }
 
   /* Enhanced title */
-<<<<<<< HEAD
-  .project-hero-title {
-    font-size: clamp(2.5rem, 5vw, 5.5rem);
-    letter-spacing: -0.02em;
-    max-width: 28ch;
-    background: linear-gradient(
-      135deg,
-=======
   .project-hero-title {
     max-width: 28ch;
     background: linear-gradient(
       135deg,
->>>>>>> origin/master
       hsl(0 0% 100%) 0%,
       hsl(0 0% 98%) 30%,
       hsl(0 0% 92%) 70%,
@@ -575,22 +526,12 @@ function getCategoryIcon(category: string): string {
     );
     -webkit-background-clip: text;
     background-clip: text;
-<<<<<<< HEAD
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 4px 20px hsl(0 0% 0% / 0.5));
-    display: flex;
-    flex-direction: column;
-    line-height: 0.95;
-  }
-=======
     color: transparent;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 4px 20px hsl(0 0% 0% / 0.5));
     display: flex;
     flex-direction: column;
   }
->>>>>>> origin/master
 
   .project-hero-title > span {
     display: block;
@@ -615,13 +556,6 @@ function getCategoryIcon(category: string): string {
     }
   }
 
-<<<<<<< HEAD
-  /* Enhanced location */
-  .project-hero-location {
-    letter-spacing: 0.03em;
-    font-weight: 400;
-  }
-=======
   /* Hero metadata */
   .project-hero-meta {
     display: flex;
@@ -653,34 +587,11 @@ function getCategoryIcon(category: string): string {
     letter-spacing: 0.02em;
     color: hsl(0 0% 100% / 0.92);
   }
->>>>>>> origin/master
 
   /* ============================================
      PROJECT STATS SIDEBAR
      ============================================ */
 
-<<<<<<< HEAD
-  .project-stats-sidebar {
-    position: relative;
-    padding: clamp(1.2rem, 1rem + 1.2vw, 2rem);
-    background: linear-gradient(170deg,
-      hsl(var(--card) / 0.98),
-      hsl(var(--card) / 0.92)
-    );
-    border: 1px solid hsl(var(--primary) / 0.12);
-    box-shadow:
-      0 20px 50px -30px hsl(var(--primary) / 0.5),
-      0 0 0 1px hsl(var(--accent) / 0.05) inset;
-  }
-
-  .project-stats-sidebar::before {
-    content: '';
-    position: absolute;
-    inset: 10px;
-    border: 1px solid hsl(var(--accent) / 0.12);
-    pointer-events: none;
-  }
-=======
   .project-stats-sidebar {
     position: relative;
   }
@@ -688,7 +599,6 @@ function getCategoryIcon(category: string): string {
   .project-stats-sidebar::before {
     content: none;
   }
->>>>>>> origin/master
 
   .project-stats-list {
     display: flex;
@@ -878,75 +788,6 @@ function getCategoryIcon(category: string): string {
      ENHANCED POSTER SHELL
      ============================================ */
 
-<<<<<<< HEAD
-  .project-poster-shell {
-    position: relative;
-    padding: clamp(1rem, 0.8rem + 1vw, 1.8rem);
-    background:
-      linear-gradient(170deg, hsl(var(--background)), hsl(var(--card) / 0.95)),
-      radial-gradient(ellipse at top left, hsl(var(--accent) / 0.03), transparent 50%);
-    border: 1px solid hsl(var(--primary) / 0.1);
-    box-shadow:
-      0 25px 60px -30px hsl(var(--primary) / 0.5),
-      0 0 0 1px hsl(var(--accent) / 0.05) inset;
-    overflow: hidden;
-    margin-bottom: 2rem;
-  }
-
-  .project-poster-shell::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg,
-      transparent,
-      hsl(var(--accent) / 0.4),
-      transparent
-    );
-  }
-
-  /* Enhanced frame with corner accents */
-  .project-poster-frame {
-    position: absolute;
-    inset: 14px;
-    border: 1px solid hsl(var(--accent) / 0.1);
-    pointer-events: none;
-  }
-
-  .frame-corner {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-color: hsl(var(--accent) / 0.4);
-    border-style: solid;
-  }
-
-  .frame-tl {
-    top: -1px;
-    left: -1px;
-    border-width: 2px 0 0 2px;
-  }
-
-  .frame-tr {
-    top: -1px;
-    right: -1px;
-    border-width: 2px 2px 0 0;
-  }
-
-  .frame-bl {
-    bottom: -1px;
-    left: -1px;
-    border-width: 0 0 2px 2px;
-  }
-
-  .frame-br {
-    bottom: -1px;
-    right: -1px;
-    border-width: 0 2px 2px 0;
-  }
-=======
   .project-poster-shell {
     position: relative;
     padding: 0;
@@ -960,7 +801,6 @@ function getCategoryIcon(category: string): string {
   .project-poster-shell::before {
     content: none;
   }
->>>>>>> origin/master
 
   /* Enhanced controls */
   .project-bento-controls {
@@ -1067,30 +907,7 @@ function getCategoryIcon(category: string): string {
     background: linear-gradient(90deg, hsl(var(--accent)), transparent);
   }
 
-<<<<<<< HEAD
-  .content-section-title {
-    font-size: 1.5rem;
-    letter-spacing: 0.08em;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    color: hsl(var(--primary));
-    position: relative;
-  }
-
-  .content-section-title::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 80px;
-    height: 3px;
-    background: hsl(var(--accent));
-  }
-
   /* Prose styling */
-=======
-  /* Prose styling */
->>>>>>> origin/master
   .project-prose :global(h2) {
     position: relative;
     display: inline-block;
@@ -1149,19 +966,10 @@ function getCategoryIcon(category: string): string {
      LAYOUT & RESPONSIVE
      ============================================ */
 
-<<<<<<< HEAD
-  .project-details-section {
-    position: relative;
-    background:
-      radial-gradient(1400px 600px at -10% -20%, hsl(var(--accent) / 0.06), transparent 50%),
-      linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.98) 100%);
-  }
-=======
   .project-details-section {
     position: relative;
     background: transparent;
   }
->>>>>>> origin/master
 
   .project-overview-bento-layout {
     display: grid;
@@ -1175,15 +983,6 @@ function getCategoryIcon(category: string): string {
     flex-direction: column;
   }
 
-<<<<<<< HEAD
-  .project-overview-content {
-    position: relative;
-    padding: clamp(1.5rem, 1.2rem + 1.2vw, 2.5rem);
-    background: linear-gradient(170deg, hsl(var(--card) / 0.95), hsl(var(--card) / 0.9));
-    border: 1px solid hsl(var(--primary) / 0.1);
-    box-shadow: 0 15px 40px -25px hsl(var(--primary) / 0.3);
-  }
-=======
   .project-overview-content {
     position: relative;
     padding: 0;
@@ -1191,7 +990,6 @@ function getCategoryIcon(category: string): string {
     border: 0;
     box-shadow: none;
   }
->>>>>>> origin/master
 
   /* Tablet styles */
   @media (max-width: 1023px) {
@@ -1209,19 +1007,9 @@ function getCategoryIcon(category: string): string {
       grid-row: span 1;
     }
 
-<<<<<<< HEAD
-    .project-poster-frame {
-      inset: 10px;
-    }
-
     .project-overview-bento-layout {
       grid-template-columns: 1fr;
       gap: 1.25rem;
-=======
-    .project-overview-bento-layout {
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
->>>>>>> origin/master
     }
 
     .project-stats-sidebar {
@@ -1244,11 +1032,7 @@ function getCategoryIcon(category: string): string {
   }
 
   /* Mobile styles */
-<<<<<<< HEAD
   @media (max-width: 640px) {
-=======
-  @media (max-width: 640px) {
->>>>>>> origin/master
     .project-hero-section {
       min-height: 600px;
     }
@@ -1267,15 +1051,6 @@ function getCategoryIcon(category: string): string {
       grid-column: span 1;
     }
 
-<<<<<<< HEAD
-    .project-poster-shell {
-      padding: 1rem;
-    }
-
-    .project-poster-frame {
-      inset: 6px;
-    }
-=======
     .project-poster-shell {
       margin-bottom: 1.25rem;
     }
@@ -1284,7 +1059,6 @@ function getCategoryIcon(category: string): string {
       width: 100%;
       min-width: 0;
     }
->>>>>>> origin/master
 
     .project-bento-controls {
       padding: 0;
@@ -1295,15 +1069,9 @@ function getCategoryIcon(category: string): string {
       height: 2.25rem;
     }
 
-<<<<<<< HEAD
-    .project-overview-content {
-      padding: 1.25rem;
-    }
-=======
     .project-overview-content {
       padding: 0;
     }
->>>>>>> origin/master
 
     .project-stats-list {
       flex-direction: column;

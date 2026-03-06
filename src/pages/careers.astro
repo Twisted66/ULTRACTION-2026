@@ -35,11 +35,7 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
 
         <div class="max-w-xl mx-auto w-full relative z-10">
           <span class="text-xs font-bold uppercase tracking-widest opacity-80 mb-4 block">Careers</span>
-<<<<<<< HEAD
-          <h1 class="text-5xl lg:text-7xl font-bold uppercase leading-none mb-12 font-heading">
-=======
           <h1 class="hero-page-title mb-12 hero-text-reveal opacity-0">
->>>>>>> origin/master
             Join Our<br/><span class="text-accent italic">Expert Team</span>.
           </h1>
           
@@ -68,11 +64,7 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
               magnetic={false}
               ripple={false}
               size="lg"
-<<<<<<< HEAD
-              class="w-full sm:w-auto bg-[#800000] text-white hover:bg-[#800000] focus-visible:outline-[#800000]"
-=======
               class="w-full sm:w-auto bg-accent text-primary-foreground hover:bg-accent/90 focus-visible:outline-accent"
->>>>>>> origin/master
             >
               <span class="flex items-center gap-4">
                 Apply via Contact Form
@@ -124,17 +116,6 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
 
           <!-- Why Join Section (Small overlay) -->
           <div class="absolute bottom-12 right-12 z-20 hidden xl:block max-w-xs">
-<<<<<<< HEAD
-            <div class="bg-white backdrop-blur-xl border border-primary/20 overflow-hidden">
-              <div class="bg-[#800000] px-8 py-4">
-                <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-white">Why ULTRACTION?</h3>
-              </div>
-              <div class="p-8">
-                <ul class="space-y-3 text-xs uppercase tracking-widest font-bold opacity-70">
-                  <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> Iconic Projects</li>
-                  <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> Expert Leadership</li>
-                  <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent rounded-full"></span> Innovation Driven</li>
-=======
             <div class="bg-surface/90 backdrop-blur-xl border border-border overflow-hidden rounded-none">
               <div class="bg-accent px-8 py-4">
                 <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-white">Why ULTRACTION?</h3>
@@ -144,7 +125,6 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
                   <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent rounded-none"></span> Iconic Projects</li>
                   <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent rounded-none"></span> Expert Leadership</li>
                   <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-accent rounded-none"></span> Innovation Driven</li>
->>>>>>> origin/master
                 </ul>
               </div>
             </div>
@@ -175,11 +155,8 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
   const statusElement = document.getElementById('jobs-status');
   const countElement = document.getElementById('jobs-count');
   const listElement = document.getElementById('jobs-list');
-<<<<<<< HEAD
-=======
   const base = typeof jobsApiBaseUrl === 'string' ? jobsApiBaseUrl.trim().replace(/\/$/, '') : '';
   const endpoint = base ? `${base}/api/jobs` : '/api/jobs';
->>>>>>> origin/master
 
   function formatEmploymentType(value) {
     if (!value || typeof value !== 'string') return 'Role';
@@ -189,8 +166,6 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
       .join(' ');
   }
 
-<<<<<<< HEAD
-=======
   function escapeHtml(value) {
     return String(value)
       .replaceAll('&', '&amp;')
@@ -208,56 +183,24 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
     statusElement.classList.toggle('text-primary', !isError);
   }
 
->>>>>>> origin/master
   function renderJobs(jobs) {
     if (!listElement || !statusElement || !countElement) return;
     if (!Array.isArray(jobs) || jobs.length === 0) {
       countElement.textContent = '0 Open Roles';
-<<<<<<< HEAD
-      statusElement.textContent =
-        'No openings are live at the moment. You can still submit your CV through the contact form.';
-=======
       listElement.classList.add('hidden');
       setStatus('No openings are live at the moment. You can still submit your CV through the contact form.');
->>>>>>> origin/master
       return;
     }
 
     countElement.textContent = `${jobs.length} Open Role${jobs.length > 1 ? 's' : ''}`;
-<<<<<<< HEAD
-    statusElement.classList.add('hidden');
-    listElement.classList.remove('hidden');
-
-    listElement.innerHTML = jobs
-=======
     setStatus('Latest roles loaded from the backend jobs API.');
     listElement.classList.remove('hidden');
     const jobsHtml = jobs
->>>>>>> origin/master
       .map((job) => {
         const title = typeof job.title === 'string' ? job.title : 'Untitled Role';
         const location = typeof job.location === 'string' ? job.location : 'UAE';
         const department = typeof job.department === 'string' ? job.department : '';
         const employmentType = formatEmploymentType(job.employmentType);
-<<<<<<< HEAD
-        const summary =
-          typeof job.summary === 'string'
-            ? job.summary
-            : typeof job.description === 'string'
-              ? job.description
-              : '';
-        const safeTitle = title.replace(/[<>]/g, '');
-        const safeLocation = location.replace(/[<>]/g, '');
-        const safeDepartment = department.replace(/[<>]/g, '');
-        const safeSummary = summary.replace(/[<>]/g, '');
-
-        return `
-          <li class="border border-primary/15 bg-surface/70 px-5 py-5 transition-colors duration-300 hover:border-accent/60">
-            <div class="flex flex-wrap items-start justify-between gap-3">
-              <div class="space-y-2">
-                <h3 class="text-xl font-bold uppercase leading-tight font-heading">${safeTitle}</h3>
-                <p class="text-xs uppercase tracking-widest opacity-70">${safeLocation}${safeDepartment ? ` • ${safeDepartment}` : ''}</p>
-=======
         const summary = typeof job.description === 'string' ? job.description : '';
         const safeTitle = escapeHtml(title);
         const safeLocation = escapeHtml(location);
@@ -271,25 +214,16 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
               <div class="space-y-2">
                 <h3 class="text-xl font-bold uppercase leading-tight font-heading text-primary">${safeTitle}</h3>
                 <p class="text-xs uppercase tracking-widest opacity-70 text-primary">${safeLocation}${safeDepartment ? ` • ${safeDepartment}` : ''}</p>
->>>>>>> origin/master
               </div>
               <span class="text-[10px] uppercase tracking-[0.2em] font-bold text-accent">${employmentType}</span>
             </div>
             ${
               safeSummary
-<<<<<<< HEAD
-                ? `<p class="mt-4 text-sm opacity-75 leading-relaxed">${safeSummary}</p>`
-                : ''
-            }
-            <a
-              href="/contact?subject=careers"
-=======
                 ? `<p class="mt-4 text-sm opacity-75 leading-relaxed text-primary">${safeSummary}</p>`
                 : ''
             }
             <a
               href="${applyUrl}"
->>>>>>> origin/master
               class="inline-flex items-center gap-2 mt-5 text-xs uppercase tracking-[0.2em] font-bold text-accent hover:text-primary transition-colors duration-200"
             >
               Apply For This Role
@@ -299,23 +233,14 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
         `;
       })
       .join('');
-<<<<<<< HEAD
-=======
 
     listElement.innerHTML = jobsHtml;
->>>>>>> origin/master
   }
 
   async function loadJobs() {
     if (!statusElement || !countElement) return;
-<<<<<<< HEAD
-
-    const base = typeof jobsApiBaseUrl === 'string' ? jobsApiBaseUrl.trim().replace(/\/$/, '') : '';
-    const endpoint = base ? `${base}/api/jobs` : '/api/jobs';
-=======
     setStatus('Fetching current opportunities...');
     countElement.textContent = 'Loading...';
->>>>>>> origin/master
 
     try {
       const response = await fetch(endpoint, {
@@ -324,20 +249,6 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
         cache: 'no-store',
       });
 
-<<<<<<< HEAD
-      if (!response.ok) {
-        throw new Error(`jobs_fetch_failed_${response.status}`);
-      }
-
-      const payload = await response.json();
-      const jobs = payload?.data?.jobs ?? payload?.jobs ?? [];
-      renderJobs(jobs);
-    } catch (error) {
-      console.error('Unable to load jobs feed on /careers:', error);
-      countElement.textContent = 'Unavailable';
-      statusElement.textContent =
-        'Live roles are temporarily unavailable. Please apply through the contact form and we will review your profile.';
-=======
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) {
         const message = payload?.error?.message ?? `Unable to load jobs (${response.status}).`;
@@ -359,7 +270,6 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
           ? error.message
           : 'Careers feed is temporarily unavailable. Please try again shortly.';
       setStatus(message, true);
->>>>>>> origin/master
     }
   }
 

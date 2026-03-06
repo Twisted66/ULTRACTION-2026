@@ -9,11 +9,6 @@ import {
 } from '../../lib/jobs-store';
 import type { JobStatus } from '../../lib/jobs-store';
 
-<<<<<<< HEAD
-export const prerender = false;
-
-=======
->>>>>>> origin/master
 const READ_RATE_LIMIT_WINDOW_MS = 60_000;
 const READ_RATE_LIMIT_MAX_REQUESTS = 120;
 const WRITE_RATE_LIMIT_WINDOW_MS = 60_000;
@@ -24,10 +19,6 @@ const rateLimitMap = new Map<string, { count: number; windowStart: number }>();
 
 interface JobWriteRequestBody {
   id?: string;
-<<<<<<< HEAD
-  slug?: string;
-=======
->>>>>>> origin/master
   title?: string;
   location?: string;
   description?: string;
@@ -46,13 +37,6 @@ function jsonResponse(status: number, body: Record<string, unknown>): Response {
     headers: {
       'Content-Type': 'application/json',
       'Cache-Control': 'no-store',
-<<<<<<< HEAD
-      // CORS headers for Custom GPT Actions
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-jobs-api-key',
-=======
->>>>>>> origin/master
     },
   });
 }
@@ -161,11 +145,7 @@ function isRateLimited(ip: string, scope: 'read' | 'write'): boolean {
 }
 
 function ensureWriteAuth(request: Request): { ok: true } | { ok: false; response: Response } {
-<<<<<<< HEAD
-  const expectedApiKey = (import.meta.env.JOBS_API_KEY ?? process.env.JOBS_API_KEY)?.trim();
-=======
   const expectedApiKey = process.env.JOBS_API_KEY?.trim();
->>>>>>> origin/master
   if (!expectedApiKey) {
     return {
       ok: false,
@@ -223,129 +203,6 @@ async function parseJsonBody(request: Request): Promise<JobWriteRequestBody | nu
   }
 }
 
-<<<<<<< HEAD
-async function resolveJobForArchive(
-  url: URL,
-  body: JobWriteRequestBody | null,
-): Promise<{ id: string; title: string } | { error: Response }> {
-  const idFromQuery = (url.searchParams.get('id') ?? '').trim();
-  const idFromBody = body?.id?.trim() ?? '';
-  const slugFromQuery = (url.searchParams.get('slug') ?? '').trim();
-  const slugFromBody = body?.slug?.trim() ?? '';
-  const titleFromQuery = (url.searchParams.get('title') ?? '').trim();
-  const titleFromBody = body?.title?.trim() ?? '';
-
-  const id = idFromQuery || idFromBody;
-  const slug = slugFromQuery || slugFromBody;
-  const title = titleFromQuery || titleFromBody;
-
-  const selected = [id ? 'id' : '', slug ? 'slug' : '', title ? 'title' : ''].filter(Boolean);
-  if (selected.length === 0) {
-    return {
-      error: jsonResponse(400, {
-        ok: false,
-        error: {
-          code: 'missing_selector',
-          message: 'Provide one selector: id, slug, or title.',
-        },
-      }),
-    };
-  }
-
-  if (selected.length > 1) {
-    return {
-      error: jsonResponse(400, {
-        ok: false,
-        error: {
-          code: 'ambiguous_selector',
-          message: 'Provide only one selector: id, slug, or title.',
-        },
-      }),
-    };
-  }
-
-  if (idFromQuery && idFromBody && idFromQuery !== idFromBody) {
-    return {
-      error: jsonResponse(400, {
-        ok: false,
-        error: {
-          code: 'validation_error',
-          message: 'Invalid archive payload.',
-          fieldErrors: {
-            id: 'body.id must match query parameter id.',
-          },
-        },
-      }),
-    };
-  }
-
-  if (id) {
-    return {
-      id,
-      title: '',
-    };
-  }
-
-  try {
-    const jobs = await listJobs('all');
-    if (slug) {
-      const matches = jobs.filter(job => job.slug === slug);
-      if (matches.length === 0) {
-        return {
-          error: jsonResponse(404, {
-            ok: false,
-            error: {
-              code: 'not_found',
-              message: `Job not found for slug: ${slug}`,
-            },
-          }),
-        };
-      }
-
-      return { id: matches[0].id, title: matches[0].title };
-    }
-
-    const matches = jobs.filter(job => job.title === title);
-    if (matches.length === 0) {
-      return {
-        error: jsonResponse(404, {
-          ok: false,
-          error: {
-            code: 'not_found',
-            message: `Job not found for title: ${title}`,
-          },
-        }),
-      };
-    }
-
-    if (matches.length > 1) {
-      return {
-        error: jsonResponse(409, {
-          ok: false,
-          error: {
-            code: 'conflict',
-            message: 'Multiple jobs share this title. Use slug or id instead.',
-          },
-        }),
-      };
-    }
-
-    return { id: matches[0].id, title: matches[0].title };
-  } catch {
-    return {
-      error: jsonResponse(500, {
-        ok: false,
-        error: {
-          code: 'internal_error',
-          message: 'Unable to resolve job selector right now.',
-        },
-      }),
-    };
-  }
-}
-
-=======
->>>>>>> origin/master
 export const GET: APIRoute = async ({ request, url }) => {
   const ip = getClientIp(request);
   if (isRateLimited(ip, 'read')) {
@@ -614,14 +471,6 @@ export const DELETE: APIRoute = async ({ request, url }) => {
   }
 
   const body = await parseJsonBody(request);
-<<<<<<< HEAD
-  const resolved = await resolveJobForArchive(url, body);
-  if ('error' in resolved) {
-    return resolved.error;
-  }
-
-  const jobId = resolved.id;
-=======
   const jobId = (url.searchParams.get('id') ?? '').trim();
 
   if (!jobId) {
@@ -647,7 +496,6 @@ export const DELETE: APIRoute = async ({ request, url }) => {
       },
     });
   }
->>>>>>> origin/master
 
   const confirmParam = url.searchParams.get('confirm')?.trim().toLowerCase();
   const confirmFromQuery =
@@ -657,10 +505,6 @@ export const DELETE: APIRoute = async ({ request, url }) => {
     body?.confirmTitle?.trim() ??
     url.searchParams.get('confirmTitle')?.trim() ??
     url.searchParams.get('title')?.trim() ??
-<<<<<<< HEAD
-    resolved.title ??
-=======
->>>>>>> origin/master
     '';
 
   const confirmationErrors: Record<string, string> = {};
@@ -723,45 +567,11 @@ export const DELETE: APIRoute = async ({ request, url }) => {
   }
 };
 
-<<<<<<< HEAD
-// Handle OPTIONS preflight requests for CORS
-export const OPTIONS: APIRoute = async () => {
-  return new Response(null, {
-    status: 204,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-jobs-api-key',
-      'Access-Control-Max-Age': '86400', // Cache preflight for 24 hours
-    },
-  });
-};
-
-export const ALL: APIRoute = async (context) => {
-  // Return 405 for unsupported methods (but OPTIONS is handled above)
-  const method = context.request.method;
-  if (method === 'OPTIONS') {
-    return new Response(null, {
-      status: 204,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-jobs-api-key',
-      },
-    });
-  }
-  return jsonResponse(405, {
-=======
 export const ALL: APIRoute = async () =>
   jsonResponse(405, {
->>>>>>> origin/master
     ok: false,
     error: {
       code: 'method_not_allowed',
       message: 'Method not allowed.',
     },
   });
-<<<<<<< HEAD
-};
-=======
->>>>>>> origin/master

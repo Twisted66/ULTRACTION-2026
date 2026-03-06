@@ -10,6 +10,7 @@ export const CoreValuesVideoPlayer: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const playerRef = useRef<PlayerRef>(null);
     const [dims, setDims] = useState({ width: 1920, height: 1080 });
+    const [isMounted, setIsMounted] = useState(false);
 
     // Compute player size based on container.
     // Desktop keeps "cover" behavior; small viewports switch to "contain"
@@ -48,6 +49,7 @@ export const CoreValuesVideoPlayer: React.FC = () => {
             setDims({ width: Math.round(w), height: Math.round(h) });
         };
         update();
+        setIsMounted(true);
         let ro: ResizeObserver | null = null;
         if ('ResizeObserver' in window) {
             ro = new ResizeObserver(update);
@@ -76,6 +78,17 @@ export const CoreValuesVideoPlayer: React.FC = () => {
                 backgroundColor: '#0d0d0d',
             }}
         >
+            {!isMounted ? (
+                <div
+                    aria-hidden="true"
+                    style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background:
+                            'linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.82) 100%), url(/images/projects/photo_018.jpeg) center / cover no-repeat',
+                    }}
+                />
+            ) : null}
             <Player
                 ref={playerRef}
                 component={CoreValuesComposition}
@@ -90,6 +103,7 @@ export const CoreValuesVideoPlayer: React.FC = () => {
                     transform: 'translate(-50%, -50%)',
                     width: dims.width,
                     height: dims.height,
+                    opacity: isMounted ? 1 : 0,
                 }}
                 autoPlay
                 loop

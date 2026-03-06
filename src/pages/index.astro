@@ -4,19 +4,13 @@
 
 import Layout from '../layouts/Layout.astro';
 import VideoPlayer from '../components/common/VideoPlayer.astro';
-<<<<<<< HEAD
-=======
 import TextTypeAnimation from '../components/animations/TextTypeAnimation';
->>>>>>> origin/master
 import InfiniteScroll from '../components/common/InfiniteScroll.astro';
 import SectionBackground from '../components/common/SectionBackground';
 import ClientPartners from '../components/about/ClientPartners';
 import ServicesCarousel from '../components/sections/ServicesCarousel';
 import Stats from '../components/sections/Stats';
-<<<<<<< HEAD
-=======
 import FeaturedProjectCard from '../components/sections/FeaturedProjectCard';
->>>>>>> origin/master
 import { services } from '../data/services';
 
 const galleryImages = [
@@ -69,15 +63,6 @@ const structuredData = {
           Expert<br/>
           Construction<br/>
           Services For<br/>
-<<<<<<< HEAD
-          <span class="text-white">Every Project</span>
-        </h1>
-        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-          <a href="/contact" class="bg-[#800000] backdrop-blur-sm hover:bg-[#800000]/90 border border-[#800000] hover:border-[#800000] text-white py-3 sm:py-4 px-6 sm:px-10 text-center font-medium transition-all motion-base uppercase tracking-wide text-xs sm:text-sm inline-block min-h-[44px] flex items-center">
-            Contact Us
-          </a>
-          <a href="/about" class="text-white hover:text-[#800000] text-xs sm:text-sm uppercase tracking-widest flex items-center gap-3 group transition-colors min-h-[44px]">
-=======
           <span class="block mt-2 sm:mt-3">
             <TextTypeAnimation
               client:load
@@ -97,7 +82,6 @@ const structuredData = {
             Contact Us
           </a>
           <a href="/about" class="text-primary-foreground hover:text-accent text-xs sm:text-sm uppercase tracking-widest flex items-center gap-3 group transition-colors min-h-[44px]">
->>>>>>> origin/master
             <span>Learn More</span>
             <div class="w-8 h-8 rounded-none border border-primary-foreground/40 flex items-center justify-center group-hover:bg-primary-foreground group-hover:text-primary transition-all motion-base">
               <svg class="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,21 +130,12 @@ const structuredData = {
   <Stats client:visible />
 
   <!-- Services Overview - Carousel -->
-<<<<<<< HEAD
-  <section id="services" class="border-t border-black dark:border-black bg-surface">
-    <ServicesCarousel client:visible services={services} />
-  </section>
-
-  <!-- Featured Projects - Carousel Snippet -->
-  <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={false} contentWrapperClassName="w-full p-12 lg:p-20 border-b border-black flex flex-col md:flex-row justify-between items-center">
-=======
   <section id="services" class="border-t border-border bg-surface">
     <ServicesCarousel client:load services={services} />
   </section>
 
   <!-- Featured Projects - Carousel Snippet -->
   <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={false} contentWrapperClassName="w-full p-12 lg:p-20 border-b border-border flex flex-col md:flex-row justify-between items-center">
->>>>>>> origin/master
     <div>
       <div class="flex items-center gap-3 mb-6">
         <div class="w-16 h-[2px] bg-accent"></div>
@@ -183,44 +158,6 @@ const structuredData = {
 
   <div class="w-full">
         <!-- Manually selected featured projects for now to ensure quality images -->
-<<<<<<< HEAD
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 h-full border-b border-black">
-          <a href="/projects/naseem-albar-bridge" class="relative group h-[250px] sm:h-[400px] lg:h-[500px] overflow-hidden border-b lg:border-b-0 border-black lg:border-r block">
-            <img src="/images/projects/naseem-albar-bridge/naseem.jpg" alt="Naseem Al Bar Bridge Construction Site" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity motion-base"></div>
-            <div class="absolute bottom-0 left-0 p-6 sm:p-8 w-full translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all motion-medium text-white">
-              <span class="text-[10px] sm:text-xs uppercase tracking-widest text-white mb-2 block">Infrastructure</span>
-              <h3 class="text-xl sm:text-2xl font-bold uppercase">Naseem Al Bar Bridge</h3>
-            </div>
-            <div class="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity motion-base">
-              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-            </div>
-          </a>
-
-          <a href="/projects/etihad-rail-2f2-adp" class="relative group h-[250px] sm:h-[400px] lg:h-[500px] overflow-hidden border-b lg:border-b-0 border-black lg:border-r block">
-            <img src="/images/projects/infrastructure/p082_img01_xref6357.jpeg" alt="Infrastructure Project" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity motion-base"></div>
-            <div class="absolute bottom-0 left-0 p-6 sm:p-8 w-full translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all motion-medium text-white">
-              <span class="text-[10px] sm:text-xs uppercase tracking-widest text-white mb-2 block">Infrastructure</span>
-              <h3 class="text-xl sm:text-2xl font-bold uppercase">Etihad Rail Projects</h3>
-            </div>
-            <div class="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity motion-base">
-              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-            </div>
-          </a>
-
-          <a href="/projects/utility-bridge" class="relative group h-[250px] sm:h-[400px] lg:h-[500px] overflow-hidden block">
-            <img src="/images/projects/utility-structure/photo_005.jpeg" alt="Utility Structure" class="w-full h-full object-cover transition-transform motion-slow media-motion group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity motion-base"></div>
-            <div class="absolute bottom-0 left-0 p-6 sm:p-8 w-full translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all motion-medium text-white">
-              <span class="text-[10px] sm:text-xs uppercase tracking-widest text-white mb-2 block">Industrial</span>
-              <h3 class="text-xl sm:text-2xl font-bold uppercase">Utility Structures</h3>
-            </div>
-            <div class="absolute top-4 sm:top-6 right-4 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity motion-base">
-              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-            </div>
-          </a>
-=======
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 h-full border-b border-border">
           <FeaturedProjectCard
             client:visible
@@ -248,7 +185,6 @@ const structuredData = {
             category="Industrial"
             title="Utility Structures"
           />
->>>>>>> origin/master
     </div>
   </div>
   <!-- Gallery Section - Infinite Scroll Moved Here -->
@@ -257,11 +193,7 @@ const structuredData = {
 
 
   <!-- Why Choose ULTRACTION Section -->
-<<<<<<< HEAD
-  <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={false} contentWrapperClassName="w-full p-12 lg:p-20 border-b border-black flex flex-col md:flex-row justify-between items-center">
-=======
   <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={false} contentWrapperClassName="w-full p-12 lg:p-20 border-b border-border flex flex-col md:flex-row justify-between items-center">
->>>>>>> origin/master
     <div>
       <div class="flex items-center gap-3 mb-6">
         <div class="w-16 h-[2px] bg-accent"></div>
@@ -276,31 +208,6 @@ const structuredData = {
       </div>
   </SectionBackground>
 
-<<<<<<< HEAD
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-0 px-0 max-w-full mx-auto border-b border-black">
-    <div class="p-6 sm:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-black bg-surface text-center group hover:bg-primary/5 transition-colors">
-      <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-all motion-base">
-        <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-      </a>
-      <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Quality Assurance</h3>
-      <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">ISO-certified processes ensuring every project meets global standards of excellence and durability.</p>
-    </div>
-
-    <div class="p-6 sm:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-black bg-surface text-center group hover:bg-primary/5 transition-colors">
-      <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-all motion-base">
-        <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-      </a>
-      <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">On-Time Delivery</h3>
-      <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">Rigorous project management methodologies to ensure we deliver on schedule, every time.</p>
-    </div>
-
-    <div class="p-6 sm:p-8 lg:p-12 bg-surface text-center group hover:bg-primary/5 transition-colors">
-      <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-full flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-white transition-all motion-base">
-        <svg class="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-      </a>
-      <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Safety First</h3>
-      <p class="text-[13px] sm:text-sm opacity-80 leading-relaxed">Uncompromising commitment to health, safety, and environment (HSE) on every construction site.</p>
-=======
   <div class="grid grid-cols-1 md:grid-cols-3 gap-0 px-0 max-w-full mx-auto border-b border-border">
     <div class="p-6 sm:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-border bg-surface text-center group hover:bg-primary/5 transition-colors">
       <a href="/about" aria-label="Learn more about ULTRACTION" class="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 bg-primary/5 text-primary rounded-none flex items-center justify-center text-xl sm:text-2xl group-hover:bg-primary group-hover:text-primary-foreground transition-all motion-base">
@@ -324,41 +231,25 @@ const structuredData = {
       </a>
       <h3 class="text-base sm:text-lg font-bold uppercase mb-2 sm:mb-4">Safety First</h3>
       <p class="text-sm opacity-80 leading-relaxed">Uncompromising commitment to health, safety, and environment (HSE) on every construction site.</p>
->>>>>>> origin/master
     </div>
   </div>
 
   <!-- About Section - Numbered list -->
-<<<<<<< HEAD
-  <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={true} showGrid={true} contentWrapperClassName="flex flex-col lg:flex-row">
-    <div class="w-full lg:w-1/4 border-r border-black dark:border-black min-h-[200px] lg:min-h-[400px] overflow-hidden relative">
-      <img alt="Naseem Al Bar Bridge Detail" class="w-full h-full object-cover" src="/images/projects/naseem-albar-bridge/photo_012.jpeg" />
-=======
   <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={true} showGrid={true} contentWrapperClassName="flex flex-col lg:flex-row border-b border-border">
     <div class="w-full lg:w-1/4 border-r border-border min-h-[200px] lg:min-h-[400px] overflow-hidden relative">
       <img alt="Naseem Al Bar Bridge Detail" loading="lazy" class="w-full h-full object-cover" src="/images/projects/naseem-albar-bridge/photo_012.jpeg" />
->>>>>>> origin/master
     </div>
     <div class="w-full lg:w-3/4 p-6 lg:p-20">
       <div class="flex items-center gap-3 mb-12">
         <div class="w-16 h-[2px] bg-accent"></div>
         <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">Our Commitment</span>
       </div>
-<<<<<<< HEAD
-      <h2 class="text-2xl sm:text-4xl font-bold uppercase mb-12 lg:mb-20 max-w-2xl leading-[1.1]">
-        We are committed to creating buildings that are not only functional and aesthetically pleasing.
-      </h2>
-        <div class="flex flex-col border-t border-black dark:border-black">
-          <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-black dark:border-black gap-4 md:gap-16">
-            <span class="text-[10px] sm:text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">About Us</span>
-=======
       <h2 class="text-3xl sm:text-4xl font-bold uppercase mb-12 lg:mb-20 max-w-2xl leading-[1.1] font-heading">
         We are committed to creating buildings that are not only functional and aesthetically pleasing.
       </h2>
         <div class="flex flex-col border-t border-border">
           <div class="flex flex-col md:flex-row items-baseline py-6 sm:py-10 border-b border-border gap-4 md:gap-16">
             <span class="text-xs uppercase font-bold tracking-[0.2em] w-24 sm:w-32 shrink-0">About Us</span>
->>>>>>> origin/master
             <div class="flex gap-4 sm:gap-8 items-start flex-1">
               <span class="text-sm font-bold text-accent font-mono pt-1">[01]</span>
               <p class="text-sm border-l border-border pl-4 uppercase tracking-widest leading-relaxed">ULTRACTION is a construction company that delivers exceptional projects across the UAE.</p>
@@ -389,27 +280,16 @@ const structuredData = {
       </div>
   </SectionBackground>
 
-<<<<<<< HEAD
-  <!-- CTO Section -->
-  <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={true} showGrid={false} showAccentBlob={false} showBottomLine={false} contentWrapperClassName="flex flex-col md:flex-row">
-     <div class="w-full md:w-1/2 min-h-[400px] md:min-h-[600px] relative order-2 md:order-1">
-        <img src="/images/projects/naseem-albar-bridge/photo_044.jpeg" alt="Technical leadership at ULTRACTION" class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all motion-slow media-motion" />
-=======
   <!-- General Manager Statement Section -->
   <SectionBackground variant="surface" showTopBorder={true} showBottomBorder={true} showGrid={false} showAccentBlob={false} showBottomLine={false} contentWrapperClassName="flex flex-col md:flex-row">
      <div class="w-full md:w-1/2 min-h-[400px] md:min-h-[600px] relative order-2 md:order-1">
         <img src="/images/projects/naseem-albar-bridge/photo_044.jpeg" alt="General Manager statement at ULTRACTION" loading="lazy" class="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all motion-slow media-motion" />
->>>>>>> origin/master
         <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
      </div>
      <div class="w-full md:w-1/2 p-12 lg:p-24 flex flex-col justify-center order-1 md:order-2">
         <div class="flex items-center gap-3 mb-8">
           <div class="w-16 h-[2px] bg-accent"></div>
-<<<<<<< HEAD
-          <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">Technical Leadership</span>
-=======
           <span class="text-xs font-bold uppercase tracking-[0.35em] text-accent">General Manager Statement</span>
->>>>>>> origin/master
         </div>
           <blockquote class="text-3xl lg:text-4xl font-light leading-tight mb-10">
             "At ULTRACTION, construction is more than assembling structures. It is about creating spaces that serve communities, uphold safety, and stand as lasting proof of quality and innovation."
@@ -423,8 +303,6 @@ const structuredData = {
 
   <!-- Client Partners Section -->
   <ClientPartners client:visible />
-<<<<<<< HEAD
-=======
 
   <!-- Final CTA Section -->
   <section class="relative bg-surface text-primary overflow-hidden border-y border-primary/20">
@@ -486,13 +364,7 @@ const structuredData = {
 
     <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent"></div>
   </section>
->>>>>>> origin/master
 </Layout>
 
 <!-- Page-specific structured data -->
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/master

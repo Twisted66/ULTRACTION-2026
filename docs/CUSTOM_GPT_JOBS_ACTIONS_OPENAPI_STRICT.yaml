@@ -1,17 +1,10 @@
 openapi: 3.0.3
 info:
   title: ULTRACTION Jobs API for Custom GPT Actions (Strict)
-<<<<<<< HEAD
-  version: 1.2.0
-  description: >
-    Restricted Actions spec exposing list, update, and archive operations for
-    safer production usage.
-=======
   version: 1.1.0
   description: >
     Restricted Actions spec exposing list, create, update, and remove/archive
     operations for safer production usage.
->>>>>>> origin/master
 servers:
   - url: https://your-api-domain.com
     description: Replace with your live API domain
@@ -53,8 +46,6 @@ paths:
           $ref: '#/components/responses/Misconfigured'
         '500':
           $ref: '#/components/responses/InternalError'
-<<<<<<< HEAD
-=======
     post:
       tags: [Jobs]
       operationId: createJob
@@ -89,7 +80,6 @@ paths:
           $ref: '#/components/responses/Misconfigured'
         '500':
           $ref: '#/components/responses/InternalError'
->>>>>>> origin/master
     patch:
       tags: [Jobs]
       operationId: updateJob
@@ -137,46 +127,18 @@ paths:
           $ref: '#/components/responses/InternalError'
     delete:
       tags: [Jobs]
-<<<<<<< HEAD
-      operationId: removeJob
-      summary: Remove a job (archives it)
-      description: >
-        Archives a job by selector. Provide exactly one selector: `id`, `slug`,
-        or `title`. If `confirmTitle` is omitted and selector is `slug` or
-        `title`, the API resolves it automatically.
-=======
       operationId: archiveJob
       summary: Remove / archive a job (set status=closed)
->>>>>>> origin/master
       security:
         - BearerAuth: []
         - JobsApiKey: []
       parameters:
         - name: id
           in: query
-<<<<<<< HEAD
-          required: false
-          description: Job ID to archive
-          schema:
-            type: string
-        - name: slug
-          in: query
-          required: false
-          description: Job slug to archive (recommended if no ID)
-          schema:
-            type: string
-        - name: title
-          in: query
-          required: false
-          description: Exact job title to archive (only if unique)
-          schema:
-            type: string
-=======
           required: true
           description: Job ID to archive
           schema:
             type: string
->>>>>>> origin/master
         - name: confirm
           in: query
           required: true
@@ -186,13 +148,8 @@ paths:
             enum: [true]
         - name: confirmTitle
           in: query
-<<<<<<< HEAD
-          required: false
-          description: Optional exact title confirmation (auto-resolved when using slug/title)
-=======
           required: true
           description: Must exactly match the current job title
->>>>>>> origin/master
           schema:
             type: string
             minLength: 2
@@ -286,8 +243,6 @@ components:
           type: string
           format: date-time
           nullable: true
-<<<<<<< HEAD
-=======
     CreateJobRequest:
       type: object
       required: [title, location, description]
@@ -313,7 +268,6 @@ components:
         postedAt:
           type: string
           format: date-time
->>>>>>> origin/master
     UpdateJobRequest:
       type: object
       properties:
@@ -348,13 +302,6 @@ components:
       properties:
         id:
           type: string
-<<<<<<< HEAD
-        slug:
-          type: string
-        title:
-          type: string
-=======
->>>>>>> origin/master
         confirmArchive:
           type: boolean
           enum: [true]

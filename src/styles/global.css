@@ -501,12 +501,6 @@
 
 /* Background animation keyframes */
 @keyframes pulse-slow {
-<<<<<<< HEAD
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-=======
 
   0%,
   100% {
@@ -514,7 +508,6 @@
     transform: scale(1);
   }
 
->>>>>>> origin/master
   50% {
     opacity: 0.5;
     transform: scale(1.3);
@@ -522,12 +515,6 @@
 }
 
 @keyframes pulse-slower {
-<<<<<<< HEAD
-  0%, 100% {
-    opacity: 0.2;
-    transform: scale(1);
-  }
-=======
 
   0%,
   100% {
@@ -535,7 +522,6 @@
     transform: scale(1);
   }
 
->>>>>>> origin/master
   50% {
     opacity: 0.4;
     transform: scale(1.15);

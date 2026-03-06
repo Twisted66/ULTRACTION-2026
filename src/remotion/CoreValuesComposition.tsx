@@ -6,8 +6,7 @@ import {
     useVideoConfig,
     spring,
     interpolate,
-    Img,
-    staticFile
+    Img
 } from 'remotion';
 import { Shield, Users, Target, Leaf, Zap, ShieldCheck } from 'lucide-react';
 
@@ -22,7 +21,7 @@ const coreValues = [
         title: 'Integrity',
         description: 'Unwavering honesty and transparency in every interaction and commitment.',
         insight: 'We communicate clearly, honor commitments, and take ownership from planning to handover.',
-        img: 'images/projects/photo_010.jpeg',
+        img: '/images/projects/photo_010.jpeg',
         icon: Shield,
         stats: [
             { label: 'Client Trust', value: '100%' },
@@ -34,7 +33,7 @@ const coreValues = [
         title: 'Team Spirit',
         description: 'Collaborative excellence driven by shared purpose and mutual respect.',
         insight: 'Engineers, supervisors, and site teams align early so execution stays coordinated and efficient.',
-        img: 'images/projects/photo_016.jpeg',
+        img: '/images/projects/photo_016.jpeg',
         icon: Users,
         stats: [
             { label: 'Team Collaboration', value: 'A+' },
@@ -46,7 +45,7 @@ const coreValues = [
         title: 'Commitment',
         description: 'Dedicated to delivering excellence from foundation to final handover.',
         insight: 'We stay accountable to schedule, quality, and client outcomes across every project milestone.',
-        img: 'images/projects/photo_018.jpeg',
+        img: '/images/projects/photo_018.jpeg',
         icon: Target,
         stats: [
             { label: 'Project Completion', value: '100%' },
@@ -58,7 +57,7 @@ const coreValues = [
         title: 'Sustainability',
         description: 'Building responsibly for communities and the environment.',
         insight: 'Our choices prioritize durable systems, reduced waste, and long-term value for the built environment.',
-        img: 'images/projects/qidfah-revitalization/hero.png',
+        img: '/images/projects/qidfah-revitalization/hero.png',
         icon: Leaf,
         stats: [
             { label: 'Green Projects', value: '85%' },
@@ -70,7 +69,7 @@ const coreValues = [
         title: 'Performance',
         description: 'Exceeding expectations through precision engineering and execution.',
         insight: 'We track progress and quality continuously to deliver predictable results under real site constraints.',
-        img: 'images/projects/khalifa-port/hero.png',
+        img: '/images/projects/khalifa-port/hero.png',
         icon: Zap,
         stats: [
             { label: 'Quality Score', value: '99%' },
@@ -82,7 +81,7 @@ const coreValues = [
         title: 'Safety',
         description: 'Uncompromising standards protecting our people and communities.',
         insight: 'Risk planning, safe methods, and disciplined site behavior protect teams and project continuity.',
-        img: 'images/projects/photo_015.jpeg',
+        img: '/images/projects/photo_015.jpeg',
         icon: ShieldCheck,
         stats: [
             { label: 'Accident-Free Days', value: '500+' },
@@ -158,7 +157,7 @@ const CoreValueScene: React.FC<{
             {/* Background Image with Ken Burns zoom */}
             <AbsoluteFill style={{ transform: `scale(${bgScale})`, transformOrigin: 'center center' }}>
                 <Img
-                    src={staticFile(value.img)}
+                    src={value.img}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
             </AbsoluteFill>
