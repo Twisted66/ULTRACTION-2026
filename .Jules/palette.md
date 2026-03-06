@@ -19,3 +19,7 @@
 ## 2026-02-14 - Interactive Navigation Feedback and Component Extensibility
 **Learning:** Mobile menu toggles that don't change their icon (e.g., staying as a hamburger when open) fail to provide immediate visual confirmation of the menu state. Additionally, internal UI components like 'MagneticButton' must support attribute spreading to allow developers to inject critical accessibility attributes (like aria-label) without modifying the base component.
 **Action:** Ensure all toggle interactions have distinct visual states (icons/colors) and ensure all base UI components spread '...rest' props to their root interactive element.
+
+## 2026-02-14 - Real-time Character Constraints and Automated Verification
+**Learning:** Textareas with character limits (like job descriptions) significantly benefit from real-time counters linked via `aria-describedby` and `aria-live="polite"`. Providing visual feedback (e.g., `text-accent`) at a 90% threshold helps users self-correct before hitting hard errors. Additionally, automated UX verification via Playwright sometimes requires `force: true` for clicks on elements that might be technically "intercepted" by body-level attributes (like `inert` or overlays) during rapid state transitions.
+**Action:** Implement real-time counters for all length-restricted textareas and use web-first assertions in Playwright to verify these micro-interactions.

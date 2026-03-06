@@ -115,7 +115,10 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
           </div>
 
           <div class="space-y-2">
-            <label class="text-xs uppercase tracking-[0.2em] font-bold" for="description">Description</label>
+            <div class="flex items-center justify-between">
+              <label class="text-xs uppercase tracking-[0.2em] font-bold" for="description">Description</label>
+              <div id="description-counter" class="text-[10px] uppercase tracking-widest opacity-60 font-bold" aria-live="polite">0 / 5000</div>
+            </div>
             <textarea
               id="description"
               name="description"
@@ -125,6 +128,7 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
               maxlength="5000"
               class="w-full bg-background border border-primary/20 px-4 py-3 text-sm resize-y"
               placeholder="Describe responsibilities, required experience, and qualifications."
+              aria-describedby="description-counter"
             ></textarea>
           </div>
 
@@ -168,6 +172,8 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
   const rolesCountElement = document.getElementById('open-roles-count');
   const submitButton = document.getElementById('create-job-submit');
   const refreshButton = document.getElementById('refresh-jobs');
+  const descriptionInput = document.getElementById('description');
+  const descriptionCounter = document.getElementById('description-counter');
 
   const base = typeof jobsApiBaseUrl === 'string' ? jobsApiBaseUrl.trim().replace(/\/$/, '') : '';
   const endpoint = base ? `${base}/api/jobs` : '/api/jobs';
@@ -200,6 +206,26 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
       return '';
     }
     return apiKeyInput.value.trim();
+  }
+
+  function updateDescriptionCounter() {
+    if (!(descriptionInput instanceof HTMLTextAreaElement) || !(descriptionCounter instanceof HTMLElement)) return;
+    const count = descriptionInput.value.length;
+    const max = 5000;
+    descriptionCounter.textContent = `${count} / ${max}`;
+
+    if (count >= max * 0.9) {
+      descriptionCounter.classList.add('text-accent');
+      descriptionCounter.classList.remove('opacity-60');
+    } else {
+      descriptionCounter.classList.remove('text-accent');
+      descriptionCounter.classList.add('opacity-60');
+    }
+  }
+
+  if (descriptionInput instanceof HTMLTextAreaElement) {
+    descriptionInput.addEventListener('input', updateDescriptionCounter);
+    updateDescriptionCounter();
   }
 
   function rememberJobsApiKey(apiKey) {
