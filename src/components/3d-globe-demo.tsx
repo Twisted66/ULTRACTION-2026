@@ -37,14 +37,6 @@ export default function Globe3DDemo({
         bumpScale: 5,
         autoRotateSpeed: 0.3,
       }}
-      onMarkerClick={(marker) => {
-        console.log("Clicked marker:", marker.label);
-      }}
-      onMarkerHover={(marker) => {
-        if (marker) {
-          console.log("Hovering:", marker.label);
-        }
-      }}
     />
   );
 }

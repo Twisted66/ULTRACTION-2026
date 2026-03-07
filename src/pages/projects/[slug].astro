@@ -32,18 +32,7 @@ const projectImages =
   project.data.images && project.data.images.length > 0
     ? project.data.images
     : ['/logo/UGC-HEADER.png'];
-
-const heroBentoImages = Array.from({ length: 6 }, (_, index) => projectImages[index % projectImages.length]);
-const showBentoPager = projectImages.length > 6;
-
-// Enhanced bento layout configuration
-const bentoLayout = [
-  { colSpan: 2, rowSpan: 2 }, // Large featured image
-  { colSpan: 1, rowSpan: 1 }, // Small
-  { colSpan: 1, rowSpan: 1 }, // Small
-  { colSpan: 1, rowSpan: 1 }, // Small
-  { colSpan: 1, rowSpan: 1 }, // Small
-];
+const galleryImages = projectImages.slice(0, 4);
 
 const projectTitle = project.data.title.trim().replace(/\s+/g, ' ');
 const titleWords = projectTitle.split(' ').filter(Boolean);
@@ -242,62 +231,18 @@ function getCategoryIcon(category: string): string {
 
         <!-- Main Content Area -->
         <div class="project-main-content">
-          <!-- Enhanced Bento Gallery -->
-          <div class="project-poster-shell" data-project-bento data-images={JSON.stringify(projectImages)}>
-            <!-- Enhanced controls -->
-            {showBentoPager && (
-              <div class="project-bento-controls">
-                <button type="button" class="project-bento-control" data-bento-prev aria-label="Previous images">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                  </svg>
-                </button>
-                <div class="bento-page-indicator">
-                  <span class="current-page" data-current-page>1</span>
-                  <span class="page-separator">/</span>
-                  <span class="total-pages" data-total-pages>1</span>
-                </div>
-                <button type="button" class="project-bento-control" data-bento-next aria-label="Next images">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                  </svg>
-                </button>
-              </div>
-            )}
-
-            <!-- Enhanced bento grid -->
-            <div class="project-hero-bento-grid">
-              {heroBentoImages.map((image, index) => {
-                const layout = bentoLayout[index % bentoLayout.length];
-                return (
-                  <figure
-                    class={[
-                      'project-bento-item',
-                      `col-span-${layout.colSpan}`,
-                      `row-span-${layout.rowSpan}`,
-                      index === 0 ? 'bento-featured' : '',
-                    ].join(' ')}
-                    data-bento-slot
-                    style={`animation-delay: ${index * 75}ms`}
-                  >
-                    <div class="bento-item-inner">
-                      <img
-                        src={image}
-                        alt={`${project.data.title} image ${index + 1}`}
-                        data-bento-img
-                        loading={index === 0 ? 'eager' : 'lazy'}
-                      />
-                      {/* Overlay with index */}
-                      <div class="bento-item-overlay">
-                        <span class="bento-item-index">{String(index + 1).padStart(2, '0')}</span>
-                        {index === 0 && (
-                          <span class="bento-item-badge">Featured</span>
-                        )}
-                      </div>
-                    </div>
-                  </figure>
-                );
-              })}
+          <!-- Clean Gallery -->
+          <div class="project-poster-shell">
+            <div class="project-gallery-grid">
+              {galleryImages.map((image, index) => (
+                <figure class="project-gallery-card" style={`animation-delay: ${index * 75}ms`}>
+                  <img
+                    src={image}
+                    alt={`${project.data.title} image ${index + 1}`}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                </figure>
+              ))}
             </div>
 
             <!-- Enhanced footline -->
@@ -334,97 +279,6 @@ function getCategoryIcon(category: string): string {
     </section>
   </SectionBackground>
 </Layout>
-
-<script is:inline>
-  (() => {
-    const bentoContainers = document.querySelectorAll('[data-project-bento]');
-    if (!bentoContainers.length) return;
-
-    bentoContainers.forEach((container) => {
-      const rawImages = container.getAttribute('data-images');
-      if (!rawImages) return;
-
-      let images = [];
-      try {
-        images = JSON.parse(rawImages);
-      } catch {
-        return;
-      }
-
-      if (!Array.isArray(images) || images.length <= 6) return;
-
-      const slots = Array.from(container.querySelectorAll('[data-bento-img]'));
-      const prev = container.querySelector('[data-bento-prev]');
-      const next = container.querySelector('[data-bento-next]');
-      const currentPageEl = container.querySelector('[data-current-page]');
-      const totalPagesEl = container.querySelector('[data-total-pages]');
-      if (!slots.length || !prev || !next) return;
-
-      const pageSize = slots.length;
-      const totalPages = Math.ceil(images.length / pageSize);
-      let currentPage = 0;
-
-      // Update page indicator
-      const updatePageIndicator = () => {
-        if (currentPageEl) currentPageEl.textContent = String(currentPage + 1);
-        if (totalPagesEl) totalPagesEl.textContent = String(totalPages);
-      };
-
-      const renderPage = () => {
-        const start = currentPage * pageSize;
-        const bentoItems = container.querySelectorAll('[data-bento-slot]');
-
-        slots.forEach((img, slotIndex) => {
-          const imageIndex = (start + slotIndex) % images.length;
-          const src = images[imageIndex];
-          if (typeof src !== 'string') return;
-
-          // Animate transition
-          img.style.opacity = '0';
-          setTimeout(() => {
-            img.src = src;
-            img.alt = `Project supporting image ${imageIndex + 1}`;
-            img.style.opacity = '1';
-          }, 150);
-
-          // Update index overlay
-          const item = bentoItems[slotIndex];
-          const indexOverlay = item?.querySelector('.bento-item-index');
-          if (indexOverlay) {
-            indexOverlay.textContent = String(imageIndex + 1).padStart(2, '0');
-          }
-        });
-
-        updatePageIndicator();
-      };
-
-      prev.addEventListener('click', () => {
-        currentPage = (currentPage - 1 + totalPages) % totalPages;
-        renderPage();
-      });
-
-      next.addEventListener('click', () => {
-        currentPage = (currentPage + 1) % totalPages;
-        renderPage();
-      });
-
-      // Initialize
-      updatePageIndicator();
-      renderPage();
-
-      // Add keyboard navigation
-      container.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
-          currentPage = (currentPage - 1 + totalPages) % totalPages;
-          renderPage();
-        } else if (e.key === 'ArrowRight') {
-          currentPage = (currentPage + 1) % totalPages;
-          renderPage();
-        }
-      });
-    });
-  })();
-</script>
 
 <style>
   /* ============================================
@@ -679,109 +533,47 @@ function getCategoryIcon(category: string): string {
   }
 
   /* ============================================
-     ENHANCED BENTO GRID
+     PROJECT GALLERY
      ============================================ */
 
-  .project-hero-bento-grid {
+  .project-gallery-grid {
     display: grid;
-    gap: clamp(0.5rem, 0.4rem + 0.5vw, 0.875rem);
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-auto-rows: minmax(220px, 320px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.75rem, 0.6rem + 0.6vw, 1.125rem);
   }
 
-  .project-bento-item {
+  .project-gallery-card {
     position: relative;
     overflow: hidden;
-    border-radius: clamp(4px, 0.3vw, 8px);
+    aspect-ratio: 4 / 3;
+    border-radius: clamp(6px, 0.4vw, 10px);
     background: hsl(var(--card));
     box-shadow:
-      0 4px 12px -4px hsl(var(--primary) / 0.3),
-      0 0 0 1px hsl(var(--primary) / 0.06) inset;
+      0 12px 32px -18px hsl(var(--primary) / 0.35),
+      0 0 0 1px hsl(var(--primary) / 0.08) inset;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     animation: fadeInScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
   }
 
-  /* Column span variations */
-  .project-bento-item.col-span-2 {
-    grid-column: span 2;
-  }
-
-  .project-bento-item.row-span-2 {
-    grid-row: span 2;
-  }
-
-  /* Featured item styling */
-  .project-bento-item.bento-featured {
-    border: 2px solid hsl(var(--accent) / 0.3);
-    box-shadow:
-      0 8px 24px -6px hsl(var(--primary) / 0.4),
-      0 0 0 1px hsl(var(--accent) / 0.15) inset;
-  }
-
-  .bento-item-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .project-bento-item img {
+  .project-gallery-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition:
       transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-      filter 0.4s ease;
+      filter 0.35s ease;
   }
 
-  .project-bento-item:hover img {
-    transform: scale(1.08);
-    filter: saturate(1.08) brightness(1.02);
+  .project-gallery-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 18px 36px -20px hsl(var(--primary) / 0.4),
+      0 0 0 1px hsl(var(--accent) / 0.12) inset;
   }
 
-  /* Bento item overlay */
-  .bento-item-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      hsl(0 0% 0% / 0) 0%,
-      hsl(0 0% 0% / 0.1) 50%,
-      hsl(0 0% 0% / 0.6) 100%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 1rem;
-  }
-
-  .project-bento-item:hover .bento-item-overlay {
-    opacity: 1;
-  }
-
-  .bento-item-index {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: hsl(0 0% 100%);
-    font-family: var(--font-heading);
-    letter-spacing: 0.1em;
-  }
-
-  .bento-item-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.35rem 0.65rem;
-    background: hsl(var(--accent) / 0.9);
-    color: hsl(0 0% 100%);
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
-    border-radius: 2px;
-    backdrop-filter: blur(4px);
+  .project-gallery-card:hover img {
+    transform: scale(1.03);
+    filter: saturate(1.04) brightness(1.01);
   }
 
   /* ============================================
@@ -800,60 +592,6 @@ function getCategoryIcon(category: string): string {
 
   .project-poster-shell::before {
     content: none;
-  }
-
-  /* Enhanced controls */
-  .project-bento-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding: 0 0.5rem;
-  }
-
-  .project-bento-control {
-    width: 2.75rem;
-    height: 2.75rem;
-    border: 1px solid hsl(var(--primary) / 0.15);
-    background: hsl(var(--card));
-    color: hsl(var(--primary));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    border-radius: 4px;
-  }
-
-  .project-bento-control:hover {
-    background: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
-    border-color: hsl(var(--primary));
-    transform: scale(1.05);
-  }
-
-  .project-bento-control:active {
-    transform: scale(0.98);
-  }
-
-  /* Page indicator */
-  .bento-page-indicator {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: hsl(var(--muted-foreground));
-    font-family: var(--font-heading);
-  }
-
-  .current-page {
-    color: hsl(var(--primary));
-    font-size: 1rem;
-  }
-
-  .page-separator {
-    opacity: 0.5;
   }
 
   /* Enhanced footline */
@@ -997,16 +735,6 @@ function getCategoryIcon(category: string): string {
       max-width: min(94vw, 46rem);
     }
 
-    .project-hero-bento-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      grid-auto-rows: minmax(200px, 280px);
-    }
-
-    .project-bento-item.bento-featured {
-      grid-column: span 2;
-      grid-row: span 1;
-    }
-
     .project-overview-bento-layout {
       grid-template-columns: 1fr;
       gap: 1.25rem;
@@ -1037,18 +765,8 @@ function getCategoryIcon(category: string): string {
       min-height: 600px;
     }
 
-    .project-hero-bento-grid {
+    .project-gallery-grid {
       grid-template-columns: 1fr;
-      grid-auto-rows: minmax(200px, 250px);
-    }
-
-    .project-bento-item.bento-featured {
-      grid-column: span 1;
-      grid-row: span 1;
-    }
-
-    .project-bento-item.col-span-2 {
-      grid-column: span 1;
     }
 
     .project-poster-shell {
@@ -1058,15 +776,6 @@ function getCategoryIcon(category: string): string {
     .project-hero-meta-item {
       width: 100%;
       min-width: 0;
-    }
-
-    .project-bento-controls {
-      padding: 0;
-    }
-
-    .project-bento-control {
-      width: 2.25rem;
-      height: 2.25rem;
     }
 
     .project-overview-content {
@@ -1080,28 +789,25 @@ function getCategoryIcon(category: string): string {
     .project-stat-card {
       flex: 1 1 100%;
     }
-
-    .bento-item-badge {
-      top: 0.75rem;
-      right: 0.75rem;
-      padding: 0.25rem 0.5rem;
-      font-size: 0.6rem;
+    .project-gallery-card {
+      aspect-ratio: 5 / 4;
     }
   }
 
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     .animate-slide-up,
-    .project-bento-item,
+    .project-gallery-card,
     .project-stat-card,
     .project-hero-title > span {
       animation: none !important;
     }
 
-    .project-bento-item img,
-    .project-bento-item:hover img,
+    .project-gallery-card img,
+    .project-gallery-card:hover img,
     .project-hero-chip:hover,
-    .project-stat-card:hover {
+    .project-stat-card:hover,
+    .project-gallery-card:hover {
       transform: none !important;
       transition: none !important;
     }

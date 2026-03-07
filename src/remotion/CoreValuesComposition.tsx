@@ -158,21 +158,26 @@ const CoreValueScene: React.FC<{
             <AbsoluteFill style={{ transform: `scale(${bgScale})`, transformOrigin: 'center center' }}>
                 <Img
                     src={value.img}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        filter: 'saturate(1.18) contrast(1.04) brightness(1.03)',
+                    }}
                 />
             </AbsoluteFill>
 
             {/* Dark overlay */}
-            <AbsoluteFill style={{ backgroundColor: 'rgba(0,0,0,0.78)' }} />
+            <AbsoluteFill style={{ backgroundColor: 'rgba(0,0,0,0.52)' }} />
 
             {/* Left-to-right gradient for depth */}
             <AbsoluteFill style={{
-                background: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.8) 100%)'
+                background: 'linear-gradient(to right, rgba(0,0,0,0.74) 0%, rgba(0,0,0,0.24) 58%, rgba(0,0,0,0.58) 100%)'
             }} />
 
             {/* Subtle accent corner glow */}
             <AbsoluteFill style={{
-                background: `radial-gradient(ellipse at 0% 100%, ${ACCENT}22 0%, transparent 60%)`
+                background: `radial-gradient(ellipse at 0% 100%, ${ACCENT}33 0%, transparent 60%)`
             }} />
 
             {/* Content */}

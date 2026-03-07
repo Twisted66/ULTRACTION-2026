@@ -1,71 +1,133 @@
-# Production Finalization Prompt
+# ULTRACTION CUSTOM GPT CONFIGURATION REFERENCE
+# Generated: Friday, March 6, 2026
 
-Finalize ULTRACTION to production on this cPanel host.
+================================================================================
+1. AUTHENTICATION DETAILS
+================================================================================
+Unified API Key: 5991308d17448b76b5f727c9993c6a51b17b341c3e39b143
 
-## Target State
+Jobs API Header: x-jobs-api-key
+News API Header: x-news-api-key
 
-- web root is `~/public_html`
-- secure PHP code is in `~/private`
-- no nested `~/public_html/public_html`
+Note: In ChatGPT "Authentication" settings, use:
+- Auth Type: API Key
+- Custom Header Name: x-jobs-api-key (or x-news-api-key)
+- Key: 5991308d17448b76b5f727c9993c6a51b17b341c3e39b143
 
-## Package Layout Expected
+================================================================================
+2. AGENT SYSTEM PROMPT (Instructions)
+================================================================================
+# Role: ULTRACTION Content & Recruitment Manager
+You are the official digital assistant for ULTRACTION General Contracting LLC. Your primary responsibility is to manage the company's public-facing job listings and news articles through the ULTRACTION API.
 
-- extracted `public_html/*` must become `~/public_html/*`
-- extracted `private/*` must become `~/private/*`
+# Key Capabilities:
+1. Manage Jobs: Retrieve, post, update, and archive job vacancies.
+   - Required for POST: title, location, description.
+   - Optional: department, employmentType.
+2. Manage News: Curate news articles for the website.
+   - Required for POST: title, excerpt, content, category, author, image, sourceName, sourceUrl, sourcePublishedAt.
+3. Data Integrity: Always format JSON payloads correctly. Use ISO 8601 dates for all timestamp fields.
 
-## Execute Now
+# Authentication:
+Use the provided API Key for all protected (POST, PATCH, DELETE) operations.
+- Job Header: x-jobs-api-key
+- News Header: x-news-api-key
 
-1. Find latest uploaded `ultraction-cpanel-static-*.zip`.
-2. Back up current `~/public_html` and `~/private` with timestamps.
-3. Extract zip into a temp dir and inspect contents before copying.
-4. Deploy by copying:
-   - extracted `public_html/.` -> `~/public_html/`
-   - extracted `private` -> `~/private`
-5. Remove or avoid any accidental nested `~/public_html/public_html`.
-6. Verify these exist:
-   - `~/public_html/index.html`
-   - `~/public_html/_astro`
-   - `~/public_html/api/contact.php`
-   - `~/public_html/api/jobs.php`
-   - `~/public_html/api/news.php`
-   - `~/public_html/api/.htaccess`
-   - `~/private/bootstrap.php`
-   - `~/private/config.php`
-   - `~/private/db.php`
-   - `~/private/lib`
-   - `~/private/schema/mysql.sql`
-7. Ensure runtime dirs exist and are writable:
-   - `~/private/uploads/contact-attachments`
-   - `~/private/var/rate_limits`
-   - `~/private/logs`
-8. Configure production secrets for PHP runtime safely outside web root:
-   - `DB_HOST`
-   - `DB_PORT`
-   - `DB_NAME`
-   - `DB_USER`
-   - `DB_PASSWORD`
-   - `JOBS_API_KEY`
-   - `NEWS_API_KEY`
-   - `CONTACT_RECEIVER_EMAIL`
-9. Confirm PHP environment supports:
-   - PHP 8.1+
-   - `pdo_mysql`
-   - `fileinfo`
-10. Apply `~/private/schema/mysql.sql` to the production MySQL DB safely and idempotently.
-11. Verify production:
-   - site homepage loads
-   - `/contact` loads
-   - `GET /api/jobs?status=open` returns JSON
-   - `GET /api/news?status=published` returns JSON
-   - protected writes reject missing auth
-12. If anything fails, fix it and continue until working.
+# Response Tone:
+Professional, efficient, and aligned with ULTRACTION's brand as a premium UAE construction firm.
 
-## Report Back With
+================================================================================
+3. OPENAPI SCHEMA (Actions)
+================================================================================
+openapi: 3.1.0
+info:
+  title: ULTRACTION Management API
+  version: 1.0.0
+servers:
+  - url: https://ultraction.ae/api
+paths:
+  /jobs:
+    get:
+      operationId: listJobs
+      summary: List job vacancies
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [open, closed, all]
+            default: open
+      responses:
+        '200':
+          description: OK
+    post:
+      operationId: createJob
+      summary: Create a new job vacancy
+      security:
+        - JobsAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title, location, description]
+              properties:
+                title: {type: string}
+                location: {type: string}
+                description: {type: string}
+                department: {type: string}
+                employmentType: {type: string}
+      responses:
+        '201':
+          description: Created
+  /news:
+    get:
+      operationId: listNews
+      summary: List news articles
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [published, draft, archived, all]
+            default: published
+      responses:
+        '200':
+          description: OK
+    post:
+      operationId: createNews
+      summary: Create a news article
+      security:
+        - NewsAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title, excerpt, content, category, author, image, sourceName, sourceUrl, sourcePublishedAt]
+              properties:
+                title: {type: string}
+                excerpt: {type: string, maxLength: 600}
+                content: {type: string}
+                category: {type: string}
+                author: {type: string}
+                image: {type: string}
+                sourceName: {type: string}
+                sourceUrl: {type: string}
+                sourcePublishedAt: {type: string, format: date-time}
+      responses:
+        '201':
+          description: Created
 
-- zip used
-- backup paths
-- final deployed paths
-- config method used for secrets
-- schema changes applied
-- verification results
-- any remaining blocker
+components:
+  securitySchemes:
+    JobsAuth:
+      type: apiKey
+      in: header
+      name: x-jobs-api-key
+    NewsAuth:
+      type: apiKey
+      in: header
+      name: x-news-api-key@@

@@ -19,6 +19,9 @@ test-results/
 .claude/
 ultraction-cpanel-dist.zip
 ultraction-cpanel-static.zip
+ultraction-cpanel-static-*.zip
+ultraction-cpanel-static-latest.zip
+output/
 
 
 # environment variables

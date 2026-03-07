@@ -3,6 +3,7 @@
 // Main landing page - Nova Construct Design Pattern
 
 import Layout from '../layouts/Layout.astro';
+import HomeIntro from '../components/layout/HomeIntro.astro';
 import VideoPlayer from '../components/common/VideoPlayer.astro';
 import TextTypeAnimation from '../components/animations/TextTypeAnimation';
 import InfiniteScroll from '../components/common/InfiniteScroll.astro';
@@ -46,6 +47,9 @@ const structuredData = {
   description={description}
   image="/logo/UGC-HEADER.png"
 >
+  <HomeIntro videoSrc="/video/home-intro.mp4" />
+
+  <div data-home-page-shell>
   <!-- Hero Section - Full Screen Video -->
   <section class="hero-fullscreen relative w-full h-screen min-h-[600px] overflow-hidden border-b border-black dark:border-black -mt-[64px] sm:-mt-[72px] xl:-mt-[104px]">
     <!-- Cinematic Video Background -->
@@ -364,6 +368,7 @@ const structuredData = {
 
     <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent"></div>
   </section>
+  </div>
 </Layout>
 
 <!-- Page-specific structured data -->

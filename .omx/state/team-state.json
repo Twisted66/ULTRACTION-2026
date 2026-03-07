@@ -4,13 +4,13 @@
   "iteration": 0,
   "max_iterations": 50,
   "current_phase": "cancelled",
-  "task_description": "Implement the approved Jobs API + Custom GPT Actions plan in this repo end-to-end. Include Postgres-backed canonical jobs datastore with file fallback, archive=status closed semantics, remove hard-delete with confirm flag/title guard, API and OpenAPI/docs parity updates, and full verification (astro check + build). Avoid unrelated files.",
-  "started_at": "2026-02-22T10:18:05.383Z",
-  "tmux_pane_id": "%160",
-  "tmux_pane_set_at": "2026-02-22T10:18:05.384Z",
+  "task_description": "Execute PHP.md in this repo. Migrate the Astro API surface to a cPanel-friendly PHP backend by adding shared PHP bootstrap/config/db/auth/validation/response/rate-limit/mail helpers plus /public_html/api/contact.php, jobs.php, and news.php. Preserve the existing frontend contracts for /api/contact, /api/jobs, and /api/news based on src/pages/api/*.ts and the frontend callers. Implement practical deployment-ready project structure inside this repo, keep frontend changes minimal, verify behavior, and report concrete file changes.",
+  "started_at": "2026-03-06T06:36:20.354Z",
+  "tmux_pane_id": "%1",
+  "tmux_pane_set_at": "2026-03-06T06:36:20.354Z",
   "linked_ralph": false,
-  "team_name": "implement-the-approved-jobs-ap",
+  "team_name": "execute-php-md-in-this-repo-mi",
   "agent_count": 3,
   "agent_types": "executor",
-  "completed_at": "2026-02-22T10:22:50.986Z"
+  "completed_at": "2026-03-06T06:50:09.372Z"
 }

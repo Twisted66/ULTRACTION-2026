@@ -11,6 +11,7 @@ interface SectionBackgroundProps {
   showAccentBlob?: boolean;
   showBottomLine?: boolean;
   contentWrapperClassName?: string;
+  ignoreScrollReveal?: boolean;
 }
 
 const SectionBackground: React.FC<SectionBackgroundProps> = ({
@@ -23,6 +24,7 @@ const SectionBackground: React.FC<SectionBackgroundProps> = ({
   showAccentBlob = true,
   showBottomLine = true,
   contentWrapperClassName = '',
+  ignoreScrollReveal = false,
 }) => {
   const bgClass = variant === 'surface' ? 'bg-surface' : 'bg-background';
   const sectionClass = `relative ${bgClass} text-primary overflow-hidden ${showTopBorder ? 'border-t' : ''} ${showBottomBorder ? 'border-b' : ''} border-primary/20 ${className}`;
@@ -83,7 +85,14 @@ const SectionBackground: React.FC<SectionBackgroundProps> = ({
     );
   }
 
-  return React.createElement('section', { className: sectionClass }, ...nodes);
+  return React.createElement(
+    'section',
+    {
+      className: sectionClass,
+      ...(ignoreScrollReveal ? { 'data-scroll-reveal-ignore': 'true' } : {}),
+    },
+    ...nodes,
+  );
 };
 
 export default SectionBackground;

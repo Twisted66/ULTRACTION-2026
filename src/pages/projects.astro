@@ -882,6 +882,48 @@ const projectsLogoFallbackSrc = `${import.meta.env.BASE_URL}logo/UGC-HEADER.png`
 
   setProjectListPage(0, false);
   startProjectListAutoplay();
+
+  const initProjectCardLinks = (): void => {
+    const cards = document.querySelectorAll('.project-card');
+
+    cards.forEach((card) => {
+      if (!(card instanceof HTMLElement) || card.dataset.projectLinkBound === 'true') return;
+      const primaryLink = card.querySelector('a[href]');
+      if (!(primaryLink instanceof HTMLAnchorElement)) return;
+
+      const navigate = (): void => {
+        window.location.assign(primaryLink.href);
+      };
+
+      card.dataset.projectLinkBound = 'true';
+      card.classList.add('cursor-pointer');
+      card.tabIndex = 0;
+      if (!card.getAttribute('aria-label')) {
+        card.setAttribute('aria-label', `Open ${primaryLink.textContent?.trim() || 'project details'}`);
+      }
+
+      card.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target instanceof Element && target.closest('a, button, input, textarea, select')) return;
+        navigate();
+      });
+
+      card.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        navigate();
+      });
+
+      primaryLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        navigate();
+      });
+    });
+  };
+
+  initProjectCardLinks();
+  document.addEventListener('astro:page-load', initProjectCardLinks);
 </script>
 
 <script>

@@ -1,6 +1,6 @@
 # Careers Jobs API (Backend-Managed Open Roles)
 
-This project supports backend-managed roles for `/careers` through `src/pages/api/jobs.ts`.
+This project supports backend-managed roles for `/careers` through the PHP endpoint at `public_html/api/jobs.php`.
 
 ## Manual HR Publishing (No GPT Required)
 
@@ -19,13 +19,13 @@ Security recommendations:
 
 ## Runtime Note
 
-The site currently builds statically (`astro.config.mjs` uses `output: 'static'`).  
-Astro API routes require a server runtime to execute in production.
+The site builds statically and deploys to cPanel. Production job requests are handled by the PHP backend in `public_html/api/jobs.php`, with extensionless routing via `public_html/api/.htaccess`.
 
-Use one of these deployment models:
+Frontend deployment model:
 
-1. Deploy with an Astro server adapter (Node runtime) so `/api/jobs` runs on the same domain.
-2. Keep static site hosting, deploy `/api/jobs` separately, and set `PUBLIC_JOBS_API_BASE_URL` to that API origin.
+1. Keep the Astro frontend static.
+2. Deploy the PHP backend under `/api/jobs`.
+3. Set `PUBLIC_JOBS_API_BASE_URL` only when the API is hosted on a different origin.
 
 ## Environment Variables
 

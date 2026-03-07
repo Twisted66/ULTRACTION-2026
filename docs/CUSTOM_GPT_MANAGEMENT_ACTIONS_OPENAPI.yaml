@@ -1,0 +1,610 @@
+openapi: 3.1.0
+info:
+  title: ULTRACTION Management API
+  version: 2.0.0
+  description: >
+    Combined jobs and news management API for the ULTRACTION Custom GPT.
+    Protected operations accept one shared API key through either
+    x-jobs-api-key or x-news-api-key.
+servers:
+  - url: https://ultraction.ae/api
+    description: Production
+tags:
+  - name: Jobs
+  - name: News
+paths:
+  /jobs:
+    get:
+      tags: [Jobs]
+      operationId: listJobs
+      summary: List job vacancies
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [open, closed, all]
+            default: open
+      responses:
+        '200':
+          description: Jobs returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListJobsSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+    post:
+      tags: [Jobs]
+      operationId: createJob
+      summary: Create a new job vacancy
+      security:
+        - UnifiedApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateJobRequest'
+      responses:
+        '201':
+          description: Job created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobSuccess'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+    patch:
+      tags: [Jobs]
+      operationId: updateJob
+      summary: Update an existing job vacancy
+      security:
+        - UnifiedApiKey: []
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateJobRequest'
+      responses:
+        '200':
+          description: Job updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobSuccess'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+    delete:
+      tags: [Jobs]
+      operationId: archiveJob
+      summary: Archive a job vacancy
+      security:
+        - UnifiedApiKey: []
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: confirm
+          in: query
+          required: true
+          schema:
+            type: boolean
+            enum: [true]
+        - name: confirmTitle
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 120
+      responses:
+        '200':
+          description: Job archived
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobSuccess'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+  /news:
+    get:
+      tags: [News]
+      operationId: listNews
+      summary: List news articles
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [published, draft, archived, all]
+            default: published
+      responses:
+        '200':
+          description: News returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNewsSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+    post:
+      tags: [News]
+      operationId: createNews
+      summary: Create a news article
+      security:
+        - UnifiedApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNewsRequest'
+      responses:
+        '201':
+          description: News created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsSuccess'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+    patch:
+      tags: [News]
+      operationId: updateNews
+      summary: Update an existing news article
+      security:
+        - UnifiedApiKey: []
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNewsRequest'
+      responses:
+        '200':
+          description: News updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsSuccess'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+    delete:
+      tags: [News]
+      operationId: archiveNews
+      summary: Archive a news article
+      security:
+        - UnifiedApiKey: []
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: confirm
+          in: query
+          required: true
+          schema:
+            type: boolean
+            enum: [true]
+        - name: confirmTitle
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 180
+      responses:
+        '200':
+          description: News archived
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewsSuccess'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+        '503':
+          $ref: '#/components/responses/Misconfigured'
+components:
+  securitySchemes:
+    UnifiedApiKey:
+      type: apiKey
+      in: header
+      name: x-jobs-api-key
+      description: >
+        Use the shared ULTRACTION management key. The same key is also accepted
+        through x-news-api-key for teams that prefer that header name.
+  schemas:
+    Job:
+      type: object
+      required: [id, slug, title, location, description, status, createdAt, updatedAt, postedAt]
+      properties:
+        id: { type: string }
+        slug: { type: string }
+        title: { type: string }
+        location: { type: string }
+        description: { type: string }
+        department: { type: string, nullable: true }
+        employmentType: { type: string, nullable: true }
+        status:
+          type: string
+          enum: [open, closed]
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        postedAt:
+          type: string
+          format: date-time
+    CreateJobRequest:
+      type: object
+      required: [title, location, description]
+      properties:
+        title: { type: string, minLength: 2, maxLength: 120 }
+        location: { type: string, minLength: 2, maxLength: 120 }
+        description: { type: string, minLength: 20, maxLength: 5000 }
+        department: { type: string, maxLength: 120 }
+        employmentType: { type: string, maxLength: 80 }
+        postedAt:
+          type: string
+          format: date-time
+    UpdateJobRequest:
+      type: object
+      properties:
+        title: { type: string, minLength: 2, maxLength: 120 }
+        location: { type: string, minLength: 2, maxLength: 120 }
+        description: { type: string, minLength: 20, maxLength: 5000 }
+        department: { type: string, maxLength: 120 }
+        employmentType: { type: string, maxLength: 80 }
+        postedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [open, closed]
+    JobSuccess:
+      type: object
+      required: [ok, data]
+      properties:
+        ok:
+          type: boolean
+          enum: [true]
+        data:
+          type: object
+          required: [job]
+          properties:
+            job:
+              $ref: '#/components/schemas/Job'
+    ListJobsSuccess:
+      type: object
+      required: [ok, data]
+      properties:
+        ok:
+          type: boolean
+          enum: [true]
+        data:
+          type: object
+          required: [jobs]
+          properties:
+            jobs:
+              type: array
+              items:
+                $ref: '#/components/schemas/Job'
+    News:
+      type: object
+      required:
+        [id, slug, title, excerpt, content, category, tags, author, image, sourceName, sourceUrl, sourcePublishedAt, status, createdAt, updatedAt]
+      properties:
+        id: { type: string }
+        slug: { type: string }
+        title: { type: string }
+        excerpt: { type: string }
+        content: { type: string }
+        category: { type: string }
+        tags:
+          type: array
+          items:
+            type: string
+        author: { type: string }
+        image: { type: string }
+        sourceName: { type: string }
+        sourceUrl: { type: string, format: uri }
+        sourcePublishedAt:
+          type: string
+          format: date-time
+        publishedAt:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          type: string
+          enum: [draft, published, archived]
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CreateNewsRequest:
+      type: object
+      required: [title, excerpt, content, category, author, image, sourceName, sourceUrl, sourcePublishedAt]
+      properties:
+        title: { type: string, minLength: 2, maxLength: 180 }
+        excerpt: { type: string, minLength: 10, maxLength: 600 }
+        content: { type: string, minLength: 20, maxLength: 50000 }
+        category: { type: string, minLength: 2, maxLength: 80 }
+        tags:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 40
+          maxItems: 25
+        author: { type: string, minLength: 2, maxLength: 120 }
+        image: { type: string, minLength: 3, maxLength: 2048 }
+        sourceName: { type: string, minLength: 2, maxLength: 120 }
+        sourceUrl: { type: string, format: uri, minLength: 8, maxLength: 2048 }
+        sourcePublishedAt:
+          type: string
+          format: date-time
+    UpdateNewsRequest:
+      type: object
+      properties:
+        title: { type: string, minLength: 2, maxLength: 180 }
+        excerpt: { type: string, minLength: 10, maxLength: 600 }
+        content: { type: string, minLength: 20, maxLength: 50000 }
+        category: { type: string, minLength: 2, maxLength: 80 }
+        tags:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 40
+          maxItems: 25
+        author: { type: string, minLength: 2, maxLength: 120 }
+        image: { type: string, minLength: 3, maxLength: 2048 }
+        sourceName: { type: string, minLength: 2, maxLength: 120 }
+        sourceUrl: { type: string, format: uri, minLength: 8, maxLength: 2048 }
+        sourcePublishedAt:
+          type: string
+          format: date-time
+        publishedAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [draft, published, archived]
+    NewsSuccess:
+      type: object
+      required: [ok, data]
+      properties:
+        ok:
+          type: boolean
+          enum: [true]
+        data:
+          type: object
+          required: [news]
+          properties:
+            news:
+              $ref: '#/components/schemas/News'
+    ListNewsSuccess:
+      type: object
+      required: [ok, data]
+      properties:
+        ok:
+          type: boolean
+          enum: [true]
+        data:
+          type: object
+          required: [news]
+          properties:
+            news:
+              type: array
+              items:
+                $ref: '#/components/schemas/News'
+    ErrorEnvelope:
+      type: object
+      required: [ok, error]
+      properties:
+        ok:
+          type: boolean
+          enum: [false]
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            fields:
+              type: object
+              additionalProperties:
+                type: string
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    ValidationError:
+      description: Validation failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Unauthorized:
+      description: Missing API credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Forbidden:
+      description: Invalid API credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Conflict:
+      description: Conflicting resource state
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    UnsupportedMediaType:
+      description: Content-Type must be application/json
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    RateLimited:
+      description: Too many requests
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Misconfigured:
+      description: Protected operations are not configured
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'

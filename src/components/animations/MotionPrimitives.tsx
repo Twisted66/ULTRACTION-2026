@@ -42,13 +42,13 @@ export function MotionReveal({
       return variants;
     }
 
-    return createRevealVariants({
-      direction,
-      distance: distance ?? getResponsiveMotionDistance(),
-      delay,
-      duration,
-      reducedMotion: shouldReduceMotion,
-    });
+      return createRevealVariants({
+        direction,
+        distance: distance ?? getResponsiveMotionDistance(),
+        delay,
+        duration,
+        reducedMotion: shouldReduceMotion ?? undefined,
+      });
   }, [delay, direction, distance, duration, shouldReduceMotion, variants]);
 
   return (
@@ -87,7 +87,7 @@ export function MotionStagger({
       createStaggerContainerVariants({
         staggerChildren,
         delayChildren,
-        reducedMotion: shouldReduceMotion,
+        reducedMotion: shouldReduceMotion ?? undefined,
       }),
     [delayChildren, shouldReduceMotion, staggerChildren, variants],
   );

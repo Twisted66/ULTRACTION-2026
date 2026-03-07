@@ -386,6 +386,23 @@
     transform: translate3d(0, 0, 0);
   }
 
+  html.has-scroll-reveal .scroll-reveal {
+    opacity: 0;
+    transform: translate3d(0, 2rem, 0) scale(0.985);
+    filter: blur(10px);
+    transition-property: opacity, transform, filter;
+    transition-duration: 820ms;
+    transition-timing-function: var(--motion-ease-emphasized);
+    transition-delay: var(--scroll-reveal-delay, 0ms);
+    will-change: opacity, transform, filter;
+  }
+
+  html.has-scroll-reveal .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+
   /* Grid border utilities (PROMINENT) */
   .grid-border-r {
     border-right: 1px solid currentColor;
@@ -478,6 +495,7 @@
   .overlay-motion,
   .motion-reveal,
   .motion-reveal-x,
+  .scroll-reveal,
   .motion-stagger > * {
     transition: none !important;
   }
@@ -487,10 +505,13 @@
   .motion-reveal.is-visible,
   .motion-reveal-x,
   .motion-reveal-x.is-visible,
+  .scroll-reveal,
+  .scroll-reveal.is-visible,
   .motion-stagger > *,
   .motion-stagger.is-visible > * {
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
   }
 
   .animate-pulse-slow,

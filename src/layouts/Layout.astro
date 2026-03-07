@@ -76,8 +76,9 @@ const showElementCaptureWidget =
         "url": "https://ultraction.ae",
         "logo": "https://ultraction.ae/logo/UGC-LOGO-HQ.png",
         "sameAs": [
-          "https://www.linkedin.com/company/ultraction",
-          "https://www.facebook.com/ultraction"
+          "https://www.facebook.com/people/Ultraction/61565943347227/",
+          "https://ae.linkedin.com/company/ultraction-general-contracting",
+          "https://www.instagram.com/_ultraction/"
         ],
         "address": {
           "@type": "PostalAddress",
@@ -173,6 +174,111 @@ const showElementCaptureWidget =
           html.classList.remove('dark');
         }
       })();
+    </script>
+    <script>
+      function initGlobalScrollReveal() {
+        const html = document.documentElement;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const revealSelector = [
+          'main section',
+          'main article',
+          'main [data-scroll-reveal]',
+          'main .motion-reveal',
+          'main .motion-reveal-x',
+          'main .motion-stagger',
+        ].join(', ');
+
+        const candidates = Array.from(document.querySelectorAll(revealSelector)).filter(
+          (element): element is HTMLElement => element instanceof HTMLElement,
+        );
+
+        const revealables = candidates.filter((element) => {
+          if (element.dataset.scrollRevealReady === 'true') return false;
+          if (element.classList.contains('hero-text-reveal')) return false;
+          if (element.classList.contains('reveal-project')) return false;
+          if (element.hasAttribute('data-scroll-reveal-ignore')) return false;
+
+          const parentReveal = element.parentElement?.closest(
+            '.scroll-reveal, [data-scroll-reveal]',
+          );
+
+          if (parentReveal && !element.matches('[data-scroll-reveal], .motion-reveal, .motion-reveal-x, .motion-stagger')) {
+            return false;
+          }
+
+          return true;
+        });
+
+        if (!revealables.length) return;
+
+        html.classList.add('has-scroll-reveal');
+
+        const existingObserver = (window as typeof window & {
+          __ultractionScrollRevealObserver?: IntersectionObserver;
+        }).__ultractionScrollRevealObserver;
+
+        existingObserver?.disconnect();
+
+        const markVisible = (element: HTMLElement) => {
+          element.classList.add('is-visible');
+        };
+
+        revealables.forEach((element) => {
+          element.dataset.scrollRevealReady = 'true';
+
+          if (!element.matches('.motion-reveal, .motion-reveal-x, .motion-stagger, [data-scroll-reveal]')) {
+            element.classList.add('scroll-reveal');
+          }
+
+          const siblingElements = element.parentElement
+            ? Array.from(element.parentElement.children).filter((child): child is HTMLElement =>
+                child instanceof HTMLElement &&
+                child.matches('section, article, [data-scroll-reveal], .motion-reveal, .motion-reveal-x, .motion-stagger'),
+              )
+            : [element];
+
+          const siblingIndex = Math.max(0, siblingElements.indexOf(element));
+          element.style.setProperty('--scroll-reveal-delay', `${Math.min(siblingIndex * 70, 280)}ms`);
+        });
+
+        if (reduceMotion) {
+          revealables.forEach(markVisible);
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+
+              const element = entry.target;
+              if (!(element instanceof HTMLElement)) return;
+
+              markVisible(element);
+              observer.unobserve(element);
+            });
+          },
+          {
+            threshold: 0.18,
+            rootMargin: '0px 0px -12% 0px',
+          },
+        );
+
+        revealables.forEach((element) => {
+          observer.observe(element);
+        });
+
+        (window as typeof window & {
+          __ultractionScrollRevealObserver?: IntersectionObserver;
+        }).__ultractionScrollRevealObserver = observer;
+      }
+
+      document.addEventListener('DOMContentLoaded', initGlobalScrollReveal);
+      document.addEventListener('astro:page-load', initGlobalScrollReveal);
+
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        initGlobalScrollReveal();
+      }
     </script>
     <script>
       // Global Hero Text Reveal Script

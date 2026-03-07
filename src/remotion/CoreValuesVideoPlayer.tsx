@@ -1,14 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Player } from '@remotion/player';
-import type { PlayerRef } from '@remotion/player';
 import { CoreValuesComposition, SCENE_DURATION_IN_FRAMES } from './CoreValuesComposition';
 
 // Per Remotion docs, Player requires explicit pixel dimensions via style.
 // To achieve a "cover" effect inside a variable container, we absolutely
 // position the player and scale it to always fill its parent.
 export const CoreValuesVideoPlayer: React.FC = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const playerRef = useRef<PlayerRef>(null);
+    const containerRef = useRef<HTMLDivElement | null>(null);
     const [dims, setDims] = useState({ width: 1920, height: 1080 });
     const [isMounted, setIsMounted] = useState(false);
 
@@ -55,13 +53,13 @@ export const CoreValuesVideoPlayer: React.FC = () => {
             ro = new ResizeObserver(update);
             if (containerRef.current) ro.observe(containerRef.current);
         } else {
-            window.addEventListener('resize', update);
+            globalThis.addEventListener('resize', update);
         }
         return () => {
             if (ro) {
                 ro.disconnect();
             } else {
-                window.removeEventListener('resize', update);
+                globalThis.removeEventListener('resize', update);
             }
         };
     }, []);
@@ -90,7 +88,6 @@ export const CoreValuesVideoPlayer: React.FC = () => {
                 />
             ) : null}
             <Player
-                ref={playerRef}
                 component={CoreValuesComposition}
                 durationInFrames={SCENE_DURATION_IN_FRAMES * 6}
                 fps={30}
@@ -107,7 +104,7 @@ export const CoreValuesVideoPlayer: React.FC = () => {
                 }}
                 autoPlay
                 loop
-                muted
+                initiallyMuted
                 controls={false}
                 allowFullscreen={false}
                 clickToPlay={false}

@@ -51,6 +51,35 @@ function ultraction_bearer_token(): ?string
     return trim($matches[1]);
 }
 
+function ultraction_request_api_key(array $headerNames = []): ?string
+{
+    $candidates = array_values(array_unique(array_merge(
+        $headerNames,
+        ['x-jobs-api-key', 'x-news-api-key']
+    )));
+
+    foreach ($candidates as $headerName) {
+        $value = ultraction_request_header($headerName);
+        if ($value !== null && $value !== '') {
+            return $value;
+        }
+    }
+
+    return ultraction_bearer_token();
+}
+
+function ultraction_expected_api_key(string $primaryEnvKey): ?string
+{
+    foreach ([$primaryEnvKey, 'ULTRACTION_API_KEY'] as $envKey) {
+        $value = ultraction_env_value($envKey, null);
+        if (is_string($value) && trim($value) !== '') {
+            return trim($value);
+        }
+    }
+
+    return null;
+}
+
 function ultraction_safe_equals(?string $received, ?string $expected): bool
 {
     if ($received === null || $expected === null) {

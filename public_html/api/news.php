@@ -315,8 +315,8 @@ function ultraction_news_check_rate_limit(string $scope): void
 
 function ultraction_news_ensure_write_auth(): void
 {
-    $expectedApiKey = ultraction_env_value('NEWS_API_KEY', null);
-    if (!is_string($expectedApiKey) || trim($expectedApiKey) === '') {
+    $expectedApiKey = ultraction_expected_api_key('NEWS_API_KEY');
+    if ($expectedApiKey === null) {
         ultraction_json_response(503, [
             'ok' => false,
             'error' => [
@@ -326,7 +326,7 @@ function ultraction_news_ensure_write_auth(): void
         ]);
     }
 
-    $receivedApiKey = ultraction_request_header('x-news-api-key') ?? ultraction_bearer_token();
+    $receivedApiKey = ultraction_request_api_key(['x-news-api-key']);
     if ($receivedApiKey === null || trim($receivedApiKey) === '') {
         ultraction_json_response(401, [
             'ok' => false,
@@ -337,7 +337,7 @@ function ultraction_news_ensure_write_auth(): void
         ]);
     }
 
-    if (!hash_equals(trim($expectedApiKey), trim($receivedApiKey))) {
+    if (!hash_equals($expectedApiKey, trim($receivedApiKey))) {
         ultraction_json_response(403, [
             'ok' => false,
             'error' => [

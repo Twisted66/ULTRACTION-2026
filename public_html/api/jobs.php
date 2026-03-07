@@ -301,8 +301,8 @@ function ultraction_jobs_check_rate_limit(string $scope): void
 
 function ultraction_jobs_ensure_write_auth(): void
 {
-    $expectedApiKey = ultraction_env_value('JOBS_API_KEY', null);
-    if (!is_string($expectedApiKey) || trim($expectedApiKey) === '') {
+    $expectedApiKey = ultraction_expected_api_key('JOBS_API_KEY');
+    if ($expectedApiKey === null) {
         ultraction_json_response(503, [
             'ok' => false,
             'error' => [
@@ -312,7 +312,7 @@ function ultraction_jobs_ensure_write_auth(): void
         ]);
     }
 
-    $receivedApiKey = ultraction_request_header('x-jobs-api-key') ?? ultraction_bearer_token();
+    $receivedApiKey = ultraction_request_api_key(['x-jobs-api-key']);
     if ($receivedApiKey === null || trim($receivedApiKey) === '') {
         ultraction_json_response(401, [
             'ok' => false,
@@ -323,7 +323,7 @@ function ultraction_jobs_ensure_write_auth(): void
         ]);
     }
 
-    if (!hash_equals(trim($expectedApiKey), trim($receivedApiKey))) {
+    if (!hash_equals($expectedApiKey, trim($receivedApiKey))) {
         ultraction_json_response(403, [
             'ok' => false,
             'error' => [

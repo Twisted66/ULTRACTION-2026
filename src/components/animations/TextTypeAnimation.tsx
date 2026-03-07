@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { type ElementType, type HTMLAttributes, type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import { createElement, type ElementType, type HTMLAttributes, type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 
 interface VariableSpeedConfig {
   min: number;
@@ -190,28 +190,34 @@ export default function TextTypeAnimation({
     (charIndex < (textArray[currentTextIndex]?.length ?? 0) || isDeleting);
 
   return (
-    <Component
+    <span
       ref={containerRef}
       className={`inline-block whitespace-pre-wrap tracking-tight ${className}`.trim()}
       {...rest}
     >
-      <span className="inline" style={{ color: getCurrentTextColor() }}>
-        {typedText}
-      </span>
-      {showCursor && (
-        <motion.span
-          animate={{ opacity: [1, 0, 1] }}
-          transition={{
-            duration: cursorBlinkDuration,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: 'linear',
-          }}
-          className={`ml-1 inline-block ${shouldHideCursor ? 'opacity-0' : 'opacity-100'} ${cursorClassName}`.trim()}
-          aria-hidden="true"
-        >
-          {cursorCharacter}
-        </motion.span>
+      {createElement(
+        Component,
+        {},
+        <>
+          <span className="inline" style={{ color: getCurrentTextColor() }}>
+            {typedText}
+          </span>
+          {showCursor && (
+            <motion.span
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{
+                duration: cursorBlinkDuration,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: 'linear',
+              }}
+              className={`ml-1 inline-block ${shouldHideCursor ? 'opacity-0' : 'opacity-100'} ${cursorClassName}`.trim()}
+              aria-hidden="true"
+            >
+              {cursorCharacter}
+            </motion.span>
+          )}
+        </>,
       )}
-    </Component>
+    </span>
   );
 }

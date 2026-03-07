@@ -5,10 +5,6 @@ import { OrbitControls, Html, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { cn } from "@/lib/utils";
 
-// ============================================================================
-// Types
-// ============================================================================
-
 export interface GlobeMarker {
   lat: number;
   lng: number;
@@ -18,79 +14,42 @@ export interface GlobeMarker {
 }
 
 export interface Globe3DConfig {
-  /** Globe radius */
   radius?: number;
-  /** Globe base color (used as fallback or tint) */
   globeColor?: string;
-  /** URL to the Earth texture map */
   textureUrl?: string;
-  /** URL to the bump/elevation map for terrain */
   bumpMapUrl?: string;
-  /** Whether to show atmosphere glow */
   showAtmosphere?: boolean;
-  /** Atmosphere color */
   atmosphereColor?: string;
-  /** Atmosphere intensity */
   atmosphereIntensity?: number;
-  /** Atmosphere blur/softness (higher = more diffuse, default 3) */
   atmosphereBlur?: number;
-  /** Terrain bump scale (0 = flat, higher = more pronounced) */
   bumpScale?: number;
-  /** Auto rotate speed (0 = disabled) */
   autoRotateSpeed?: number;
-  /** Enable zoom */
   enableZoom?: boolean;
-  /** Enable pan */
   enablePan?: boolean;
-  /** Min zoom distance */
   minDistance?: number;
-  /** Max zoom distance */
   maxDistance?: number;
-  /** Initial rotation */
   initialRotation?: { x: number; y: number };
-  /** Marker default size */
   markerSize?: number;
-  /** Show wireframe overlay */
   showWireframe?: boolean;
-  /** Wireframe color */
   wireframeColor?: string;
-  /** Ambient light intensity */
   ambientIntensity?: number;
-  /** Point light intensity */
   pointLightIntensity?: number;
-  /** Background color (null for transparent) */
   backgroundColor?: string | null;
 }
 
 interface Globe3DProps {
-  /** Array of markers to display on the globe */
   markers?: GlobeMarker[];
-  /** Globe configuration */
   config?: Globe3DConfig;
-  /** Additional CSS classes */
   className?: string;
-  /** Callback when a marker is clicked */
   onMarkerClick?: (marker: GlobeMarker) => void;
-  /** Callback when a marker is hovered */
   onMarkerHover?: (marker: GlobeMarker | null) => void;
 }
-
-// ============================================================================
-// Constants - Earth Texture URLs (NASA Blue Marble)
-// ============================================================================
 
 const DEFAULT_EARTH_TEXTURE =
   "https://unpkg.com/three-globe@2.31.0/example/img/earth-blue-marble.jpg";
 const DEFAULT_BUMP_TEXTURE =
   "https://unpkg.com/three-globe@2.31.0/example/img/earth-topology.png";
 
-// ============================================================================
-// Utility Functions
-// ============================================================================
-
-/**
- * Convert latitude/longitude to 3D cartesian coordinates
- */
 function latLngToVector3(
   lat: number,
   lng: number,
@@ -105,10 +64,6 @@ function latLngToVector3(
 
   return new THREE.Vector3(x, y, z);
 }
-
-// ============================================================================
-// Marker Component (static - rotation handled by parent group)
-// ============================================================================
 
 interface MarkerProps {
   marker: GlobeMarker;
@@ -129,29 +84,20 @@ function Marker({
   const imageGroupRef = useRef<THREE.Group>(null);
   const { camera } = useThree();
 
-  // Marker position
   const topPosition = useMemo(() => {
     return latLngToVector3(marker.lat, marker.lng, radius * 1.18);
   }, [marker.lat, marker.lng, radius]);
 
-  // Check if marker is facing the camera
   useFrame(() => {
     if (!imageGroupRef.current) return;
 
-    // Get the world position of the image (the positioned element)
     const worldPos = new THREE.Vector3();
     imageGroupRef.current.getWorldPosition(worldPos);
 
-    // Direction from globe center (0,0,0) to marker
     const markerDirection = worldPos.clone().normalize();
-
-    // Direction from globe center to camera
     const cameraDirection = camera.position.clone().normalize();
-
-    // Dot product: positive means facing camera, negative means behind
     const dot = markerDirection.dot(cameraDirection);
 
-    // Show marker only if it's facing the camera (stricter threshold)
     setIsVisible(dot > 0.1);
   });
 
@@ -171,7 +117,6 @@ function Marker({
 
   return (
     <group ref={groupRef} visible={isVisible}>
-      {/* Circular image marker only (pins removed) */}
       <group ref={imageGroupRef} position={topPosition}>
         <Html
           transform
@@ -210,10 +155,6 @@ function Marker({
   );
 }
 
-// ============================================================================
-// Rotating Globe with Markers (all rotate together)
-// ============================================================================
-
 interface RotatingGlobeProps {
   config: Required<Globe3DConfig>;
   markers: GlobeMarker[];
@@ -229,13 +170,11 @@ function RotatingGlobe({
 }: RotatingGlobeProps) {
   const groupRef = useRef<THREE.Group>(null);
 
-  // Load Earth textures
   const [earthTexture, bumpTexture] = useTexture([
     config.textureUrl,
     config.bumpMapUrl,
   ]);
 
-  // Configure textures
   useMemo(() => {
     if (earthTexture) {
       earthTexture.colorSpace = THREE.SRGBColorSpace;
@@ -246,7 +185,6 @@ function RotatingGlobe({
     }
   }, [earthTexture, bumpTexture]);
 
-  // Create geometries
   const geometry = useMemo(() => {
     return new THREE.SphereGeometry(config.radius, 64, 64);
   }, [config.radius]);
@@ -257,7 +195,6 @@ function RotatingGlobe({
 
   return (
     <group ref={groupRef}>
-      {/* Main globe mesh with Earth texture */}
       <mesh geometry={geometry}>
         <meshStandardMaterial
           map={earthTexture}
@@ -268,7 +205,6 @@ function RotatingGlobe({
         />
       </mesh>
 
-      {/* Wireframe overlay */}
       {config.showWireframe && (
         <mesh geometry={wireframeGeometry}>
           <meshBasicMaterial
@@ -280,7 +216,6 @@ function RotatingGlobe({
         </mesh>
       )}
 
-      {/* Markers - now inside the rotating group */}
       {markers.map((marker, index) => (
         <Marker
           key={`marker-${index}-${marker.lat}-${marker.lng}`}
@@ -294,10 +229,6 @@ function RotatingGlobe({
   );
 }
 
-// ============================================================================
-// Atmosphere Component (stays static - doesn't rotate)
-// ============================================================================
-
 interface AtmosphereProps {
   radius: number;
   color: string;
@@ -306,8 +237,6 @@ interface AtmosphereProps {
 }
 
 function Atmosphere({ radius, color, intensity, blur }: AtmosphereProps) {
-  // blur controls the fresnel exponent: lower = more diffuse, higher = sharper edge
-  // We invert it so higher blur value = more diffuse (lower exponent)
   const fresnelPower = Math.max(0.5, 5 - blur);
 
   const atmosphereMaterial = useMemo(() => {
@@ -351,10 +280,6 @@ function Atmosphere({ radius, color, intensity, blur }: AtmosphereProps) {
   );
 }
 
-// ============================================================================
-// Scene Component
-// ============================================================================
-
 interface SceneProps {
   markers: GlobeMarker[];
   config: Required<Globe3DConfig>;
@@ -365,7 +290,6 @@ interface SceneProps {
 function Scene({ markers, config, onMarkerClick, onMarkerHover }: SceneProps) {
   const { camera } = useThree();
 
-  // Set initial camera position (pulled back to accommodate markers)
   React.useEffect(() => {
     camera.position.set(0, 0, config.radius * 3.5);
     camera.lookAt(0, 0, 0);
@@ -373,7 +297,6 @@ function Scene({ markers, config, onMarkerClick, onMarkerHover }: SceneProps) {
 
   return (
     <>
-      {/* Lighting */}
       <ambientLight intensity={config.ambientIntensity} />
       <directionalLight
         position={[config.radius * 5, config.radius * 2, config.radius * 5]}
@@ -386,7 +309,6 @@ function Scene({ markers, config, onMarkerClick, onMarkerHover }: SceneProps) {
         color="#88ccff"
       />
 
-      {/* Rotating Globe with Markers */}
       <RotatingGlobe
         config={config}
         markers={markers}
@@ -394,7 +316,6 @@ function Scene({ markers, config, onMarkerClick, onMarkerHover }: SceneProps) {
         onMarkerHover={onMarkerHover}
       />
 
-      {/* Atmosphere (static) */}
       {config.showAtmosphere && (
         <Atmosphere
           radius={config.radius}
@@ -404,7 +325,6 @@ function Scene({ markers, config, onMarkerClick, onMarkerHover }: SceneProps) {
         />
       )}
 
-      {/* Controls */}
       <OrbitControls
         makeDefault
         enablePan={config.enablePan}
@@ -421,10 +341,6 @@ function Scene({ markers, config, onMarkerClick, onMarkerHover }: SceneProps) {
   );
 }
 
-// ============================================================================
-// Loading Fallback
-// ============================================================================
-
 function LoadingFallback() {
   return (
     <Html center>
@@ -436,10 +352,6 @@ function LoadingFallback() {
     </Html>
   );
 }
-
-// ============================================================================
-// Main Globe3D Component
-// ============================================================================
 
 const defaultConfig: Required<Globe3DConfig> = {
   radius: 2,
