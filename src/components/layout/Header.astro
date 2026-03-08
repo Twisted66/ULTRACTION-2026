@@ -123,8 +123,9 @@ const isActive = (href: string) => {
 
     const setBackgroundInert = (isOpen: boolean) => {
       if (!siteHeader) return;
+      // We want to make everything EXCEPT the header and its ancestors inert
       Array.from(document.body.children).forEach((element) => {
-        if (element === siteHeader) return;
+        if (element.contains(siteHeader)) return;
         if (isOpen) {
           element.setAttribute('inert', '');
           element.setAttribute('aria-hidden', 'true');
@@ -133,6 +134,21 @@ const isActive = (href: string) => {
           element.removeAttribute('aria-hidden');
         }
       });
+
+      // Also handle siblings of siteHeader within its parent (like main and footer)
+      const parent = siteHeader.parentElement;
+      if (parent) {
+        Array.from(parent.children).forEach((element) => {
+          if (element === siteHeader) return;
+          if (isOpen) {
+            element.setAttribute('inert', '');
+            element.setAttribute('aria-hidden', 'true');
+          } else {
+            element.removeAttribute('inert');
+            element.removeAttribute('aria-hidden');
+          }
+        });
+      }
     };
 
     const setMobileMenuState = (isOpen: boolean) => {
