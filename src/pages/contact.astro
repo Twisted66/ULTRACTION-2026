@@ -92,12 +92,17 @@ const messagePlaceholder =
 
             <div class="group">
                <label class="block text-xs uppercase font-bold tracking-[0.2em] mb-3 opacity-70 text-accent" for="message">
-                 <span class="flex items-center gap-2">
-                   <span class="w-4 h-[2px] bg-accent"></span>
-                   Message <span class="text-accent">*</span>
+                 <span class="flex items-center justify-between">
+                   <span class="flex items-center gap-2">
+                     <span class="w-4 h-[2px] bg-accent"></span>
+                     Message <span class="text-accent">*</span>
+                   </span>
+                   <span id="message-counter" class="text-[10px] font-mono tracking-normal opacity-50" aria-live="polite">
+                     0 / 5000
+                   </span>
                  </span>
                </label>
-               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true"></textarea>
+               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true" maxlength="5000" aria-describedby="message-counter"></textarea>
             </div>
 
             <div class="group">
@@ -326,9 +331,25 @@ const messagePlaceholder =
     const statusBox = document.getElementById('form-status');
     const subjectSelect = form.querySelector('#subject');
     const messageInput = form.querySelector('#message');
+    const messageCounter = document.getElementById('message-counter');
     const fileInput = document.querySelector('#attachment');
     const fileNameDisplay = document.getElementById('file-name');
     const roleFromQuery = form.dataset.role?.trim() ?? '';
+
+    const updateMessageCounter = () => {
+      if (!(messageInput instanceof HTMLTextAreaElement) || !(messageCounter instanceof HTMLElement)) return;
+      const count = messageInput.value.length;
+      const max = parseInt(messageInput.getAttribute('maxlength') || '5000', 10);
+      messageCounter.textContent = `${count} / ${max}`;
+
+      if (count >= max * 0.9) {
+        messageCounter.classList.add('text-accent', 'opacity-100');
+        messageCounter.classList.remove('opacity-50');
+      } else {
+        messageCounter.classList.remove('text-accent', 'opacity-100');
+        messageCounter.classList.add('opacity-50');
+      }
+    };
 
     const prefillCareerApplicationMessage = () => {
       if (!(subjectSelect instanceof HTMLSelectElement) || !(messageInput instanceof HTMLTextAreaElement)) return;
@@ -339,7 +360,14 @@ const messagePlaceholder =
         'Current location:\n' +
         'Availability:\n' +
         'CV/Portfolio link:\n';
+      updateMessageCounter();
     };
+
+    if (messageInput instanceof HTMLTextAreaElement) {
+      messageInput.addEventListener('input', updateMessageCounter);
+      // Initialize counter if there's pre-filled text
+      updateMessageCounter();
+    }
 
     prefillCareerApplicationMessage();
     if (subjectSelect instanceof HTMLSelectElement) {
@@ -414,6 +442,7 @@ const messagePlaceholder =
 
         setStatus('success', result.message || 'Your message has been sent.');
         form.reset();
+        updateMessageCounter();
         if (fileNameDisplay instanceof HTMLElement) fileNameDisplay.classList.add('hidden');
         if (subjectSelect instanceof HTMLSelectElement && selected) {
           subjectSelect.value = selected;
