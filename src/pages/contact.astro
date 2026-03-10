@@ -97,7 +97,12 @@ const messagePlaceholder =
                    Message <span class="text-accent">*</span>
                  </span>
                </label>
-               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true"></textarea>
+               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true" minlength="10" maxlength="5000" aria-describedby="message-counter"></textarea>
+               <div class="flex justify-end mt-2">
+                 <span id="message-counter" class="text-[10px] uppercase tracking-widest font-bold opacity-40 transition-colors duration-300" aria-live="polite">
+                   0 / 5000
+                 </span>
+               </div>
             </div>
 
             <div class="group">
@@ -330,6 +335,21 @@ const messagePlaceholder =
     const fileNameDisplay = document.getElementById('file-name');
     const roleFromQuery = form.dataset.role?.trim() ?? '';
 
+    const messageCounter = document.getElementById('message-counter');
+    const updateCounter = () => {
+      if (!(messageInput instanceof HTMLTextAreaElement) || !(messageCounter instanceof HTMLElement)) return;
+      const length = messageInput.value.length;
+      messageCounter.textContent = `${length} / 5000`;
+
+      if (length >= 4500) {
+        messageCounter.classList.remove('opacity-40');
+        messageCounter.classList.add('opacity-100', 'text-accent');
+      } else {
+        messageCounter.classList.add('opacity-40');
+        messageCounter.classList.remove('opacity-100', 'text-accent');
+      }
+    };
+
     const prefillCareerApplicationMessage = () => {
       if (!(subjectSelect instanceof HTMLSelectElement) || !(messageInput instanceof HTMLTextAreaElement)) return;
       if (subjectSelect.value !== 'careers' || !roleFromQuery || messageInput.value.trim()) return;
@@ -339,11 +359,17 @@ const messagePlaceholder =
         'Current location:\n' +
         'Availability:\n' +
         'CV/Portfolio link:\n';
+      updateCounter();
     };
 
     prefillCareerApplicationMessage();
     if (subjectSelect instanceof HTMLSelectElement) {
       subjectSelect.addEventListener('change', prefillCareerApplicationMessage);
+    }
+    if (messageInput instanceof HTMLTextAreaElement) {
+      messageInput.addEventListener('input', updateCounter);
+      // Initial update for non-career pre-fills or browser restores
+      updateCounter();
     }
 
     // Display selected file name
