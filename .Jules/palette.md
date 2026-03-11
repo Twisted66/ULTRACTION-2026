@@ -19,3 +19,7 @@
 ## 2026-02-14 - Interactive Navigation Feedback and Component Extensibility
 **Learning:** Mobile menu toggles that don't change their icon (e.g., staying as a hamburger when open) fail to provide immediate visual confirmation of the menu state. Additionally, internal UI components like 'MagneticButton' must support attribute spreading to allow developers to inject critical accessibility attributes (like aria-label) without modifying the base component.
 **Action:** Ensure all toggle interactions have distinct visual states (icons/colors) and ensure all base UI components spread '...rest' props to their root interactive element.
+
+## 2026-03-04 - Real-Time Input Feedback and State Synchronization
+**Learning:** Textareas with character limits should feature a real-time counter linked via 'aria-describedby' with 'aria-live="polite"', providing visual feedback (e.g., using 'text-accent') when approaching the limit. Crucially, in Astro sites with View Transitions, counter initialization must occur on both 'DOMContentLoaded' and 'astro:page-load' to maintain accuracy during client-side navigation and programmatic pre-filling.
+**Action:** Always implement character counters with accessibility-first attributes and ensure state synchronization logic is bound to the full page lifecycle (including Astro-specific navigation events).
