@@ -113,6 +113,7 @@ function latLngToVector3(
 interface MarkerProps {
   marker: GlobeMarker;
   radius: number;
+  markerSize: number;
   onClick?: (marker: GlobeMarker) => void;
   onHover?: (marker: GlobeMarker | null) => void;
 }
@@ -120,11 +121,13 @@ interface MarkerProps {
 function Marker({
   marker,
   radius,
+  markerSize,
   onClick,
   onHover,
 }: MarkerProps) {
   const [hovered, setHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const visibilityRef = useRef(true);
   const groupRef = useRef<THREE.Group>(null);
   const imageGroupRef = useRef<THREE.Group>(null);
   const { camera } = useThree();
@@ -152,7 +155,11 @@ function Marker({
     const dot = markerDirection.dot(cameraDirection);
 
     // Show marker only if it's facing the camera (stricter threshold)
-    setIsVisible(dot > 0.1);
+    const nextVisible = dot > 0.1;
+    if (visibilityRef.current !== nextVisible) {
+      visibilityRef.current = nextVisible;
+      setIsVisible(nextVisible);
+    }
   });
 
   const handlePointerEnter = useCallback(() => {
@@ -184,18 +191,20 @@ function Marker({
             transition: "opacity 0.15s ease-out",
           }}
         >
-          <div
+          <button
+            type="button"
             className={cn(
               "cursor-pointer overflow-hidden rounded-full bg-neutral-900 shadow-lg transition-transform duration-200",
               hovered && "scale-125 shadow-xl ring-1 ring-white/50",
             )}
             style={{
-              width: "9.6px",
-              height: "9.6px",
+              width: `${((marker.size ?? markerSize) * 160).toFixed(1)}px`,
+              height: `${((marker.size ?? markerSize) * 160).toFixed(1)}px`,
             }}
             onMouseEnter={handlePointerEnter}
             onMouseLeave={handlePointerLeave}
             onClick={handleClick}
+            aria-label={marker.label ?? "Open marker"}
           >
             <img
               src={marker.src}
@@ -203,7 +212,7 @@ function Marker({
               className="h-full w-full object-cover"
               draggable={false}
             />
-          </div>
+          </button>
         </Html>
       </group>
     </group>
@@ -255,6 +264,12 @@ function RotatingGlobe({
     return new THREE.SphereGeometry(config.radius * 1.002, 32, 16);
   }, [config.radius]);
 
+  React.useEffect(() => {
+    if (!groupRef.current) return;
+    groupRef.current.rotation.x = config.initialRotation.x;
+    groupRef.current.rotation.y = config.initialRotation.y;
+  }, [config.initialRotation.x, config.initialRotation.y]);
+
   return (
     <group ref={groupRef}>
       {/* Main globe mesh with Earth texture */}
@@ -265,6 +280,7 @@ function RotatingGlobe({
           bumpScale={config.bumpScale * 0.05}
           roughness={0.7}
           metalness={0.0}
+          color={config.globeColor}
         />
       </mesh>
 
@@ -286,6 +302,7 @@ function RotatingGlobe({
           key={`marker-${index}-${marker.lat}-${marker.lng}`}
           marker={marker}
           radius={config.radius}
+          markerSize={config.markerSize}
           onClick={onMarkerClick}
           onHover={onMarkerHover}
         />

@@ -68,7 +68,7 @@ function isPublishedRecord(record: RuntimeNewsRecord): boolean {
 
   const status = (normalizeText(record.status) ?? normalizeText(record.state))?.toLowerCase();
   if (!status) {
-    return true;
+    return false;
   }
 
   return status === 'published';
