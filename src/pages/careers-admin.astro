@@ -125,7 +125,13 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
               maxlength="5000"
               class="w-full bg-background border border-primary/20 px-4 py-3 text-sm resize-y"
               placeholder="Describe responsibilities, required experience, and qualifications."
+              aria-describedby="char-counter"
             ></textarea>
+            <div class="flex justify-end mt-1">
+              <span id="char-counter" class="text-[10px] uppercase tracking-widest opacity-60 font-bold" aria-live="polite">
+                0 / 5000
+              </span>
+            </div>
           </div>
 
           <div class="flex flex-wrap items-center gap-4">
@@ -162,6 +168,8 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
 <script is:inline define:vars={{ jobsApiBaseUrl }}>
   const form = document.getElementById('create-job-form');
   const apiKeyInput = document.getElementById('jobs-api-key');
+  const descriptionInput = document.getElementById('description');
+  const charCounter = document.getElementById('char-counter');
   const postedAtInput = document.getElementById('postedAt');
   const statusElement = document.getElementById('admin-status');
   const listElement = document.getElementById('open-roles-list');
@@ -172,6 +180,22 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
   const base = typeof jobsApiBaseUrl === 'string' ? jobsApiBaseUrl.trim().replace(/\/$/, '') : '';
   const endpoint = base ? `${base}/api/jobs` : '/api/jobs';
   const API_KEY_STORAGE_KEY = 'ultraction-jobs-api-key';
+  const MAX_CHARS = 5000;
+  const THRESHOLD = 0.9;
+
+  function updateCharCounter() {
+    if (!(descriptionInput instanceof HTMLTextAreaElement) || !(charCounter instanceof HTMLElement)) return;
+    const count = descriptionInput.value.length;
+    charCounter.textContent = `${count} / ${MAX_CHARS}`;
+
+    if (count >= MAX_CHARS * THRESHOLD) {
+      charCounter.classList.add('text-accent');
+      charCounter.classList.remove('opacity-60');
+    } else {
+      charCounter.classList.remove('text-accent');
+      charCounter.classList.add('opacity-60');
+    }
+  }
 
   function setStatus(message, isError = false) {
     if (!(statusElement instanceof HTMLElement)) return;
@@ -309,6 +333,9 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
     }
   }
 
+  descriptionInput?.addEventListener('input', updateCharCounter);
+  updateCharCounter();
+
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (!(form instanceof HTMLFormElement)) return;
@@ -349,6 +376,7 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
 
       rememberJobsApiKey(apiKey);
       form.reset();
+      updateCharCounter();
       if (apiKeyInput instanceof HTMLInputElement) apiKeyInput.value = apiKey;
       if (postedAtInput instanceof HTMLInputElement) postedAtInput.value = '';
 
