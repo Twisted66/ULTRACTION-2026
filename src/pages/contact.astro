@@ -97,7 +97,8 @@ const messagePlaceholder =
                    Message <span class="text-accent">*</span>
                  </span>
                </label>
-               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true"></textarea>
+               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true" maxlength="5000" aria-describedby="message-char-count"></textarea>
+               <div id="message-char-count" class="text-xs uppercase tracking-widest mt-2 opacity-60 text-right transition-colors" aria-live="polite">0 / 5000</div>
             </div>
 
             <div class="group">
@@ -326,9 +327,24 @@ const messagePlaceholder =
     const statusBox = document.getElementById('form-status');
     const subjectSelect = form.querySelector('#subject');
     const messageInput = form.querySelector('#message');
+    const messageCharCount = document.getElementById('message-char-count');
     const fileInput = document.querySelector('#attachment');
     const fileNameDisplay = document.getElementById('file-name');
     const roleFromQuery = form.dataset.role?.trim() ?? '';
+
+    const updateCounter = () => {
+      if (!(messageInput instanceof HTMLTextAreaElement) || !(messageCharCount instanceof HTMLElement)) return;
+      const length = messageInput.value.length;
+      messageCharCount.textContent = `${length} / 5000`;
+
+      if (length >= 4500) {
+        messageCharCount.classList.add('text-accent', 'opacity-100');
+        messageCharCount.classList.remove('opacity-60');
+      } else {
+        messageCharCount.classList.remove('text-accent', 'opacity-100');
+        messageCharCount.classList.add('opacity-60');
+      }
+    };
 
     const prefillCareerApplicationMessage = () => {
       if (!(subjectSelect instanceof HTMLSelectElement) || !(messageInput instanceof HTMLTextAreaElement)) return;
@@ -339,12 +355,23 @@ const messagePlaceholder =
         'Current location:\n' +
         'Availability:\n' +
         'CV/Portfolio link:\n';
+      updateCounter();
     };
 
     prefillCareerApplicationMessage();
+    updateCounter();
+
     if (subjectSelect instanceof HTMLSelectElement) {
       subjectSelect.addEventListener('change', prefillCareerApplicationMessage);
     }
+
+    if (messageInput instanceof HTMLTextAreaElement) {
+      messageInput.addEventListener('input', updateCounter);
+    }
+
+    form.addEventListener('reset', () => {
+      setTimeout(updateCounter, 0);
+    });
 
     // Display selected file name
     if (fileInput instanceof HTMLInputElement && fileNameDisplay) {
