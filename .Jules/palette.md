@@ -19,3 +19,7 @@
 ## 2026-02-14 - Interactive Navigation Feedback and Component Extensibility
 **Learning:** Mobile menu toggles that don't change their icon (e.g., staying as a hamburger when open) fail to provide immediate visual confirmation of the menu state. Additionally, internal UI components like 'MagneticButton' must support attribute spreading to allow developers to inject critical accessibility attributes (like aria-label) without modifying the base component.
 **Action:** Ensure all toggle interactions have distinct visual states (icons/colors) and ensure all base UI components spread '...rest' props to their root interactive element.
+
+## 2026-03-19 - Standardizing Character Counters for Input Limitations
+**Learning:** Textareas with large character limits (like 5,000 characters) benefit significantly from real-time counters. These counters should be linked via `aria-describedby` with `aria-live="polite"` for accessibility. Providing visual feedback (e.g., using `text-accent`) when the user reaches a specific threshold (e.g., 90%) helps manage user expectations before submission. It's also critical to ensure counters sync on form `reset` events.
+**Action:** Implement accessible real-time character counters for all text-heavy inputs with limits, using a 90% threshold for visual warnings and ensuring sync on `reset`.

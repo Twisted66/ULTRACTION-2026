@@ -115,7 +115,16 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
           </div>
 
           <div class="space-y-2">
-            <label class="text-xs uppercase tracking-[0.2em] font-bold" for="description">Description</label>
+            <div class="flex items-center justify-between">
+              <label class="text-xs uppercase tracking-[0.2em] font-bold" for="description">Description</label>
+              <div
+                id="description-counter"
+                class="text-[10px] uppercase tracking-widest opacity-60 font-bold"
+                aria-live="polite"
+              >
+                0 / 5000
+              </div>
+            </div>
             <textarea
               id="description"
               name="description"
@@ -125,6 +134,7 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
               maxlength="5000"
               class="w-full bg-background border border-primary/20 px-4 py-3 text-sm resize-y"
               placeholder="Describe responsibilities, required experience, and qualifications."
+              aria-describedby="description-counter"
             ></textarea>
           </div>
 
@@ -168,6 +178,33 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
   const rolesCountElement = document.getElementById('open-roles-count');
   const submitButton = document.getElementById('create-job-submit');
   const refreshButton = document.getElementById('refresh-jobs');
+  const descriptionTextarea = document.getElementById('description');
+  const descriptionCounter = document.getElementById('description-counter');
+
+  function updateDescriptionCounter() {
+    if (!(descriptionTextarea instanceof HTMLTextAreaElement) || !(descriptionCounter instanceof HTMLElement)) return;
+    const currentLength = descriptionTextarea.value.length;
+    const maxLength = parseInt(descriptionTextarea.getAttribute('maxlength') || '5000', 10);
+    descriptionCounter.textContent = `${currentLength} / ${maxLength}`;
+
+    // Threshold warning at 90%
+    if (currentLength >= maxLength * 0.9) {
+      descriptionCounter.classList.add('text-accent');
+      descriptionCounter.classList.remove('opacity-60');
+    } else {
+      descriptionCounter.classList.remove('text-accent');
+      descriptionCounter.classList.add('opacity-60');
+    }
+  }
+
+  if (descriptionTextarea instanceof HTMLTextAreaElement) {
+    descriptionTextarea.addEventListener('input', updateDescriptionCounter);
+    form?.addEventListener('reset', () => {
+      setTimeout(updateDescriptionCounter, 0);
+    });
+    // Initialize on load
+    updateDescriptionCounter();
+  }
 
   const base = typeof jobsApiBaseUrl === 'string' ? jobsApiBaseUrl.trim().replace(/\/$/, '') : '';
   const endpoint = base ? `${base}/api/jobs` : '/api/jobs';
