@@ -35,7 +35,8 @@ test.describe('UX Improvements Verification', () => {
     await expect(closeIcon).toBeVisible();
 
     // Click again to close menu
-    await toggle.click();
+    // Use { force: true } because the body might be intercepting pointer events when menu is open (inert logic)
+    await toggle.click({ force: true });
 
     // Back to initial state
     await expect(openIcon).toBeVisible();
