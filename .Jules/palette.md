@@ -19,3 +19,7 @@
 ## 2026-02-14 - Interactive Navigation Feedback and Component Extensibility
 **Learning:** Mobile menu toggles that don't change their icon (e.g., staying as a hamburger when open) fail to provide immediate visual confirmation of the menu state. Additionally, internal UI components like 'MagneticButton' must support attribute spreading to allow developers to inject critical accessibility attributes (like aria-label) without modifying the base component.
 **Action:** Ensure all toggle interactions have distinct visual states (icons/colors) and ensure all base UI components spread '...rest' props to their root interactive element.
+
+## 2026-02-14 - Real-time Input Feedback and Programmatic Sync
+**Learning:** Textareas with character limits greatly benefit from real-time counters linked via 'aria-describedby' to provide immediate feedback. Crucially, these counters must be manually synchronized during programmatic value changes (like form pre-filling) and 'reset' events to maintain UI accuracy, as the 'input' event does not trigger in those scenarios.
+**Action:** Always implement character counters for limited textareas and ensure they sync on 'input', 'reset', and any custom programmatic updates.
