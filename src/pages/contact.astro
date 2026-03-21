@@ -97,7 +97,10 @@ const messagePlaceholder =
                    Message <span class="text-accent">*</span>
                  </span>
                </label>
-               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true"></textarea>
+               <textarea class="form-input w-full bg-transparent border-b-2 border-primary/20 py-4 text-xl transition-all duration-300 placeholder-primary/30 resize-none h-32 focus-visible:border-accent focus-visible:outline-none" id="message" name="message" placeholder={messagePlaceholder} required aria-required="true" aria-describedby="message-counter" maxlength="5000"></textarea>
+               <div id="message-counter" class="text-right text-[10px] uppercase tracking-widest mt-2 opacity-50" aria-live="polite">
+                 0 / 5,000
+               </div>
             </div>
 
             <div class="group">
@@ -330,6 +333,23 @@ const messagePlaceholder =
     const fileNameDisplay = document.getElementById('file-name');
     const roleFromQuery = form.dataset.role?.trim() ?? '';
 
+    const messageCounter = document.getElementById('message-counter');
+    const MAX_CHARS = 5000;
+
+    const updateCounter = () => {
+      if (!(messageInput instanceof HTMLTextAreaElement) || !(messageCounter instanceof HTMLElement)) return;
+      const length = messageInput.value.length;
+      messageCounter.textContent = `${length.toLocaleString()} / ${MAX_CHARS.toLocaleString()}`;
+
+      if (length >= MAX_CHARS * 0.9) {
+        messageCounter.classList.add('text-accent', 'opacity-100', 'font-bold');
+        messageCounter.classList.remove('opacity-50');
+      } else {
+        messageCounter.classList.remove('text-accent', 'opacity-100', 'font-bold');
+        messageCounter.classList.add('opacity-50');
+      }
+    };
+
     const prefillCareerApplicationMessage = () => {
       if (!(subjectSelect instanceof HTMLSelectElement) || !(messageInput instanceof HTMLTextAreaElement)) return;
       if (subjectSelect.value !== 'careers' || !roleFromQuery || messageInput.value.trim()) return;
@@ -339,12 +359,23 @@ const messagePlaceholder =
         'Current location:\n' +
         'Availability:\n' +
         'CV/Portfolio link:\n';
+      updateCounter();
     };
 
+    if (messageInput instanceof HTMLTextAreaElement) {
+      messageInput.addEventListener('input', updateCounter);
+    }
+
     prefillCareerApplicationMessage();
+    updateCounter();
+
     if (subjectSelect instanceof HTMLSelectElement) {
       subjectSelect.addEventListener('change', prefillCareerApplicationMessage);
     }
+
+    form.addEventListener('reset', () => {
+      setTimeout(updateCounter, 0);
+    });
 
     // Display selected file name
     if (fileInput instanceof HTMLInputElement && fileNameDisplay) {
@@ -414,6 +445,7 @@ const messagePlaceholder =
 
         setStatus('success', result.message || 'Your message has been sent.');
         form.reset();
+        updateCounter();
         if (fileNameDisplay instanceof HTMLElement) fileNameDisplay.classList.add('hidden');
         if (subjectSelect instanceof HTMLSelectElement && selected) {
           subjectSelect.value = selected;
