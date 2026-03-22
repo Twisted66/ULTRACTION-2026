@@ -123,8 +123,11 @@ const isActive = (href: string) => {
 
     const setBackgroundInert = (isOpen: boolean) => {
       if (!siteHeader) return;
+      const appContainer = siteHeader.closest('.app-container');
+
       Array.from(document.body.children).forEach((element) => {
-        if (element === siteHeader) return;
+        if (element === siteHeader || element.contains(siteHeader) || (appContainer && element === appContainer)) return;
+
         if (isOpen) {
           element.setAttribute('inert', '');
           element.setAttribute('aria-hidden', 'true');
