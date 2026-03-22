@@ -19,3 +19,7 @@
 ## 2026-02-14 - Interactive Navigation Feedback and Component Extensibility
 **Learning:** Mobile menu toggles that don't change their icon (e.g., staying as a hamburger when open) fail to provide immediate visual confirmation of the menu state. Additionally, internal UI components like 'MagneticButton' must support attribute spreading to allow developers to inject critical accessibility attributes (like aria-label) without modifying the base component.
 **Action:** Ensure all toggle interactions have distinct visual states (icons/colors) and ensure all base UI components spread '...rest' props to their root interactive element.
+
+## 2026-02-15 - Improving Mobile Menu Accessibility and Testability
+**Learning:** When using the `inert` attribute to trap focus in a mobile menu, it's critical to ensure that no ancestor of the menu (like a global `.app-container`) is marked as `inert`. Doing so can cause subtle UI bugs where elements appear interactive but don't respond to pointer events, often leading to "intercepted click" errors in automated tests like Playwright.
+**Action:** Always verify that `inert` logic excludes all ancestor containers of the target interactive element.
