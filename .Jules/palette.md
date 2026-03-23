@@ -19,3 +19,7 @@
 ## 2026-02-14 - Interactive Navigation Feedback and Component Extensibility
 **Learning:** Mobile menu toggles that don't change their icon (e.g., staying as a hamburger when open) fail to provide immediate visual confirmation of the menu state. Additionally, internal UI components like 'MagneticButton' must support attribute spreading to allow developers to inject critical accessibility attributes (like aria-label) without modifying the base component.
 **Action:** Ensure all toggle interactions have distinct visual states (icons/colors) and ensure all base UI components spread '...rest' props to their root interactive element.
+
+## 2026-03-23 - Dynamic Character Counters and Astro Lifecycle
+**Learning:** Character counter implementations for textareas must explicitly trigger updates during programmatic value changes, 'input' events, and form 'reset' events (using 'setTimeout' to wait for the native reset to complete) to ensure the UI counter stays in sync with actual input length. In Astro projects using View Transitions, client-side scripts should initialize on the 'astro:page-load' event to ensure consistent behavior across all navigations.
+**Action:** Use 'astro:page-load' for script initialization and implement listeners for 'input', 'reset', and custom pre-fill events to maintain accurate character counts.
