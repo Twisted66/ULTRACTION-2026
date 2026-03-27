@@ -42,6 +42,42 @@ test.describe('UX Improvements Verification', () => {
     await expect(closeIcon).toBeHidden();
   });
 
+  test('Hero section links have focus-visible styles', async ({ page }) => {
+    await page.goto('/');
+    // Use more specific selectors for hero links to avoid matching header links
+    const heroSection = page.locator('section.hero-fullscreen');
+    const contactBtn = heroSection.locator('a[href="/contact"]');
+    const aboutBtn = heroSection.locator('a[href="/about"]');
+
+    await expect(contactBtn).toHaveClass(/focus-visible:outline-accent/);
+    await expect(aboutBtn).toHaveClass(/focus-visible:outline-accent/);
+  });
+
+  test('Scroll indicator is a functional link', async ({ page }) => {
+    await page.goto('/');
+    const scrollLink = page.locator('a[aria-label="Scroll to introduction"]');
+
+    await expect(scrollLink).toBeVisible();
+    await expect(scrollLink).toHaveAttribute('href', '#intro');
+
+    // Check for focus styles
+    await expect(scrollLink).toHaveClass(/focus-visible:outline-accent/);
+
+    const introSection = page.locator('#intro');
+    await expect(introSection).toBeVisible();
+
+    // Use { force: true } because it's an animated/bouncing element
+    await scrollLink.click({ force: true });
+    await page.waitForTimeout(1000);
+
+    const isIntersecting = await introSection.evaluate((el) => {
+      const rect = el.getBoundingClientRect();
+      // On mobile/narrow views it might be different, but it should be near the top
+      return rect.top >= -10 && rect.top <= 200;
+    });
+    expect(isIntersecting).toBeTruthy();
+  });
+
   test('MagneticButton handles spread props', async ({ page }: { page: Page }) => {
     await page.goto('/contact');
 
