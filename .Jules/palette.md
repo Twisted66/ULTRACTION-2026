@@ -23,3 +23,7 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-02-14 - Functional Scroll Indicators and High-Contrast Hero Accessibility
+**Learning:** Visual scroll indicators (like bouncing arrows) that are merely decorative fail to provide expected utility; converting them into semantic anchor links significantly improves navigation flow. Additionally, interactive elements on dark, dynamic backgrounds (like video heroes) require high-contrast `focus-visible` outlines (using brand accent colors) to remain accessible to keyboard users.
+**Action:** Always implement scroll indicators as functional links with target IDs and ensure all hero-section actions have explicit, high-contrast focus states.

@@ -78,10 +78,10 @@ const structuredData = {
           </span>
         </h1>
         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-          <a href="/contact" class="bg-accent backdrop-blur-sm hover:bg-accent/90 border border-accent hover:border-accent text-primary-foreground py-3 sm:py-4 px-6 sm:px-10 text-center font-medium transition-all motion-base uppercase tracking-wide text-xs sm:text-sm inline-block min-h-[44px] flex items-center">
+          <a href="/contact" class="bg-accent backdrop-blur-sm hover:bg-accent/90 border border-accent hover:border-accent text-primary-foreground py-3 sm:py-4 px-6 sm:px-10 text-center font-medium transition-all motion-base uppercase tracking-wide text-xs sm:text-sm inline-block min-h-[44px] flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
             Contact Us
           </a>
-          <a href="/about" class="text-primary-foreground hover:text-accent text-xs sm:text-sm uppercase tracking-widest flex items-center gap-3 group transition-colors min-h-[44px]">
+          <a href="/about" class="text-primary-foreground hover:text-accent text-xs sm:text-sm uppercase tracking-widest flex items-center gap-3 group transition-colors min-h-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
             <span>Learn More</span>
             <div class="w-8 h-8 rounded-none border border-primary-foreground/40 flex items-center justify-center group-hover:bg-primary-foreground group-hover:text-primary transition-all motion-base">
               <svg class="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform motion-base" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,17 +93,17 @@ const structuredData = {
       </div>
 
       <!-- Scroll Down Indicator -->
-      <div class="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60 animate-bounce home-scroll-indicator">
+      <a href="#intro" aria-label="Scroll to introduction" class="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60 hover:text-accent focus-visible:text-accent focus-visible:outline-accent transition-colors animate-bounce home-scroll-indicator group">
         <span class="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
-        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="h-5 w-5 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path d="M19 14l-7 7m0 0l-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
         </svg>
-      </div>
+      </a>
     </div>
   </section>
 
   <!-- Intro Section - 4-column grid -->
-  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-b border-border">
+  <section id="intro" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-b border-border scroll-mt-20 sm:scroll-mt-24 xl:scroll-mt-32">
     <div class="p-8 lg:border-r border-b lg:border-b-0 border-border">
       <h2 class="font-bold text-lg mb-4 uppercase">Delivering iconic projects<br/>in partnership with our<br/>clients around the world</h2>
       <a class="inline-flex items-center gap-2 text-sm mt-8 group" href="/about">
