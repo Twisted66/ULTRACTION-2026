@@ -183,14 +183,12 @@ function getCategoryIcon(category: string): string {
         </div>
 
         <!-- Scroll indicator -->
-        <div class="mt-12 animate-bounce">
-          <div class="flex flex-col items-center gap-2 text-white/50">
-            <span class="text-[10px] uppercase tracking-[0.2em]">Scroll to explore</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-            </svg>
-          </div>
-        </div>
+        <a href="#project-details" aria-label="Scroll to project details" class="mt-12 animate-bounce flex flex-col items-center gap-2 text-white/50 w-fit mx-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+          <span class="text-[10px] uppercase tracking-[0.2em]">Scroll to explore</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+          </svg>
+        </a>
       </div>
     </div>
 
@@ -199,7 +197,7 @@ function getCategoryIcon(category: string): string {
   </section>
 
   <!-- Enhanced Project Details Section -->
-  <section class="project-details-section py-20 md:py-28 px-4 md:px-8 lg:px-16 border-b border-primary/10 dark:border-white/10">
+  <section id="project-details" class="project-details-section py-20 md:py-28 px-4 md:px-8 lg:px-16 border-b border-primary/10 dark:border-white/10 scroll-mt-[64px] sm:scroll-mt-[72px] xl:scroll-mt-[104px]">
     <div class="w-full max-w-[98vw] mx-auto">
       <!-- Enhanced bento layout with stats sidebar -->
       <div class="project-overview-bento-layout">
