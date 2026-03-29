@@ -54,4 +54,38 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin description counter updates on input', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    const description = page.locator('#description');
+    const counter = page.locator('#description-counter');
+
+    // Initial state
+    await expect(counter).toHaveText('0 / 5,000');
+    await expect(counter).toHaveClass(/text-primary/);
+    await expect(counter).not.toHaveClass(/text-accent/);
+
+    // Type some text
+    const testText = 'Building the future of infrastructure.';
+    await description.fill(testText);
+    await expect(counter).toHaveText(`${testText.length} / 5,000`);
+
+    // Test 90% threshold (4500 chars)
+    const longText = 'a'.repeat(4501);
+    await description.fill(longText);
+    await expect(counter).toHaveText('4,501 / 5,000');
+    await expect(counter).toHaveClass(/text-accent/);
+    await expect(counter).not.toHaveClass(/text-primary/);
+
+    // Test form reset
+    await page.evaluate(() => {
+      const form = document.getElementById('create-job-form');
+      if (form instanceof HTMLFormElement) form.reset();
+    });
+    // Wait for the setTimeout(..., 0) in the reset handler
+    await page.waitForTimeout(100);
+    await expect(counter).toHaveText('0 / 5,000');
+    await expect(counter).toHaveClass(/text-primary/);
+  });
 });
