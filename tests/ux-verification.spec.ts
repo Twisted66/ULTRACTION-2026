@@ -54,4 +54,41 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin character counter and required fields', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    // Check legend
+    const legend = page.getByText('Fields marked with * are required.');
+    await expect(legend).toBeVisible();
+
+    // Check required indicators in labels
+    const labels = ['Jobs API Key', 'Role Title', 'Location', 'Description'];
+    for (const labelText of labels) {
+      const label = page.locator('label', { hasText: labelText });
+      await expect(label.locator('span.text-accent')).toHaveText('*');
+    }
+
+    // Check character counter
+    const textarea = page.locator('#description');
+    const counter = page.locator('#description-counter');
+
+    await expect(counter).toHaveText('0 / 5,000');
+
+    // Type and check counter
+    await textarea.fill('Testing the character counter logic.');
+    await expect(counter).toHaveText('36 / 5,000');
+
+    // Check threshold warning (4500 chars)
+    const longText = 'a'.repeat(4500);
+    await textarea.fill(longText);
+    await expect(counter).toHaveText('4,500 / 5,000');
+    await expect(counter).toHaveClass(/text-accent/);
+
+    // Reset form and check counter
+    await page.locator('#create-job-form').evaluate((form: HTMLFormElement) => form.reset());
+    // The reset event has a setTimeout(..., 0) in the script
+    await expect(counter).toHaveText('0 / 5,000');
+    await expect(counter).not.toHaveClass(/text-accent/);
+  });
 });
