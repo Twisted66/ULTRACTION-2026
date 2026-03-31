@@ -54,4 +54,21 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Home page scroll indicator is a functional link', async ({ page }: { page: Page }) => {
+    await page.goto('/');
+
+    const scrollIndicator = page.locator('.home-scroll-indicator');
+
+    // Assert it is an <a> tag
+    await expect(scrollIndicator).toHaveJSProperty('tagName', 'A');
+
+    // Assert it has correct href and aria-label
+    await expect(scrollIndicator).toHaveAttribute('href', '#intro');
+    await expect(scrollIndicator).toHaveAttribute('aria-label', 'Scroll to introduction');
+
+    // Assert the target section exists
+    const targetSection = page.locator('#intro');
+    await expect(targetSection).toBeVisible();
+  });
 });
