@@ -125,16 +125,30 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
               maxlength="5000"
               class="w-full bg-background border border-primary/20 px-4 py-3 text-sm resize-y"
               placeholder="Describe responsibilities, required experience, and qualifications."
+              aria-describedby="description-counter"
             ></textarea>
+            <div class="flex justify-end mt-2">
+              <span id="description-counter" class="text-xs uppercase tracking-widest font-bold text-primary opacity-70 transition-colors duration-300" aria-hidden="false">
+                0 / 5,000
+              </span>
+            </div>
           </div>
 
           <div class="flex flex-wrap items-center gap-4">
             <button
               id="create-job-submit"
               type="submit"
-              class="bg-[#800000] text-white px-7 py-3 text-xs uppercase tracking-[0.2em] font-bold"
+              class="bg-accent text-white px-7 py-3 text-xs uppercase tracking-[0.2em] font-bold relative overflow-hidden flex items-center justify-center min-h-[44px]"
             >
-              Publish Role
+              <span id="submit-label" class="flex items-center gap-2 transition-opacity duration-300">
+                Publish Role
+              </span>
+              <span id="submit-spinner" class="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              </span>
             </button>
             <button
               id="refresh-jobs"
@@ -167,11 +181,40 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
   const listElement = document.getElementById('open-roles-list');
   const rolesCountElement = document.getElementById('open-roles-count');
   const submitButton = document.getElementById('create-job-submit');
+  const submitLabel = document.getElementById('submit-label');
+  const submitSpinner = document.getElementById('submit-spinner');
   const refreshButton = document.getElementById('refresh-jobs');
+  const descriptionInput = document.getElementById('description');
+  const descriptionCounter = document.getElementById('description-counter');
 
   const base = typeof jobsApiBaseUrl === 'string' ? jobsApiBaseUrl.trim().replace(/\/$/, '') : '';
   const endpoint = base ? `${base}/api/jobs` : '/api/jobs';
   const API_KEY_STORAGE_KEY = 'ultraction-jobs-api-key';
+
+  const updateDescriptionCounter = () => {
+    if (!(descriptionInput instanceof HTMLTextAreaElement) || !(descriptionCounter instanceof HTMLElement)) return;
+    const count = descriptionInput.value.length;
+    const limit = 5000;
+    descriptionCounter.textContent = `${count.toLocaleString()} / ${limit.toLocaleString()}`;
+
+    if (count >= limit * 0.9) {
+      descriptionCounter.classList.remove('text-primary', 'opacity-70');
+      descriptionCounter.classList.add('text-accent', 'opacity-100');
+    } else {
+      descriptionCounter.classList.add('text-primary', 'opacity-70');
+      descriptionCounter.classList.remove('text-accent', 'opacity-100');
+    }
+  };
+
+  if (descriptionInput instanceof HTMLTextAreaElement) {
+    descriptionInput.addEventListener('input', updateDescriptionCounter);
+  }
+
+  form?.addEventListener('reset', () => {
+    setTimeout(updateDescriptionCounter, 0);
+  });
+
+  updateDescriptionCounter();
 
   function setStatus(message, isError = false) {
     if (!(statusElement instanceof HTMLElement)) return;
@@ -334,7 +377,13 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
 
     try {
       if (submitButton instanceof HTMLButtonElement) {
-        submitButton.setAttribute('disabled', 'true');
+        submitButton.disabled = true;
+        form.setAttribute('aria-busy', 'true');
+      }
+      if (submitLabel) submitLabel.classList.add('opacity-0');
+      if (submitSpinner) {
+        submitSpinner.classList.remove('opacity-0', 'pointer-events-none');
+        submitSpinner.classList.add('opacity-100');
       }
 
       setStatus('Publishing role...');
@@ -361,7 +410,13 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
       setStatus(message, true);
     } finally {
       if (submitButton instanceof HTMLButtonElement) {
-        submitButton.removeAttribute('disabled');
+        submitButton.disabled = false;
+        form.removeAttribute('aria-busy');
+      }
+      if (submitLabel) submitLabel.classList.remove('opacity-0');
+      if (submitSpinner) {
+        submitSpinner.classList.add('opacity-0', 'pointer-events-none');
+        submitSpinner.classList.remove('opacity-100');
       }
     }
   });
