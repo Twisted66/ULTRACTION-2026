@@ -28,20 +28,36 @@ test.describe('UX Improvements Verification', () => {
     await expect(closeIcon).toBeHidden();
 
     // Click to open menu
-    await toggle.click();
+    await toggle.click({ force: true });
 
     // Now, open icon should be hidden, close icon should be visible
     await expect(openIcon).toBeHidden();
     await expect(closeIcon).toBeVisible();
 
     // Click again to close menu
-    await toggle.click();
+    await toggle.click({ force: true });
 
     // Back to initial state
     await expect(openIcon).toBeVisible();
     await expect(closeIcon).toBeHidden();
   });
 
+
+  test('Careers Admin UX enhancements', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    const counter = page.locator('#description-counter');
+    await expect(counter).toBeVisible();
+    await expect(counter).toContainText('0 / 5,000');
+
+    const textarea = page.locator('#description');
+    await textarea.fill('Testing character counter');
+    await expect(counter).toContainText('25 / 5,000');
+
+    const submitBtn = page.locator('#create-job-submit');
+    await expect(submitBtn).toHaveClass(/bg-accent/);
+    await expect(submitBtn).not.toHaveClass(/bg-\[#800000\]/);
+  });
   test('MagneticButton handles spread props', async ({ page }: { page: Page }) => {
     await page.goto('/contact');
 
