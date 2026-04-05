@@ -54,4 +54,22 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Hero scroll indicator is a functional link', async ({ page }: { page: Page }) => {
+    await page.goto('/');
+
+    // Locate the scroll indicator
+    const scrollIndicator = page.locator('a.home-scroll-indicator');
+
+    // Should be visible and have correct href
+    await expect(scrollIndicator).toBeVisible();
+    await expect(scrollIndicator).toHaveAttribute('href', '#intro');
+
+    // Target section should exist with correct ID and scroll-mt
+    const targetSection = page.locator('section#intro');
+    await expect(targetSection).toBeVisible();
+    // Check that it has some scroll-mt class (Tailwind CSS)
+    const classList = await targetSection.getAttribute('class');
+    expect(classList).toContain('scroll-mt-');
+  });
 });

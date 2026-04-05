@@ -23,3 +23,11 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-02-14 - Functional Scroll Indicators and Header Awareness
+**Learning:** Purely decorative scroll indicators in hero sections can frustrate users who expect them to be interactive. Converting these to anchor links significantly improves navigation. Crucially, these links must account for sticky headers using Tailwind's `scroll-mt` classes to prevent the destination content from being obscured upon arrival.
+**Action:** Always implement hero scroll indicators as functional anchor links and apply responsive `scroll-mt` classes to target sections matching the sticky header height.
+
+## 2026-02-14 - Correct Application of 'inert' in Accessible Menus
+**Learning:** When using the `inert` attribute to trap focus within a mobile menu, applying it to a parent container that also holds the menu/header will inadvertently disable the menu itself. This leads to "pointer-event interception" errors in automated tests (like Playwright) and can break user interactions if the DOM structure is not carefully traversed.
+**Action:** When applying `inert` to body siblings, explicitly exclude the header and any of its ancestor containers using `.contains()` checks to ensure the interactive menu remains accessible.
