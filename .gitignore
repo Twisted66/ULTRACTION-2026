@@ -45,3 +45,4 @@ mcp/element-inspector-app/
 
 # Dev-only API endpoints
 src/pages/api/element-capture.ts
+playwright-report/
