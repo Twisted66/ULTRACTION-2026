@@ -54,4 +54,36 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin description counter updates on input', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    // Wait for Astro scripts
+    await page.waitForTimeout(500);
+
+    const textarea = page.locator('#description');
+    const counter = page.locator('#description-counter');
+
+    // Initial state
+    await expect(counter).toHaveText('0 / 5,000');
+    await expect(counter).not.toHaveClass(/text-accent/);
+
+    // Type some text
+    await textarea.fill('Test description for the new career role.');
+    const count = 'Test description for the new career role.'.length;
+    await expect(counter).toHaveText(`${count} / 5,000`);
+
+    // Test threshold (90% of 5,000 = 4,500)
+    const longText = 'A'.repeat(4500);
+    await textarea.fill(longText);
+    await expect(counter).toHaveText('4,500 / 5,000');
+    await expect(counter).toHaveClass(/text-accent/);
+
+    // Test reset
+    await page.locator('#create-job-form').evaluate((form: HTMLFormElement) => form.reset());
+    // reset has a setTimeout(..., 0) in the script
+    await page.waitForTimeout(100);
+    await expect(counter).toHaveText('0 / 5,000');
+    await expect(counter).not.toHaveClass(/text-accent/);
+  });
 });
