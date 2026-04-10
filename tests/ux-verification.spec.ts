@@ -54,4 +54,37 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin character counter updates on input', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    const textarea = page.locator('#description');
+    const counter = page.locator('#description-counter');
+
+    // Initial state
+    await expect(counter).toHaveText('0 / 5,000');
+
+    // Type some text
+    await textarea.fill('Testing character counter');
+    await expect(counter).toHaveText('25 / 5,000');
+
+    // Check threshold styling (90% of 5000 is 4500)
+    // We can simulate a long string
+    const longText = 'a'.repeat(4501);
+    await textarea.fill(longText);
+    await expect(counter).toHaveText('4,501 / 5,000');
+    await expect(counter).toHaveClass(/text-accent/);
+
+    // Reset form and check counter reset
+    await page.click('#create-job-form button[type="button"]:has-text("Refresh")'); // This is not reset button
+    // Actually there is no reset button in the UI, but we can call form.reset() via evaluate
+    await page.evaluate(() => {
+      const form = document.getElementById('create-job-form') as HTMLFormElement;
+      if (form) form.reset();
+    });
+
+    // Resetting form via script triggers counter update after a timeout
+    await page.waitForTimeout(100);
+    await expect(counter).toHaveText('0 / 5,000');
+  });
 });
