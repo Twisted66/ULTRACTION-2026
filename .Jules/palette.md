@@ -23,3 +23,7 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-02-14 - Functional Scroll Indicators and Responsive Scroll Padding
+**Learning:** Purely decorative scroll indicators are a missed UX opportunity. Converting them into functional anchor links with proper ARIA labels improves navigation efficiency. Furthermore, using responsive Tailwind `scroll-mt` classes that match sticky header heights across different breakpoints ensures that target sections are never obscured upon navigation.
+**Action:** Always implement visual scroll cues as functional anchor links and apply matching responsive `scroll-mt` padding to target sections.
