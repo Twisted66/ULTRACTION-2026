@@ -54,4 +54,40 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers admin character counter updates and resets', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    const textarea = page.locator('textarea#description');
+    const counter = page.locator('#description-counter');
+
+    // Initial state
+    await expect(counter).toHaveText('0 / 5,000');
+    await expect(counter).toHaveClass(/opacity-60/);
+
+    // Type text and check counter
+    await textarea.fill('This is a test description for the careers admin panel.');
+    const length = 'This is a test description for the careers admin panel.'.length;
+    await expect(counter).toHaveText(`${length} / 5,000`);
+
+    // Check threshold warning (90% of 5,000 = 4,500)
+    const longText = 'a'.repeat(4500);
+    await textarea.fill(longText);
+    await expect(counter).toHaveText('4,500 / 5,000');
+    await expect(counter).toHaveClass(/text-accent/);
+    await expect(counter).toHaveClass(/opacity-100/);
+
+    // Reset form and check counter
+    const resetButton = page.locator('button#refresh-jobs'); // Using refresh as a proxy for "not submitting" or we can just call form.reset()
+    // Actually careers-admin doesn't have a reset button, but we can evaluate it
+    await page.evaluate(() => {
+      const form = document.querySelector('form#create-job-form');
+      if (form instanceof HTMLFormElement) form.reset();
+    });
+
+    // Wait for the setTimeout(..., 0) in the reset handler
+    await page.waitForTimeout(100);
+    await expect(counter).toHaveText('0 / 5,000');
+    await expect(counter).not.toHaveClass(/text-accent/);
+  });
 });
