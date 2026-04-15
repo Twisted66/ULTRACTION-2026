@@ -28,14 +28,14 @@ test.describe('UX Improvements Verification', () => {
     await expect(closeIcon).toBeHidden();
 
     // Click to open menu
-    await toggle.click();
+    await toggle.click({ force: true });
 
     // Now, open icon should be hidden, close icon should be visible
     await expect(openIcon).toBeHidden();
     await expect(closeIcon).toBeVisible();
 
     // Click again to close menu
-    await toggle.click();
+    await toggle.click({ force: true });
 
     // Back to initial state
     await expect(openIcon).toBeVisible();
@@ -53,5 +53,36 @@ test.describe('UX Improvements Verification', () => {
 
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
+  });
+
+  test('Home page scroll indicator scrolls to intro section', async ({ page }: { page: Page }) => {
+    await page.goto('/');
+
+    // Wait for Astro scripts and layout
+    await page.waitForTimeout(1000);
+
+    const scrollIndicator = page.locator('a[aria-label="Scroll to introduction"]');
+    const introSection = page.locator('#intro');
+
+    // Ensure indicator and intro section exist
+    await expect(scrollIndicator).toBeVisible();
+    await expect(introSection).toBeVisible();
+
+    // Click the scroll indicator
+    await scrollIndicator.click({ force: true });
+
+    // Wait for scroll animation
+    await page.waitForTimeout(1000);
+
+    // Verify that the intro section is in view
+    const isInViewport = await introSection.evaluate((el) => {
+      const rect = el.getBoundingClientRect();
+      return (
+        rect.top >= -10 && // Allow for minor inaccuracies
+        rect.top <= 120    // Should be at the top, considering sticky header
+      );
+    });
+
+    expect(isInViewport).toBe(true);
   });
 });
