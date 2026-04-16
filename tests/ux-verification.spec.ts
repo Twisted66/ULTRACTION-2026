@@ -54,4 +54,25 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Home page scroll indicator is a functional link', async ({ page }) => {
+    await page.goto('/');
+    const scrollIndicator = page.locator('a.home-scroll-indicator');
+    await expect(scrollIndicator).toBeVisible();
+    await expect(scrollIndicator).toHaveAttribute('href', '#intro');
+
+    const targetSection = page.locator('#intro');
+    await expect(targetSection).toBeVisible();
+  });
+
+  test('Project page scroll indicator is a functional link', async ({ page }) => {
+    // Navigate to a project page. Naseem Al Bar Bridge is a known project.
+    await page.goto('/projects/naseem-albar-bridge');
+    const scrollIndicator = page.locator('a.animate-bounce').filter({ hasText: 'Scroll to explore' });
+    await expect(scrollIndicator).toBeVisible();
+    await expect(scrollIndicator).toHaveAttribute('href', '#overview');
+
+    const targetSection = page.locator('#overview');
+    await expect(targetSection).toBeVisible();
+  });
 });
