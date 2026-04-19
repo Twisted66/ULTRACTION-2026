@@ -23,3 +23,7 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-02-14 - Functional Anchors for Decorative Indicators and Header Offset Handling
+**Learning:** Purely decorative "Scroll Down" animations are missed opportunities for UX. Converting them to functional `<a>` links with `aria-label` improves both navigation and accessibility. However, in sites with sticky headers, standard anchor jumps often obscure content. Using Tailwind's responsive `scroll-mt` classes (matching the header's 64px to 104px height) on the target section ensures the content is correctly framed after the jump.
+**Action:** Convert decorative scroll indicators into functional links and apply matching `scroll-mt` values to target sections to account for sticky header heights.
