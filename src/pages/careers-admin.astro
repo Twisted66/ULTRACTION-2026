@@ -125,7 +125,13 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
               maxlength="5000"
               class="w-full bg-background border border-primary/20 px-4 py-3 text-sm resize-y"
               placeholder="Describe responsibilities, required experience, and qualifications."
+              aria-describedby="description-counter"
             ></textarea>
+            <div class="flex justify-end mt-1">
+              <span id="description-counter" class="text-[10px] uppercase tracking-widest font-bold opacity-70 transition-colors duration-300">
+                0 / 5,000
+              </span>
+            </div>
           </div>
 
           <div class="flex flex-wrap items-center gap-4">
@@ -163,6 +169,8 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
   const form = document.getElementById('create-job-form');
   const apiKeyInput = document.getElementById('jobs-api-key');
   const postedAtInput = document.getElementById('postedAt');
+  const descriptionInput = document.getElementById('description');
+  const descriptionCounter = document.getElementById('description-counter');
   const statusElement = document.getElementById('admin-status');
   const listElement = document.getElementById('open-roles-list');
   const rolesCountElement = document.getElementById('open-roles-count');
@@ -302,12 +310,37 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
     }
   }
 
+  const updateDescriptionCounter = () => {
+    if (!(descriptionInput instanceof HTMLTextAreaElement) || !(descriptionCounter instanceof HTMLElement)) return;
+    const count = descriptionInput.value.length;
+    const limit = 5000;
+    descriptionCounter.textContent = `${count.toLocaleString()} / ${limit.toLocaleString()}`;
+
+    if (count >= limit * 0.9) {
+      descriptionCounter.classList.remove('opacity-70');
+      descriptionCounter.classList.add('text-accent', 'opacity-100');
+    } else {
+      descriptionCounter.classList.add('opacity-70');
+      descriptionCounter.classList.remove('text-accent', 'opacity-100');
+    }
+  };
+
+  if (descriptionInput instanceof HTMLTextAreaElement) {
+    descriptionInput.addEventListener('input', updateDescriptionCounter);
+  }
+
+  updateDescriptionCounter();
+
   if (apiKeyInput instanceof HTMLInputElement) {
     const savedApiKey = sessionStorage.getItem(API_KEY_STORAGE_KEY);
     if (savedApiKey) {
       apiKeyInput.value = savedApiKey;
     }
   }
+
+  form?.addEventListener('reset', () => {
+    setTimeout(updateDescriptionCounter, 0);
+  });
 
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
