@@ -26,16 +26,20 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
       </div>
 
       <div class="border border-primary/15 bg-surface/70 p-8 mb-8">
+        <p class="text-[10px] uppercase tracking-widest mb-6 opacity-60 font-bold">
+          Fields marked with <span class="text-accent">*</span> are required.
+        </p>
         <form id="create-job-form" class="space-y-6" autocomplete="off">
           <div class="space-y-2">
             <label class="text-xs uppercase tracking-[0.2em] font-bold" for="jobs-api-key"
-              >Jobs API Key</label
+              >Jobs API Key <span class="text-accent">*</span></label
             >
             <input
               id="jobs-api-key"
               name="jobsApiKey"
               type="password"
               required
+              aria-required="true"
               class="w-full bg-background border border-primary/20 px-4 py-3 text-sm"
               placeholder="Paste server-side JOBS_API_KEY"
             />
@@ -46,12 +50,13 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="space-y-2">
-              <label class="text-xs uppercase tracking-[0.2em] font-bold" for="title">Role Title</label>
+              <label class="text-xs uppercase tracking-[0.2em] font-bold" for="title">Role Title <span class="text-accent">*</span></label>
               <input
                 id="title"
                 name="title"
                 type="text"
                 required
+                aria-required="true"
                 minlength="2"
                 maxlength="120"
                 class="w-full bg-background border border-primary/20 px-4 py-3 text-sm"
@@ -59,12 +64,13 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
               />
             </div>
             <div class="space-y-2">
-              <label class="text-xs uppercase tracking-[0.2em] font-bold" for="location">Location</label>
+              <label class="text-xs uppercase tracking-[0.2em] font-bold" for="location">Location <span class="text-accent">*</span></label>
               <input
                 id="location"
                 name="location"
                 type="text"
                 required
+                aria-required="true"
                 minlength="2"
                 maxlength="120"
                 class="w-full bg-background border border-primary/20 px-4 py-3 text-sm"
@@ -115,24 +121,31 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
           </div>
 
           <div class="space-y-2">
-            <label class="text-xs uppercase tracking-[0.2em] font-bold" for="description">Description</label>
+            <label class="text-xs uppercase tracking-[0.2em] font-bold" for="description">Description <span class="text-accent">*</span></label>
             <textarea
               id="description"
               name="description"
               rows={6}
               required
+              aria-required="true"
               minlength="20"
               maxlength="5000"
               class="w-full bg-background border border-primary/20 px-4 py-3 text-sm resize-y"
               placeholder="Describe responsibilities, required experience, and qualifications."
+              aria-describedby="description-counter"
             ></textarea>
+            <div class="flex justify-end">
+              <span id="description-counter" class="text-[10px] uppercase tracking-widest font-bold text-primary opacity-60 transition-colors duration-300">
+                0 / 5,000
+              </span>
+            </div>
           </div>
 
           <div class="flex flex-wrap items-center gap-4">
             <button
               id="create-job-submit"
               type="submit"
-              class="bg-[#800000] text-white px-7 py-3 text-xs uppercase tracking-[0.2em] font-bold"
+              class="bg-accent text-white px-7 py-3 text-xs uppercase tracking-[0.2em] font-bold"
             >
               Publish Role
             </button>
@@ -168,6 +181,33 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
   const rolesCountElement = document.getElementById('open-roles-count');
   const submitButton = document.getElementById('create-job-submit');
   const refreshButton = document.getElementById('refresh-jobs');
+  const descriptionInput = document.getElementById('description');
+  const descriptionCounter = document.getElementById('description-counter');
+
+  const updateDescriptionCounter = () => {
+    if (!(descriptionInput instanceof HTMLTextAreaElement) || !(descriptionCounter instanceof HTMLElement)) return;
+    const count = descriptionInput.value.length;
+    const limit = 5000;
+    descriptionCounter.textContent = `${count.toLocaleString()} / ${limit.toLocaleString()}`;
+
+    if (count >= limit * 0.9) {
+      descriptionCounter.classList.remove('opacity-60');
+      descriptionCounter.classList.add('text-accent', 'opacity-100');
+    } else {
+      descriptionCounter.classList.remove('text-accent', 'opacity-100');
+      descriptionCounter.classList.add('opacity-60');
+    }
+  };
+
+  if (descriptionInput instanceof HTMLTextAreaElement) {
+    descriptionInput.addEventListener('input', updateDescriptionCounter);
+  }
+
+  form?.addEventListener('reset', () => {
+    setTimeout(updateDescriptionCounter, 0);
+  });
+
+  updateDescriptionCounter();
 
   const base = typeof jobsApiBaseUrl === 'string' ? jobsApiBaseUrl.trim().replace(/\/$/, '') : '';
   const endpoint = base ? `${base}/api/jobs` : '/api/jobs';
