@@ -54,4 +54,31 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin character counter works', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    const textarea = page.locator('textarea#description');
+    const counter = page.locator('#description-counter');
+
+    // Initial state
+    await expect(counter).toHaveText('0 / 5,000');
+    await expect(counter).toHaveClass(/opacity-60/);
+
+    // Type some text
+    await textarea.fill('Short description for the role.');
+    await expect(counter).toHaveText('31 / 5,000');
+
+    // Test threshold (90% of 5,000 is 4,500)
+    const longText = 'a'.repeat(4501);
+    await textarea.fill(longText);
+    await expect(counter).toHaveText('4,501 / 5,000');
+    await expect(counter).toHaveClass(/text-accent/);
+    await expect(counter).toHaveClass(/opacity-100/);
+
+    // Reset threshold
+    await textarea.fill('Back to short.');
+    await expect(counter).not.toHaveClass(/text-accent/);
+    await expect(counter).toHaveClass(/opacity-60/);
+  });
 });
