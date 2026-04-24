@@ -23,3 +23,7 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-02-14 - Robust Background Interactivity Management
+**Learning:** When applying the 'inert' attribute to background elements during mobile menu activation, the logic must explicitly exclude the header and its ancestor containers (e.g., '.app-container') using '.contains(siteHeader)' to ensure the menu remains interactive even if the DOM structure changes.
+**Action:** Always verify that 'inert' logic uses '.contains()' checks on critical UI components to prevent accidental self-disabling.
