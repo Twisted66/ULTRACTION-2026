@@ -125,7 +125,16 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
               maxlength="5000"
               class="w-full bg-background border border-primary/20 px-4 py-3 text-sm resize-y"
               placeholder="Describe responsibilities, required experience, and qualifications."
+              aria-describedby="description-counter"
             ></textarea>
+            <div class="flex justify-end mt-1">
+              <span
+                id="description-counter"
+                class="text-[10px] uppercase tracking-widest font-bold opacity-60 transition-colors duration-300"
+              >
+                0 / 5,000
+              </span>
+            </div>
           </div>
 
           <div class="flex flex-wrap items-center gap-4">
@@ -168,6 +177,8 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
   const rolesCountElement = document.getElementById('open-roles-count');
   const submitButton = document.getElementById('create-job-submit');
   const refreshButton = document.getElementById('refresh-jobs');
+  const descriptionInput = document.getElementById('description');
+  const descriptionCounter = document.getElementById('description-counter');
 
   const base = typeof jobsApiBaseUrl === 'string' ? jobsApiBaseUrl.trim().replace(/\/$/, '') : '';
   const endpoint = base ? `${base}/api/jobs` : '/api/jobs';
@@ -302,6 +313,24 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
     }
   }
 
+  function updateDescriptionCounter() {
+    if (!(descriptionInput instanceof HTMLTextAreaElement) || !(descriptionCounter instanceof HTMLElement)) return;
+    const count = descriptionInput.value.length;
+    const limit = 5000;
+    descriptionCounter.textContent = `${count.toLocaleString()} / ${limit.toLocaleString()}`;
+
+    if (count >= limit * 0.9) {
+      descriptionCounter.classList.remove('opacity-60');
+      descriptionCounter.classList.add('text-accent', 'opacity-100');
+    } else {
+      descriptionCounter.classList.remove('text-accent', 'opacity-100');
+      descriptionCounter.classList.add('opacity-60');
+    }
+  }
+
+  descriptionInput?.addEventListener('input', updateDescriptionCounter);
+  form?.addEventListener('reset', () => setTimeout(updateDescriptionCounter, 0));
+
   if (apiKeyInput instanceof HTMLInputElement) {
     const savedApiKey = sessionStorage.getItem(API_KEY_STORAGE_KEY);
     if (savedApiKey) {
@@ -349,6 +378,7 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
 
       rememberJobsApiKey(apiKey);
       form.reset();
+      updateDescriptionCounter();
       if (apiKeyInput instanceof HTMLInputElement) apiKeyInput.value = apiKey;
       if (postedAtInput instanceof HTMLInputElement) postedAtInput.value = '';
 
