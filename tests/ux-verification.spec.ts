@@ -54,4 +54,35 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Home page scroll indicator is a functional link', async ({ page }: { page: Page }) => {
+    await page.goto('/');
+
+    const scrollIndicator = page.locator('a.home-scroll-indicator');
+
+    // Should be an anchor link pointing to #intro
+    await expect(scrollIndicator).toBeVisible();
+    await expect(scrollIndicator).toHaveAttribute('href', '#intro');
+    await expect(scrollIndicator).toHaveAttribute('aria-label', 'Scroll to intro section');
+
+    // Target section should exist
+    const targetSection = page.locator('#intro');
+    await expect(targetSection).toBeVisible();
+  });
+
+  test('Project detail page scroll indicator is a functional link', async ({ page }: { page: Page }) => {
+    // Using one of the existing projects from src/content/projects
+    await page.goto('/projects/dubai-marina-tower');
+
+    const scrollIndicator = page.locator('a.project-scroll-indicator');
+
+    // Should be an anchor link pointing to #overview
+    await expect(scrollIndicator).toBeVisible();
+    await expect(scrollIndicator).toHaveAttribute('href', '#overview');
+    await expect(scrollIndicator).toHaveAttribute('aria-label', 'Scroll to overview section');
+
+    // Target section should exist
+    const targetSection = page.locator('#overview');
+    await expect(targetSection).toBeVisible();
+  });
 });
