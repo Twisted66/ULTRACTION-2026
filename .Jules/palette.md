@@ -23,3 +23,7 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-02-14 - Functional Scroll Indicators and Header Offset Management
+**Learning:** Purely decorative visual cues that mimic interactive elements (like a bouncing scroll indicator) can frustrate users if they are non-functional. Converting these to semantic links improves UX. Crucially, when implementing in-page navigation with a sticky header, CSS `scroll-mt` must be used on target sections to account for the header's height at various breakpoints, preventing content from being obscured upon navigation.
+**Action:** Ensure all directional visual cues are functional links and apply responsive `scroll-mt` offsets to anchor targets to accommodate fixed UI elements.
