@@ -54,4 +54,31 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Home page scroll indicator is a functional link', async ({ page }: { page: Page }) => {
+    await page.goto('/');
+
+    // Remove the dev-only ElementCaptureWidget to prevent it from intercepting clicks
+    await page.evaluate(() => {
+      const widget = document.getElementById('element-capture-widget');
+      if (widget) widget.remove();
+    });
+
+    const scrollIndicator = page.locator('a[href="#intro"]');
+    await expect(scrollIndicator).toBeVisible();
+    await expect(scrollIndicator).toHaveAttribute('aria-label', 'Scroll down to introduction');
+
+    // Click it (using force: true due to animate-bounce)
+    await scrollIndicator.click({ force: true });
+
+    // Verify hash
+    await expect(page).toHaveURL(/.*#intro/);
+
+    // Verify target section
+    const introSection = page.locator('section#intro');
+    await expect(introSection).toBeVisible();
+    await expect(introSection).toHaveClass(/scroll-mt-\[64px\]/);
+    await expect(introSection).toHaveClass(/sm:scroll-mt-\[72px\]/);
+    await expect(introSection).toHaveClass(/xl:scroll-mt-\[104px\]/);
+  });
 });
