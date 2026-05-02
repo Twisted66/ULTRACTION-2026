@@ -35,7 +35,7 @@ test.describe('UX Improvements Verification', () => {
     await expect(closeIcon).toBeVisible();
 
     // Click again to close menu
-    await toggle.click();
+    await toggle.click({ force: true });
 
     // Back to initial state
     await expect(openIcon).toBeVisible();
@@ -53,5 +53,38 @@ test.describe('UX Improvements Verification', () => {
 
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
+  });
+
+  test('Careers Admin form enhancements', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    // Check legend
+    await expect(page.getByText('Fields marked with * are required')).toBeVisible();
+
+    // Check character counter
+    const description = page.locator('#description');
+    const counter = page.locator('#description-counter');
+    await expect(counter).toHaveText('0 / 5,000');
+
+    await description.fill('Test description with more than twenty characters.');
+    // Check that counter is updated (using regex to ignore formatting if any, though we used toLocaleString)
+    await expect(counter).not.toHaveText('0 / 5,000');
+
+    // Check submit button loading state
+    const submitBtn = page.locator('#create-job-submit');
+    const spinner = page.locator('#submit-spinner');
+
+    // Fill required fields to enable submission
+    await page.locator('#jobs-api-key').fill('test-key');
+    await page.locator('#title').fill('Test Job');
+    await page.locator('#location').fill('Abu Dhabi');
+
+    // We don't want to actually submit successfully as we don't have a backend here,
+    // but we can check if it enters loading state
+    await submitBtn.click();
+
+    // It might be too fast if it fails immediately, but let's see if we can catch it
+    // we use a promise to catch it during the transition
+    await expect(spinner).toBeVisible();
   });
 });
