@@ -23,3 +23,7 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-02-14 - Reliable UI State Transitions in Inline Scripts
+**Learning:** For UI state transitions within Astro `<script is:inline>` blocks (e.g., toggling a loading spinner), manipulating an element's `.style.opacity` directly provides a more reliable result than toggling Tailwind utility classes, as it bypasses potential issues with class purging or script execution timing in static builds.
+**Action:** Use direct style manipulation for critical interaction feedback (spinners, labels) in inline scripts to ensure immediate and reliable state changes.
