@@ -54,4 +54,30 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin form accessibility and character counter', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    const description = page.locator('#description');
+    const counter = page.locator('#description-counter');
+
+    // Check accessibility attributes
+    await expect(description).toHaveAttribute('aria-required', 'true');
+    await expect(description).toHaveAttribute('aria-describedby', 'description-counter');
+
+    // Check initial counter state
+    await expect(counter).toHaveText('0 / 5,000');
+
+    // Type in description and check counter update
+    await description.fill('This is a test description with more than 20 characters.');
+    await expect(counter).toHaveText('56 / 5,000');
+
+    // Test nearing limit styling (90% of 5000 is 4500)
+    await description.fill('a'.repeat(4501));
+    await expect(counter).toHaveClass(/text-accent/);
+
+    // Reset form and check counter
+    await page.locator('#create-job-form').evaluate((form: HTMLFormElement) => form.reset());
+    await expect(counter).toHaveText('0 / 5,000');
+  });
 });
