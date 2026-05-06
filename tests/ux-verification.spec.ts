@@ -35,7 +35,7 @@ test.describe('UX Improvements Verification', () => {
     await expect(closeIcon).toBeVisible();
 
     // Click again to close menu
-    await toggle.click();
+    await toggle.click({ force: true });
 
     // Back to initial state
     await expect(openIcon).toBeVisible();
@@ -53,5 +53,47 @@ test.describe('UX Improvements Verification', () => {
 
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
+  });
+
+  test('Careers Admin form accessibility and character counter', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    // Check for legend
+    const legend = page.locator('p:has-text("Fields marked with")');
+    await expect(legend).toBeVisible();
+
+    // Check for required fields aria-required
+    const mandatoryFields = ['jobs-api-key', 'title', 'location', 'description'];
+    for (const id of mandatoryFields) {
+      const input = page.locator(`#${id}`);
+      await expect(input).toHaveAttribute('aria-required', 'true');
+
+      const label = page.locator(`label[for="${id}"]`);
+      await expect(label).toContainText('*');
+    }
+
+    // Check character counter
+    const description = page.locator('#description');
+    const counter = page.locator('#description-counter');
+
+    await expect(counter).toHaveText('0 / 5,000');
+
+    await description.fill('Test character counter');
+    await expect(counter).toHaveText('22 / 5,000');
+
+    // Check color change when nearing limit (90% of 5000 is 4500)
+    await description.fill('a'.repeat(4501));
+    await expect(counter).toHaveClass(/text-accent/);
+    await expect(counter).toHaveClass(/opacity-100/);
+
+    // Reset form and check counter resets
+    await page.evaluate(() => {
+      const form = document.getElementById('create-job-form');
+      if (form instanceof HTMLFormElement) form.reset();
+    });
+
+    // Wait for the setTimeout(..., 0) in the reset listener
+    await page.waitForTimeout(100);
+    await expect(counter).toHaveText('0 / 5,000');
   });
 });
