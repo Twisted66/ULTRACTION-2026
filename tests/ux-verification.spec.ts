@@ -54,4 +54,27 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin character counter updates correctly', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    const textarea = page.locator('#description');
+    const counter = page.locator('#description-counter');
+
+    // Initially should be 0
+    await expect(counter).toContainText('0 / 5,000');
+
+    // Type some text
+    const text = 'This is a test description for a job role.';
+    await textarea.fill(text);
+
+    // Counter should update
+    await expect(counter).toContainText(`${text.length} / 5,000`);
+
+    // Near limit should change color (text-accent class)
+    const longText = 'a'.repeat(4501);
+    await textarea.fill(longText);
+    await expect(counter).toHaveClass(/text-accent/);
+    await expect(counter).toContainText('4,501 / 5,000');
+  });
 });
