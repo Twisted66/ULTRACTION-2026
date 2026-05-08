@@ -54,4 +54,29 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin form has accessibility features', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    // Check for required fields legend
+    await expect(page.locator('text=Fields marked with * are required.')).toBeVisible();
+
+    // Check for visual asterisks and aria-required
+    const titleLabel = page.locator('label[for="title"]');
+    await expect(titleLabel).toContainText('*');
+    const titleInput = page.locator('#title');
+    await expect(titleInput).toHaveAttribute('aria-required', 'true');
+
+    // Check character counter
+    const description = page.locator('#description');
+    const counter = page.locator('#description-counter');
+    await expect(counter).toContainText('0 / 5,000');
+
+    await description.fill('This is a test description with more than twenty characters.');
+    await expect(counter).toContainText('60 / 5,000');
+
+    // Check if counter changes color when nearing limit (4500+)
+    await description.fill('a'.repeat(4501));
+    await expect(counter).toHaveClass(/text-accent/);
+  });
 });
