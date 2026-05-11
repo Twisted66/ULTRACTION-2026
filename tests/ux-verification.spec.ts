@@ -54,4 +54,33 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin form has standard feedback and accessibility', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    // Check for required fields legend
+    await expect(page.locator('text=Fields marked with * are required')).toBeVisible();
+
+    // Check for mandatory fields and aria-required
+    const mandatoryFields = ['#jobs-api-key', '#title', '#location', '#description'];
+    for (const selector of mandatoryFields) {
+      const input = page.locator(selector);
+      await expect(input).toBeVisible();
+      await expect(input).toHaveAttribute('aria-required', 'true');
+    }
+
+    // Check character counter
+    const description = page.locator('#description');
+    const counter = page.locator('#description-counter');
+    await expect(counter).toHaveText('0 / 5,000');
+
+    await description.fill('Test description for the role.');
+    const count = (await description.inputValue()).length;
+    await expect(counter).toHaveText(`${count} / 5,000`);
+
+    // Check near limit state (90% of 5,000 is 4,500)
+    await description.fill('a'.repeat(4500));
+    await expect(counter).toHaveClass(/text-accent/);
+    await expect(counter).toHaveClass(/opacity-100/);
+  });
 });
