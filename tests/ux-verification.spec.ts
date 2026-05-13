@@ -54,4 +54,24 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Hero scroll indicators are functional anchor links', async ({ page }: { page: Page }) => {
+    // Check Homepage
+    await page.goto('/');
+    const homeScrollIndicator = page.locator('a[aria-label="Scroll to introduction"]');
+    await expect(homeScrollIndicator).toBeVisible();
+    await expect(homeScrollIndicator).toHaveAttribute('href', '#intro');
+
+    // Check Project Details Page
+    // Assuming there is at least one project, let's try to find a link from the projects page or go to a known slug
+    await page.goto('/projects');
+    const projectLink = page.locator('a[href^="/projects/"]').first();
+    const projectHref = await projectLink.getAttribute('href');
+    if (projectHref) {
+      await page.goto(projectHref);
+      const projectScrollIndicator = page.locator('a[aria-label="Scroll to project details"]');
+      await expect(projectScrollIndicator).toBeVisible();
+      await expect(projectScrollIndicator).toHaveAttribute('href', '#details');
+    }
+  });
 });
