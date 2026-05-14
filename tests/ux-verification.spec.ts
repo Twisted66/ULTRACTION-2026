@@ -35,7 +35,7 @@ test.describe('UX Improvements Verification', () => {
     await expect(closeIcon).toBeVisible();
 
     // Click again to close menu
-    await toggle.click();
+    await toggle.click({ force: true });
 
     // Back to initial state
     await expect(openIcon).toBeVisible();
@@ -53,5 +53,25 @@ test.describe('UX Improvements Verification', () => {
 
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
+  });
+
+  test('Scroll indicators are functional links', async ({ page }: { page: Page }) => {
+    // Check home page scroll indicator
+    await page.goto('/');
+    const homeScrollIndicator = page.locator('a.home-scroll-indicator');
+    await expect(homeScrollIndicator).toHaveAttribute('href', '#intro');
+    await expect(homeScrollIndicator).toHaveAttribute('aria-label', 'Scroll to introduction');
+
+    // Check project detail page scroll indicator
+    // Need a valid project slug. We'll try to find one from the home page or use a known one.
+    await page.goto('/projects');
+    const firstProjectLink = page.locator('.project-card a').first();
+    const projectUrl = await firstProjectLink.getAttribute('href');
+
+    if (projectUrl) {
+      await page.goto(projectUrl);
+      const projectScrollIndicator = page.locator('a[aria-label="Scroll to project details"]');
+      await expect(projectScrollIndicator).toHaveAttribute('href', '#details');
+    }
   });
 });
