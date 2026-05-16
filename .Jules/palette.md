@@ -23,3 +23,11 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-02-14 - Robust Inert Management for Nested Navigation
+**Learning:** Using 'inert' on 'document.body.children' to trap focus in a mobile menu can accidentally disable the menu itself if the navigation component is nested within a container div. Standard exclusion logic ('element === siteHeader') fails in these cases.
+**Action:** Always use '.contains()' (e.g., 'element.contains(siteHeader)') when applying 'inert' to background elements to ensure the interactive component and its ancestor tree remain accessible.
+
+## 2026-02-14 - Precise Anchor Navigation with Sticky Headers
+**Learning:** Visual scroll indicators in hero sections are often expected to be functional links. When converting them, failing to account for sticky header height results in the target section being obscured upon navigation.
+**Action:** Implement scroll indicators as '<a>' links and apply responsive 'scroll-mt' values to target sections that match the sticky header's dynamic heights.
