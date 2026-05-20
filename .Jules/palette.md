@@ -23,3 +23,7 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-02-14 - Robust Accessibility Traps in Nested Layouts
+**Learning:** Using the `inert` attribute to trap focus in modals or mobile menus can inadvertently disable the trigger or the menu itself if the element being excluded from `inert` has interactive ancestors within the same trap logic. Specifically, if the header is nested within a wrapper like `.app-container`, simply checking `element === siteHeader` is insufficient; the logic must check `element.contains(siteHeader)` to ensure parent containers remain interactive.
+**Action:** When implementing `inert`-based focus traps, always use `element.contains(target)` to exclude the target and its entire ancestor tree from being marked inert.
