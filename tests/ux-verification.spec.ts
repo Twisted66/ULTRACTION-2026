@@ -54,4 +54,37 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin form has accessibility legend and character counter', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    // Check for the legend
+    const legend = page.locator('p:has-text("Fields marked with * are required.")');
+    await expect(legend).toBeVisible();
+
+    // Check for required markers on labels
+    const titleLabel = page.locator('label[for="title"]');
+    await expect(titleLabel).toContainText('*');
+
+    // Check for ARIA attributes
+    const titleInput = page.locator('#title');
+    await expect(titleInput).toHaveAttribute('aria-required', 'true');
+
+    const descriptionInput = page.locator('#description');
+    await expect(descriptionInput).toHaveAttribute('aria-required', 'true');
+    await expect(descriptionInput).toHaveAttribute('aria-describedby', 'description-counter');
+
+    // Check character counter functionality
+    const counter = page.locator('#description-counter');
+    await expect(counter).toContainText('0 / 5,000');
+
+    await descriptionInput.fill('This is a test description for the careers admin page.');
+    await expect(counter).toContainText('54 / 5,000');
+
+    // Check threshold feedback (90% of 5000 is 4500)
+    const longText = 'a'.repeat(4501);
+    await descriptionInput.fill(longText);
+    await expect(counter).toHaveClass(/text-accent/);
+    await expect(counter).toHaveClass(/opacity-100/);
+  });
 });
