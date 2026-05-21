@@ -54,4 +54,30 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin character counter and legend', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    // Check for required fields legend
+    const legend = page.locator('p:has-text("Fields marked with")');
+    await expect(legend).toBeVisible();
+    await expect(legend).toContainText('*');
+
+    // Check character counter for Description
+    const textarea = page.locator('textarea#description');
+    const counter = page.locator('#description-counter');
+
+    await expect(counter).toContainText('0 / 5,000');
+
+    // Type into textarea and check counter
+    const testText = 'Build the future with ULTRACTION.';
+    await textarea.fill(testText);
+    await expect(counter).toContainText(`${testText.length} / 5,000`);
+
+    // Reset form and check counter resets
+    await page.locator('#create-job-form').evaluate((form: HTMLFormElement) => form.reset());
+    // Wait for setTimeouts in script
+    await page.waitForTimeout(100);
+    await expect(counter).toContainText('0 / 5,000');
+  });
 });
