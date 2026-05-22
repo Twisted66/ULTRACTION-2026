@@ -137,7 +137,7 @@ const showElementCaptureWidget =
     </button>
 
     <script is:inline>
-      document.addEventListener('DOMContentLoaded', () => {
+      const initBackToTop = () => {
         const backToTopBtn = document.getElementById('back-to-top');
         if (backToTopBtn) {
           window.addEventListener('scroll', () => {
@@ -157,7 +157,10 @@ const showElementCaptureWidget =
             });
           });
         }
-      });
+      };
+
+      document.addEventListener('DOMContentLoaded', initBackToTop);
+      document.addEventListener('astro:page-load', initBackToTop);
     </script>
 
     <!-- Dark Mode Toggle Script -->
