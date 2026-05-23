@@ -54,4 +54,20 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Header "PROJECTS" link remains active on project sub-paths', async ({ page }: { page: Page }) => {
+    // Navigate to a specific project page
+    await page.goto('/projects/naseem-albar-bridge');
+
+    // Find the PROJECTS link in the header (specifically the desktop one for desktop tests)
+    // The link text is uppercase "PROJECTS" in Header.astro
+    const projectsLink = page.locator('.lg\\:flex a[href="/projects"]');
+
+    // It should have aria-current="page"
+    await expect(projectsLink).toHaveAttribute('aria-current', 'page');
+
+    // The active indicator (dot) should be visible
+    const activeIndicator = projectsLink.locator('span.rounded-full');
+    await expect(activeIndicator).toHaveClass(/opacity-100/);
+  });
 });
