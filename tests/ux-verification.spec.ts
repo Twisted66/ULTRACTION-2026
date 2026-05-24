@@ -54,4 +54,29 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Hero scroll indicator is a functional link', async ({ page }: { page: Page }) => {
+    await page.goto('/');
+
+    const scrollLink = page.locator('a[aria-label="Scroll down to introduction"]');
+    await expect(scrollLink).toBeVisible();
+    await expect(scrollLink).toHaveAttribute('href', '#intro');
+
+    // Check if the target section exists
+    const targetSection = page.locator('#intro');
+    await expect(targetSection).toBeVisible();
+
+    // Verify it scrolls (using a simple scroll position check)
+    const initialScroll = await page.evaluate(() => window.scrollY);
+    expect(initialScroll).toBe(0);
+
+    // Click it - using force because it has animate-bounce
+    await scrollLink.click({ force: true });
+
+    // Wait for scroll to finish
+    await page.waitForTimeout(1000);
+
+    const newScroll = await page.evaluate(() => window.scrollY);
+    expect(newScroll).toBeGreaterThan(0);
+  });
 });
