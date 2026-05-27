@@ -54,4 +54,22 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Mobile menu remains interactive when open', async ({ page }: { page: Page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/');
+    await page.waitForTimeout(1000);
+    await page.evaluate(() => document.getElementById('element-capture-widget')?.remove());
+
+    const toggle = page.locator('#mobile-menu-toggle');
+    await toggle.click();
+
+    const mobileNav = page.locator('#mobile-nav');
+    await expect(mobileNav).toBeVisible();
+
+    const aboutLink = mobileNav.locator('a[href="/about"]');
+    await aboutLink.click();
+    await page.waitForURL('**/about');
+    await expect(page.url()).toContain('/about');
+  });
 });
