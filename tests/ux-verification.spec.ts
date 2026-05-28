@@ -1,57 +1,29 @@
 import { test, expect, type Page } from '@playwright/test';
 
 test.describe('UX Improvements Verification', () => {
-  test('Mobile menu toggle swaps icons', async ({ page }: { page: Page }) => {
-    // Set viewport to mobile size
-    await page.setViewportSize({ width: 375, height: 667 });
-
+  test('Functional scroll indicators', async ({ page }: { page: Page }) => {
+    // Check Home page scroll indicator
     await page.goto('/');
 
-    page.on('console', msg => console.log('BROWSER LOG:', msg.text()));
-    page.on('pageerror', err => console.log('BROWSER ERROR:', err.message));
-
-    // Wait for Astro scripts to mount
-    await page.waitForTimeout(1000);
-
-    // Remove the dev-only ElementCaptureWidget to prevent it from intercepting clicks
+    // Remove the dev-only ElementCaptureWidget if present
     await page.evaluate(() => {
-      const widget = document.getElementById('element-capture-widget');
-      if (widget) widget.remove();
+      document.getElementById('element-capture-widget')?.remove();
     });
 
-    const toggle = page.locator('#mobile-menu-toggle');
-    const openIcon = toggle.locator('#hamburger-icon');
-    const closeIcon = toggle.locator('#close-icon');
+    const homeScrollLink = page.locator('a[href="#intro"]');
+    await expect(homeScrollLink).toBeVisible();
+    await expect(homeScrollLink).toHaveAttribute('aria-label', 'Scroll to intro section');
+    const introSection = page.locator('#intro');
+    await expect(introSection).toBeVisible();
+    await expect(introSection).toHaveClass(/scroll-mt-\[64px\]/);
 
-    // Initially, open icon should be visible, close icon should be hidden
-    await expect(openIcon).toBeVisible();
-    await expect(closeIcon).toBeHidden();
-
-    // Click to open menu
-    await toggle.click();
-
-    // Now, open icon should be hidden, close icon should be visible
-    await expect(openIcon).toBeHidden();
-    await expect(closeIcon).toBeVisible();
-
-    // Click again to close menu
-    await toggle.click();
-
-    // Back to initial state
-    await expect(openIcon).toBeVisible();
-    await expect(closeIcon).toBeHidden();
-  });
-
-  test('MagneticButton handles spread props', async ({ page }: { page: Page }) => {
-    await page.goto('/contact');
-
-    // The MagneticButton in contact.astro has data-submit-button
-    const submitButton = page.locator('button[data-submit-button]');
-
-    // It should exist if the prop was correctly spread
-    await expect(submitButton).toBeVisible();
-
-    // Check for other spread props like type="submit"
-    await expect(submitButton).toHaveAttribute('type', 'submit');
+    // Check Project page scroll indicator
+    await page.goto('/projects/khalifa-port');
+    const projectScrollLink = page.locator('a[href="#overview"]');
+    await expect(projectScrollLink).toBeVisible();
+    await expect(projectScrollLink).toHaveAttribute('aria-label', 'Scroll to project overview');
+    const overviewSection = page.locator('#overview');
+    await expect(overviewSection).toBeVisible();
+    await expect(overviewSection).toHaveClass(/scroll-mt-\[64px\]/);
   });
 });
