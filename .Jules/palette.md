@@ -23,3 +23,7 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-02-14 - Accessible Scroll Indicators and Safe Interactivity Traps
+**Learning:** Purely decorative scroll indicators (like bouncing arrows) miss an opportunity to provide a "Skip to Content" experience. Converting them to functional anchor links with aria-label improves page navigation for both mouse and screen reader users. Furthermore, when using the inert attribute to trap focus or disable the background during modal/menu states, the logic must explicitly exclude all parent containers of the interactive element (e.g., via .contains()) to prevent the interactive component itself from being accidentally disabled.
+**Action:** Convert decorative scroll cues into functional links and ensure inert application logic recursively checks parents of the target active element.
