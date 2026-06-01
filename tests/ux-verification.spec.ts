@@ -54,4 +54,19 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Navigation stays active on sub-paths', async ({ page }: { page: Page }) => {
+    // Navigate to a project detail page
+    await page.goto('/projects/khalifa-port');
+
+    // Find the PROJECTS link in the desktop header (the first one)
+    const projectsNavLink = page.locator('header div.hidden.lg\\:flex a[href="/projects"]');
+
+    // It should have aria-current="page"
+    await expect(projectsNavLink).toHaveAttribute('aria-current', 'page');
+
+    // The active indicator dot should be visible
+    const activeDot = projectsNavLink.locator('span.bg-primary');
+    await expect(activeDot).toHaveClass(/opacity-100/);
+  });
 });
