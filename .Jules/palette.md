@@ -23,3 +23,7 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-02-14 - Navigation State Persistence and Safe Inert Application
+**Learning:** Top-level navigation items lose their "active" visual state when users visit sub-pages (e.g., project details) if path matching is too strict. Using 'startsWith' for non-root paths ensures better orientation. Additionally, when using 'inert' for focus management in modals/menus, the exclusion logic must account for ancestor containers (like '.app-container') to avoid accidentally locking out the interaction elements themselves.
+**Action:** Use 'startsWith' for active link detection and always verify that 'inert' logic excludes all ancestors of the element that must remain interactive.
