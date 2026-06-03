@@ -137,25 +137,47 @@ const showElementCaptureWidget =
     </button>
 
     <script is:inline>
-      document.addEventListener('DOMContentLoaded', () => {
+      function initBackToTop() {
         const backToTopBtn = document.getElementById('back-to-top');
-        if (backToTopBtn) {
-          window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) {
-              backToTopBtn.classList.remove('translate-y-20', 'opacity-0', 'invisible');
-              backToTopBtn.classList.add('translate-y-0', 'opacity-100', 'visible');
-            } else {
-              backToTopBtn.classList.add('translate-y-20', 'opacity-0', 'invisible');
-              backToTopBtn.classList.remove('translate-y-0', 'opacity-100', 'visible');
-            }
-          });
+        if (!backToTopBtn) return;
 
-          backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            });
+        const handleScroll = () => {
+          if (window.scrollY > 400) {
+            backToTopBtn.classList.remove('translate-y-20', 'opacity-0', 'invisible');
+            backToTopBtn.classList.add('translate-y-0', 'opacity-100', 'visible');
+          } else {
+            backToTopBtn.classList.add('translate-y-20', 'opacity-0', 'invisible');
+            backToTopBtn.classList.remove('translate-y-0', 'opacity-100', 'visible');
+          }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        const handleClick = () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
           });
+        };
+
+        backToTopBtn.addEventListener('click', handleClick);
+
+        // Return cleanup function for astro:before-swap
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+          backToTopBtn.removeEventListener('click', handleClick);
+        };
+      }
+
+      let backToTopCleanup;
+      document.addEventListener('astro:page-load', () => {
+        if (backToTopCleanup) backToTopCleanup();
+        backToTopCleanup = initBackToTop();
+      });
+      document.addEventListener('astro:before-swap', () => {
+        if (backToTopCleanup) {
+          backToTopCleanup();
+          backToTopCleanup = undefined;
         }
       });
     </script>

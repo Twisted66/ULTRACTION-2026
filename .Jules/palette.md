@@ -23,3 +23,7 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-02-14 - Lifecycle Management in ViewTransitions and Focus Trap Safety
+**Learning:** When using Astro's `ViewTransitions`, client-side scripts for layout components (like "Back to Top" buttons) must be re-initialized on the `astro:page-load` event to remain functional across navigations. Additionally, when implementing focus traps via the `inert` attribute, the logic must explicitly exclude the site header's full ancestor tree (e.g., `.app-container`) to prevent accidental interaction lockout of navigation controls.
+**Action:** Re-initialize layout utilities on `astro:page-load` and ensure `inert` logic traverses up the DOM to protect the header's interactive ancestor chain.
