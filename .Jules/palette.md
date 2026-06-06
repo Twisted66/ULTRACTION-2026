@@ -23,3 +23,7 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-02-14 - Hierarchical Navigation Context and Recursive Interaction Lockouts
+**Learning:** In applications using the 'inert' attribute for focus management (like mobile menus), recursive lockout can occur if the exclusion logic doesn't account for the component's ancestor structure within a global wrapper (like '.app-container'). Additionally, strict path matching for navigation active states fails to provide location context when users visit sub-paths (e.g., /projects/slug).
+**Action:** When using 'inert', explicitly exclude any element that contains the interaction source. For navigation, use 'startsWith' matching to ensure parent items remain highlighted during sub-path exploration, maintaining consistent site context.
