@@ -23,3 +23,7 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-06-07 - Component-Aware Focus Trapping and Form Standardization
+**Learning:** Using 'inert' for focus management (like mobile menus) on siblings of a top-level container (e.g., '.app-container') can inadvertently lock out the site header itself if it's nested within that container. Logic must explicitly check for ancestors to avoid interaction lockout. Additionally, standardizing admin forms with character counters and clear 'aria-required' states provides critical feedback for internal tools that often lack the polish of public-facing pages.
+**Action:** Always use 'element.contains(siteHeader)' when applying 'inert' to body children to ensure navigation remains interactive, and apply full UX standards (legends, counters, aria-required) to administrative panels to maintain system-wide quality.
