@@ -23,3 +23,7 @@
 ## 2026-02-14 - Real-time Character Constraints and Visual Feedback
 **Learning:** Textareas with character limits must feature a real-time counter linked via `aria-describedby` to ensure accessibility. Providing visual feedback, such as a color change (e.g., using the brand's accent color) when reaching 90% of the limit, significantly improves the user's ability to manage long inputs without trial-and-error. Programmatic value changes and form resets must also be explicitly handled to keep the UI counter in sync.
 **Action:** Always include an accessible character counter for limited textareas and use distinct styling for nearing-limit states.
+
+## 2026-06-08 - Standardizing Admin Form Feedback and Extensibility
+**Learning:** Administrative forms often lack the same level of UX polish as public forms, leading to a disconnected experience. Furthermore, base UI components must support standard HTML attributes like 'id' to ensure they can be reliably targeted by client-side scripts and automated tests without relying on fragile selectors or random identifiers.
+**Action:** Always include 'id' and '...rest' props in base UI components, and apply the same high-standard feedback patterns (spinners, legends, aria-required) to internal tools as to public-facing pages.

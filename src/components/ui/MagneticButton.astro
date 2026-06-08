@@ -30,12 +30,13 @@ const {
   strength = 0.5,
   ripple = true,
   href,
+  id: providedId,
   type = 'button',
   class: additionalClass = '',
   ...rest
 } = Astro.props;
 
-const id = `magnetic-${Math.random().toString(36).slice(2, 11)}`;
+const id = providedId || `magnetic-${Math.random().toString(36).slice(2, 11)}`;
 
 // Size classes
 const sizeClasses = {
