@@ -124,7 +124,8 @@ const isActive = (href: string) => {
     const setBackgroundInert = (isOpen: boolean) => {
       if (!siteHeader) return;
       Array.from(document.body.children).forEach((element) => {
-        if (element === siteHeader) return;
+        // Don't make the header or any of its parents inert
+        if (element === siteHeader || element.contains(siteHeader)) return;
         if (isOpen) {
           element.setAttribute('inert', '');
           element.setAttribute('aria-hidden', 'true');
