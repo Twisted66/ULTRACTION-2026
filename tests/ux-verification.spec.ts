@@ -54,4 +54,55 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers admin form has required UX features', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    const description = page.locator('#description');
+    const counter = page.locator('#description-counter');
+
+    // Initial state
+    await expect(counter).toHaveText('0 / 5,000');
+
+    // Type something
+    await description.fill('This is a test description with more than twenty characters.');
+    await expect(counter).toHaveText('60 / 5,000');
+
+    // Check for required field indicators
+    const labels = page.locator('label');
+    await expect(labels.filter({ hasText: 'Role Title *' })).toBeVisible();
+    await expect(description).toHaveAttribute('aria-required', 'true');
+
+    // Test loading state on submit
+    // We'll mock the API response to ensure it doesn't actually hit a backend
+    await page.route('**/api/jobs', async (route) => {
+      // Add a delay to capture the spinner
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ ok: true, data: { job: { title: 'Test' } } }),
+      });
+    });
+
+    // Fill required fields
+    await page.locator('#jobs-api-key').fill('test-key');
+    await page.locator('#title').fill('Test Engineer');
+    await page.locator('#location').fill('Dubai');
+
+    // Submit
+    const submitBtn = page.locator('#create-job-submit');
+    const spinner = page.locator('#submit-spinner');
+    const label = page.locator('#submit-label');
+
+    await submitBtn.click();
+
+    // Check loading state
+    await expect(spinner).toHaveClass(/opacity-100/);
+    await expect(label).toHaveCSS('opacity', '0');
+
+    // Wait for completion
+    await expect(spinner).toHaveClass(/opacity-0/);
+    await expect(label).toHaveCSS('opacity', '1');
+  });
 });
