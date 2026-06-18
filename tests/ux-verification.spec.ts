@@ -54,4 +54,47 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin form has required fields and character counter', async ({
+    page,
+  }: {
+    page: Page;
+  }) => {
+    await page.goto('/careers-admin');
+
+    // Check for the legend
+    const legend = page.locator('text=Fields marked with * are required');
+    await expect(legend).toBeVisible();
+
+    // Check for asterisks in labels
+    const apiKeyLabel = page.locator('label[for="jobs-api-key"]');
+    await expect(apiKeyLabel).toContainText('*');
+
+    const titleLabel = page.locator('label[for="title"]');
+    await expect(titleLabel).toContainText('*');
+
+    const descriptionLabel = page.locator('label[for="description"]');
+    await expect(descriptionLabel).toContainText('*');
+
+    // Check for aria-required
+    const apiKeyInput = page.locator('#jobs-api-key');
+    await expect(apiKeyInput).toHaveAttribute('aria-required', 'true');
+
+    const descriptionInput = page.locator('#description');
+    await expect(descriptionInput).toHaveAttribute('aria-required', 'true');
+
+    // Test character counter
+    const counter = page.locator('#description-counter');
+    await expect(counter).toContainText('0 / 5,000');
+
+    await descriptionInput.fill('This is a test description with more than 20 characters.');
+    // 56 characters
+    await expect(counter).toContainText('56 / 5,000');
+
+    // Test counter nearing limit color change (90% of 5000 is 4500)
+    const longText = 'a'.repeat(4500);
+    await descriptionInput.fill(longText);
+    await expect(counter).toHaveClass(/text-accent/);
+    await expect(counter).toContainText('4,500 / 5,000');
+  });
 });
