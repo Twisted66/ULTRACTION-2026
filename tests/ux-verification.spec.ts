@@ -54,4 +54,33 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin character counter updates on input', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    const textarea = page.locator('#description');
+    const counter = page.locator('#description-counter');
+
+    // Initially should be 0
+    await expect(counter).toHaveText(/0 \/ 5,000/);
+
+    // Type some text
+    const testText = 'Building the future of infrastructure in the UAE.';
+    await textarea.fill(testText);
+
+    // Counter should update
+    const expectedCount = testText.length;
+    await expect(counter).toHaveText(new RegExp(`${expectedCount} / 5,000`));
+
+    // Test threshold feedback (90% of 5000 is 4500)
+    await page.evaluate(() => {
+      const el = document.getElementById('description') as HTMLTextAreaElement;
+      el.value = 'a'.repeat(4500);
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+
+    // Check if it has the accent color class/style
+    await expect(counter).toHaveClass(/text-accent/);
+    await expect(counter).toHaveClass(/opacity-100/);
+  });
 });
