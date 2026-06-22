@@ -54,4 +54,50 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin description has character counter with threshold feedback', async ({ page }: { page: Page }) => {
+    await page.setViewportSize({ width: 1280, height: 1200 });
+    await page.goto('/careers-admin');
+
+    // Remove the dev-only ElementCaptureWidget
+    await page.evaluate(() => {
+      const widget = document.getElementById('element-capture-widget');
+      if (widget) widget.remove();
+    });
+
+    const textarea = page.locator('#description');
+    const counter = page.locator('#description-counter');
+
+    // Initial state
+    await expect(counter).toHaveText('0 / 5,000');
+    await expect(counter).toHaveClass(/text-primary/);
+    await expect(counter).not.toHaveClass(/text-accent/);
+
+    // Type some text
+    await textarea.fill('Short description');
+    await expect(counter).toHaveText('17 / 5,000');
+    await expect(counter).toHaveClass(/text-primary/);
+
+    // Reach 90% threshold (4500 characters)
+    const longText = 'a'.repeat(4500);
+    await textarea.fill(longText);
+    await expect(counter).toHaveText('4,500 / 5,000');
+
+    // Should now have the accent color
+    await expect(counter).toHaveClass(/text-accent/);
+    await expect(counter).toHaveClass(/opacity-100/);
+    await expect(counter).not.toHaveClass(/text-primary/);
+
+    // Screenshot for verification
+    const counterBox = page.locator('.space-y-2').filter({ has: textarea });
+    await counterBox.scrollIntoViewIfNeeded();
+    await page.screenshot({ path: 'verification/careers-admin-counter-accent.png' });
+
+    // Reset form and check counter
+    await page.locator('#create-job-form').evaluate((form: HTMLFormElement) => form.reset());
+    // The reset event has a setTimeout(..., 0) in the script
+    await page.waitForTimeout(100);
+    await expect(counter).toHaveText('0 / 5,000');
+    await expect(counter).toHaveClass(/text-primary/);
+  });
 });
