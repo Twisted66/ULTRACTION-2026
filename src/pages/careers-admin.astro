@@ -125,7 +125,13 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
               maxlength="5000"
               class="w-full bg-background border border-primary/20 px-4 py-3 text-sm resize-y"
               placeholder="Describe responsibilities, required experience, and qualifications."
+              aria-describedby="description-counter"
             ></textarea>
+            <div class="flex justify-end">
+              <span id="description-counter" class="text-[10px] uppercase tracking-widest font-bold text-primary opacity-70 transition-colors duration-300">
+                0 / 5,000
+              </span>
+            </div>
           </div>
 
           <div class="flex flex-wrap items-center gap-4">
@@ -168,6 +174,8 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
   const rolesCountElement = document.getElementById('open-roles-count');
   const submitButton = document.getElementById('create-job-submit');
   const refreshButton = document.getElementById('refresh-jobs');
+  const descriptionInput = document.getElementById('description');
+  const descriptionCounter = document.getElementById('description-counter');
 
   const base = typeof jobsApiBaseUrl === 'string' ? jobsApiBaseUrl.trim().replace(/\/$/, '') : '';
   const endpoint = base ? `${base}/api/jobs` : '/api/jobs';
@@ -200,6 +208,21 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
       return '';
     }
     return apiKeyInput.value.trim();
+  }
+
+  function updateDescriptionCounter() {
+    if (!(descriptionInput instanceof HTMLTextAreaElement) || !(descriptionCounter instanceof HTMLElement)) return;
+    const count = descriptionInput.value.length;
+    const limit = 5000;
+    descriptionCounter.textContent = `${count.toLocaleString()} / ${limit.toLocaleString()}`;
+
+    if (count >= limit * 0.9) {
+      descriptionCounter.classList.remove('text-primary', 'opacity-70');
+      descriptionCounter.classList.add('text-accent', 'opacity-100');
+    } else {
+      descriptionCounter.classList.add('text-primary', 'opacity-70');
+      descriptionCounter.classList.remove('text-accent', 'opacity-100');
+    }
   }
 
   function rememberJobsApiKey(apiKey) {
@@ -309,6 +332,16 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
     }
   }
 
+  if (descriptionInput instanceof HTMLTextAreaElement) {
+    descriptionInput.addEventListener('input', updateDescriptionCounter);
+  }
+
+  form?.addEventListener('reset', () => {
+    setTimeout(updateDescriptionCounter, 0);
+  });
+
+  updateDescriptionCounter();
+
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (!(form instanceof HTMLFormElement)) return;
@@ -349,6 +382,7 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
 
       rememberJobsApiKey(apiKey);
       form.reset();
+      updateDescriptionCounter();
       if (apiKeyInput instanceof HTMLInputElement) apiKeyInput.value = apiKey;
       if (postedAtInput instanceof HTMLInputElement) postedAtInput.value = '';
 
