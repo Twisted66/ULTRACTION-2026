@@ -54,4 +54,27 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Homepage scroll indicator is functional', async ({ page }: { page: Page }) => {
+    await page.goto('/');
+
+    // Wait for Astro scripts/styles to load
+    await page.waitForTimeout(500);
+
+    // Remove the dev-only ElementCaptureWidget if present
+    await page.evaluate(() => document.getElementById('element-capture-widget')?.remove());
+
+    const scrollIndicator = page.locator('a[href="#intro"]');
+    const introSection = page.locator('#intro');
+
+    // Ensure the indicator is visible
+    await expect(scrollIndicator).toBeVisible();
+
+    // Click the indicator
+    // Using { force: true } because the element has 'animate-bounce' which makes it "unstable" for Playwright
+    await scrollIndicator.click({ force: true });
+
+    // Assert that the intro section is now in the viewport
+    await expect(introSection).toBeInViewport();
+  });
 });
