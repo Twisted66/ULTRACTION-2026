@@ -4,7 +4,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
 const isActive = (href: string) => {
   const normalizedHref = href.replace(/\/$/, "");
   if (normalizedHref === "") return pathname === "";
-  return pathname === normalizedHref;
+  return pathname === normalizedHref || pathname.startsWith(`${normalizedHref}/`);
 };
 ---
 
