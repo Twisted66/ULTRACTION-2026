@@ -54,4 +54,16 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin form has counter', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    const textarea = page.locator('#description');
+    const counter = page.locator('#description-counter');
+
+    await expect(counter).toHaveText('0 / 5,000');
+    await textarea.fill('A'.repeat(4501));
+    await expect(counter).toHaveText('4,501 / 5,000');
+    await expect(counter).toHaveClass(/text-accent/);
+  });
 });
