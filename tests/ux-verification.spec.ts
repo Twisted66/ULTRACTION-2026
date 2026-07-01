@@ -54,4 +54,37 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin form standardizes UX and accessibility', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    // Check for required fields legend
+    const legend = page.locator('text=Fields marked with * are required.');
+    await expect(legend).toBeVisible();
+
+    // Check for asterisk in labels
+    const titleLabel = page.locator('label[for="title"]');
+    await expect(titleLabel).toContainText('*');
+
+    // Check for aria-required
+    const titleInput = page.locator('#title');
+    await expect(titleInput).toHaveAttribute('aria-required', 'true');
+
+    // Check character counter
+    const counter = page.locator('#description-counter');
+    await expect(counter).toHaveText('0 / 5,000');
+
+    const textarea = page.locator('#description');
+    await textarea.fill('This is a test description that should be at least 20 chars long.');
+
+    // Check if counter updated (it uses toLocaleString, so 0 / 5,000)
+    const count = (await textarea.inputValue()).length;
+    await expect(counter).toHaveText(`${count} / 5,000`);
+
+    // Check threshold feedback (90% of 5,000 = 4,500)
+    const longText = 'a'.repeat(4500);
+    await textarea.fill(longText);
+    await expect(counter).toHaveClass(/text-accent/);
+    await expect(counter).toHaveText('4,500 / 5,000');
+  });
 });
