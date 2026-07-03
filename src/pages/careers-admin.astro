@@ -123,9 +123,13 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
               required
               minlength="20"
               maxlength="5000"
+              aria-describedby="description-counter"
               class="w-full bg-background border border-primary/20 px-4 py-3 text-sm resize-y"
               placeholder="Describe responsibilities, required experience, and qualifications."
             ></textarea>
+            <div class="flex justify-end mt-2">
+              <span id="description-counter" class="text-xs uppercase tracking-widest font-bold text-primary opacity-70 transition-colors duration-300">0 / 5,000</span>
+            </div>
           </div>
 
           <div class="flex flex-wrap items-center gap-4">
@@ -168,6 +172,18 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
   const rolesCountElement = document.getElementById('open-roles-count');
   const submitButton = document.getElementById('create-job-submit');
   const refreshButton = document.getElementById('refresh-jobs');
+  const descInput = document.getElementById('description');
+  const descCounter = document.getElementById('description-counter');
+
+  const updateCounter = () => {
+    if (!(descInput instanceof HTMLTextAreaElement) || !descCounter) return;
+    const len = descInput.value.length;
+    descCounter.textContent = `${len.toLocaleString()} / 5,000`;
+    descCounter.classList.toggle('text-accent', len >= 4500);
+    descCounter.classList.toggle('opacity-100', len >= 4500);
+  };
+  descInput?.addEventListener('input', updateCounter);
+  form?.addEventListener('reset', () => setTimeout(updateCounter, 0));
 
   const base = typeof jobsApiBaseUrl === 'string' ? jobsApiBaseUrl.trim().replace(/\/$/, '') : '';
   const endpoint = base ? `${base}/api/jobs` : '/api/jobs';
@@ -349,6 +365,7 @@ const jobsApiBaseUrl = import.meta.env.PUBLIC_JOBS_API_BASE_URL?.trim() ?? '';
 
       rememberJobsApiKey(apiKey);
       form.reset();
+      updateCounter();
       if (apiKeyInput instanceof HTMLInputElement) apiKeyInput.value = apiKey;
       if (postedAtInput instanceof HTMLInputElement) postedAtInput.value = '';
 
