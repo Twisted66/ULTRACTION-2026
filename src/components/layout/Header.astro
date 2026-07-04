@@ -4,7 +4,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, "");
 const isActive = (href: string) => {
   const normalizedHref = href.replace(/\/$/, "");
   if (normalizedHref === "") return pathname === "";
-  return pathname === normalizedHref;
+  return pathname === normalizedHref || pathname.startsWith(`${normalizedHref}/`);
 };
 ---
 
@@ -123,16 +123,24 @@ const isActive = (href: string) => {
 
     const setBackgroundInert = (isOpen: boolean) => {
       if (!siteHeader) return;
-      Array.from(document.body.children).forEach((element) => {
-        if (element === siteHeader) return;
-        if (isOpen) {
-          element.setAttribute('inert', '');
-          element.setAttribute('aria-hidden', 'true');
-        } else {
-          element.removeAttribute('inert');
-          element.removeAttribute('aria-hidden');
-        }
-      });
+      const walker = (root: HTMLElement) => {
+        Array.from(root.children).forEach((el) => {
+          if (!(el instanceof HTMLElement)) return;
+          if (el === siteHeader) return;
+          if (el.contains(siteHeader)) {
+            walker(el);
+          } else {
+            if (isOpen) {
+              el.setAttribute('inert', '');
+              el.setAttribute('aria-hidden', 'true');
+            } else {
+              el.removeAttribute('inert');
+              el.removeAttribute('aria-hidden');
+            }
+          }
+        });
+      };
+      walker(document.body);
     };
 
     const setMobileMenuState = (isOpen: boolean) => {
