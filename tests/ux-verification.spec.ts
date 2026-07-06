@@ -54,4 +54,58 @@ test.describe('UX Improvements Verification', () => {
     // Check for other spread props like type="submit"
     await expect(submitButton).toHaveAttribute('type', 'submit');
   });
+
+  test('Careers Admin form has character counter and loading state', async ({ page }: { page: Page }) => {
+    await page.goto('/careers-admin');
+
+    const textarea = page.locator('#description');
+    const counter = page.locator('#description-counter');
+
+    // Check initial counter state
+    await expect(counter).toContainText('0 / 5,000');
+
+    // Type some text and verify counter updates
+    await textarea.fill('This is a test description with more than twenty characters.');
+    const count = (await textarea.inputValue()).length;
+    await expect(counter).toContainText(`${count} / 5,000`);
+
+    // Verify visual feedback for required fields
+    const requiredLabels = page.locator('label:has(span.text-accent)');
+    await expect(requiredLabels).toHaveCount(4); // API Key, Title, Location, Description
+
+    // Mock the API request to test loading state
+    await page.route('**/api/jobs', async (route) => {
+      // Delay response to capture loading state
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ ok: true, data: { job: { title: 'Test Job' } } }),
+      });
+    });
+
+    // Fill form and submit
+    await page.locator('#jobs-api-key').fill('test-key');
+    await page.locator('#title').fill('Test Job');
+    await page.locator('#location').fill('Test Location');
+    // Description is already filled
+
+    const submitBtn = page.locator('#create-job-submit');
+    const submitLabel = page.locator('#submit-label');
+    const submitSpinner = page.locator('#submit-spinner');
+
+    // Click submit
+    await submitBtn.click();
+
+    // Verify loading state
+    await expect(submitBtn).toBeDisabled();
+    await expect(submitLabel).toHaveCSS('opacity', '0');
+    await expect(submitSpinner).toHaveCSS('opacity', '1');
+
+    // Wait for success and verify reset
+    await expect(submitBtn).toBeEnabled();
+    await expect(submitLabel).toHaveCSS('opacity', '1');
+    await expect(submitSpinner).toHaveCSS('opacity', '0');
+    await expect(counter).toContainText('0 / 5,000');
+  });
 });
